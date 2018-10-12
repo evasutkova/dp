@@ -6,3 +6,5 @@
 1. Vytvorte funkčný a dátový model aplikácie s využitím vybraných diagramov UML.
 1. Navrhnite používateľské rozhranie aplikácie a systém implementujte.
 1. Vypracujte dokumentáciu.
+
+test

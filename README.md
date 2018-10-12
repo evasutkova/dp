@@ -7,4 +7,4 @@
 1. Navrhnite používateľské rozhranie aplikácie a systém implementujte.
 1. Vypracujte dokumentáciu.
 
-test
+test sd

@@ -26,6 +26,22 @@ module.exports = function (grunt) {
                     }
                 }]            
             },
+            app: {
+                options: {
+                    process: function (content, srcpath) {
+                        return content
+                            .replace(/\{version\}/g, grunt.config("package").version)
+                            .replace(/\{homepage\}/g, "https://evasutkova.github.io/dp/");
+                    }
+                },
+                files: [{
+                    expand: true,
+                    src: ["app.xhtml"],
+                    rename: function () {
+                        return "wwwroot/app.html";
+                    }
+                }]
+            },
             css: {
                 files: [{
                     expand: true,
@@ -113,6 +129,7 @@ module.exports = function (grunt) {
         grunt.task.run.apply(grunt.task, [
             "clean:wwwroot",
             "copy:index",
+            "copy:app",
             "copy:css",
             "copy:materialize",
             "copy:js",

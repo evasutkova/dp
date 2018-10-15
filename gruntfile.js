@@ -59,6 +59,15 @@ module.exports = function (grunt) {
                     filter: "isFile"
                 }]
             },
+            js: {
+                files: [{
+                    expand: true,
+                    cwd: "js/",
+                    src: ["**", "!**/*.less", "!**/materialize.js"],
+                    dest: "wwwroot/js/",
+                    filter: "isFile"
+                }]
+            }            
         }
     });
 
@@ -96,7 +105,8 @@ module.exports = function (grunt) {
         grunt.task.run.apply(grunt.task, [
             "copy:index",
             "copy:css",
-            "copy:materialize"
+            "copy:materialize",
+            "copy:js"
         ]);
     }     
 

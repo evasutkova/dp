@@ -108,30 +108,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-less");
 
-    grunt.registerTask("cleanTask", cleanTask);
-    grunt.registerTask("buildTask", buildTask);
-
-    //#endregion
-
-
-    //#region [ Methods ]
-
-    /**
-     * Clean task.
-     */
-    function cleanTask() {
-        grunt.task.run.apply(grunt.task, [
-            "clean:wwwroot"
-        ]);
-    }
-
-
-    /**
-     * Build task.
-     */
-    function buildTask(target) {
+    grunt.registerTask("buildTask", function() {
         grunt.log.writeln("Build verzie \"" + grunt.config("package").version + "\"");
         grunt.task.run.apply(grunt.task, [
+            "clean:wwwroot",
             "copy:index",
             "copy:css",
             "copy:materialize",
@@ -139,7 +119,7 @@ module.exports = function (grunt) {
             "jshint",
             "less"
         ]);
-    }     
+    });
 
     //#endregion
 };

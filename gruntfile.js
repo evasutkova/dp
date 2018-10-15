@@ -68,7 +68,23 @@ module.exports = function (grunt) {
                     filter: "isFile"
                 }]
             }            
-        }
+        },
+        jshint: {
+            options: {
+                debug: true,
+                multistr: true,
+                sub: true,
+                laxbreak: true,
+                globals: {
+                    jQuery: true
+                }
+            },
+            src: [
+                "gruntfile.js",
+                "js/**/*.js",
+                "!js/libs/*.js"
+            ]
+        }        
     });
 
     //#endregion
@@ -78,6 +94,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
 
     grunt.registerTask("cleanTask", cleanTask);
     grunt.registerTask("buildTask", buildTask);
@@ -106,7 +123,8 @@ module.exports = function (grunt) {
             "copy:index",
             "copy:css",
             "copy:materialize",
-            "copy:js"
+            "copy:js",
+            "jshint"
         ]);
     }     
 

@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
 
     grunt.registerTask("cleanTask", cleanTask);
+    grunt.registerTask("buildTask", buildTask);
 
     //#endregion
 
@@ -32,6 +33,16 @@ module.exports = function (grunt) {
             "clean:wwwroot"
         ]);
     }
+
+
+    /**
+     * Build task.
+     */
+    function buildTask(target) {
+        grunt.log.writeln("Build verzie \"" + grunt.config("package").version + "\"");
+        grunt.task.run.apply(grunt.task, [
+        ]);
+    }     
 
     //#endregion
 };

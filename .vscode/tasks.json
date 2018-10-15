@@ -23,6 +23,17 @@
 				"panel": "new"
 			},
             "problemMatcher": []
+        },{
+            "label": "Restore",
+            "command": "Shell",
+            "windows": {
+                "command": "restore.cmd"
+            },            
+            "group": "build",
+            "presentation": {
+				"panel": "new"
+			},
+            "problemMatcher": []
         }
     ]
 }

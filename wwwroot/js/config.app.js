@@ -1,5 +1,5 @@
 require({
-    urlArgs: "t=" + (new Date()).getTime(),
+    urlArgs: "t=v1.0.0",
     packages: [{
         name: "dp",
         location: "/dp/wwwroot/js"

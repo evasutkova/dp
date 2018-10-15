@@ -109,7 +109,8 @@ module.exports = function (grunt) {
             src: {
                 files: {
                     "wwwroot/css/site.css": "less/site.less",
-                    "wwwroot/css/app.css": "js/components/app/app.less"
+                    "wwwroot/css/app.css": "js/components/app/app.less",
+                    "wwwroot/css/toolbar.css": "js/components/toolbar/toolbar.less"
                 }
             }
         }

@@ -84,7 +84,18 @@ module.exports = function (grunt) {
                 "js/**/*.js",
                 "!js/libs/*.js"
             ]
-        }        
+        },
+        less: {
+            options: {
+                paths: ["less"],
+                strictMath: false
+            },
+            src: {
+                files: {
+                    "wwwroot/css/site.css": "less/site.less"
+                }
+            }
+        }
     });
 
     //#endregion
@@ -95,6 +106,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-less");
 
     grunt.registerTask("cleanTask", cleanTask);
     grunt.registerTask("buildTask", buildTask);
@@ -124,7 +136,8 @@ module.exports = function (grunt) {
             "copy:css",
             "copy:materialize",
             "copy:js",
-            "jshint"
+            "jshint",
+            "less"
         ]);
     }     
 

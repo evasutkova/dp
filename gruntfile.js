@@ -25,7 +25,40 @@ module.exports = function (grunt) {
                         return "wwwroot/index.html";
                     }
                 }]            
-            }
+            },
+            css: {
+                files: [{
+                    expand: true,
+                    cwd: "css/",
+                    src: ["**"],
+                    dest: "wwwroot/css/",
+                    filter: "isFile"
+                }]
+            },
+            materialize: {
+                options: {
+                    process: function (content, srcpath) {
+                        return "(function (root, factory) {\n\
+                                    if (typeof (define) === 'function' && define.amd) {\n\
+                                        define(['jquery'], factory);\n\
+                                    }\n\
+                                    else {\n\
+                                        factory(root.jQuery);\n\
+                                    }\n\
+                                }(typeof (self) !== 'undefined' ? self : this, function (jQuery) {\n"
+                                    + content +
+                                    "return M;\n\
+                                }));";
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: "js/",
+                    src: ["**/materialize.js"],
+                    dest: "wwwroot/js/",
+                    filter: "isFile"
+                }]
+            },
         }
     });
 
@@ -61,7 +94,9 @@ module.exports = function (grunt) {
     function buildTask(target) {
         grunt.log.writeln("Build verzie \"" + grunt.config("package").version + "\"");
         grunt.task.run.apply(grunt.task, [
-            "copy:index"
+            "copy:index",
+            "copy:css",
+            "copy:materialize"
         ]);
     }     
 

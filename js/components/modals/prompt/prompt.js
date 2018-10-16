@@ -1,6 +1,8 @@
 define([
+    "knockout",
+    "materialize",
     "text!./prompt.html"
-], function (view) {
+], function (ko, M, view) {
     //#region [ Constructor ]
 
     /**
@@ -11,12 +13,71 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("PromptModal()");
+
+        this._resolve = null;
+
+        this.title = ko.observable("");
+        this.text = ko.observable("");
+        this.value = ko.observable("");
+        this.yes = ko.observable("");
+        this.no = ko.observable("");
+
+        this.modal = M.Modal.init(info.element.querySelector(".prompt-modal"), {
+            dismissible: false,
+            onOpenEnd: function (modal, trigger) {
+                modal.querySelector("input[type=text]").focus();
+            }
+        });
+
+        if (typeof (args.openAction) === "function") {
+            args.openAction(this.open.bind(this));
+        }
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Zobrazí prompt.
+     * 
+     * @param {string} title Nadpis.
+     * @param {string} text Text.
+     * @param {string} value Základná hodnota.
+     * @param {string} yes Text pre potvrdenie.
+     * @param {string} no Text pre zrušenie.
+     */
+    Model.prototype.open = function (title, text, value, yes, no) {
+        this.title(title || "");
+        this.text(text || "");
+        this.value(value || "");
+        this.yes(yes || "Áno");
+        this.no(no || "Nie");
+
+        this.modal.open();
+
+        var $this = this;
+        return new Promise(function(resolve) {
+            $this._resolve = resolve;
+        });        
+    };
+
+
+    /**
+     * Zavrie prompt.
+     * 
+     * @param {string} value Výsledok promptu.
+     */
+    Model.prototype.close = function (value) {
+        this.modal.close();
+
+        if (this._resolve) {
+            this._resolve(ko.unwrap(value));
+            this._resolve = null;
+        }
+    };      
+
 
     /**
      * Dispose.

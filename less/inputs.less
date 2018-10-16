@@ -1,0 +1,20 @@
+@import "_mixins.less";
+
+.app {
+    .input-field {
+        label {
+            color: fade(@fg-color, 55%);
+        }
+    
+        input[type=text] {
+            &:focus {
+                border-bottom: 1px solid @primary-color;
+                box-shadow: 0 1px 0 0 @primary-color;
+    
+                + label {
+                    color: @primary-color;
+                }
+            }
+        }
+    }
+}

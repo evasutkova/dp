@@ -1,6 +1,19 @@
 <div class="app">
     <div class="app__side">
         <toolbar params="tool: tool"></toolbar>
+        <!-- ko if: tool() -->
+        <div class="tool">
+            <!-- ko if: tool() === 'drive' -->
+            <drive-tool></drive-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'explorer' -->
+            explorer
+            <!-- /ko -->
+            <!-- ko if: tool() === 'settings' -->
+            settings
+            <!-- /ko -->
+        </div>        
+        <!-- /ko -->
     </div>
     <div class="app__main">
         todo

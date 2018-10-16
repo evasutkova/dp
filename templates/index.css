@@ -1,0 +1,35 @@
+<% if (fontfaceStyles) { %>
+    <% if (fontPathVariables && stylesheet !== 'css') { %>
+    <%= fontPathVariable %>
+    <% } %>
+    <% if (fontSrc1 && embed.length) { %>
+    @font-face {
+        font-family:"<%= fontFamilyName %>";
+        src:<%= fontSrc1 %>;
+        font-weight:normal;
+        font-style:normal;
+    }
+    <% } %>@font-face {
+        font-family:"<%= fontFamilyName %>";<% if (fontSrc1) { %>
+        src:<%= fontSrc1 %>;<% }%>
+        src:<%= fontSrc2 %>;
+        font-weight:normal;
+        font-style:normal;
+    }
+    <% } %>
+    <% if (baseStyles) { %>.<%= baseClass %> {
+        font-family:"<%= fontFamilyName %>";
+        display:inline-block;
+        line-height:1;
+        font-weight:normal;
+        font-style:normal;
+        font-feature-settings: "liga";	
+        font-size: 24px;
+        speak:none;
+        text-decoration:inherit;
+        text-transform:none;
+        text-rendering:auto;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+    }
+    <% } %>

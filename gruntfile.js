@@ -113,7 +113,30 @@ module.exports = function (grunt) {
                     "wwwroot/css/toolbar.css": "js/components/toolbar/toolbar.less"
                 }
             }
-        }
+        },
+        webfont: {
+            icons: {
+                src: "svg/*.svg",
+                dest: "wwwroot/fonts",
+                destCss: "wwwroot/css",
+                options: {
+                    version: "1.0.0",
+                    engine: "fontforge",
+                    font: "dp-icons",
+                    hashes: true,
+                    types: "woff2,woff,ttf,svg",
+                    template: "templates/index.css",
+                    templateOptions: {
+                        baseClass: "dp-icons",
+                        classPrefix: "dp-icons_"
+                    },
+                    relativeFontPath: "../fonts",
+                    htmlDemo: false,
+                    ligatures: true,
+                    fontFamilyName: "Dp Icons"
+                }
+            }
+        }        
     });
 
     //#endregion
@@ -125,6 +148,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.loadNpmTasks("grunt-webfont");
 
     grunt.registerTask("buildTask", function() {
         grunt.log.writeln("Build verzie \"" + grunt.config("package").version + "\"");
@@ -136,7 +160,8 @@ module.exports = function (grunt) {
             "copy:materialize",
             "copy:js",
             "jshint",
-            "less"
+            "less",
+            "webfont"
         ]);
     });
 

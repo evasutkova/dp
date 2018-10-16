@@ -1,6 +1,7 @@
 define([
+    "knockout",
     "text!./app.html"
-], function (view) {
+], function (ko, view) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -18,6 +19,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("App()");
+
+        this.tool = ko.observable("");
     };
 
     //#endregion

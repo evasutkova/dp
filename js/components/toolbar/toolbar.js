@@ -1,6 +1,7 @@
 define([
+    "knockout",
     "text!./toolbar.html"
-], function (view) {
+], function (ko, view) {
     //#region [ Constructor ]
 
     /**
@@ -11,6 +12,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("Toolbar()");
+
+        this.tool = args.tool || ko.observable("");
     };
 
     //#endregion

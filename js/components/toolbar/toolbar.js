@@ -14,6 +14,7 @@ define([
         console.log("Toolbar()");
 
         this.tool = args.tool || ko.observable("");
+        this.isConnected = args.isConnected || ko.observable(false);
     };
 
     //#endregion

@@ -4,6 +4,7 @@
             <i class="dp-icons">folder_google_drive</i>
         </button>
     </li>
+    <!-- ko if: isConnected() -->
     <li>
         <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($data, 'explorer')">
             <i class="dp-icons">file_tree</i>
@@ -14,4 +15,5 @@
             <i class="dp-icons">settings</i>
         </button>
     </li>    
+    <!-- /ko -->
 </ul>

@@ -1,22 +1,21 @@
 <div class="app">
     <div class="app__side">
-        <toolbar params="tool: tool"></toolbar>
+        <toolbar params="tool: tool, isConnected: isConnected"></toolbar>
         <!-- ko if: tool() -->
         <div class="tool">
             <!-- ko if: tool() === 'drive' -->
             <drive-tool></drive-tool>
             <!-- /ko -->
-            <!-- ko if: tool() === 'explorer' -->
+            <!-- ko if: isConnected() && tool() === 'explorer' -->
             <explorer-tool></explorer-tool>
             <!-- /ko -->
-            <!-- ko if: tool() === 'settings' -->
+            <!-- ko if: isConnected() && tool() === 'settings' -->
             <settings-tool></settings-tool>
             <!-- /ko -->
         </div>        
         <!-- /ko -->
     </div>
     <div class="app__main">
-        todo
     </div>
     <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>
 </div>

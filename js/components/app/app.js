@@ -21,6 +21,7 @@ define([
         console.log("App()");
 
         this.tool = ko.observable("");
+        this.isConnected = ko.observable(false);
 
         this._prompt_openAction = ko.observable();
     };
@@ -72,6 +73,7 @@ define([
 	 */
     Model.createViewModel = function (params, componentInfo) {
         global.app = new Model(params, componentInfo);
+        app.tool("drive");
         return global.app;
     };
 

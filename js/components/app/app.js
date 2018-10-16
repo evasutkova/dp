@@ -21,12 +21,32 @@ define([
         console.log("App()");
 
         this.tool = ko.observable("");
+
+        this._prompt_openAction = ko.observable();
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Zobrazí prompt.
+     * 
+     * @param {string} text Text.
+     * @param {string} value Základná hodnota.
+     */
+    Model.prototype.prompt = function (text, value) {
+        var action = this._prompt_openAction();
+
+        if (typeof (action) !== "function") {
+            console.error("App : prompt() : Akcia pre otvorenie prompt dialógu nie je definovaná.");
+            return;
+        }
+
+        return action(text, value);
+    };
+
     
     /**
      * Dispose.

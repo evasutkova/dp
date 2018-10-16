@@ -25,6 +25,10 @@
     &--primary {
         background: @primary-color;
 
+        &:focus {
+            background: darken(@primary-color, 5%);
+        }        
+
         &:hover {
             background: @primary-color;
         }

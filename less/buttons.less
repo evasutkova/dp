@@ -1,0 +1,18 @@
+@import "_mixins.less";
+
+.btn-flat {
+    font-family: @font-family;
+    font-size: 1rem;
+    font-weight: 500;
+    color: @primary-color;
+    transition: opacity .3s ease;
+    opacity: .85;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:focus {
+        background: transparent;
+    }
+}

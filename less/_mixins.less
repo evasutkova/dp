@@ -1,6 +1,16 @@
 @bg-color: #fff;
 @fg-color: rgba(0,0,0,.85);
+@fg-disabled-color: #9f9f9f;
 @hr-color: #ccc;
 @primary-color: #ffc107;
+@disabled-color: #dfdfdf;
 
 @font-family: 'Roboto', sans-serif;
+
+.not-selectable() {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}

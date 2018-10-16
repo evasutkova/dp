@@ -39,6 +39,12 @@
     }
 
     &--loading {
+        .not-selectable;
+        background: @disabled-color;
+        color: @fg-disabled-color;
+        cursor: default;
+        box-shadow: none;
+
         > i {
             display: none;
         }

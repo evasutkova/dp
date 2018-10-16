@@ -6,6 +6,10 @@ module.exports = function (grunt) {
         clean: {
             wwwroot: [
                 "wwwroot/**/*"
+            ],
+            css: [
+                "wwwroot/css/*",
+                "!wwwroot/css/site.css"
             ]
         },
         copy: {
@@ -116,6 +120,20 @@ module.exports = function (grunt) {
                 }
             }
         },
+        concat: {
+            css: {
+                src: [
+                    "wwwroot/css/materialize.css",
+                    "wwwroot/css/dp-icons.css",
+                    "wwwroot/css/site.css",
+                    "wwwroot/css/app.css",
+                    "wwwroot/css/toolbar.css",
+                    "wwwroot/css/tools.css",
+                    "wwwroot/css/driveTool.css"
+                ],
+                dest: "wwwroot/css/site.css"
+            }
+        },            
         webfont: {
             icons: {
                 src: "svg/*.svg",
@@ -150,6 +168,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-webfont");
 
     grunt.registerTask("buildTask", function() {
@@ -163,7 +182,9 @@ module.exports = function (grunt) {
             "copy:js",
             "jshint",
             "less",
-            "webfont"
+            "webfont",
+            "concat:css",
+            "clean:css"
         ]);
     });
 

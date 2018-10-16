@@ -2,4 +2,30 @@
 
 .toolbar {
     background: @bg-color;
+    margin: 0;
+    height: 100%;
+    box-shadow: inset -1px 0 0 @hr-color;
+
+    &__item {
+        height: 3rem;
+        width: 3rem;
+        line-height: 3rem;
+        padding: 0;
+        color: rgba(0, 0, 0, .45);
+        transition: color .3s ease;
+        border-radius: 0;
+
+        &:hover {
+            color: @primary-color;
+        }
+
+        &:focus {
+            background: transparent;
+        }
+
+        &--active {
+            color: @primary-color;
+            box-shadow: inset -3px 0 0 @primary-color !important;
+        }
+    }
 }

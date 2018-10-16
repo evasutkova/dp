@@ -1,16 +1,16 @@
 <ul class="toolbar">
     <li>
-        <button class="btn-flat toolbar__item">
+        <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'drive' }, click: setTool.bind($data, 'drive')">
             <i class="dp-icons">folder_google_drive</i>
         </button>
     </li>
     <li>
-        <button class="btn-flat toolbar__item">
+        <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($data, 'explorer')">
             <i class="dp-icons">file_tree</i>
         </button>
     </li>
     <li>
-        <button class="btn-flat toolbar__item">
+        <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($data, 'settings')">
             <i class="dp-icons">settings</i>
         </button>
     </li>    

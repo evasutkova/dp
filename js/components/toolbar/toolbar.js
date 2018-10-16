@@ -22,6 +22,20 @@ define([
     //#region [ Methods : Public ]
     
     /**
+     * Nastaví aktívny tool.
+     * 
+     * @params {string} tool Nástroj, ktorý sa má aktivovať.
+     */
+    Model.prototype.setTool = function (tool) {
+        if(this.tool() === tool) {
+            this.tool("");
+            return;
+        }
+        this.tool(tool);
+    };
+
+
+    /**
      * Dispose.
      */
     Model.prototype.dispose = function () {

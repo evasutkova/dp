@@ -33,10 +33,13 @@ define([
     /**
      * Zobrazí prompt.
      * 
+     * @param {string} title Nadpis.
      * @param {string} text Text.
      * @param {string} value Základná hodnota.
+     * @param {string} yes Text pre potvrdenie.
+     * @param {string} no Text pre zrušenie.
      */
-    Model.prototype.prompt = function (text, value) {
+    Model.prototype.prompt = function (title, text, value, yes, no) {
         var action = this._prompt_openAction();
 
         if (typeof (action) !== "function") {
@@ -44,7 +47,7 @@ define([
             return;
         }
 
-        return action(text, value);
+        return action(title, text, value, yes, no);
     };
 
     

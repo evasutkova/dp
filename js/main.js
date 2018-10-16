@@ -9,6 +9,7 @@ define([
     ko.components.register("drive-tool", { require: "dp/components/tools/drive/drive" });
     ko.components.register("explorer-tool", { require: "dp/components/tools/explorer/explorer" });
     ko.components.register("settings-tool", { require: "dp/components/tools/settings/settings" });
+    ko.components.register("prompt-modal", { require: "dp/components/modals/prompt/prompt" });
 
     // Spustime aplikaciu
     $(function () {

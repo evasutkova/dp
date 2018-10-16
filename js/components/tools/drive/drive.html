@@ -1,3 +1,13 @@
 <div class="drive-tool">
-    drive
+    <!-- ko if: !isConnected() -->
+    <div class="row">
+        <div class="col s12 center">
+            <br>
+            <button class="btn blue">
+                <i class="dp-icons left">google_drive</i>
+                Pripojiť
+            </button>            
+        </div>
+    </div>
+    <!-- /ko -->
 </div>

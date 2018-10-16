@@ -11,6 +11,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("DriveTool()");
+
+        this.isConnected = args.isConnected || ko.observable(false);
     };
 
     //#endregion

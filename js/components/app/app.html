@@ -4,7 +4,7 @@
         <!-- ko if: tool() -->
         <div class="tool">
             <!-- ko if: tool() === 'drive' -->
-            <drive-tool></drive-tool>
+            <drive-tool params="isConnected: isConnected"></drive-tool>
             <!-- /ko -->
             <!-- ko if: isConnected() && tool() === 'explorer' -->
             <explorer-tool></explorer-tool>

@@ -110,7 +110,9 @@ module.exports = function (grunt) {
                 files: {
                     "wwwroot/css/site.css": "less/site.less",
                     "wwwroot/css/app.css": "js/components/app/app.less",
-                    "wwwroot/css/toolbar.css": "js/components/toolbar/toolbar.less"
+                    "wwwroot/css/toolbar.css": "js/components/toolbar/toolbar.less",
+                    "wwwroot/css/tools.css": "js/components/tools/tools.less",
+                    "wwwroot/css/driveTool.css": "js/components/tools/drive/drive.less"
                 }
             }
         },

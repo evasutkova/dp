@@ -9,7 +9,8 @@ require({
         ajaxTransport: "/dp/wwwroot/js/libs/jquery.ajaxTransport",
         knockout: "/dp/wwwroot/js/libs/knockout",
         materialize: "/dp/wwwroot/js/libs/materialize",
-        text: "/dp/wwwroot/js/libs/text"
+        text: "/dp/wwwroot/js/libs/text",
+        google: "/dp/wwwroot/js/libs/google"
     },
     config: {
         "dp/components/app/app": {

@@ -117,7 +117,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/toolbar.css": "js/components/toolbar/toolbar.less",
                     "wwwroot/css/tools.css": "js/components/tools/tools.less",
                     "wwwroot/css/drive-tool.css": "js/components/tools/drive/drive.less",
-                    "wwwroot/css/explorer-tool.css": "js/components/tools/explorer/explorer.less"
+                    "wwwroot/css/explorer-tool.css": "js/components/tools/explorer/explorer.less",
+                    "wwwroot/css/settings-tool.css": "js/components/tools/settings/settings.less"
                 }
             }
         },
@@ -131,7 +132,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/toolbar.css",
                     "wwwroot/css/tools.css",
                     "wwwroot/css/drive-tool.css",
-                    "wwwroot/css/explorer-tool.css"
+                    "wwwroot/css/explorer-tool.css",
+                    "wwwroot/css/settings-tool.css"
                 ],
                 dest: "wwwroot/css/site.css"
             }

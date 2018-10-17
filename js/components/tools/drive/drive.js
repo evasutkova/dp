@@ -2,7 +2,8 @@ define([
     "module",
     "knockout",
     "google!client:auth2",
-    "text!./drive.html"
+    "text!./drive.html",
+    "dp/bindings/optiscroll",
 ], function (module, ko, api, view) {
     //#region [ Fields ]
 

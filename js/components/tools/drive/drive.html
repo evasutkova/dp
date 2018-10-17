@@ -27,7 +27,7 @@
                             <img data-bind="attr: { src: iconLink }" />
                         </i>
                         <span data-bind="text: name"></span>
-                        <b class="right">1 kb</b>
+                        <b class="right" data-bind="text: $parent._size($data.size)"></b>
                     </a>
                     <a class="btn-flat" title="Vymazať súbor">
                         <i class="dp-icons">settings</i>

@@ -143,6 +143,37 @@ define([
     //#endregion
 
 
+    //#region [ Methods : Private ]
+
+    /**
+     * Vráti naformátovanú veľkosť súboru.
+     * 
+     * @param {number} size Veľkosť v bajtoch.
+     */
+    Model.prototype._size = function(size) {
+        if(typeof(size) === "undefined") {
+            return "";
+        }
+
+        var s = parseInt(size);
+        var unit = " B";
+
+        if((s / 1024) > 1) {
+            unit = " KB";
+            s = s / 1024;
+        }
+
+        if((s / 1024) > 1) {
+            unit = " MB";
+            s = s / 1024;
+        }
+        
+        return s.toFixed(2) + unit;
+    };
+
+    //#endregion
+
+
     //#region [ Methods : Public ]
 
     /**

@@ -22,6 +22,10 @@ define([
     var Model = function (args, info) {
         console.log("DriveTool()");
 
+        this._signedIn_subscribe = null;
+        this._currentUser_subscribe = null;
+
+        this.user = args.user || ko.observable(null);
         this.isConnected = args.isConnected || ko.observable(false);
         this.isConnecting = ko.observable(false);
         this.errorMessage = ko.observable("");
@@ -36,14 +40,22 @@ define([
      * Spracovanie udalosti pripojenia na Google Drive.
      */
     Model.prototype._onConnectSuccess = function () {
+        if(!this._signedIn_subscribe) {
+            this._signedIn_subscribe = api.auth2.getAuthInstance().isSignedIn.listen(this._onSignedIn.bind(this));
+        }
+        if(!this._currentUser_subscribe) {
+            this._currentUser_subscribe = api.auth2.getAuthInstance().currentUser.listen(this._onCurrentUser.bind(this));
+        }
+        
         var isSignedIn = api.auth2.getAuthInstance().isSignedIn.get();
         if(isSignedIn) {
             this.isConnected(true);
             this.isConnecting(false);
+            this._onSignedIn(true);
+            this._onCurrentUser(api.auth2.getAuthInstance().currentUser.get());
             return;
         }
 
-        api.auth2.getAuthInstance().isSignedIn.listen(this._onSignedIn.bind(this));
         api.auth2.getAuthInstance().signIn();
     };
 
@@ -83,7 +95,27 @@ define([
 
         this.isConnecting(false);
         this.isConnected(false);
-    };    
+    };  
+    
+    
+    /**
+     * Spracovanie udalosti zmeny prihláseného používateľa.
+     * 
+     * @param {object} googleUser Inštancia google usera.
+     */
+    Model.prototype._onCurrentUser = function (googleUser) {
+        if(!googleUser.isSignedIn()) {
+            this.user(null);
+            return;
+        }        
+
+        var profile = googleUser.getBasicProfile();
+        this.user({
+            name: profile.getName(),
+            imageUrl: profile.getImageUrl(),
+            email: profile.getEmail()
+        });
+    };     
     
     //#endregion
 
@@ -104,6 +136,27 @@ define([
         }).then(this._onConnectSuccess.bind(this), this._onConnectError.bind(this));
     };
 
+
+    /**
+	 * Odpojenie na Google Drive.
+	 */
+    Model.prototype.disconnect = function () {
+        if(!this._signedIn_subscribe) {
+            this._signedIn_subscribe.remove();
+            this._signedIn_subscribe = null;
+        }
+        if(!this._currentUser_subscribe) {
+            this._currentUser_subscribe.remove();
+            this._currentUser_subscribe = null;
+        }
+        
+        this.isConnecting(false);
+        this.isConnected(false);
+        this.user(null);
+        this.errorMessage("");
+        api.auth2.getAuthInstance().signOut();
+    };    
+    
 
     /**
      * Dispose.

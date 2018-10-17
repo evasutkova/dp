@@ -21,6 +21,7 @@ define([
         console.log("App()");
 
         this.tool = ko.observable("");
+        this.user = ko.observable(null);
         this.isConnected = ko.observable(false);
 
         this._prompt_openAction = ko.observable();

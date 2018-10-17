@@ -44,7 +44,8 @@ define([
             return;
         }
 
-        return action();
+        this.tool("drive");
+        action();
     };
 
 

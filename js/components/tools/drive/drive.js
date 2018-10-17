@@ -145,6 +145,10 @@ define([
 	 * Odpojenie na Google Drive.
 	 */
     Model.prototype.disconnect = function () {
+        if(!api.auth2.getAuthInstance()) {
+            return;
+        }
+        
         if(this._signedIn_subscribe) {
             this._signedIn_subscribe.remove();
             this._signedIn_subscribe = null;

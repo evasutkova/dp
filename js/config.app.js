@@ -10,7 +10,8 @@ require({
         knockout: "/dp/wwwroot/js/libs/knockout",
         materialize: "/dp/wwwroot/js/libs/materialize",
         text: "/dp/wwwroot/js/libs/text",
-        google: "/dp/wwwroot/js/libs/google"
+        google: "/dp/wwwroot/js/libs/google",
+        optiscroll: "/dp/wwwroot/js/libs/optiscroll"
     },
     config: {
         "dp/components/tools/drive/drive": {

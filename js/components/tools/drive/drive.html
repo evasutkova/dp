@@ -3,10 +3,17 @@
     <div class="row">
         <div class="col s12 center">
             <br>
-            <button class="btn btn--primary">
+            <button class="btn btn--primary" data-bind="click: connect, css: { 'btn--loading': isConnecting }">
                 <i class="dp-icons left">google_drive</i>
-                Pripojiť
+                <!-- ko text: isConnecting() ? '... pripájam sa' : 'Pripojiť' --><!-- /ko -->
             </button>            
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: errorMessage() -->
+    <div class="row">
+        <div class="col s12">
+            <p class="red-text" data-bind="text: errorMessage"></p>
         </div>
     </div>
     <!-- /ko -->

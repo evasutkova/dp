@@ -1,8 +1,7 @@
 define([
     "knockout",
-    "google!client:auth2",
     "text!./app.html"
-], function (ko, api, view) {
+], function (ko, view) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();

@@ -25,12 +25,28 @@ define([
         this.isConnected = ko.observable(false);
 
         this._prompt_openAction = ko.observable();
+        this._drive_disconnectAction = ko.observable();
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Odhlási používateľa.
+     */
+    Model.prototype.disconnect = function () {
+        var action = this._drive_disconnectAction();
+
+        if (typeof (action) !== "function") {
+            console.error("App : disconnect() : Akcia pre odhlásenie nie je definovaná.");
+            return;
+        }
+
+        return action();
+    };
+
 
     /**
      * Zobrazí prompt.

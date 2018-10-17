@@ -29,6 +29,8 @@ define([
         this.isConnected = args.isConnected || ko.observable(false);
         this.isConnecting = ko.observable(false);
         this.errorMessage = ko.observable("");
+        this.files = args.files || ko.observableArray([]);
+        this.nextPage = ko.observable("");
 
         if (typeof (args.disconnectAction) === "function") {
             args.disconnectAction(this.disconnect.bind(this));
@@ -53,8 +55,6 @@ define([
         
         var isSignedIn = api.auth2.getAuthInstance().isSignedIn.get();
         if(isSignedIn) {
-            this.isConnected(true);
-            this.isConnecting(false);
             this._onSignedIn(true);
             this._onCurrentUser(api.auth2.getAuthInstance().currentUser.get());
             return;
@@ -87,13 +87,13 @@ define([
             return;
         }
         
-        // this.nextPage("");
-        // this.files([]);
+        this.nextPage("");
+        this.files([]);
 
         if(isSignedIn) {
             this.isConnected(true);
             this.isConnecting(false);
-            //this.listFiles();
+            this.listFiles();
             return;
         }
 
@@ -120,6 +120,25 @@ define([
             email: profile.getEmail()
         });
     };     
+
+
+    /**
+     * Spracovanie udalosti načítania záznamov.
+     * 
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._onFilesListed = function (e) {
+        this.nextPage(e.result.nextPageToken ? e.result.nextPageToken : "");
+
+        var files = e.result.files;
+        
+        if (!files || !files.length) {
+            this.files([]);
+            return;
+        }
+
+        this.files(this.files().concat(files));
+    };      
     
     //#endregion
 
@@ -162,7 +181,35 @@ define([
         this.isConnected(false);
         this.user(null);
         this.errorMessage("");
+        this.nextPage("");
+        this.files([]);
         api.auth2.getAuthInstance().signOut();
+    };    
+
+
+    /**
+	 * Načítanie súborov.
+     * 
+     * @param {string} nextPage Token pre získanie ďalšej strany.
+	 */
+    Model.prototype.listFiles = function (nextPage) {
+        if(!this.isConnected()) {
+            return;
+        }
+
+        var query = {
+            pageSize: 10,
+            orderBy: "name",
+            fields: "*"
+        };
+
+        if(nextPage) {
+            query.pageToken = nextPage;
+        }        
+
+        api.client.drive.files
+            .list(query)
+            .then(this._onFilesListed.bind(this));
     };    
     
 

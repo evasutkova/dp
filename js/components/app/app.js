@@ -20,9 +20,10 @@ define([
     var Model = function (args, info) {
         console.log("App()");
 
+        this.isConnected = ko.observable(false);
         this.tool = ko.observable("");
         this.user = ko.observable(null);
-        this.isConnected = ko.observable(false);
+        this.files = ko.observableArray([]);
 
         this._prompt_openAction = ko.observable();
         this._drive_disconnectAction = ko.observable();

@@ -35,6 +35,13 @@
                 </li>
             </ul>
         </div>
+        <!-- ko if: nextPage().length -->
+        <div class="col s12 center">
+            <button class="btn-small btn--secondary" data-bind="click: listFiles.bind($component, nextPage())">
+                Ďalšie záznamy
+            </button>
+        </div>        
+        <!-- /ko -->       
     </div>
     <!-- /ko -->
 </div>

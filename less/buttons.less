@@ -41,17 +41,19 @@
     &--secondary {
         background: transparent;
         color: @primary-color;
-        box-shadow: inset 0 1px 0 0 @primary-color, inset -1px 0 0 0 @primary-color, inset 0 -1px 0 0 @primary-color, inset 1px 0 0 0 @primary-color;
+        box-shadow: none;
+        border: 1px solid @primary-color;
 
         &:focus {
             background: transparent;
             color: tint(@primary-color, 20%);
-            box-shadow: inset 0 1px 0 0 tint(@primary-color, 20%), inset -1px 0 0 0 tint(@primary-color, 20%), inset 0 -1px 0 0 tint(@primary-color, 20%), inset 1px 0 0 0 tint(@primary-color, 20%);
+            box-shadow: none;
+            border-color: tint(@primary-color, 20%);
         }        
 
         &:hover {
             background: transparent;
-            box-shadow: inset 0 1px 0 0 tint(@primary-color, 20%), inset -1px 0 0 0 tint(@primary-color, 20%), inset 0 -1px 0 0 tint(@primary-color, 20%), inset 1px 0 0 0 tint(@primary-color, 20%);
+            box-shadow: none;
         }        
     }
 

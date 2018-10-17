@@ -8,11 +8,6 @@
                 <!-- ko text: isConnecting() ? '... pripájam sa' : 'Pripojiť' --><!-- /ko -->
             </button>            
             <!-- /ko -->
-            <!-- ko if: isConnected() -->
-            <button class="btn btn--secondary" data-bind="click: disconnect">
-                Odhlásiť
-            </button>            
-            <!-- /ko -->            
         </div>
     </div>
     <!-- ko if: errorMessage() -->

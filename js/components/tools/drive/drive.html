@@ -1,15 +1,20 @@
 <div class="drive-tool">
-    <!-- ko if: !isConnected() -->
     <div class="row">
         <div class="col s12 center">
             <br>
+            <!-- ko if: !isConnected() -->
             <button class="btn btn--primary" data-bind="click: connect, css: { 'btn--loading': isConnecting }">
                 <i class="dp-icons left">google_drive</i>
                 <!-- ko text: isConnecting() ? '... pripájam sa' : 'Pripojiť' --><!-- /ko -->
             </button>            
+            <!-- /ko -->
+            <!-- ko if: isConnected() -->
+            <button class="btn btn--secondary">
+                Odhlásiť
+            </button>            
+            <!-- /ko -->            
         </div>
     </div>
-    <!-- /ko -->
     <!-- ko if: errorMessage() -->
     <div class="row">
         <div class="col s12">

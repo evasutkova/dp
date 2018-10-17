@@ -37,6 +37,14 @@ define([
 
 
     /**
+     * Odhlásenie používateľa.
+     */
+    Model.prototype.disconnect = function () {
+        console.info(this);
+    };
+    
+
+    /**
      * Dispose.
      */
     Model.prototype.dispose = function () {

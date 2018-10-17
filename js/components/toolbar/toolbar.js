@@ -15,6 +15,7 @@ define([
 
         this.tool = args.tool || ko.observable("");
         this.isConnected = args.isConnected || ko.observable(false);
+        this.disconnectCallback = args.disconnectCallback;
     };
 
     //#endregion
@@ -40,7 +41,9 @@ define([
      * Odhlásenie používateľa.
      */
     Model.prototype.disconnect = function () {
-        console.info(this);
+        if(typeof(this.disconnectCallback) === "function") {
+            this.disconnectCallback();
+        }
     };
     
 

@@ -36,14 +36,15 @@ define([
      * Spracovanie udalosti pripojenia na Google Drive.
      */
     Model.prototype._onConnectSuccess = function () {
-        // this.isConnected(true);
-        // this.isConnecting(false);
+        var isSignedIn = api.auth2.getAuthInstance().isSignedIn.get();
+        if(isSignedIn) {
+            this.isConnected(true);
+            this.isConnecting(false);
+            return;
+        }
 
-        // this.isSignedIn(api.auth2.getAuthInstance().isSignedIn.get());
-        // this.listFiles();
-        
-        // // Listen for sign-in state changes.
-        // api.auth2.getAuthInstance().isSignedIn.listen(this._onStatuChanged.bind(this));
+        api.auth2.getAuthInstance().isSignedIn.listen(this._onSignedIn.bind(this));
+        api.auth2.getAuthInstance().signIn();
     };
 
 
@@ -57,6 +58,31 @@ define([
         this.isConnecting(false);
         this.errorMessage("Nepodarilo sa pripojiť na Google Drive");
         console.error("DriveTool : connect() : %o", e.error);
+    };    
+
+
+    /**
+     * Spracovanie udalosti prihlásenia.
+     * 
+     * @param {boolean} isSignedIn Ak nastavené na true, tak prebehlo úspešné prihlásenie.
+     */
+    Model.prototype._onSignedIn = function (isSignedIn) {
+        if(this.isConnected() === isSignedIn) {
+            return;
+        }
+        
+        // this.nextPage("");
+        // this.files([]);
+
+        if(isSignedIn) {
+            this.isConnected(true);
+            this.isConnecting(false);
+            //this.listFiles();
+            return;
+        }
+
+        this.isConnecting(false);
+        this.isConnected(false);
     };    
     
     //#endregion

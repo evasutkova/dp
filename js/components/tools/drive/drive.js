@@ -141,11 +141,11 @@ define([
 	 * Odpojenie na Google Drive.
 	 */
     Model.prototype.disconnect = function () {
-        if(!this._signedIn_subscribe) {
+        if(this._signedIn_subscribe) {
             this._signedIn_subscribe.remove();
             this._signedIn_subscribe = null;
         }
-        if(!this._currentUser_subscribe) {
+        if(this._currentUser_subscribe) {
             this._currentUser_subscribe.remove();
             this._currentUser_subscribe = null;
         }

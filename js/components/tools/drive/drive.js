@@ -29,6 +29,10 @@ define([
         this.isConnected = args.isConnected || ko.observable(false);
         this.isConnecting = ko.observable(false);
         this.errorMessage = ko.observable("");
+
+        if (typeof (args.disconnectAction) === "function") {
+            args.disconnectAction(this.disconnect.bind(this));
+        }
     };
 
     //#endregion

@@ -53,7 +53,7 @@ define([
                     return;
                 }
         
-                $this.tool("drive");
+                $this.tool("");
                 action();
             });
     };
@@ -121,7 +121,6 @@ define([
 	 */
     Model.createViewModel = function (params, componentInfo) {
         global.app = new Model(params, componentInfo);
-        app.tool("drive");
         return global.app;
     };
 

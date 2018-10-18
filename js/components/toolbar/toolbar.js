@@ -24,6 +24,14 @@ define([
     //#region [ Methods : Public ]
     
     /**
+     * Vyvolá dialóg pre otvorenie súboru.
+     */
+    Model.prototype.open = function () {
+        console.info("open");
+    };
+
+
+    /**
      * Nastaví aktívny tool.
      * 
      * @params {string} tool Nástroj, ktorý sa má aktivovať.

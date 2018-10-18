@@ -99,6 +99,23 @@ define([
         return action(title, text, yes, no);
     };    
 
+
+    /**
+     * Zobrazí dialóg pre otvorenie súboru.
+     * 
+     * @param {string} title Nadpis.
+     * @param {string} text Text.
+     * @param {string} mode Mód.
+     * @param {boolean} multiple Ak je true je možné vybrať viacero súborov naraz.
+     */
+    Model.prototype.browse = function (title, text, mode, multiple) {
+        console.info("browse", arguments);
+        // mode = mode || "text";
+        // multiple = multiple || false;
+
+        // return $this._fileBrowser_OpenAction()(text, mode, multiple);
+    };  
+
     
     /**
      * Dispose.

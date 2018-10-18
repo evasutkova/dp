@@ -108,13 +108,21 @@ define([
      * @param {string} text Text.
      * @param {string} mode Mód.
      * @param {boolean} multiple Ak je true je možné vybrať viacero súborov naraz.
+     * @param {string} yes Text pre potvrdenie.
+     * @param {string} no Text pre zrušenie.
      */
-    Model.prototype.browse = function (title, text, mode, multiple) {
-        console.info("browse", arguments);
+    Model.prototype.browse = function (title, text, mode, multiple, yes, no) {
+        var action = this._fileBrowser_openAction();
+
+        if (typeof (action) !== "function") {
+            console.error("App : browse() : Akcia pre otvorenie file browse dialógu nie je definovaná.");
+            return;
+        }
+
+        return action(title, text, mode, multiple, yes, no);
+
         // mode = mode || "text";
         // multiple = multiple || false;
-
-        // return $this._fileBrowser_OpenAction()(text, mode, multiple);
     };  
 
     

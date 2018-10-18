@@ -25,9 +25,9 @@ define([
         //     dismissible: false
         // });
 
-        // if (typeof (args.openAction) === "function") {
-        //     args.openAction(this.open.bind(this));
-        // }
+        if (typeof (args.openAction) === "function") {
+            args.openAction(this.open.bind(this));
+        }
     };
 
     //#endregion
@@ -45,6 +45,7 @@ define([
      * @param {string} no Text pre zrušenie.
      */
     Model.prototype.open = function (title, text, value, yes, no) {
+        console.info("open", arguments);
         // this.title(title || "");
         // this.text(text || "");
         // this.value(value || "");

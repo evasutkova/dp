@@ -1,25 +1,30 @@
-<ul class="toolbar">
-    <li>
-        <button class="btn-flat toolbar__item" title="Google Drive" data-bind="css: { 'toolbar__item--active': tool() === 'drive' }, click: setTool.bind($component, 'drive')">
-            <i class="dp-icons">google_drive</i>
-        </button>
-    </li>
+<div class="toolbar">
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item" title="Google Drive" data-bind="css: { 'toolbar__item--active': tool() === 'drive' }, click: setTool.bind($component, 'drive')">
+                <i class="dp-icons">google_drive</i>
+            </button>
+        </li>
+    </ul>
     <!-- ko if: isConnected() -->
-    <li>
-        <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($component, 'explorer')">
-            <i class="dp-icons">file_tree</i>
-        </button>
-    </li>
-    <li>
-        <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($component, 'settings')">
-            <i class="dp-icons">settings</i>
-        </button>
-    </li>
-    <li class="divider"></li>
-    <li>
-        <button class="btn-flat toolbar__item" title="Odhlásiť" data-bind="click: disconnect">
-            <i class="dp-icons">logout_variant</i>
-        </button>
-    </li>    
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($component, 'explorer')">
+                <i class="dp-icons">file_tree</i>
+            </button>
+        </li>
+        <li>
+            <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($component, 'settings')">
+                <i class="dp-icons">settings</i>
+            </button>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item" title="Odhlásiť" data-bind="click: disconnect">
+                <i class="dp-icons">logout_variant</i>
+            </button>
+        </li> 
+    </ul>
     <!-- /ko -->
-</ul>
+</div>

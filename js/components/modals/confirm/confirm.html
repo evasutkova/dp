@@ -6,7 +6,7 @@
         <p data-bind="text: text"></p>       
     </div>
     <div class="modal-footer">
-        <button class="btn-flat" data-bind="click: close.bind($component, null), text: no"></button>
-        <button class="btn-flat" data-bind="click: close.bind($component, value), text: yes"></button>
+        <button class="btn-flat" data-bind="click: close.bind($component, false), text: no"></button>
+        <button class="btn-flat" data-bind="click: close.bind($component, true), text: yes"></button>
     </div>
 </div>

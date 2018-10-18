@@ -11,7 +11,8 @@ require({
         materialize: "/dp/wwwroot/js/libs/materialize",
         text: "/dp/wwwroot/js/libs/text",
         google: "/dp/wwwroot/js/libs/google",
-        optiscroll: "/dp/wwwroot/js/libs/optiscroll"
+        optiscroll: "/dp/wwwroot/js/libs/optiscroll",
+        session: "/dp/wwwroot/js/storage/session"
     },
     config: {
         "dp/components/tools/drive/drive": {

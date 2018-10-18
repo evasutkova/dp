@@ -3,8 +3,9 @@ define([
     "knockout",
     "google!client:auth2",
     "text!./drive.html",
+    "session!",
     "dp/bindings/optiscroll",
-], function (module, ko, api, view) {
+], function (module, ko, api, view, session) {
     //#region [ Fields ]
 
     var cnf = module.config();
@@ -31,8 +32,8 @@ define([
         this.isConnecting = ko.observable(false);
         this.errorMessage = ko.observable("");
         this.files = args.files || ko.observableArray([]);
-        this.nextPage = ko.observable("");
-        this.search = ko.observable("").extend({ rateLimit: 350 });
+        this.nextPage = ko.observable(session.get("nextPage") || "");
+        this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
 
         if (typeof (args.disconnectAction) === "function") {
             args.disconnectAction(this.disconnect.bind(this));
@@ -267,6 +268,11 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~DriveTool()");
+
+        session.set({
+            nextPage: this.nextPage(),
+            search: this.search()
+        });
 
         this._search_subscribe.dispose();
     };

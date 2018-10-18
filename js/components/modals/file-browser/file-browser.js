@@ -24,6 +24,7 @@ define([
         this._resolve = null;
 
         this.mode = ko.observable("text");
+        this.accept = ko.observable("");
         this.title = ko.observable("");
         this.text = ko.observable("");
         this.yes = ko.observable("");
@@ -109,13 +110,15 @@ define([
      * @param {string} title Nadpis.
      * @param {string} text Text.
      * @param {string} mode Mód.
+     * @param {string} accept Typ súborov.
      * @param {boolean} multiple Ak je true je možné vybrať viacero súborov naraz.
      * @param {string} yes Text pre potvrdenie.
      * @param {string} no Text pre zrušenie.
      */
-    Model.prototype.open = function (title, text, mode, multiple, yes, no) {
+    Model.prototype.open = function (title, text, mode, accept, multiple, yes, no) {
         multiple = (typeof(multiple) === "boolean") ? multiple : false;
         mode = mode || "text";
+        accept = accept || "";
         
         if (multiple) {
             this._file.setAttribute("multiple", "multiple"); 
@@ -123,8 +126,16 @@ define([
         else {
             this._file.removeAttribute("multiple");
         }
+
+        if (accept) {
+            this._file.setAttribute("accept", accept); 
+        }
+        else {
+            this._file.removeAttribute("accept");
+        }
         
         this.mode(mode);
+        this.accept(accept);
         this.value("");
         this.files([]);
         this.title(title || "");

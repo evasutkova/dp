@@ -40,7 +40,7 @@ define([
      * Otvorí a načíta dokument z disku.
      */
     Model.prototype.open = function () {
-        this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", false, "Otvoriť", "Zrušiť")
+        this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
                 debugger;
                 // // Check file conent
@@ -135,11 +135,12 @@ define([
      * @param {string} title Nadpis.
      * @param {string} text Text.
      * @param {string} mode Mód.
+     * @param {string} accept Typ súborov.
      * @param {boolean} multiple Ak je true je možné vybrať viacero súborov naraz.
      * @param {string} yes Text pre potvrdenie.
      * @param {string} no Text pre zrušenie.
      */
-    Model.prototype.browse = function (title, text, mode, multiple, yes, no) {
+    Model.prototype.browse = function (title, text, mode, accept, multiple, yes, no) {
         var action = this._fileBrowser_openAction();
 
         if (typeof (action) !== "function") {
@@ -147,7 +148,7 @@ define([
             return;
         }
 
-        return action(title, text, mode, multiple, yes, no);
+        return action(title, text, mode, accept, multiple, yes, no);
     };  
 
     

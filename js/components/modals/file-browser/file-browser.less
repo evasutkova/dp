@@ -2,6 +2,7 @@
 
 .file-browser-modal {
     background: @bg-color;
+    overflow: hidden;
 
     .row {
         margin-bottom: 0;
@@ -10,5 +11,18 @@
             margin-bottom: 0;
             padding: 0;
         }
+    }
+
+    .file-path-wrapper {
+        padding: 0;
+    }
+
+    &__value {
+        height: 0 !important;
+        opacity: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 0 !important;
+        position: absolute;
     }
 }

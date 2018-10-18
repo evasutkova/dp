@@ -40,7 +40,7 @@ define([
      */
     Model.prototype.disconnect = function () {
         var $this = this;
-        this.confirm("Odhlásenie", "Naozaj chcete ukončiť prácu s aplikáciou?", "Pokračovať", "Ukončiť")
+        this.confirm("Odhlásenie", "Naozaj chcete ukončiť prácu s aplikáciou?", "Odhlásiť", "Pokračovať")
             .then(function(r) {
                 if(!r) {
                     return;

@@ -9,6 +9,14 @@
         </div>
     </div>
     <!-- /ko -->
+    <!-- ko if: isConnected() -->
+    <div class="row" style="margin-bottom: 0">
+        <div class="input-field col s12 drive-tool__search">
+            <i class="dp-icons prefix">search</i>
+            <input id="search" type="text" />
+        </div>
+    </div>      
+    <!-- /ko -->
     <!-- ko if: errorMessage() -->
     <div class="row">
         <div class="col s12">

@@ -232,7 +232,8 @@ define([
         var query = {
             pageSize: 10,
             orderBy: "name",
-            fields: "*"
+            fields: "*",
+            //q: "name contains 'f'"
         };
 
         if(nextPage) {

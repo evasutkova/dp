@@ -27,6 +27,7 @@ define([
 
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
+        this._fileBrowser_openAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
     };
 

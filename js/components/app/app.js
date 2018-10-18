@@ -26,6 +26,7 @@ define([
         this.files = ko.observableArray([]);
 
         this._prompt_openAction = ko.observable();
+        this._confirm_openAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
     };
 
@@ -69,6 +70,26 @@ define([
 
         return action(title, text, value, yes, no);
     };
+
+
+    /**
+     * Zobrazí confirm.
+     * 
+     * @param {string} title Nadpis.
+     * @param {string} text Text.
+     * @param {string} yes Text pre potvrdenie.
+     * @param {string} no Text pre zrušenie.
+     */
+    Model.prototype.confirm = function (title, text, yes, no) {
+        var action = this._confirm_openAction();
+
+        if (typeof (action) !== "function") {
+            console.error("App : confirm() : Akcia pre otvorenie confirm dialógu nie je definovaná.");
+            return;
+        }
+
+        return action(title, text, yes, no);
+    };    
 
     
     /**

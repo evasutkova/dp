@@ -32,16 +32,28 @@ define([
         this.errorMessage = ko.observable("");
         this.files = args.files || ko.observableArray([]);
         this.nextPage = ko.observable("");
+        this.search = ko.observable("").extend({ rateLimit: 350 });
 
         if (typeof (args.disconnectAction) === "function") {
             args.disconnectAction(this.disconnect.bind(this));
         }
+
+        this._search_subscribe = this.search.subscribe(this._onSearch, this);
     };
 
     //#endregion
 
 
     //#region [ Event Handlers ]
+
+    /**
+     * Spracovanie udalosti zmeny searchu.
+     */
+    Model.prototype._onSearch = function (val) {
+        this.files([]);
+        this.listFiles();
+    };    
+    
 
     /**
      * Spracovanie udalosti pripojenia na Google Drive.
@@ -232,13 +244,17 @@ define([
         var query = {
             pageSize: 10,
             orderBy: "name",
-            fields: "*",
-            //q: "name contains 'f'"
+            fields: "*"
         };
 
         if(nextPage) {
             query.pageToken = nextPage;
         }        
+
+        var search = this.search();
+        if(search) {
+            query.q = "name contains '" + search + "'";
+        }
 
         api.client.drive.files
             .list(query)
@@ -251,6 +267,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~DriveTool()");
+
+        this._search_subscribe.dispose();
     };
 
     //#endregion

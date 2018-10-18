@@ -121,7 +121,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/explorer-tool.css": "js/components/tools/explorer/explorer.less",
                     "wwwroot/css/settings-tool.css": "js/components/tools/settings/settings.less",
                     "wwwroot/css/modals.css": "js/components/modals/modals.less",
-                    "wwwroot/css/prompt-modal.css": "js/components/modals/prompt/prompt.less"
+                    "wwwroot/css/prompt-modal.css": "js/components/modals/prompt/prompt.less",
+                    "wwwroot/css/confirm-modal.css": "js/components/modals/confirm/confirm.less"
                 }
             }
         },
@@ -140,7 +141,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/explorer-tool.css",
                     "wwwroot/css/settings-tool.css",
                     "wwwroot/css/modals.css",
-                    "wwwroot/css/prompt-modal.css"
+                    "wwwroot/css/prompt-modal.css",
+                    "wwwroot/css/confirm-modal.css"
                 ],
                 dest: "wwwroot/css/site.css"
             }

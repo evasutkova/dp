@@ -11,6 +11,7 @@ define([
     ko.components.register("explorer-tool", { require: "dp/components/tools/explorer/explorer" });
     ko.components.register("settings-tool", { require: "dp/components/tools/settings/settings" });
     ko.components.register("prompt-modal", { require: "dp/components/modals/prompt/prompt" });
+    ko.components.register("confirm-modal", { require: "dp/components/modals/confirm/confirm" });
 
     // Spustime aplikaciu
     $(function () {

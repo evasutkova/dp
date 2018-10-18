@@ -3,10 +3,10 @@
         <!-- ko if: title() -->
         <h6 data-bind="text: title"></h6>
         <!-- /ko -->
-        <p data-bind="text: text"></p>       
+        <p data-bind="html: text"></p>       
     </div>
     <div class="modal-footer">
-        <button class="btn-flat" data-bind="click: close.bind($component, false), text: no"></button>
+        <button class="btn-flat btn-flat--secondary" data-bind="click: close.bind($component, false), text: no"></button>
         <button class="btn-flat" data-bind="click: close.bind($component, true), text: yes"></button>
     </div>
 </div>

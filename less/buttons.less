@@ -5,16 +5,24 @@
     font-size: 1rem;
     font-weight: 400;
     color: @primary-color;
-    transition: opacity .3s ease;
-    opacity: .85;
-
-    &:hover {
-        opacity: 1;
-    }
+    transition: color .3s ease;
 
     &:focus {
         background: transparent;
     }
+
+    &:hover {
+        background: transparent;
+        color: tint(@primary-color, 80%);
+    }
+
+    &--secondary {
+        color: fade(@fg-color, 45%);
+
+        &:hover {
+            color: @fg-color;
+        }        
+    }    
 }
 
 .btn {

@@ -39,15 +39,23 @@ define([
      * Odhlási používateľa.
      */
     Model.prototype.disconnect = function () {
-        var action = this._drive_disconnectAction();
+        var $this = this;
+        this.confirm("Odhlásenie", "Naozaj chcete ukončiť prácu s aplikáciou?", "Pokračovať", "Ukončiť")
+            .then(function(r) {
+                if(!r) {
+                    return;
+                }
 
-        if (typeof (action) !== "function") {
-            console.error("App : disconnect() : Akcia pre odhlásenie nie je definovaná.");
-            return;
-        }
+                var action = $this._drive_disconnectAction();
 
-        this.tool("drive");
-        action();
+                if (typeof (action) !== "function") {
+                    console.error("App : disconnect() : Akcia pre odhlásenie nie je definovaná.");
+                    return;
+                }
+        
+                $this.tool("drive");
+                action();
+            });
     };
 
 

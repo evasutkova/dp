@@ -16,6 +16,7 @@ define([
         this.tool = args.tool || ko.observable("");
         this.isConnected = args.isConnected || ko.observable(false);
         this.disconnectCallback = args.disconnectCallback;
+        this.openCallback = args.openCallback;
     };
 
     //#endregion
@@ -27,7 +28,9 @@ define([
      * Vyvolá dialóg pre otvorenie súboru.
      */
     Model.prototype.open = function () {
-        console.info("open");
+        if(typeof(this.openCallback) === "function") {
+            this.openCallback();
+        }
     };
 
 

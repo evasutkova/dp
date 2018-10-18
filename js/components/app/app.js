@@ -37,6 +37,34 @@ define([
     //#region [ Methods : Public ]
 
     /**
+     * Otvorí a načíta dokument z disku.
+     */
+    Model.prototype.open = function () {
+        this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", false, "Otvoriť", "Zrušiť")
+            .then(function (data) {
+                debugger;
+                // // Check file conent
+                // if (!data.content) {
+                //     $this.alert($this.resources.openHelp.errors.emptyTitle);
+                //     return;
+                // }
+
+                // // Try to parse content
+                // var parsedData;
+                // try {
+                //     parsedData = JSON.parse(data.content);
+                // }
+                // catch (ex) {
+                //     $this.alert($this.resources.openHelp.errors.invalidFormat);
+                //     return;
+                // }
+
+                // $this._openHelp(data.content, data.fileName);
+            });
+    };
+
+
+    /**
      * Odhlási používateľa.
      */
     Model.prototype.disconnect = function () {
@@ -120,9 +148,6 @@ define([
         }
 
         return action(title, text, mode, multiple, yes, no);
-
-        // mode = mode || "text";
-        // multiple = multiple || false;
     };  
 
     

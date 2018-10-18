@@ -1,6 +1,6 @@
 <div class="app">
     <div class="app__side">
-        <toolbar params="tool: tool, isConnected: isConnected, disconnectCallback: disconnect.bind($component)"></toolbar>
+        <toolbar params="tool: tool, isConnected: isConnected, disconnectCallback: disconnect.bind($component), openCallback: open.bind($component)"></toolbar>
         <!-- ko if: tool() -->
         <div class="tool">
             <!-- ko if: tool() === 'drive' -->

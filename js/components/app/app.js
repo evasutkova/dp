@@ -44,8 +44,13 @@ define([
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
-                // Skontrolujeme obsah
-                if (!data || !data.length) {
+                // Ak prislo null pouzivatel zrusil okno
+                if(!data) {
+                    return;
+                }
+                
+                // Ak prislo prazdne pole pouizvatel nevybral ziadensubor
+                if (!data.length) {
                     $this.confirm("Otvoriť projekt", "Musíte vybrať súbor s príponou .mdzip alebo .md.", "Ok");
                     return;
                 }

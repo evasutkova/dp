@@ -12,7 +12,8 @@ require({
         text: "/dp/wwwroot/js/libs/text",
         google: "/dp/wwwroot/js/libs/google",
         optiscroll: "/dp/wwwroot/js/libs/optiscroll",
-        session: "/dp/wwwroot/js/storage/session"
+        session: "/dp/wwwroot/js/storage/session",
+        jszip: "/wwwroot/js/libs/jszip"
     },
     config: {
         "dp/components/tools/drive/drive": {

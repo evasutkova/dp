@@ -51,7 +51,7 @@ define([
                 
                 // Ak prislo prazdne pole pouizvatel nevybral ziadensubor
                 if (!data.length) {
-                    $this.confirm("Otvoriť projekt", "Musíte vybrať súbor s príponou .mdzip alebo .md.", "Ok");
+                    $this.confirm("Otvoriť projekt", "Musíte vybrať súbor s príponou <b>.mdzip</b> alebo <b>.md</b>.", "Ok");
                     return;
                 }
 

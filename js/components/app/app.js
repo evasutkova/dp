@@ -1,7 +1,8 @@
 define([
     "knockout",
+    "jszip",
     "text!./app.html"
-], function (ko, view) {
+], function (ko, zip, view) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -41,6 +42,8 @@ define([
      */
     Model.prototype.open = function () {
         var $this = this;
+        var name = null;
+        var archive = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
@@ -55,17 +58,24 @@ define([
                     return;
                 }
 
-                // // Try to parse content
-                // var parsedData;
-                // try {
-                //     parsedData = JSON.parse(data.content);
-                // }
-                // catch (ex) {
-                //     $this.alert($this.resources.openHelp.errors.invalidFormat);
-                //     return;
-                // }
-
+                // Pokusime sa rozzipovat subor
+                name = data[0].name;
+                try {
+                    return new zip().loadAsync(data[0].content);
+                }
+                catch(ex) {
+                    //     $this.alert($this.resources.openHelp.errors.invalidFormat);
+                    return null;
+                }
                 // $this._openHelp(data.content, data.fileName);
+            })
+            .then(function(a) {
+                archive = a;
+                // Najrpv nacitame sablonu
+                return archive.file("template.html").async("string");
+            })
+            .then(function(r) {
+                debugger;
             });
     };
 

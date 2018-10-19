@@ -44,38 +44,41 @@ define([
         var $this = this;
         var name = null;
         var archive = null;
+        var template = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
                 // Ak prislo null pouzivatel zrusil okno
                 if(!data) {
-                    return;
+                    return Promise.reject(null);
                 }
                 
-                // Ak prislo prazdne pole pouizvatel nevybral ziadensubor
+                // Ak prislo prazdne pole pouzivatel nevybral ziaden subor
                 if (!data.length) {
-                    $this.confirm("Otvoriť projekt", "Musíte vybrať súbor s príponou <b>.mdzip</b> alebo <b>.md</b>.", "Ok");
-                    return;
+                    throw "Musíte vybrať súbor s príponou <b>.mdzip</b> alebo <b>.md</b>.";
                 }
 
-                // Pokusime sa rozzipovat subor
+                // Odlozime nazov suboru
                 name = data[0].name;
-                try {
-                    return new zip().loadAsync(data[0].content);
-                }
-                catch(ex) {
-                    //     $this.alert($this.resources.openHelp.errors.invalidFormat);
-                    return null;
-                }
-                // $this._openHelp(data.content, data.fileName);
+                return new zip().loadAsync(data[0].content);
             })
             .then(function(a) {
+                // Odlozime archiv
                 archive = a;
-                // Najrpv nacitame sablonu
+
+                // Nacitame sablonu
                 return archive.file("template.html").async("string");
             })
             .then(function(r) {
+                template = r;
                 debugger;
+                // $this._openHelp(data.content, data.fileName);
+            })
+            .catch(function(error) {
+                if(!error) {
+                    return;
+                }
+                $this.confirm("Otvoriť projekt", error, "Ok");
             });
     };
 

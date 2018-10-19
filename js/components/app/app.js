@@ -40,14 +40,15 @@ define([
      * Otvorí a načíta dokument z disku.
      */
     Model.prototype.open = function () {
+        var $this = this;
+
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
-                debugger;
-                // // Check file conent
-                // if (!data.content) {
-                //     $this.alert($this.resources.openHelp.errors.emptyTitle);
-                //     return;
-                // }
+                // Skontrolujeme obsah
+                if (!data || !data.length) {
+                    $this.confirm("Otvoriť projekt", "Musíte vybrať súbor s príponou .mdzip alebo .md.", "Ok");
+                    return;
+                }
 
                 // // Try to parse content
                 // var parsedData;

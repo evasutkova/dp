@@ -6,7 +6,9 @@
         <p data-bind="html: text"></p>       
     </div>
     <div class="modal-footer">
+        <!-- ko if: no().length -->
         <button class="btn-flat btn-flat--secondary" data-bind="click: close.bind($component, false), text: no"></button>
+        <!-- /ko -->
         <button class="btn-flat" data-bind="click: close.bind($component, true), text: yes"></button>
     </div>
 </div>

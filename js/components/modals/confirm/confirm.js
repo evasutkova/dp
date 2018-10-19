@@ -47,7 +47,7 @@ define([
         this.title(title || "");
         this.text(text || "");
         this.yes(yes || "Áno");
-        this.no(no || "Nie");
+        this.no(no || "");
 
         this.modal.open();
 

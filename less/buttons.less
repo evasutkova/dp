@@ -68,7 +68,7 @@
     &--loading {
         .not-selectable;
         background: @disabled-color !important;
-        color: @fg-disabled-color;
+        color: @bg-color;
         cursor: default;
         box-shadow: none;
 
@@ -88,6 +88,7 @@
             content: "loading";
             line-height: inherit;
             float: left;
+            color: @bg-color;
             margin-right: 15px;
             animation: rotating 2s linear infinite;
         }

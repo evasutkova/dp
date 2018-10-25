@@ -47,21 +47,15 @@
     }
 
     &--secondary {
-        background: transparent;
+        background: fade(@fg-color, 60%);
         color: @complementary-color;
-        box-shadow: none;
-        border: 1px solid @complementary-color;
 
         &:focus {
-            background: transparent;
-            color: tint(@complementary-color, 20%);
-            box-shadow: none;
-            border-color: tint(@complementary-color, 20%);
+            background: tint(fade(@fg-color, 60%), 20%);
         }        
 
         &:hover {
-            background: transparent;
-            box-shadow: none;
+            background: fade(@fg-color, 60%);
         }        
     }
 

@@ -17,10 +17,10 @@
     }
 
     &--secondary {
-        color: fade(@fg-color, 45%);
+        color: @complementary-color;
 
         &:hover {
-            color: @fg-color;
+            color: tint(@complementary-color, 20%);
         }        
     }    
 }

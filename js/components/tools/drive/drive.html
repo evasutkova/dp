@@ -10,10 +10,11 @@
     </div>
     <!-- /ko -->
     <!-- ko if: isConnected() -->
-    <div class="row" style="margin-bottom: 0;padding: 0 .5rem">
+    <div class="row" style="margin-bottom: 0;padding: 0 .75rem">
         <div class="input-field input-field--negative col s12 drive-tool__search">
             <i class="dp-icons prefix">search</i>
-            <input id="search" type="text" placeholder="Nájsť v zozname" data-bind="textInput: search" />
+            <input id="search" type="text" placeholder="Nájsť v zozname"
+                   data-bind="textInput: search, event:{ focus: function(m, e) { $(e.target.parentNode).addClass('input-field--active'); }, blur: function(m, e) { $(e.target.parentNode).removeClass('input-field--active'); }}" />
         </div>
     </div>      
     <!-- /ko -->

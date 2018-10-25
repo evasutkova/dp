@@ -42,6 +42,7 @@
             transition: background-color .3s ease;
             
             input[type=text] {
+                color: fade(@fg-color, 45%);
                 border-bottom: 0;
                 margin-top: .25rem;
                 margin-bottom: .25rem;
@@ -63,6 +64,15 @@
             &.input-field--active {
                 background: @fg-color;
                 box-shadow: 0 1px 1px rgba(0,0,0,.24);
+
+                input[type=text] {
+                    color: @complementary-color;
+    
+                    &:focus {
+                        border-bottom: 0;
+                        box-shadow: none;
+                    }
+                }
 
                 .prefix {
                     color: @complementary-color;

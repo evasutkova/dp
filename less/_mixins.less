@@ -1,9 +1,9 @@
-@bg-color: #fff;
-@fg-color: rgba(0,0,0,.85);
-@fg-disabled-color: #9f9f9f;
-@hr-color: #ccc;
-@primary-color: #ffc107;
-@complementary-color: #607d8b;
+@bg-color: #55688a;
+@fg-color: #fff;
+@fg-color-secondary: fade(@fg-color, 70%);
+@hr-color: #6a7a98;
+@primary-color: #1a73e8;
+@complementary-color: #404040;
 @disabled-color: #dfdfdf;
 
 @font-family: 'Roboto', sans-serif;
@@ -14,4 +14,12 @@
     -ms-user-select: none;
     user-select: none;
     pointer-events: none;
+}
+
+.primary-text-shadow() {
+    text-shadow: 0 1px 2px rgba(0,0,0,.65);
+}
+
+.secondary-text-shadow() {
+    text-shadow: 0 0 4px rgba(0,0,0,.4);
 }

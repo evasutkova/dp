@@ -18,7 +18,7 @@
         width: 3rem;
         line-height: 3rem;
         padding: 0;
-        color: fade(@fg-color, 45%);
+        color: fade(@fg-color, 60%);
         transition: color .3s ease;
         border-radius: 0;
 
@@ -27,7 +27,7 @@
         }
 
         &:hover {
-            color: @primary-color;
+            color: fade(@fg-color, 90%);
         }
 
         &:focus {
@@ -35,8 +35,8 @@
         }
 
         &--active {
-            color: @primary-color;
-            box-shadow: inset -3px 0 0 @primary-color !important;
+            color: fade(@fg-color, 90%);
+            box-shadow: inset -3px 0 0 fade(@fg-color, 90%) !important;
         }
     }
 }

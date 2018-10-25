@@ -31,6 +31,7 @@
         
         > i {
             margin-right: 0.5rem;
+            display: none;
         }
 
         > span {
@@ -47,13 +48,28 @@
             .secondary-text-shadow;
         }
 
+        &::before{
+            content: "\00a0";
+            background: fade(@fg-color, 20%);
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            border-radius: .25rem;
+            margin-left: -.5rem;     
+            transform: scale(0);
+            transition: transform .15s ease;
+        }
+
         &:focus {
             background: transparent;
         }
 
         &:hover {
-            background: fade(@fg-color, 20%);
             color: @fg-color;
+
+            &::before {
+                transform: scale(1); 
+            }
         }
 
         + a {

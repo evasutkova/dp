@@ -22,6 +22,29 @@ define([
     //#endregion
 
 
+    //#region [ Event Handlers ]
+
+    /**
+     * Spracovanie udalosti stlačenia klávesy.
+     *
+     * @param {object} model Model.
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._onKeydown = function (attribute, e) {
+        if(attribute.isProtected || attribute.value()) {
+            return true;
+        }
+
+        if(e.keyCode === 46) {
+            this.meta.remove(attribute);
+        }
+
+        return true;
+    };
+
+    //#endregion
+
+
     //#region [ Methods : Public ]
     
     /**

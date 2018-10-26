@@ -1,7 +1,8 @@
 define([
     "knockout",
     "text!./settings.html",
-    "dp/polyfills/string"
+    "dp/polyfills/string",
+    "dp/bindings/optiscroll"
 ], function (ko, view) {
     //#region [ Constructor ]
 

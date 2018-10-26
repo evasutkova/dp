@@ -1,4 +1,4 @@
-<div class="settings-tool">
+<div class="settings-tool" data-bind="optiscroll">
     <div class="row" data-bind="foreach: meta">
         <div class="input-field input-field--inverse col s12">
             <input type="text" data-bind="textInput: value, attr: { id: key }, event: { keydown: $parent._onKeydown.bind($parent) }" />

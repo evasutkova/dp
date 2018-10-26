@@ -4,7 +4,7 @@ define([
     "google!client:auth2",
     "text!./drive.html",
     "session!",
-    "dp/bindings/optiscroll",
+    "dp/bindings/optiscroll"
 ], function (module, ko, api, view, session) {
     //#region [ Fields ]
 

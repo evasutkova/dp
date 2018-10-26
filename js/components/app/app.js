@@ -56,7 +56,8 @@ define([
             return {
                 key: key,
                 label: m.label,
-                value: m.value
+                value: m.value,
+                isProtected: key[0] === "@"
             };
         }));
     };

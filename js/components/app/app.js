@@ -26,10 +26,39 @@ define([
         this.user = ko.observable(null);
         this.files = ko.observableArray([]);
 
+        this.fileName = ko.observable("");
+        this.template = ko.observable("").extend({ rateLimit: 500 });
+        this.meta = ko.observableArray([]);
+
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
         this._fileBrowser_openAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
+    };
+
+    //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Otvorí súbor/projekt.
+     * 
+     * @param {string} fileName Názov súboru.
+     * @param {object} meta Metainformácie.
+     * @param {string} template HTML šablóna pre výstup.
+     */
+    Model.prototype._open = function(fileName, template, meta) {
+        this.fileName(fileName);
+        this.template(template);
+        this.meta(Object.keys(meta).map(function(key) {
+            var m = meta[key];
+            return {
+                key: key,
+                label: m.label,
+                value: m.value
+            };
+        }));
     };
 
     //#endregion
@@ -42,9 +71,11 @@ define([
      */
     Model.prototype.open = function () {
         var $this = this;
+
         var name = null;
         var archive = null;
         var template = null;
+        var meta = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
@@ -71,14 +102,22 @@ define([
             })
             .then(function(r) {
                 template = r;
-                debugger;
-                // $this._openHelp(data.content, data.fileName);
+
+                // Nacitame metainformacie
+                return archive.file("meta.json").async("string");
+            })
+            .then(function(r) {
+                meta = JSON.parse(r);
+            })
+            .then(function() {
+                $this._open(name, template, meta);
             })
             .catch(function(error) {
                 if(!error) {
                     return;
                 }
-                $this.confirm("Otvoriť projekt", error, "Ok");
+                console.error(error);
+                $this.confirm("Otvoriť projekt", (typeof(error) === "string") ? error : "Nepodarilo sa načítať obsah súboru.", "Ok");
             });
     };
 

@@ -56,7 +56,7 @@ define([
             return {
                 key: key,
                 label: m.label,
-                value: m.value,
+                value: ko.observable(m.value),
                 isProtected: key[0] === "@"
             };
         }));

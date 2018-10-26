@@ -3,6 +3,7 @@
         <toolbar params="tool: tool, 
                          isConnected: isConnected, 
                          hasMeta: meta().length > 0,
+                         hasTemplate: template().length > 0,
                          disconnectCallback: disconnect.bind($component), 
                          openCallback: open.bind($component)">
         </toolbar>
@@ -11,7 +12,7 @@
             <!-- ko if: tool() === 'drive' -->
             <drive-tool params="isConnected: isConnected, user: user, files: files, disconnectAction: _drive_disconnectAction"></drive-tool>
             <!-- /ko -->
-            <!-- ko if: isConnected() && tool() === 'explorer' -->
+            <!-- ko if: tool() === 'explorer' -->
             <explorer-tool></explorer-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'settings' -->

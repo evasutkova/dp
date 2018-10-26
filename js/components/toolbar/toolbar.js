@@ -16,6 +16,7 @@ define([
         this.tool = args.tool || ko.observable("");
         this.isConnected = args.isConnected || ko.observable(false);
         this.hasMeta = args.hasMeta || ko.observable(false);
+        this.hasTemplate = args.hasTemplate || ko.observable(false);
         this.disconnectCallback = args.disconnectCallback;
         this.openCallback = args.openCallback;
     };

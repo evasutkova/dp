@@ -20,6 +20,9 @@
     </div>
     <div class="app__main">
         <div class="app__actions">
+            <!-- ko if: fileName().length -->
+            <h1 class="app__fileName" data-bind="text: fileName"></h1>
+            <!-- /ko -->
         </div>
         <div class="app__main">
         </div>

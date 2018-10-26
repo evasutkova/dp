@@ -15,7 +15,7 @@
             <explorer-tool></explorer-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'settings' -->
-            <settings-tool params="meta: meta"></settings-tool>
+            <settings-tool params="meta: meta, promptCallback: prompt.bind($component), confirmCallback: confirm.bind($component)"></settings-tool>
             <!-- /ko -->
         </div>        
         <!-- /ko -->

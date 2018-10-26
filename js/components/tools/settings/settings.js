@@ -13,6 +13,8 @@ define([
         console.log("SettingsTool()");
 
         this.meta = args.meta || ko.observableArray([]);
+        this.promptCallback = args.promptCallback;
+        this.confirmCallback = args.confirmCallback;
     };
 
     //#endregion
@@ -24,7 +26,31 @@ define([
      * Pridá nový atribút.
      */
     Model.prototype.add = function () {
-        console.log("add()");
+        var prompt = this.promptCallback;
+        if(typeof(prompt) !== "function") {
+            console.error("SettingsTool : add() : Akcia pre otvorenie prompt dialógu nie je definovaná.");
+            return;
+        }
+
+        var confirm = this.confirmCallback;
+        if(typeof(confirm) !== "function") {
+            console.error("SettingsTool : add() : Akcia pre otvorenie confirm dialógu nie je definovaná.");
+            return;
+        }
+
+        var $this = this;
+        prompt("Nový atribút", "Zadajte názov pre nový atribút", "", "Vytvoriť", "Zrušiť").then(function(r) {
+            if(r === null) {
+                return;
+            }
+
+            if(!r) {
+                confirm("Nový atribút", "Musíte zadať názov pre nový atribút.", "Ok").then(function() {
+                    $this.add();
+                });
+                return;
+            }
+        });
     };
 
 

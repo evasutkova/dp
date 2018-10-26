@@ -19,6 +19,14 @@ define([
 
 
     //#region [ Methods : Public ]
+    
+    /**
+     * Pridá nový atribút.
+     */
+    Model.prototype.add = function () {
+        console.log("add()");
+    };
+
 
     /**
      * Dispose.

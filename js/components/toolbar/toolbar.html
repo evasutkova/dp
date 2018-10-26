@@ -11,19 +11,23 @@
             </button>
         </li>        
     </ul>
-    <!-- ko if: isConnected() -->
+    <!-- ko if: hasMeta() -->
     <ul>
-        <li>
+        <!-- <li>
             <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($component, 'explorer')">
                 <i class="dp-icons">file_tree</i>
             </button>
-        </li>
+        </li> -->
+        <!-- ko if: hasMeta -->
         <li>
-            <button class="btn-flat toolbar__item" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($component, 'settings')">
+            <button class="btn-flat toolbar__item" title="Nastavenia" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($component, 'settings')">
                 <i class="dp-icons">settings</i>
             </button>
         </li>
+        <!-- /ko -->
     </ul>
+    <!-- /ko -->
+    <!-- ko if: isConnected() -->
     <ul>
         <li>
             <button class="btn-flat toolbar__item" title="Odhlásiť" data-bind="click: disconnect">

@@ -79,5 +79,27 @@
                 }                 
             }
         }
+
+        &--inverse {
+            label {
+                color: @fg-color-secondary;
+                .secondary-text-shadow;
+            }
+
+            input[type=text] {
+                color: @fg-color;
+                border-bottom: 1px solid @hr-color;
+
+                &:focus {
+                    border-bottom: 1px solid @fg-color;
+                    box-shadow: 0 1px 0 0 @fg-color;
+        
+                    + label {
+                        color: @fg-color;
+                        .primary-text-shadow;
+                    }
+                }
+            }            
+        }
     }
 }

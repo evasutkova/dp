@@ -14,8 +14,8 @@
             <!-- ko if: isConnected() && tool() === 'explorer' -->
             <explorer-tool></explorer-tool>
             <!-- /ko -->
-            <!-- ko if: isConnected() && tool() === 'settings' -->
-            <settings-tool></settings-tool>
+            <!-- ko if: tool() === 'settings' -->
+            <settings-tool params="meta: meta"></settings-tool>
             <!-- /ko -->
         </div>        
         <!-- /ko -->

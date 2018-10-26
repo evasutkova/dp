@@ -11,6 +11,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("SettingsTool()");
+
+        this.meta = args.meta || ko.observableArray([]);
     };
 
     //#endregion

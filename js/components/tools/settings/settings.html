@@ -1,3 +1,8 @@
 <div class="settings-tool">
-    settings
+    <div class="row" data-bind="foreach: meta">
+        <div class="input-field input-field--inverse col s12">
+            <input type="text" data-bind="value: value, attr: { id: key }" />
+            <label data-bind="text: label, attr: { for: key }, css: { 'active': value().length }"></label>
+        </div>        
+    </div>
 </div>

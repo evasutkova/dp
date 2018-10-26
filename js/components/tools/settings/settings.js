@@ -1,6 +1,8 @@
 define([
-    "text!./settings.html"
-], function (view) {
+    "knockout",
+    "text!./settings.html",
+    "dp/polyfills/string"
+], function (ko, view) {
     //#region [ Constructor ]
 
     /**
@@ -39,17 +41,41 @@ define([
         }
 
         var $this = this;
-        prompt("Nový atribút", "Zadajte názov pre nový atribút", "", "Vytvoriť", "Zrušiť").then(function(r) {
-            if(r === null) {
+        prompt("Nový atribút", "Zadajte názov pre nový atribút", "", "Vytvoriť", "Zrušiť").then(function(label) {
+            if(label === null) {
                 return;
             }
 
-            if(!r) {
+            if(!label) {
                 confirm("Nový atribút", "Musíte zadať názov pre nový atribút.", "Ok").then(function() {
                     $this.add();
                 });
                 return;
             }
+
+            // Ziskame kluc pre atribut
+            var key = label.toCodeName();
+
+            // Overime jedinecnost klucu
+            var meta = $this.meta();
+            var isUnique = true;
+            for(var i = 0; (i < meta.length) && isUnique; i++) {
+                isUnique = meta[i].key !==  key;
+            }
+            if(!isUnique) {
+                confirm("Nový atribút", "Atribút <b>" + label + "</b> už existuje.", "Ok").then(function() {
+                    $this.add();
+                });
+                return;
+            }
+            
+            // Pridame atribut do zoznamu
+            $this.meta.push({
+                key: key,
+                label: label,
+                value: ko.observable(""),
+                isProtected: false
+            });
         });
     };
 

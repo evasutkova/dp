@@ -17,6 +17,16 @@
             padding: .2rem 0;
             display: flex;
         }
+
+        .generate(5, ".explorer-tool__tree");
+        .generate(@n, @s, @i: 1) when (@i =< @n) {
+            @tmp: ~'@{s}';
+            @{tmp} .explorer-tool__item::before {
+                content: "\00a0";
+                width: ~"@{i}rem";
+            }
+            .generate(@n, "@{s} .explorer-tool__tree", (@i + 1));
+        }
     }
 
     &__item {
@@ -41,7 +51,7 @@
             .primary-text-shadow;
         }
 
-        &::before{
+        &::after{
             content: "\00a0";
             background: fade(@fg-color, 20%);
             position: absolute;
@@ -56,7 +66,7 @@
         &:hover {
             color: @fg-color;
 
-            &::before {
+            &::after {
                 transform: scale(1); 
             }
         }        

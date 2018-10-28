@@ -1,7 +1,8 @@
 define([
+    "knockout",
     "text!./explorer.html",
     "dp/bindings/optiscroll"
-], function (view) {
+], function (ko, view) {
     //#region [ Constructor ]
 
     /**
@@ -12,6 +13,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("ExplorerTool()");
+
+        this.hasTemplate = args.hasTemplate || ko.observable(false);
     };
 
     //#endregion

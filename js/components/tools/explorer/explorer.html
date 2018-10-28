@@ -2,6 +2,16 @@
     <div class="row">
         <div class="col s12" style="margin:0.5rem 0">
             <ul class="collection explorer-tool__tree">
+                <!-- ko if: hasTemplate -->
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item">
+                        <i class="dp-icons left">xml</i>
+                        <span>Šablóna</span>
+                    </button>
+                </li>
+                <!-- /ko -->
+            </ul>            
+            <!-- <ul class="collection explorer-tool__tree">
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item">
                         <i class="dp-icons left">markdown</i>
@@ -73,7 +83,7 @@
                         <i class="dp-icons">dots_vertical</i>
                     </button>
                 </li>                
-            </ul>
+            </ul> -->
         </div>
     </div>
 </div>

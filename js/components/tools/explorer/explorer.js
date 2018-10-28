@@ -1,5 +1,6 @@
 define([
-    "text!./explorer.html"
+    "text!./explorer.html",
+    "dp/bindings/optiscroll"
 ], function (view) {
     //#region [ Constructor ]
 

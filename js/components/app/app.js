@@ -26,6 +26,7 @@ define([
         this.user = ko.observable(null);
         this.files = ko.observableArray([]);
 
+        this.title = ko.observable("");
         this.fileName = ko.observable("");
         this.template = ko.observable("").extend({ rateLimit: 500 });
         this.meta = ko.observableArray([]);

@@ -15,11 +15,22 @@ require({
         session: "/dp/wwwroot/js/storage/session",
         jszip: "/dp/wwwroot/js/libs/jszip",
         codemirror: "/dp/wwwroot/js/libs/codemirror",
+        codemirrorCss: "/dp/wwwroot/js/libs/codemirror.css",
+        codemirrorHtmlmixed: "/dp/wwwroot/js/libs/codemirror.htmlmixed",
+        codemirrorJavascript: "/dp/wwwroot/js/libs/codemirror.javascript",
+        codemirrorMarkdown: "/dp/wwwroot/js/libs/codemirror.markdown",
+        codemirrorMeta: "/dp/wwwroot/js/libs/codemirror.meta",
+        codemirrorXml: "/dp/wwwroot/js/libs/codemirror.xml",        
         codemirrorSimplescrollbars: "/dp/wwwroot/js/libs/codemirror.simplescrollbars"
     },
     map: {
         "*": {
-            "../../lib/codemirror": "codemirror"
+            "../lib/codemirror": "codemirror",
+            "../../lib/codemirror": "codemirror",
+            "../xml/xml": "codemirrorXml",
+            "../javascript/javascript": "codemirrorJavascript",
+            "../css/css": "codemirrorCss",
+            "../meta": "codemirrorMeta"
         }
     },
     config: {

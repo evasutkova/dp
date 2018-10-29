@@ -13,6 +13,7 @@ define([
     ko.components.register("prompt-modal", { require: "dp/components/modals/prompt/prompt" });
     ko.components.register("confirm-modal", { require: "dp/components/modals/confirm/confirm" });
     ko.components.register("file-browser-modal", { require: "dp/components/modals/file-browser/file-browser" });
+    ko.components.register("template-editor", { require: "dp/components/editors/template/template" });
 
     // Spustime aplikaciu
     $(function () {

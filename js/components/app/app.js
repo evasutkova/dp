@@ -25,6 +25,7 @@ define([
         this.tool = ko.observable("");
         this.user = ko.observable(null);
         this.files = ko.observableArray([]);
+        this.editor = ko.observable("");
 
         this.title = ko.observable("");
         this.fileName = ko.observable("");

@@ -34,6 +34,9 @@
             <!-- /ko -->            
         </div>
         <div class="app__main">
+            <!-- ko if: editor() === 'template' -->
+            <template-editor></template-editor>
+            <!-- /ko -->            
         </div>
     </div>
     <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>

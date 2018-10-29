@@ -33,7 +33,7 @@
         }
 
         &-selected {
-            background: @primary-color;
+            background: @fg-color;
         }
 
         &-overlayscroll-vertical {
@@ -81,6 +81,119 @@
                     background: fade(#fff, 30%);
                 }
             }              
+        }
+    }
+
+    .cm-s {
+        &-editor {
+            &--default {
+                span.cm-meta {
+                    color: #757575;
+                }
+        
+                span.cm-number {
+                    color: #6897BB;
+                }
+        
+                span.cm-keyword {
+                    line-height: 1em;
+                    font-weight: bold;
+                    color: #4156F6;
+                }
+        
+                span.cm-def {
+                    color: #FF6DE9;
+                }
+        
+                span.cm-variable {
+                    color: #71B6FF;
+                }
+        
+                span.cm-variable-2 {
+                    color: #757575;
+                }
+        
+                span.cm-variable-3,
+                span.cm-type {
+                    color: #71B6FF;
+                }
+        
+                span.cm-property {
+                    color: #757575;
+                }
+        
+                span.cm-operator {
+                    color: #757575;
+                }
+        
+                span.cm-string {
+                    color: #C34B01;
+                }
+        
+                span.cm-string-2 {
+                    color: #6A8759;
+                }
+        
+                span.cm-comment {
+                    color: #57A64A;
+                }
+        
+                span.cm-link {
+                    color: #287BDE;
+                }
+        
+                span.cm-atom {
+                    font-weight: normal;
+                    color: #757575;
+                }
+        
+                span.cm-error {
+                    color: #BC3F3C;
+                }
+        
+                span.cm-tag {
+                    color: #4156F6;
+                }
+        
+                span.cm-attribute {
+                    color: #00A7FF;
+                }
+        
+                span.cm-qualifier {
+                    color: #C88905;
+                }
+        
+                span.cm-bracket {
+                    color: #808080;
+                }
+        
+                span.cm-builtin {
+                    color: #71B6FF;
+                }     
+            }
+
+            &--markdown {
+                span.cm-header {
+                    font-weight: bold;
+                    color: #569CD6;
+                }
+        
+                span.cm-variable-2 {
+                    color: #D7BA7D;
+                }
+        
+                span.cm-quote {
+                    color: #57A64A;
+                }
+        
+                span.cm-comment {
+                    color: #a50;
+                }
+        
+                span.cm-link {
+                    color: #9CDCFE;
+                }                
+            }
         }
     }
 }

@@ -1,0 +1,86 @@
+@import "../../../less/_mixins.less";
+
+.editor {
+    height: 100%;
+
+    .CodeMirror {
+        height: 100%;
+        background: @bg-color-secondary;
+        color: @complementary-color;
+
+        &-gutters {
+            border-right-color: @hr-color;
+            background: @bg-color;
+        }
+
+        &-linenumbers {
+            background: transparent;
+        }
+
+        &-linenumber {
+            font-family: Courier New, Courier, monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: @fg-color-secondary;
+            .secondary-text-shadow;
+            .not-selectable;            
+        }
+
+        &-cursor {
+            border-left: 2px solid @primary-color;
+            height: 20px !important;
+            margin-top: 2px;
+        }
+
+        &-selected {
+            background: @primary-color;
+        }
+
+        &-overlayscroll-vertical {
+            width: 3px;
+
+            div {
+                background: fade(#000, 30%);
+                border-radius: 2px;
+                box-shadow: 0 0 1px #000;
+            }
+        }
+
+        &-overlayscroll-horizontal {
+            height: 3px;
+
+            div {
+                background: fade(#000, 30%);
+                border-radius: 2px;
+                box-shadow: 0 0 1px #000;
+            }
+        }        
+    }
+
+    &--readonly {
+        .CodeMirror {
+            background: transparent;
+            color: @fg-color-secondary;
+
+            &-cursor {
+                border-left-width: 0;
+            }
+    
+            &-selected {
+                background: transparent;
+            }
+
+            &-overlayscroll-vertical {
+                div {
+                    background: fade(#fff, 30%);
+                }
+            }
+    
+            &-overlayscroll-horizontal {
+                div {
+                    background: fade(#fff, 30%);
+                }
+            }              
+        }
+    }
+}

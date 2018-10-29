@@ -14,6 +14,16 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("TemplateEditor()");
+
+        this.cm = CodeMirror(info.element.querySelector(".template-editor"), {
+            lineNumbers: true,
+            lineWrapping: true,
+            readOnly: false,
+            value: "<b></b>",
+            mode: "htmlmixed",
+            scrollbarStyle: "overlay",
+            theme: "editor--default"
+        });
     };
 
     //#endregion

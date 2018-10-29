@@ -133,6 +133,8 @@ module.exports = function (grunt) {
                 src: [
                     "wwwroot/css/materialize.css",
                     "wwwroot/css/optiscroll.css",
+                    "wwwroot/css/codemirror.css",
+                    "wwwroot/css/codemirror.simplescrollbars.css",
                     "wwwroot/css/dp-icons.css",
                     "wwwroot/css/site.css",
                     "wwwroot/css/app.css",

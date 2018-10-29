@@ -1,8 +1,10 @@
 define([
     "knockout",
     "text!./explorer.html",
+    "codemirror",
+    "codemirrorSimplescrollbars",
     "dp/bindings/optiscroll"
-], function (ko, view) {
+], function (ko, view, CodeMirror) {
     //#region [ Constructor ]
 
     /**

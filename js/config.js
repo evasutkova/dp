@@ -13,8 +13,15 @@ require({
         google: "/wwwroot/js/libs/google",
         optiscroll: "/wwwroot/js/libs/optiscroll",
         session: "/wwwroot/js/storage/session",
-        jszip: "/wwwroot/js/libs/jszip"
+        jszip: "/wwwroot/js/libs/jszip",
+        codemirror: "/wwwroot/js/libs/codemirror",
+        codemirrorSimplescrollbars: "/wwwroot/js/libs/codemirror.simplescrollbars"
     },
+    map: {
+        "*": {
+            "../../lib/codemirror": "codemirror"
+        }
+    },    
     config: {
         "dp/components/tools/drive/drive": {
             apiKey: "AIzaSyDNFM5eXTFSr9V1CkmKlIx_5rlC7_b2xdY",

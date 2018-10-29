@@ -13,7 +13,14 @@ require({
         google: "/dp/wwwroot/js/libs/google",
         optiscroll: "/dp/wwwroot/js/libs/optiscroll",
         session: "/dp/wwwroot/js/storage/session",
-        jszip: "/wwwroot/js/libs/jszip"
+        jszip: "/dp/wwwroot/js/libs/jszip",
+        codemirror: "/dp/wwwroot/js/libs/codemirror",
+        codemirrorSimplescrollbars: "/dp/wwwroot/js/libs/codemirror.simplescrollbars"
+    },
+    map: {
+        "*": {
+            "../../lib/codemirror": "codemirror"
+        }
     },
     config: {
         "dp/components/tools/drive/drive": {

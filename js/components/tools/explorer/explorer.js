@@ -14,6 +14,8 @@ define([
     var Model = function (args, info) {
         console.log("ExplorerTool()");
 
+        this.editor = args.editor || ko.observable("");
+        this.title = args.title || ko.observable("");
         this.hasTemplate = args.hasTemplate || ko.observable(false);
     };
 
@@ -21,6 +23,15 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Spustí editáciu šablóny.
+     */
+    Model.prototype.editTemplate = function () {
+        this.editor("template");
+        this.title("Šablóna");
+    };
+    
 
     /**
      * Dispose.

@@ -1,6 +1,9 @@
 define([
-    "text!./template.html"
-], function (view) {
+    "text!./template.html",
+    "codemirror",
+    "codemirrorHtmlmixed",
+    "codemirrorSimplescrollbars"
+], function (view, CodeMirror) {
     //#region [ Constructor ]
 
     /**

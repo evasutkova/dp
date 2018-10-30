@@ -1,9 +1,10 @@
 define([
+    "knockout",
     "text!./template.html",
     "codemirror",
     "codemirrorHtmlmixed",
     "codemirrorSimplescrollbars"
-], function (view, CodeMirror) {
+], function (ko, view, CodeMirror) {
     //#region [ Constructor ]
 
     /**
@@ -15,11 +16,13 @@ define([
     var Model = function (args, info) {
         console.log("TemplateEditor()");
 
+        this.content = args.content || ko.observable("");
+
         this.cm = CodeMirror(info.element.querySelector(".template-editor"), {
             lineNumbers: true,
             lineWrapping: true,
             readOnly: false,
-            value: "<b></b>",
+            value: this.content(),
             mode: "htmlmixed",
             scrollbarStyle: "overlay",
             theme: "editor--default"

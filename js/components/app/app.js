@@ -51,6 +51,10 @@ define([
      * @param {string} template HTML šablóna pre výstup.
      */
     Model.prototype._open = function(fileName, template, meta) {
+        this.tool("explorer");
+        this.editor("");
+        this.title("");
+
         this.fileName(fileName);
         this.template(template);
         this.meta(Object.keys(meta).map(function(key) {

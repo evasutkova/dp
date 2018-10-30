@@ -27,12 +27,37 @@ define([
             scrollbarStyle: "overlay",
             theme: "editor--default"
         });
+
+        this.cm.on("change", this._cm_onChange.bind(this));
+    };
+
+    //#endregion
+
+
+    //#region [ Event Handlers ]
+
+    /**
+     * Spracovanie udalosti zmeny hodnoty editora.
+     * 
+     * @param {object} cm Inštancia editora CodeMirror.
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._cm_onChange = function(cm, e) {
+        this.save();
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Uloží zmeny.
+     */
+    Model.prototype.save = function () {
+        this.content(this.cm.getValue());
+    };
+
 
     /**
      * Dispose.

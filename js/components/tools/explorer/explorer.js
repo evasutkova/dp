@@ -17,6 +17,7 @@ define([
         this.editor = args.editor || ko.observable("");
         this.title = args.title || ko.observable("");
         this.hasTemplate = args.hasTemplate || ko.observable(false);
+        this.nodes = args.nodes || ko.observableArray([]);
     };
 
     //#endregion

@@ -93,7 +93,7 @@ define([
                 
                 // Ak prislo prazdne pole pouzivatel nevybral ziaden subor
                 if (!data.length) {
-                    throw "Musíte vybrať súbor s príponou <b>.mdzip</b> alebo <b>.md</b>.";
+                    throw "Musíte vybrať súbor s príponou <b>.mdzip</b>.";
                 }
 
                 // Odlozime nazov suboru

@@ -31,6 +31,7 @@ define([
         this.fileName = ko.observable("");
         this.template = ko.observable("").extend({ rateLimit: 500 });
         this.meta = ko.observableArray([]);
+        this.nodes = ko.observableArray([]);
 
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
@@ -47,17 +48,29 @@ define([
      * Otvorí súbor/projekt.
      * 
      * @param {string} fileName Názov súboru.
-     * @param {object} meta Metainformácie.
      * @param {string} template HTML šablóna pre výstup.
+     * @param {object} meta Metainformácie.
+     * @param {array} nodes Uzly dokumentu.
      */
-    Model.prototype._open = function(fileName, template, meta) {
+    Model.prototype._open = function(fileName, template, meta, nodes) {
         this.tool("explorer");
         this.editor("");
         this.title("");
 
         this.fileName(fileName);
         this.template(template);
-        this.meta(Object.keys(meta).map(function(key) {
+        this.meta(this._parseMeta(meta));
+        this.nodes(this._parseNodes(nodes, null));
+    };
+
+
+    /**
+     * Spracovanie metadát.
+     * 
+     * @param {object} meta Metainformácie.
+     */
+    Model.prototype._parseMeta = function(meta) {
+        return Object.keys(meta).map(function(key) {
             var m = meta[key];
             return {
                 key: key,
@@ -65,7 +78,35 @@ define([
                 value: ko.observable(m.value),
                 isProtected: key[0] === "@"
             };
-        }));
+        });
+    };
+
+
+    /**
+     * Spracovanie uzlov dokumentu.
+     * 
+     * @param {array} nodes Uzly dokumentu.
+     * @param {object} parent Nadradený uzol.
+     */
+    Model.prototype._parseNodes = function(nodes, parent) {
+        if ((typeof(nodes) === "undefined") || !(nodes instanceof Array)) {
+            return [];
+        }
+        
+        var $this = this;
+
+        return nodes.map(function(n) {
+            var tmp = {
+                parent: parent,
+                title: ko.observable(n.title),
+                content: ko.observable(n.content || ""),
+                keywords: ko.observable(n.keywords || ""),
+                isExpanded: ko.observable(n.isExpanded || false),
+                isActive: ko.observable(n.isActive || false)
+            };
+            tmp.nodes = ko.observableArray($this._parseNodes(n.nodes, tmp));
+            return tmp;
+        });
     };
 
     //#endregion
@@ -83,6 +124,7 @@ define([
         var archive = null;
         var template = null;
         var meta = null;
+        var nodes = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
@@ -115,9 +157,15 @@ define([
             })
             .then(function(r) {
                 meta = JSON.parse(r);
+
+                // Nacitame uzly dokumentu
+                return archive.file("nodes.json").async("string");
+            })
+            .then(function(r) {
+                nodes = JSON.parse(r);
             })
             .then(function() {
-                $this._open(name, template, meta);
+                $this._open(name, template, meta, nodes);
             })
             .catch(function(error) {
                 if(!error) {

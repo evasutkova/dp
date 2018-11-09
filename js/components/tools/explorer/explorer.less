@@ -69,7 +69,19 @@
             &::after {
                 transform: scale(1); 
             }
-        }        
+        }
+
+        &--active {
+            background: fade(@fg-color, 40%);
+
+            &:hover {
+                background: fade(@fg-color, 40%);
+
+                &::after {
+                    transform: scale(0); 
+                }
+            }            
+        }
     }
 
     &__action {

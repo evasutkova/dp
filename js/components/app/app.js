@@ -117,6 +117,16 @@ define([
     //#region [ Methods : Public ]
 
     /**
+     * Vytvorí nový uzol a pridá ho do zoznamu uzlov pre vstupný uzol.
+     * 
+     * @param {object} node Uzol pre ktorý sa má pridať nový uzol.
+     */
+    Model.prototype.addNode = function(node) {
+        console.info("addNode");
+    };
+
+
+    /**
      * Otvorí a načíta dokument z disku.
      */
     Model.prototype.open = function () {

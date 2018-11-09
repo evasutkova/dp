@@ -19,6 +19,8 @@ define([
         this.hasTemplate = args.hasTemplate || ko.observable(false);
         this.nodes = args.nodes || ko.observableArray([]);
         this.activeNode = args.activeNode || ko.observable(null);
+
+        this.addNodeCallback = args.addNodeCallback;
     };
 
     //#endregion
@@ -90,7 +92,11 @@ define([
      * @param {object} parent Nadradený uzol v dokumente.
      */    
     Model.prototype.add = function (parent) {
-        debugger;
+        if (typeof (this.addNodeCallback) !== "function") {
+            return;
+        }
+        
+        this.addNodeCallback(parent);
     };      
     
 

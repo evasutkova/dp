@@ -18,7 +18,7 @@
         <li>
             <ul class="collection explorer-tool__tree">
                 <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: $component.add.bind($component)">
+                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: $component.add.bind($component), clickBubble: false">
                         <i class="dp-icons left">file_plus</i>
                         <span>Pridať položku</span>
                     </button>
@@ -34,7 +34,7 @@
                 <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
                 <!-- ko if: activeNode() === null -->
                 <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: add.bind($component, null)">
+                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: add.bind($component, null), clickBubble: false">
                         <i class="dp-icons left">file_plus</i>
                         <span>Pridať položku</span>
                     </button>

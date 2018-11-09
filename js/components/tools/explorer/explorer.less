@@ -71,6 +71,17 @@
             }
         }
 
+        &--secondary {
+            > i {
+                color: @fg-color-secondary;
+            } 
+
+            > span {
+                color: @fg-color-secondary;
+                .secondary-text-shadow;
+            }
+        }
+
         &--active {
             background: fade(@fg-color, 40%);
 

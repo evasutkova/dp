@@ -1,8 +1,9 @@
 define([
     "knockout",
     "jszip",
-    "text!./app.html"
-], function (ko, zip, view) {
+    "text!./app.html",
+    "dp/document/node"
+], function (ko, zip, view, Node) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -133,15 +134,15 @@ define([
         var $this = this;
 
         return nodes.map(function(n) {
-            var tmp = {
+            var tmp = new Node({
                 parent: parent,
-                title: ko.observable(n.title),
-                content: ko.observable(n.content || ""),
-                keywords: ko.observable(n.keywords || ""),
-                isExpanded: ko.observable(n.isExpanded || false),
-                isActive: ko.observable(n.isActive || false)
-            };
-            tmp.nodes = ko.observableArray($this._parseNodes(n.nodes, tmp));
+                title: n.title,
+                content: n.content,
+                keywords: n.keywords,
+                isExpanded: n.isExpanded,
+                isActive: n.isActive
+            });
+            tmp.nodes($this._parseNodes(n.nodes, tmp));
             return tmp;
         });
     };

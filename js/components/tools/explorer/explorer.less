@@ -83,16 +83,10 @@
         }
 
         &--active {
-            background: fade(@fg-color, 40%);
-
-            &:hover,
-            &:focus {
+            &::after {
                 background: fade(@fg-color, 40%);
-
-                &::after {
-                    transform: scale(0); 
-                }
-            }            
+                transform: scale(1); 
+            }
         }
 
         &--floating {

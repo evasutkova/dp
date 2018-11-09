@@ -19,6 +19,7 @@ define([
         this.hasTemplate = args.hasTemplate || ko.observable(false);
         this.nodes = args.nodes || ko.observableArray([]);
         this.activeNode = args.activeNode || ko.observable(null);
+        this.tools = ko.computed(this._tools, this);
 
         this.addNodeCallback = args.addNodeCallback;
     };
@@ -38,6 +39,133 @@ define([
                !node.isExpanded() ? "folder" :
                "folder_open";
     };
+
+
+    /**
+     * Zoznam dostupných nástrojov pre aktívny uzol.
+     */
+    Model.prototype._tools = function() {
+        var node = this.activeNode();
+        if(!node) {
+            return [];
+        }
+
+        // Premenovanie uzla
+        var renameAction = {
+            text: "Premenovať",
+            icon: "rename_box",
+            isEnabled: true,
+            action: function (n) {
+                debugger;
+            }
+        };
+
+        return [
+            renameAction 
+        ];
+    };    
+
+/*
+    Model.prototype.activeNodeTools = function (node) {
+        if (!node) {
+            return [];
+        }
+
+        // Action for node movement
+        var moveNodeFnc = function (source, target) {
+            if (typeof ($this._replaceNodeCallback) === "function") {
+                $this._replaceNodeCallback(source, target);
+            }
+        };
+
+        // Prepare list of candidates for node movement
+        var candidates = [];
+        if (node.parent.parent) {
+            candidates.push({
+                text: node.parent.parent.title(),
+                action: moveNodeFnc,
+                source: node,
+                target: node.parent.parent
+            });
+            node.parent.parent.nodes().forEach(function (n) {
+                if (n == node.parent) {
+                    return;
+                }
+                candidates.push({
+                    text: n.title(),
+                    action: moveNodeFnc,
+                    source: node,
+                    target: n
+                });
+            });
+        }
+        node.parent.nodes().forEach(function (n) {
+            if (n == node) {
+                return;
+            }
+            candidates.push({
+                text: n.title(),
+                action: moveNodeFnc,
+                source: node,
+                target: n
+            });
+        });
+
+        return [{
+            text: "explorer-tool.rename",
+            icon: "edit",
+            isEnabled: true,
+            action: function (n) {
+                if (typeof ($this._renameNodeCallback) === "function") {
+                    $this._renameNodeCallback(n);
+                }
+            }
+        }, {
+            text: "explorer-tool.keywords",
+            icon: "label",
+            isEnabled: true,
+            action: function (n) {
+                if (typeof ($this._keywordsNodeCallback) === "function") {
+                    $this._keywordsNodeCallback(n);
+                }
+            }
+        }, {
+            text: "explorer-tool.move-up",
+            icon: "arrow_upward",
+            isEnabled: node.canMoveUp(),
+            action: function (n) {
+                if (typeof ($this._moveNodeCallback) === "function") {
+                    $this._moveNodeCallback(n, n.index() - 1);
+                }
+            }
+        }, {
+            text: "explorer-tool.move-down",
+            icon: "arrow_downward",
+            isEnabled: node.canMoveDown(),
+            action: function (n) {
+                if (typeof ($this._moveNodeCallback) === "function") {
+                    $this._moveNodeCallback(n, n.index() + 1);
+                }
+            }
+        }, {
+            text: "explorer-tool.delete",
+            icon: "delete",
+            isEnabled: true,
+            action: function (n) {
+                if (typeof ($this._deleteNodeCallback) === "function") {
+                    $this._deleteNodeCallback(n);
+                }
+            }
+        }, {
+            text: "explorer-tool.move-to",
+            icon: "call_merge",
+            isEnabled: candidates.length > 0,
+            action: function (n) {
+            },
+            tools: candidates
+        }];
+    };
+*/
 
     //#endregion
 
@@ -117,6 +245,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~ExplorerTool()");
+
+        this.tools.dispose();
     };
 
     //#endregion

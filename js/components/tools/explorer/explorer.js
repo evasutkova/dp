@@ -35,7 +35,7 @@ define([
      * @param {object} node Uzol v dokumente.
      */
     Model.prototype._icon = function(node) {
-        return !node.nodes().length ? "markdown" :
+        return !node.nodes().length ? "file_document_outline" :
                !node.isExpanded() ? "folder" :
                "folder_open";
     };

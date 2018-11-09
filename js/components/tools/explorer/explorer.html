@@ -7,9 +7,11 @@
                 <i class="dp-icons left" data-bind="text: $component._icon($data)"></i>
                 <span data-bind="text: title"></span>
             </button>
-            <button class="btn-flat explorer-tool__action">
+            <!-- ko if: isActive() && $component.tools().length -->
+            <button class="btn-flat explorer-tool__action" title="Možnosti" data-bind="clickBubble: false">
                 <i class="dp-icons">dots_vertical</i>
             </button>
+            <!-- /ko -->
         </li>
         <!-- ko if: nodes().length && $data.isExpanded() -->
         <li>

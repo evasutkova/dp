@@ -15,7 +15,7 @@
         </li>
         <!-- /ko -->
         <!-- ko if: isActive -->
-        <li>
+        <li class="explorer-tool__float-action">
             <ul class="collection explorer-tool__tree">
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item explorer-tool__item--floating" title="Pridať položku"
@@ -33,7 +33,7 @@
             <ul class="collection explorer-tool__tree">
                 <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
                 <!-- ko if: activeNode() === null -->
-                <li class="collection-item">
+                <li class="collection-item explorer-tool__float-action">
                     <button class="btn-flat explorer-tool__item explorer-tool__item--floating" title="Pridať položku"
                             data-bind="click: add.bind($component, null), clickBubble: false">
                         <i class="dp-icons">plus</i>

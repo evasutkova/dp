@@ -23,6 +23,22 @@ define([
     //#endregion
 
 
+    //#region [ Methods : Private ]
+
+    /**
+     * Vráti ikonku pre uzol v dokumente.
+     * 
+     * @param {object} node Uzol v dokumente.
+     */
+    Model.prototype._icon = function(node) {
+        return !node.nodes().length ? "markdown" :
+               !node.isExpanded() ? "folder" :
+               "folder_open";
+    };
+
+    //#endregion
+
+
     //#region [ Methods : Public ]
 
     /**

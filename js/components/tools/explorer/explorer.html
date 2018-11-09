@@ -1,9 +1,9 @@
-<div class="explorer-tool" data-bind="optiscroll">
+<div class="explorer-tool" data-bind="optiscroll, click: select.bind($component, null)">
     <script type="text/html" id="explorer-tool__item-template">
         <!-- ko foreach: nodes -->
         <li class="collection-item">
             <button class="btn-flat explorer-tool__item" 
-                    data-bind="css: { 'explorer-tool__item--active': isActive }, click: $component.select.bind($component), event: { dblclick: $component.expand }">
+                    data-bind="css: { 'explorer-tool__item--active': isActive }, click: $component.select.bind($component), clickBubble: false, event: { dblclick: $component.expand }">
                 <i class="dp-icons left" data-bind="text: $component._icon($data)"></i>
                 <span data-bind="text: title"></span>
             </button>
@@ -14,12 +14,32 @@
             </ul>
         </li>
         <!-- /ko -->
+        <!-- ko if: isActive -->
+        <li>
+            <ul class="collection explorer-tool__tree">
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: $component.add.bind($component)">
+                        <i class="dp-icons left">file_plus</i>
+                        <span>Pridať položku</span>
+                    </button>
+                </li>
+            </ul>
+        </li>
+        <!-- /ko -->        
         <!-- /ko -->
     </script>
     <div class="row">
         <div class="col s12" style="margin:0.5rem 0">
             <ul class="collection explorer-tool__tree">
                 <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
+                <!-- ko if: activeNode() === null -->
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item explorer-tool__item--secondary" data-bind="click: add.bind($component, null)">
+                        <i class="dp-icons left">file_plus</i>
+                        <span>Pridať položku</span>
+                    </button>
+                </li>
+                <!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, css: { 'explorer-tool__item--active': editor() === 'template' }">

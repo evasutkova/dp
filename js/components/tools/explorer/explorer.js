@@ -82,6 +82,16 @@ define([
         // TODO : NASTAVIT SPRAVNY EDITOR MOD
         this.editor("");
     };    
+
+
+    /**
+     * Vytvorí nový uzol v dokumente.
+     * 
+     * @param {object} parent Nadradený uzol v dokumente.
+     */    
+    Model.prototype.add = function (parent) {
+        debugger;
+    };      
     
 
     /**

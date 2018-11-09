@@ -75,9 +75,9 @@ define([
 
         if (node) {
             node.isActive(true);
-            this.title(node.title());
         }
         
+        this.title(node ? node.title() : "");
         this.activeNode(node);
         // TODO : NASTAVIT SPRAVNY EDITOR MOD
         this.editor("");

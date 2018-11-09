@@ -60,6 +60,7 @@ define([
         console.log("~User()");
 
         this.imageUrl.dispose();
+        this.name.dispose();
     };
 
     //#endregion

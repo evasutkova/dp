@@ -96,9 +96,18 @@ define([
             return;
         }
         
+        var $this = this;
+
         this.addNodeCallback(parent).then(function(node) {
-            debugger;
-            console.info("novy node", node);
+            if(!node) {
+                return;
+            }
+            
+            if(node.parent) {
+                node.parent.isExpanded(true);
+            }
+            
+            $this.select(node);
         });
     };      
     

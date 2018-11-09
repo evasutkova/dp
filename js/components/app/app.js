@@ -54,31 +54,29 @@ define([
      * @param {string} parent Nadradený uzol.
      */
     Model.prototype._addNode = function (title, parent) {
-        // // Novy uzol
-        // var n;
+        // Novy uzol
+        var n;
 
-        // if (parent) {
-        //     n = parent.add(title);
-        // }
-        // else {
-        //     var doc = $this.file();
-        //     n = new Node({
-        //         parent: doc,
-        //         title: title
-        //     });
-        //     doc.nodes.push(n);
-        // }
+        if (parent) {
+            n = parent.add(title);
+        }
+        else {
+            n = new Node({
+                title: title
+            });
+            this.nodes.push(n);
+        }
 
-        // // Create default content
-        // var level = "#";
-        // var p = n.parent;
-        // while (p.parent != null) {
-        //     level += "#";
-        //     p = p.parent;
-        // }
-        // n.content(level + " " + title);
+        // Vytvorime default obsah
+        var level = "#";
+        var p = n.parent;
+        while (p) {
+            level += "#";
+            p = p.parent;
+        }
+        n.content(level + " " + title);
 
-        // return n;
+        return n;
     };
 
 
@@ -171,8 +169,8 @@ define([
                         return $this.addNode(node);
                     });
                 }
-
-                return title;
+                
+                return $this._addNode(title, node);
             });
     };
 

@@ -2,7 +2,7 @@
     <script type="text/html" id="explorer-tool__item-template">
         <!-- ko foreach: nodes -->
         <li class="collection-item">
-            <button class="btn-flat explorer-tool__item">
+            <button class="btn-flat explorer-tool__item" data-bind="css: { 'explorer-tool__item--active': isActive }">
                 <i class="dp-icons left" data-bind="text: $component._icon($data)"></i>
                 <span data-bind="text: title"></span>
             </button>
@@ -21,7 +21,7 @@
                 <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate">
+                    <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, css: { 'explorer-tool__item--active': editor() === 'template' }">
                         <i class="dp-icons left">xml</i>
                         <span>Šablóna</span>
                     </button>

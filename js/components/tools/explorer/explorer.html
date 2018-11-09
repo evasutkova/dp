@@ -42,7 +42,7 @@
                 <!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, css: { 'explorer-tool__item--active': editor() === 'template' }">
+                    <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'template' }">
                         <i class="dp-icons left">xml</i>
                         <span>Šablóna</span>
                     </button>

@@ -47,6 +47,41 @@ define([
     //#region [ Methods : Private ]
 
     /**
+     * Vytvorí novú položku.
+     * 
+     * @param {string} title Nadpis.
+     * @param {string} parent Nadradený uzol.
+     */
+    Model.prototype._addNode = function (title, parent) {
+        // // Novy uzol
+        // var n;
+
+        // if (parent) {
+        //     n = parent.add(title);
+        // }
+        // else {
+        //     var doc = $this.file();
+        //     n = new Node({
+        //         parent: doc,
+        //         title: title
+        //     });
+        //     doc.nodes.push(n);
+        // }
+
+        // // Create default content
+        // var level = "#";
+        // var p = n.parent;
+        // while (p.parent != null) {
+        //     level += "#";
+        //     p = p.parent;
+        // }
+        // n.content(level + " " + title);
+
+        // return n;
+    };
+
+
+    /**
      * Otvorí súbor/projekt.
      * 
      * @param {string} fileName Názov súboru.
@@ -122,7 +157,22 @@ define([
      * @param {object} node Uzol pre ktorý sa má pridať nový uzol.
      */
     Model.prototype.addNode = function(node) {
-        console.info("addNode");
+        var $this = this;
+
+        return this.prompt("Nová položka", "Zadajte názov novej položky", "", "Vytvoriť", "Zrušiť")
+            .then(function(title) {
+                if(title === null) {
+                    return null;
+                }
+
+                if(!title) {
+                    return $this.confirm("Nová položka", "Musíte zadať názov pre novú položku.", "Ok").then(function() {
+                        return $this.addNode(node);
+                    });
+                }
+
+                return title;
+            });
     };
 
 

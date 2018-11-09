@@ -18,7 +18,7 @@
                                    hasTemplate: template().length > 0, 
                                    nodes: nodes, 
                                    activeNode: activeNode, 
-                                   addNodeCallback: addNode">
+                                   addNodeCallback: addNode.bind($component)">
             </explorer-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'settings' -->

@@ -96,7 +96,9 @@ define([
             return;
         }
         
-        this.addNodeCallback(parent);
+        this.addNodeCallback(parent).then(function(node) {
+            console.info("novy node", node);
+        });
     };      
     
 

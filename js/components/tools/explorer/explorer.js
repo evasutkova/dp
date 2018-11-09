@@ -18,6 +18,7 @@ define([
         this.title = args.title || ko.observable("");
         this.hasTemplate = args.hasTemplate || ko.observable(false);
         this.nodes = args.nodes || ko.observableArray([]);
+        this.activeNode = args.activeNode || ko.observable(null);
     };
 
     //#endregion
@@ -45,6 +46,7 @@ define([
      * Spustí editáciu šablóny.
      */
     Model.prototype.editTemplate = function () {
+        this.select(null);
         this.editor("template");
         this.title("Šablóna");
     };
@@ -58,6 +60,28 @@ define([
     Model.prototype.expand = function (node) {
         node.isExpanded(!node.isExpanded());
     };
+
+
+    /**
+     * Vyberie uzol v dokumente.
+     * 
+     * @param {object} node Uzol v dokumente.
+     */    
+    Model.prototype.select = function (node) {
+        var n = this.activeNode();
+        if (n) {
+            n.isActive(false);
+        }
+
+        if (node) {
+            node.isActive(true);
+            this.title(node.title());
+        }
+        
+        this.activeNode(node);
+        // TODO : NASTAVIT SPRAVNY EDITOR MOD
+        this.editor("");
+    };    
     
 
     /**

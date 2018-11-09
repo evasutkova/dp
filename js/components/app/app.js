@@ -32,6 +32,8 @@ define([
         this.template = ko.observable("").extend({ rateLimit: 500 });
         this.meta = ko.observableArray([]);
         this.nodes = ko.observableArray([]);
+        
+        this.activeNode = ko.observable(null);
 
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();

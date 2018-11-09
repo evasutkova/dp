@@ -13,7 +13,7 @@
             <drive-tool params="isConnected: isConnected, user: user, files: files, disconnectAction: _drive_disconnectAction"></drive-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'explorer' -->
-            <explorer-tool params="editor: editor, title: title, hasTemplate: template().length > 0, nodes: nodes"></explorer-tool>
+            <explorer-tool params="editor: editor, title: title, hasTemplate: template().length > 0, nodes: nodes, activeNode: activeNode"></explorer-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'settings' -->
             <settings-tool params="meta: meta, promptCallback: prompt.bind($component), confirmCallback: confirm.bind($component)"></settings-tool>

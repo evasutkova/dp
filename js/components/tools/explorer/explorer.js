@@ -51,6 +51,16 @@ define([
     
 
     /**
+     * Zbalí/rozbalí uzol v dokumente.
+     * 
+     * @param {object} node Uzol v dokumente.
+     */    
+    Model.prototype.expand = function (node) {
+        node.isExpanded(!node.isExpanded());
+    };
+    
+
+    /**
      * Dispose.
      */
     Model.prototype.dispose = function () {

@@ -155,7 +155,69 @@
 }
 
 .explorer-tool-menu {
-    background: red;
     overflow: visible;
     position: absolute;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.2);
+    border-radius: 2px;
+
+    > li {
+        line-height: 1;
+        min-height: 0;
+        padding: 0.3125rem 0.3125rem 0 0.3125rem;
+
+        &:hover {
+            background: transparent;
+        }
+
+        + li,
+        &:last-child {
+            padding-bottom: 0.3125rem;
+        }
+    }
+
+    &__item {
+        color: @complementary-color;
+        text-transform: none;
+        padding: 0 0.625rem;
+        position: relative;
+        width: 100%;
+        text-align: left;
+
+        > i {
+            font-size: 1.25rem;
+            margin-right: 0.625rem;
+        }
+
+        > span {
+            font-size: 0.875rem;
+        }
+
+        &::after{
+            content: "\00a0";
+            background: fade(@bg-color, 10%);
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            border-radius: .25rem;
+            left: 0;
+            transform: scale(0);
+            opacity: 0;
+            transition: all .15s ease;
+        }
+
+        &:hover {
+            color: @complementary-color;
+
+            &::after {
+                transform: scale(1);
+                opacity: 1; 
+            }
+        }
+
+        &--disabled {
+            cursor: not-allowed;
+            opacity: .35;
+            .not-selectable
+        }
+    }
 }

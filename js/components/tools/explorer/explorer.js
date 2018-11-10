@@ -1,7 +1,8 @@
 define([
     "knockout",
     "text!./explorer.html",
-    "dp/bindings/optiscroll"
+    "dp/bindings/optiscroll",
+    "dp/bindings/dropdown"
 ], function (ko, view) {
     //#region [ Constructor ]
 
@@ -60,8 +61,19 @@ define([
             }
         };
 
+        // Vymazanie uzla
+        var deleteAction = {
+            text: "Vymazať",
+            icon: "delete",
+            isEnabled: true,
+            action: function (n) {
+                debugger;
+            }
+        };        
+
         return [
-            renameAction 
+            renameAction,
+            deleteAction
         ];
     };    
 

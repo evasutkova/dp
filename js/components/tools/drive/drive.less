@@ -58,7 +58,8 @@
             border-radius: .25rem;
             margin-left: -.5rem;     
             transform: scale(0);
-            transition: transform .15s ease;
+            opacity: 0;
+            transition: all .15s ease;
         }
 
         &:focus {
@@ -69,7 +70,8 @@
             color: @fg-color;
 
             &::before {
-                transform: scale(1); 
+                transform: scale(1);
+                opacity: 1;
             }
         }
 

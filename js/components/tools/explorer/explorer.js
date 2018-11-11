@@ -25,6 +25,7 @@ define([
         this.addNodeCallback = args.addNodeCallback;
         this.deleteNodeCallback = args.deleteNodeCallback;
         this.renameNodeCallback = args.renameNodeCallback;
+        this.moveNodeCallback = args.moveNodeCallback;
     };
 
     //#endregion
@@ -105,22 +106,32 @@ define([
         // Posun uzla nahor
         var moveUpAction = {
             node: node,
+            index: index,
             text: "Posunút nahor",
             icon: "arrow_up_thick",
             isEnabled: index > 0,
             action: (function (e) {
-                debugger;               
+                if (typeof (this.moveNodeCallback) !== "function") {
+                    return;
+                }
+
+                this.moveNodeCallback(e.node, e.index, e.index - 1);
             }).bind(this)
         };
         
         // Posun uzla nadol
         var moveDownAction = {
             node: node,
+            index: index,
             text: "Posunút nadol",
             icon: "arrow_down_thick",
             isEnabled: index < nodes.length - 1,
             action: (function (e) {
-                debugger;               
+                if (typeof (this.moveNodeCallback) !== "function") {
+                    return;
+                }
+
+                this.moveNodeCallback(e.node, e.index, e.index + 1);
             }).bind(this)
         };   
 
@@ -185,24 +196,6 @@ define([
             action: function (n) {
                 if (typeof ($this._keywordsNodeCallback) === "function") {
                     $this._keywordsNodeCallback(n);
-                }
-            }
-        }, {
-            text: "explorer-tool.move-up",
-            icon: "arrow_upward",
-            isEnabled: node.canMoveUp(),
-            action: function (n) {
-                if (typeof ($this._moveNodeCallback) === "function") {
-                    $this._moveNodeCallback(n, n.index() - 1);
-                }
-            }
-        }, {
-            text: "explorer-tool.move-down",
-            icon: "arrow_downward",
-            isEnabled: node.canMoveDown(),
-            action: function (n) {
-                if (typeof ($this._moveNodeCallback) === "function") {
-                    $this._moveNodeCallback(n, n.index() + 1);
                 }
             }
         }, {

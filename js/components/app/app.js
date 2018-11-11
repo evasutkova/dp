@@ -2,7 +2,8 @@ define([
     "knockout",
     "jszip",
     "text!./app.html",
-    "dp/document/node"
+    "dp/document/node",
+    "dp/polyfills/array"
 ], function (ko, zip, view, Node) {
     //#region [ Fields ]
 
@@ -106,6 +107,19 @@ define([
         node.title(title);
         return node;
     };
+
+
+    /**
+     * Presunie uzol na novú pozíciu.
+     * 
+     * @param {array} nodes Zoznam uzlov, ktorom sa nachádza uzol.
+     * @param {object} node Uzol, ktorý treba presunúť.
+     * @param {number} from Index z ktorého treba uzol posunúť.
+     * @param {number} to Index na ktorý treba uzol posunúť.
+     */
+    Model.prototype._moveNode = function(nodes, node, from, to) {
+        nodes().move(from, to);
+    };     
     
 
     /**
@@ -244,6 +258,20 @@ define([
             });        
     };    
     
+
+    /**
+     * Presunie uzol na novú pozíciu.
+     * 
+     * @param {object} node Uzol, ktorý treba presunúť.
+     * @param {number} from Index z ktorého treba uzol posunúť.
+     * @param {number} to Index na ktorý treba uzol posunúť.
+     */
+    Model.prototype.moveNode = function(node, from, to) {
+        var nodes = node.parent ? node.parent.nodes : this.nodes;
+        this._moveNode(nodes, node, from, to);
+        nodes.valueHasMutated();        
+    }; 
+
     
     /**
      * Otvorí a načíta dokument z disku.

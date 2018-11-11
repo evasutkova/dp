@@ -24,6 +24,7 @@ define([
 
         this.addNodeCallback = args.addNodeCallback;
         this.deleteNodeCallback = args.deleteNodeCallback;
+        this.renameNodeCallback = args.renameNodeCallback;
     };
 
     //#endregion
@@ -59,7 +60,17 @@ define([
             icon: "rename_box",
             isEnabled: true,
             action: (function (e) {
-                debugger;
+                if (typeof (this.renameNodeCallback) !== "function") {
+                    return;
+                }
+
+                var $this = this;
+                this.renameNodeCallback(e.node).then(function(node) {
+                    if(!node) {
+                        return;
+                    }
+                    $this.select(node);
+                });                
             }).bind(this)
         };
 

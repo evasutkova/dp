@@ -51,7 +51,7 @@ define([
      * Vytvorí novú položku.
      * 
      * @param {string} title Nadpis.
-     * @param {string} parent Nadradený uzol.
+     * @param {object} parent Nadradený uzol.
      */
     Model.prototype._addNode = function (title, parent) {
         // Novy uzol
@@ -93,8 +93,20 @@ define([
 
         this.nodes.remove(node);
         return node;
-    };    
+    };
 
+
+    /**
+     * Premenuje položku.
+     * 
+     * @param {string} title Nadpis.
+     * @param {object} node Nadradený uzol.
+     */
+    Model.prototype._renameNode = function (title, node) {
+        node.title(title);
+        return node;
+    };
+    
 
     /**
      * Otvorí súbor/projekt.
@@ -208,6 +220,30 @@ define([
             });
     };
 
+
+    /**
+     * Premenuje uzol.
+     * 
+     * @param {object} node Uzol ktorý sa má premenovať.
+     */
+    Model.prototype.renameNode = function(node) {
+        var $this = this;
+        return this.prompt("Premenovať položku", "Zadajte nový názov pre položku <b>" + node.title() + "</b>", node.title(), "Premenovať", "Zrušiť")
+            .then(function(title) {
+                if(title === null) {
+                    return null;
+                }
+
+                if(!title) {
+                    return $this.confirm("Premenovať položku", "Musíte zadať názov.", "Ok").then(function() {
+                        return $this.renameNode(node);
+                    });
+                }
+                
+                return $this._renameNode(title, node);
+            });        
+    };    
+    
     
     /**
      * Otvorí a načíta dokument z disku.

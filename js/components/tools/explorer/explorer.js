@@ -53,6 +53,9 @@ define([
             return [];
         }
 
+        var nodes = node.parent ? node.parent.nodes() : this.nodes();
+        var index = nodes.indexOf(node);
+
         // Premenovanie uzla
         var renameAction = {
             node: node,
@@ -97,10 +100,34 @@ define([
                     $this.select(parent);
                 });
             }).bind(this)
-        };        
+        };
+
+        // Posun uzla nahor
+        var moveUpAction = {
+            node: node,
+            text: "Posunút nahor",
+            icon: "arrow_up_thick",
+            isEnabled: index > 0,
+            action: (function (e) {
+                debugger;               
+            }).bind(this)
+        };
+        
+        // Posun uzla nadol
+        var moveDownAction = {
+            node: node,
+            text: "Posunút nadol",
+            icon: "arrow_down_thick",
+            isEnabled: index < nodes.length - 1,
+            action: (function (e) {
+                debugger;               
+            }).bind(this)
+        };   
 
         return [
             renameAction,
+            moveUpAction,
+            moveDownAction,
             deleteAction
         ];
     };    

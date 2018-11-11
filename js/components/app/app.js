@@ -123,6 +123,17 @@ define([
     
 
     /**
+     * Nastaví kľúčové slová pre uzol.
+     * 
+     * @param {array} keywords Kľúčové slová.
+     * @param {object} node Uzol.
+     */
+    Model.prototype._keywordsNode = function(keywords, node) {
+        node.keywords(keywords.join(","));
+    }; 
+
+
+    /**
      * Otvorí súbor/projekt.
      * 
      * @param {string} fileName Názov súboru.
@@ -270,8 +281,30 @@ define([
         var nodes = node.parent ? node.parent.nodes : this.nodes;
         this._moveNode(nodes, node, from, to);
         nodes.valueHasMutated();        
-    }; 
+    };
 
+
+    /**
+     * Nastaví kľúčové slová pre uzol.
+     * 
+     * @param {object} node Uzol.
+     */
+    Model.prototype.keywordsNode = function(node) {
+        var $this = this;
+        return this.prompt("Kľúčové slová", "Zadajte kľúčové slová oddelené čiarkou", node.keywords(), "Nastaviť", "Zrušiť")
+            .then(function(keywords) {
+                keywords = (keywords || "")
+                    .split(",")
+                    .map(function(kw) {
+                        return kw.trim();
+                    })
+                    .filter(function(kw) {
+                        return kw.length > 0;
+                    });
+                return $this._keywordsNode(keywords, node);
+            });  
+    };    
+    
     
     /**
      * Otvorí a načíta dokument z disku.

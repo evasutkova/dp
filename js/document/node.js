@@ -49,35 +49,7 @@ define([
         this.nodes.remove(node);
     };   
 
-
-    /**
-     * Index uzla v zozname uzlov v rámci rodičovského uzla.
-     */
-    Model.prototype.index = function () {
-        if (!this.parent) {
-            return -1;
-        }
-        var nodes = this.parent.nodes();
-        return nodes.indexOf(this);
-    };   
-
-
-    /**
-     * Vráti true ak sa uzol môže posunúť smerom nahor v rámci zoznamu uzlov rodičovského uzla.
-     */
-    Model.prototype.canMoveUp = function () {
-        return this.index() > 0;
-    };   
-
-
-    /**
-     * Vráti true ak sa uzol môže posunúť smerom nadol v rámci zoznamu uzlov rodičovského uzla.
-     */
-    Model.prototype.canMoveDown = function () {
-        return this.index() < this.parent.nodes().length - 1;
-    }; 
-
-
+    
     /**
      * Dispose.
      */

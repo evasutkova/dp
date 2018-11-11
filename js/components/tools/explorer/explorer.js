@@ -152,15 +152,6 @@ define([
         });
 
         return [{
-            text: "explorer-tool.rename",
-            icon: "edit",
-            isEnabled: true,
-            action: function (n) {
-                if (typeof ($this._renameNodeCallback) === "function") {
-                    $this._renameNodeCallback(n);
-                }
-            }
-        }, {
             text: "explorer-tool.keywords",
             icon: "label",
             isEnabled: true,
@@ -185,15 +176,6 @@ define([
             action: function (n) {
                 if (typeof ($this._moveNodeCallback) === "function") {
                     $this._moveNodeCallback(n, n.index() + 1);
-                }
-            }
-        }, {
-            text: "explorer-tool.delete",
-            icon: "delete",
-            isEnabled: true,
-            action: function (n) {
-                if (typeof ($this._deleteNodeCallback) === "function") {
-                    $this._deleteNodeCallback(n);
                 }
             }
         }, {

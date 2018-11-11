@@ -26,6 +26,7 @@ define([
         this.deleteNodeCallback = args.deleteNodeCallback;
         this.renameNodeCallback = args.renameNodeCallback;
         this.moveNodeCallback = args.moveNodeCallback;
+        this.keywordsNodeCallback = args.keywordsNodeCallback;
     };
 
     //#endregion
@@ -133,81 +134,32 @@ define([
 
                 this.moveNodeCallback(e.node, e.index, e.index + 1);
             }).bind(this)
-        };   
+        };
+
+        // Nastavenie keywords
+        var keywordsAction = {
+            node: node,
+            index: index,
+            text: "Kľúčové slová",
+            icon: "tag_text_outline",
+            isEnabled: true,
+            action: (function (e) {
+                if (typeof (this.keywordsNodeCallback) !== "function") {
+                    return;
+                }
+
+                this.keywordsNodeCallback(e.node);
+            }).bind(this)
+        };
 
         return [
             renameAction,
+            keywordsAction,
             moveUpAction,
             moveDownAction,
             deleteAction
         ];
     };    
-
-/*
-    Model.prototype.activeNodeTools = function (node) {
-        if (!node) {
-            return [];
-        }
-
-        // Action for node movement
-        var moveNodeFnc = function (source, target) {
-            if (typeof ($this._replaceNodeCallback) === "function") {
-                $this._replaceNodeCallback(source, target);
-            }
-        };
-
-        // Prepare list of candidates for node movement
-        var candidates = [];
-        if (node.parent.parent) {
-            candidates.push({
-                text: node.parent.parent.title(),
-                action: moveNodeFnc,
-                source: node,
-                target: node.parent.parent
-            });
-            node.parent.parent.nodes().forEach(function (n) {
-                if (n == node.parent) {
-                    return;
-                }
-                candidates.push({
-                    text: n.title(),
-                    action: moveNodeFnc,
-                    source: node,
-                    target: n
-                });
-            });
-        }
-        node.parent.nodes().forEach(function (n) {
-            if (n == node) {
-                return;
-            }
-            candidates.push({
-                text: n.title(),
-                action: moveNodeFnc,
-                source: node,
-                target: n
-            });
-        });
-
-        return [{
-            text: "explorer-tool.keywords",
-            icon: "label",
-            isEnabled: true,
-            action: function (n) {
-                if (typeof ($this._keywordsNodeCallback) === "function") {
-                    $this._keywordsNodeCallback(n);
-                }
-            }
-        }, {
-            text: "explorer-tool.move-to",
-            icon: "call_merge",
-            isEnabled: candidates.length > 0,
-            action: function (n) {
-            },
-            tools: candidates
-        }];
-    };
-*/
 
     //#endregion
 

@@ -81,6 +81,22 @@ define([
 
 
     /**
+     * Vymaže položku.
+     * 
+     * @param {object} node Uzol, ktorý sa má vymazať.
+     */
+    Model.prototype._deleteNode = function (node) {
+        var parent = node.parent || null;
+        if (parent) {
+            parent.remove(node);
+        }
+
+        this.nodes.remove(node);
+        return node;
+    };    
+
+
+    /**
      * Otvorí súbor/projekt.
      * 
      * @param {string} fileName Názov súboru.
@@ -175,6 +191,24 @@ define([
     };
 
 
+    /**
+     * Vymaže uzol.
+     * 
+     * @param {object} node Uzol ktorý sa má vymazať.
+     */
+    Model.prototype.deleteNode = function(node) {
+        var $this = this;
+        return this.confirm("Vymazať položku", "Chcete vymazať položku <b>" + node.title() + "</b>?", "Vymazať", "Zrušiť")
+            .then(function(r) {
+                if(!r) {
+                    return;
+                }
+                
+                return $this._deleteNode(node);
+            });
+    };
+
+    
     /**
      * Otvorí a načíta dokument z disku.
      */

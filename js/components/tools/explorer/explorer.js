@@ -23,6 +23,7 @@ define([
         this.tools = ko.computed(this._tools, this);
 
         this.addNodeCallback = args.addNodeCallback;
+        this.deleteNodeCallback = args.deleteNodeCallback;
     };
 
     //#endregion
@@ -53,22 +54,38 @@ define([
 
         // Premenovanie uzla
         var renameAction = {
+            node: node,
             text: "Premenovať",
             icon: "rename_box",
             isEnabled: true,
-            action: function (n) {
+            action: (function (e) {
                 debugger;
-            }
+            }).bind(this)
         };
 
         // Vymazanie uzla
         var deleteAction = {
+            node: node,
             text: "Vymazať",
             icon: "delete",
             isEnabled: true,
-            action: function (n) {
-                debugger;
-            }
+            action: (function (e) {
+                if (typeof (this.deleteNodeCallback) !== "function") {
+                    return;
+                }
+
+                var $this = this;
+                this.deleteNodeCallback(e.node).then(function(node) {
+                    if (!node) {
+                        return;
+                    }
+                    var parent = node.parent || null;
+                    if(parent) {
+                        parent.isExpanded(true);
+                    }
+                    $this.select(parent);
+                });
+            }).bind(this)
         };        
 
         return [

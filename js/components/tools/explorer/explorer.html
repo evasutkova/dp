@@ -15,7 +15,7 @@
             <ul id="explorer-tool-menu" class="dropdown-content explorer-tool-menu" data-bind="foreach: $component.tools">
                 <li>
                     <button class="btn-flat explorer-tool-menu__item" 
-                        data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }">
+                        data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }, click: action, clickBubble: false">
                         <i class="dp-icons left" data-bind="text: icon"></i>
                         <span data-bind="text: text"></span>
                     </button>

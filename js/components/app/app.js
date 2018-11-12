@@ -8,6 +8,7 @@ define([
     //#region [ Fields ]
 
     var global = (function() { return this; })();
+    var loader = null;
 
     //#endregion
     
@@ -204,6 +205,31 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Zobrazí/skryje loader.
+     *
+     * @param {boolean} isLoading Ak je true tak sa loader zobrazí inak sa skryje.
+     * @param {string} title Text - nadpis.
+     * @param {string} cancelText Text pre tlačidlo zrušiť.
+     */
+    Model.prototype.loading = function (isLoading, title, cancelText) {
+        if (isLoading) {
+            if (loader) {
+                loader.close();
+                loader = null;
+            }
+
+            loader = this.window("loader", { title: title, cancelText: cancelText });
+            return loader.open();
+        }
+
+        if(loader) {
+            loader.close();
+            loader = null;
+        }
+    };
+
 
     /**
      * Vytvorí nový uzol a pridá ho do zoznamu uzlov pre vstupný uzol.

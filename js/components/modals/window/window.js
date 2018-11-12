@@ -17,6 +17,7 @@ define([
         this._resolve = null;
 
         this.component = ko.observable("");
+        this.params = ko.observable(null);
         this.modal = M.Modal.init(info.element.querySelector(".window-modal"), {
             dismissible: false
         });
@@ -35,8 +36,14 @@ define([
      * Zobrazí modálne okno.
      * 
      * @param {string} component Názov komponentu.
+     * @param {object} params Parametre komponentu.
      */
-    Model.prototype.open = function (component) {
+    Model.prototype.open = function (component, params) {
+        params = params || {};
+
+        params.closeCallback = this.close.bind(this);
+
+        this.params(params);
         this.component(component || "");
 
         this.modal.open();

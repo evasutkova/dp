@@ -12,12 +12,27 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("Loader()");
+
+        this.title = ko.isObservable(args.title) ? args.title : ko.observable(args.title || "");
+        this.cancelText = ko.isObservable(args.cancelText) ? args.cancelText : ko.observable(args.cancelText || "");
+
+        this.closeCallback = args.closeCallback;
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Zavrie loader.
+     */
+    Model.prototype.close = function () {
+        if(typeof(this.closeCallback) === "function") {
+            this.closeCallback(false);
+        }
+    };
+
 
     /**
      * Dispose.

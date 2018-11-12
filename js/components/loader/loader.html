@@ -1,3 +1,16 @@
 <div class="loader">
-    loader
+    <div class="modal-content">
+        <!-- ko if: title().length > 0 -->
+        <h6 data-bind="text: title"></h6>
+        <!-- /ko -->
+        <br>
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <!-- ko if: cancelText().length > 0 -->
+    <div class="modal-footer">
+        <button class="btn btn--primary" data-bind="click: close, text: cancelText"></button>
+    </div>    
+    <!-- /ko -->
 </div>

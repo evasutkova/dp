@@ -1,5 +1,12 @@
 @import "../../../less/_mixins.less";
 
 .loader {
-    background: red;
+    .progress {
+        border-radius: 0;
+        background: fade(@primary-color, 20%);
+
+        .indeterminate {
+            background-color: @primary-color;
+        }
+    }    
 }

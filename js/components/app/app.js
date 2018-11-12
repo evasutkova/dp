@@ -40,6 +40,7 @@ define([
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
         this._fileBrowser_openAction = ko.observable();
+        this._window_openAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
     };
 
@@ -456,6 +457,23 @@ define([
         return action(title, text, mode, accept, multiple, yes, no);
     };  
 
+
+    /**
+     * Zobrazí modálne okno.
+     * 
+     * @param {string} component Názov komponentu.
+     */
+    Model.prototype.window = function (component) {
+        var action = this._window_openAction();
+        
+        if (typeof (action) !== "function") {
+            console.error("App : window() : Akcia pre otvorenie modálneho dialógu nie je definovaná.");
+            return;
+        }
+
+        return action(component);
+    };      
+    
     
     /**
      * Dispose.

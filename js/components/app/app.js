@@ -41,6 +41,7 @@ define([
         this._confirm_openAction = ko.observable();
         this._fileBrowser_openAction = ko.observable();
         this._window_openAction = ko.observable();
+        this._window_closeAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
     };
 
@@ -462,16 +463,31 @@ define([
      * Zobrazí modálne okno.
      * 
      * @param {string} component Názov komponentu.
+     * @param {object} params Parametre komponentu.
      */
-    Model.prototype.window = function (component) {
-        var action = this._window_openAction();
+    Model.prototype.window = function (component, params) {
+        var openAction = this._window_openAction();
         
-        if (typeof (action) !== "function") {
+        if (typeof (openAction) !== "function") {
             console.error("App : window() : Akcia pre otvorenie modálneho dialógu nie je definovaná.");
             return;
         }
 
-        return action(component);
+        var closeAction = this._window_closeAction();
+        
+        if (typeof (closeAction) !== "function") {
+            console.error("App : window() : Akcia pre zatvorenie modálneho dialógu nie je definovaná.");
+            return;
+        }        
+        
+        return {
+            open: function() {
+                return openAction(component, params);
+            },
+            close: function() {
+                closeAction(true);
+            }
+        };
     };      
     
     

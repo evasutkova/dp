@@ -25,6 +25,10 @@ define([
         if (typeof (args.openAction) === "function") {
             args.openAction(this.open.bind(this));
         }
+
+        if (typeof (args.closeAction) === "function") {
+            args.closeAction(this.close.bind(this));
+        }
     };
 
     //#endregion

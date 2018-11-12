@@ -126,7 +126,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/file-browser-modal.css": "js/components/modals/file-browser/file-browser.less",
                     "wwwroot/css/window-modal.css": "js/components/modals/window/window.less",
                     "wwwroot/css/editors.css": "js/components/editors/editors.less",
-                    "wwwroot/css/template-editor.css": "js/components/editors/template/template.less"
+                    "wwwroot/css/template-editor.css": "js/components/editors/template/template.less",
+                    "wwwroot/css/loader.css": "js/components/loader/loader.less"
                 }
             }
         },
@@ -152,7 +153,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/file-browser-modal.css",
                     "wwwroot/css/window-modal.css",
                     "wwwroot/css/editors.css",
-                    "wwwroot/css/template-editor.css"
+                    "wwwroot/css/template-editor.css",
+                    "wwwroot/css/loader.css"
                 ],
                 dest: "wwwroot/css/site.css"
             }

@@ -15,6 +15,7 @@ define([
     ko.components.register("file-browser-modal", { require: "dp/components/modals/file-browser/file-browser" });
     ko.components.register("window-modal", { require: "dp/components/modals/window/window" });
     ko.components.register("template-editor", { require: "dp/components/editors/template/template" });
+    ko.components.register("loader", { require: "dp/components/loader/loader" });
 
     // Spustime aplikaciu
     $(function () {

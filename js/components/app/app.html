@@ -47,8 +47,8 @@
             <!-- ko if: editor() === 'template' -->
             <template-editor params="content: template"></template-editor>
             <!-- /ko -->
-            <!-- ko if: editor() === 'markdown' -->
-            <markdown-editor></markdown-editor>
+            <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
+            <markdown-editor params="content: activeNode().content"></markdown-editor>
             <!-- /ko -->
         </div>
     </div>

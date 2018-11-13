@@ -203,8 +203,7 @@ define([
         
         this.title(node ? node.title() : "");
         this.activeNode(node);
-        // TODO : NASTAVIT SPRAVNY EDITOR MOD
-        this.editor("");
+        this.editor(node ? "markdown" : "");
     };    
 
 

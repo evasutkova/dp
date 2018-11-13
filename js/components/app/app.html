@@ -46,7 +46,10 @@
         <div class="app__main">
             <!-- ko if: editor() === 'template' -->
             <template-editor params="content: template"></template-editor>
-            <!-- /ko -->            
+            <!-- /ko -->
+            <!-- ko if: editor() === 'markdown' -->
+            <markdown-editor></markdown-editor>
+            <!-- /ko -->
         </div>
     </div>
     <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>

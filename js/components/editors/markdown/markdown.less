@@ -12,15 +12,26 @@
         left: 0;
         top: 0;
         bottom: 0;
-        right: 45%;
+        right: 55%;
+
+        &::after {
+            content: "\00a0";
+            background: @bg-color-secondary;
+            display: block;
+            width: .5rem;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -.5rem;
+        }
     }
 
     &__output {
         position: absolute;
-        left: 55%;
+        left: calc(45% + .5rem);
         top: 0;
         bottom: 0;
-        background: lime;
+        background: @bg-color-secondary;
         right: 0;
     }
 }

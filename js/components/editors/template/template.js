@@ -43,21 +43,13 @@ define([
      * @param {object} e Argumenty udalosti.
      */
     Model.prototype._cm_onChange = function(cm, e) {
-        this.save();
+        this.content(this.cm.getValue());
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
-
-    /**
-     * Uloží zmeny.
-     */
-    Model.prototype.save = function () {
-        this.content(this.cm.getValue());
-    };
-
 
     /**
      * Dispose.

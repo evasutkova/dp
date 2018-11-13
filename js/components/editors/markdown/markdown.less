@@ -44,6 +44,7 @@
         bottom: 0;
         background: @bg-color-secondary;
         right: 0;
+        color: @complementary-color;
 
         .optiscroll-v {
             top: 0;
@@ -58,5 +59,70 @@
                 opacity: 1;            
             }            
         }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+        } 
+                
+        h5 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0 0 1rem 0;
+        }
+
+        h6 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0;
+        }        
+
+        ul {
+            list-style-type: circle;
+            padding-left: 2rem;
+
+            > li {
+                list-style-type: circle;
+
+                &.task-list-item {
+                    input[type='checkbox'] {
+                        opacity: 1;
+                        margin: 0.3em 0.35em 0.25em -1.2em !important;
+                    }
+                }
+            }
+        }
+
+        pre {
+            background: rgba(0,0,0,.1);
+            padding: 1rem;
+        }
+
+        code {
+            font-weight: 600;
+        }
+
+        blockquote {
+            border-left-color: rgba(0,0,0,.1);
+        }        
     }
 }

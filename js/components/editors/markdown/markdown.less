@@ -14,6 +14,17 @@
         bottom: 0;
         right: 55%;
 
+        &::before {
+            content: "\00a0";
+            position: absolute;
+            background: #C6CDD6;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            right: -0.25rem;
+            z-index: 1;
+        }
+
         &::after {
             content: "\00a0";
             background: @bg-color-secondary;

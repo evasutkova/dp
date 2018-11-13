@@ -1,11 +1,12 @@
 define([
     "knockout",
     "text!./markdown.html",
+    "showdown",
     "codemirror",
     "codemirrorHtmlmixed",
     "codemirrorMarkdown",
     "codemirrorSimplescrollbars"
-], function (ko, view, CodeMirror) {
+], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
 
     /**
@@ -18,6 +19,14 @@ define([
         console.log("MarkdownEditor()");
 
         this.content = args.content || ko.observable("");
+
+        this.sd = new Showdown.Converter({
+            tables: true, 
+            tasklists: true, 
+            strikethrough: true, 
+            openLinksInNewWindow: true
+        });
+        this.preview = ko.computed(this._preview, this);
 
         this.cm = CodeMirror(info.element.querySelector(".markdown-editor__input"), {
             lineNumbers: true,
@@ -34,6 +43,20 @@ define([
         this._content_subscription = this.content.subscribe(this._content_onChange, this);
     };
 
+    //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Generovanie náhľadu html.
+     */
+    Model.prototype._preview = function() {
+        var content = this.content();
+
+        return this.sd.makeHtml(content);
+    };    
+    
     //#endregion
 
 
@@ -74,6 +97,7 @@ define([
         console.log("~MarkdownEditor()");
 
         this._content_subscription.dispose();
+        this.preview.dispose();
     };
 
     //#endregion

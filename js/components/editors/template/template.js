@@ -29,6 +29,8 @@ define([
         });
 
         this.cm.on("change", this._cm_onChange.bind(this));
+
+        this._content_subscription = this.content.subscribe(this._content_onChange, this);
     };
 
     //#endregion
@@ -46,6 +48,19 @@ define([
         this.content(this.cm.getValue());
     };
 
+
+    /**
+     * Spracovanie udalosti zmeny obsahu.
+     * 
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._content_onChange = function(e) {
+        if (this.cm.getValue() === e) {
+            return;
+        }
+        this.cm.setValue(e);
+    };      
+
     //#endregion
 
 
@@ -56,6 +71,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~TemplateEditor()");
+
+        this._content_subscription.dispose();
     };
 
     //#endregion

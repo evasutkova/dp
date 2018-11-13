@@ -22,7 +22,8 @@ require({
         codemirrorMeta: "/wwwroot/js/libs/codemirror.meta",
         codemirrorXml: "/wwwroot/js/libs/codemirror.xml",
         codemirrorSimplescrollbars: "/wwwroot/js/libs/codemirror.simplescrollbars",
-        showdown: "/wwwroot/js/libs/showdown"
+        showdown: "/wwwroot/js/libs/showdown",
+        syncscroll: "/wwwroot/js/libs/syncscroll"
     },
     map: {
         "*": {

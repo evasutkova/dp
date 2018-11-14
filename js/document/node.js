@@ -49,6 +49,41 @@ define([
         this.nodes.remove(node);
     };   
 
+
+    /**
+     * Vygeneruje JSON reprezentáciu.
+     */
+    Model.prototype.toJson = function() {
+        var n = {
+            title: this.title(),
+            content: this.content()
+        };
+
+        var tmp = this.isActive();
+        if(tmp) {
+            n.isActive = tmp;
+        }
+
+        tmp = this.isExpanded();
+        if(tmp) {
+            n.isExpanded = tmp;
+        }
+
+        tmp = this.keywords();
+        if(tmp) {
+            n.keywords = tmp;
+        }
+
+        tmp = this.nodes();
+        if(tmp.length) {
+            n.nodes = tmp.map(function(i) {
+                return i.toJson();
+            });
+        }
+
+        return n;
+    };
+
     
     /**
      * Dispose.

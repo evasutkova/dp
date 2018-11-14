@@ -51,6 +51,11 @@
             <markdown-editor params="content: activeNode().content"></markdown-editor>
             <!-- /ko -->
         </div>
+        <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
+        <div class="app__actions app__actions--footer">
+            dd
+        </div>
+        <!-- /ko -->        
     </div>
     <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>
     <confirm-modal params="openAction: _confirm_openAction"></confirm-modal>

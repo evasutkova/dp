@@ -398,6 +398,14 @@ define([
 
 
     /**
+     * Zobrazí náhľad výstupu.
+     */
+    Model.prototype.preview = function() {
+        console.info("preview");
+    };
+
+
+    /**
      * Odhlási používateľa.
      */
     Model.prototype.disconnect = function () {

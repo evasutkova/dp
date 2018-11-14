@@ -25,7 +25,9 @@ define([
             value: this.content(),
             mode: "htmlmixed",
             scrollbarStyle: "overlay",
-            theme: "editor--default"
+            theme: "editor--default",
+            indentWithTabs: true,
+            indentUnit: 4
         });
 
         this.cm.on("change", this._cm_onChange.bind(this));

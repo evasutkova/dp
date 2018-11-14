@@ -537,7 +537,36 @@ define([
                 closeAction(true);
             }
         };
-    };      
+    };
+
+
+    /**
+     * Vygeneruje JSON reprezentáciu dokumentu.
+     */
+    Model.prototype.toJson = function() {
+        var $this = this;
+        return new Promise(function(resolve, reject) {
+            var o = {
+                fileName: $this.fileName(),
+                template: $this.template(),
+                meta: {},
+                nodes: []
+            };
+
+            $this.meta().forEach(function(m) {
+                o.meta[m.key] = {
+                    label: m.label,
+	                value: m.value()
+                };
+            });
+
+            o.nodes = $this.nodes().map(function(n) {
+                return n.toJson();
+            });
+
+            resolve(o);
+        });   
+    };    
     
 
     /**

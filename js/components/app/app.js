@@ -401,7 +401,12 @@ define([
      * Zobrazí náhľad výstupu.
      */
     Model.prototype.preview = function() {
-        console.info("preview");
+        var output = "<b>hello world</b>";
+
+        var w = global.open(null, this.fileName());
+        w.document.open();
+        w.document.write(output);
+        w.document.close(); 
     };
 
 

@@ -32,8 +32,20 @@ self.onmessage = function(e) {
     // Vygenerovanie toc
     data.nodes.forEach(getToc.bind(view.toc, ""));
 
+    // Vytvorime converter
+    var converter = new showdown.Converter({
+        tables: true, 
+        tasklists: true,
+        strikethrough: true,
+        openLinksInNewWindow: true
+        //highlightAuto: false,
+        //noHeaderId: false,
+        //prefixHeaderId: "x",
+        //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
+    }); 
+
     // Vygenerovanie obsahu
-    data.nodes.forEach(getContent.bind(view.sections, ""));
+    data.nodes.forEach(getContent.bind(view.sections, "", converter));
 
     // Vratime vysledok do hlavneho vlakna
     self.postMessage(JSON.stringify(view));
@@ -92,14 +104,15 @@ function getToc(parentId, node) {
  * Spracovanie uzlov a vygenerovanie obsahue.
  * 
  * @param {string} parentId Identifikátor nadradeného uzla.
+ * @param {object} converter Markdown konvertor.
  * @param {object} node Aktuálne spracovávaný uzol.
  */
-function getContent(parentId, node) {
+function getContent(parentId, converter, node) {
     // Section view pre aktualny uzol
     var section = {
         id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
         title: node.title,
-        content: node.content,
+        content: converter.makeHtml(node.content),
         hasChildren: false
     };
 
@@ -110,7 +123,7 @@ function getContent(parentId, node) {
     if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
         section.hasChildren = true;
         section.children = [];
-        node.nodes.forEach(getContent.bind(section.children, section.id));
+        node.nodes.forEach(getContent.bind(section.children, section.id, converter));
     }
 }
 

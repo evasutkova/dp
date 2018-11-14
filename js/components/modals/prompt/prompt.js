@@ -1,7 +1,8 @@
 define([
     "knockout",
     "materialize",
-    "text!./prompt.html"
+    "text!./prompt.html",
+    "dp/bindings/enter"
 ], function (ko, M, view) {
     //#region [ Constructor ]
 

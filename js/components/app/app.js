@@ -1,10 +1,11 @@
 define([
+    "require",
     "knockout",
     "jszip",
     "text!./app.html",
     "dp/document/node",
     "dp/polyfills/array"
-], function (ko, zip, view, Node) {
+], function (require, ko, zip, view, Node) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -391,7 +392,7 @@ define([
                 if(!error) {
                     return;
                 }
-                console.error(error);
+                console.error("App : open() : " + error);
                 $this.confirm("Otvoriť projekt", (typeof(error) === "string") ? error : "Nepodarilo sa načítať obsah súboru.", "Ok");
             });
     };
@@ -414,7 +415,7 @@ define([
             })
             .catch(function(error) {
                 $this.loading(false);
-                console.error(error);
+                console.error("App : preview() : " + error);
                 $this.confirm("Náhľad výstupu", "Nepodarilo sa vytvoriť náhľad výstupu.", "Ok");
             });
     };
@@ -576,14 +577,30 @@ define([
         var $this = this;
 
         return new Promise(function(resolve, reject) {
+            // Kontrola ci je mozne vobec spustit generovanie html
             var template = $this.template();
             if(!template) {
                 reject("Nie je možné vytvoriť HTML bez šablóny.");
             }
 
+            // Ziskame JSON reprezentaciu celeho dokumentu
             $this.toJson().then(function(json) {
-                console.info(json);
-                resolve("<b>helo world</b>");
+                // Vytvorime worker
+                var worker = new Worker(require.toUrl("dp/workers/toHtml.js"));
+
+                // Spracovanie udalosti
+                worker.onmessage = function(e) {
+                    resolve(e.data);
+                    worker = null;
+                };
+                worker.onerror = function(e) {
+                    reject("Worker error at line " + e.lineno + " in '" + e.filename + "' : " + e.message);
+                    worker = null;
+                };
+                
+                // Spustime worker
+                worker.postMessage(json);
+                //myWorker.terminate();
             });
         });   
     };

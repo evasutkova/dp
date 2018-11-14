@@ -2,7 +2,8 @@ define([
     "knockout",
     "materialize",
     "text!./confirm.html",
-    "dp/bindings/enter"
+    "dp/bindings/enter",
+    "dp/bindings/escape"
 ], function (ko, M, view) {
     //#region [ Constructor ]
 

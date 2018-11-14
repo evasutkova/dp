@@ -32,6 +32,9 @@ self.onmessage = function(e) {
     // Vygenerovanie toc
     data.nodes.forEach(getToc.bind(view.toc, ""));
 
+    // Vygenerovanie obsahu
+    data.nodes.forEach(getContent.bind(view.sections, ""));
+
     // Vratime vysledok do hlavneho vlakna
     self.postMessage(JSON.stringify(view));
 
@@ -81,6 +84,33 @@ function getToc(parentId, node) {
         ti.hasChildren = true;
         ti.children = [];
         node.nodes.forEach(getToc.bind(ti.children, ti.id));
+    }
+}
+
+
+/**
+ * Spracovanie uzlov a vygenerovanie obsahue.
+ * 
+ * @param {string} parentId Identifikátor nadradeného uzla.
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function getContent(parentId, node) {
+    // Section view pre aktualny uzol
+    var section = {
+        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        title: node.title,
+        content: node.content,
+        hasChildren: false
+    };
+
+    // Odlozime aktualny uzol
+    this.push(section);
+
+    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
+    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
+        section.hasChildren = true;
+        section.children = [];
+        node.nodes.forEach(getContent.bind(section.children, section.id));
     }
 }
 

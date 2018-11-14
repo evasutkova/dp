@@ -48,7 +48,7 @@ self.onmessage = function(e) {
     data.nodes.forEach(getContent.bind(view.sections, "", converter));
 
     // Vratime vysledok do hlavneho vlakna
-    self.postMessage(JSON.stringify(view));
+    self.postMessage(Mustache.render(data.template, view));
 
     // Ukoncime worker
     self.close(); 

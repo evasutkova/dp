@@ -18,6 +18,7 @@ define([
     ko.components.register("markdown-editor", { require: "dp/components/editors/markdown/markdown" });
     ko.components.register("loader", { require: "dp/components/loader/loader" });
     ko.components.register("syncscroll", { require: "dp/components/syncscroll/syncscroll" });
+    ko.components.register("keywords", { require: "dp/components/keywords/keywords" });
 
     // Spustime aplikaciu
     $(function () {

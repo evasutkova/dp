@@ -128,7 +128,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/editors.css": "js/components/editors/editors.less",
                     "wwwroot/css/template-editor.css": "js/components/editors/template/template.less",
                     "wwwroot/css/markdown-editor.css": "js/components/editors/markdown/markdown.less",
-                    "wwwroot/css/loader.css": "js/components/loader/loader.less"
+                    "wwwroot/css/loader.css": "js/components/loader/loader.less",
+                    "wwwroot/css/keywords.css": "js/components/keywords/keywords.less"
                 }
             }
         },
@@ -156,7 +157,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/editors.css",
                     "wwwroot/css/template-editor.css",
                     "wwwroot/css/markdown-editor.css",
-                    "wwwroot/css/loader.css"
+                    "wwwroot/css/loader.css",
+                    "wwwroot/css/keywords.css"
                 ],
                 dest: "wwwroot/css/site.css"
             }

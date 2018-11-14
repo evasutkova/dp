@@ -401,12 +401,22 @@ define([
      * Zobrazí náhľad výstupu.
      */
     Model.prototype.preview = function() {
-        var output = "<b>hello world</b>";
+        var $this = this;
 
-        var w = global.open(null, this.fileName());
-        w.document.open();
-        w.document.write(output);
-        w.document.close(); 
+        this.loading(true, "Náhľad výstupu");
+        this.toHtml()
+            .then(function (result) {
+                $this.loading(false);
+                var w = global.open(null, $this.fileName());
+                w.document.open();
+                w.document.write(result);
+                w.document.close();                 
+            })
+            .catch(function(error) {
+                $this.loading(false);
+                console.error(error);
+                $this.confirm("Náhľad výstupu", "Nepodarilo sa vytvoriť náhľad výstupu.", "Ok");
+            });
     };
 
 
@@ -529,6 +539,23 @@ define([
         };
     };      
     
+
+    /**
+     * Vygeneruje html výstup.
+     */
+    Model.prototype.toHtml = function() {
+        var $this = this;
+
+        return new Promise(function(resolve, reject) {
+            var template = $this.template();
+            if(!template) {
+                reject("Nie je možné vytvoriť HTML bez šablóny.");
+            }
+
+            resolve("<b>helo world</b>");
+        });   
+    };
+
     
     /**
      * Dispose.

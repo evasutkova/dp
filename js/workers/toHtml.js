@@ -1,5 +1,6 @@
 //#region [ Imports ]
 
+importScripts("../polyfills/string.js");
 importScripts("../libs/mustache.js");
 importScripts("../libs/showdown.js");
 
@@ -26,7 +27,10 @@ self.onmessage = function(e) {
     };
 
     // Spracovanie metadat
-    parseMeta.bind(view.meta)(data.meta);
+    getMetadata.bind(view.meta)(data.meta);
+
+    // Vygenerovanie toc
+    data.nodes.forEach(getToc.bind(view.toc, ""));
 
     // Vratime vysledok do hlavneho vlakna
     self.postMessage(JSON.stringify(view));
@@ -40,11 +44,43 @@ self.onmessage = function(e) {
 
 //#region [ Methods ]
 
-function parseMeta(meta) {
+/**
+ * Spracovanie metaúdajov. 
+ * 
+ * @param {object} meta Metadáta.
+ */
+function getMetadata(meta) {
     var keys = Object.keys(meta);
     for(var i = 0; i < keys.length; i++) {
         var key = keys[i];
         this[key] = meta[key].value;
+    }
+}
+
+
+/**
+ * Spracovanie uzlov a vygenerovanie toc.
+ * 
+ * @param {string} parentId Identifikátor nadradeného uzla.
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function getToc(parentId, node) {
+    // Toc view pre aktualny uzol
+    var ti = {
+        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        title: node.title,
+        keywords: node.keywords,
+        hasChildren: false
+    };
+
+    // Odlozime aktualny uzol
+    this.push(ti);
+
+    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
+    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
+        ti.hasChildren = true;
+        ti.children = [];
+        node.nodes.forEach(getToc.bind(ti.children, ti.id));
     }
 }
 

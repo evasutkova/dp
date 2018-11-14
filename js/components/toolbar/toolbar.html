@@ -9,7 +9,14 @@
             <button class="btn-flat toolbar__item" title="Otvoriť projekt" data-bind="click: open">
                 <i class="dp-icons">folder_open</i>
             </button>
-        </li>        
+        </li>
+        <!-- ko if: hasMeta() && hasTemplate() -->
+        <li>
+            <button class="btn-flat toolbar__item" title="Náhľad výstupu" data-bind="click: preview">
+                <i class="dp-icons">file_find</i>
+            </button>
+        </li>
+        <!-- /ko -->
     </ul>
     <!-- ko if: hasMeta() || hasTemplate() -->
     <ul>

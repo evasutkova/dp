@@ -17,8 +17,10 @@ define([
         this.isConnected = args.isConnected || ko.observable(false);
         this.hasMeta = args.hasMeta || ko.observable(false);
         this.hasTemplate = args.hasTemplate || ko.observable(false);
+        
         this.disconnectCallback = args.disconnectCallback;
         this.openCallback = args.openCallback;
+        this.previewCallback = args.previewCallback;
     };
 
     //#endregion
@@ -34,6 +36,16 @@ define([
             this.openCallback();
         }
     };
+
+
+    /**
+     * Zobrazí náhľad výstupu.
+     */
+    Model.prototype.preview = function () {
+        if(typeof(this.previewCallback) === "function") {
+            this.previewCallback();
+        }
+    };        
 
 
     /**

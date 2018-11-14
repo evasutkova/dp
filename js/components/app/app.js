@@ -545,7 +545,7 @@ define([
      */
     Model.prototype.toJson = function() {
         var $this = this;
-        return new Promise(function(resolve, reject) {
+        return new Promise(function(resolve) {
             var o = {
                 fileName: $this.fileName(),
                 template: $this.template(),
@@ -581,7 +581,10 @@ define([
                 reject("Nie je možné vytvoriť HTML bez šablóny.");
             }
 
-            resolve("<b>helo world</b>");
+            $this.toJson().then(function(json) {
+                console.info(json);
+                resolve("<b>helo world</b>");
+            });
         });   
     };
 

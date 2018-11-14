@@ -1,7 +1,8 @@
 define([
     "knockout",
     "materialize",
-    "text!./confirm.html"
+    "text!./confirm.html",
+    "dp/bindings/enter"
 ], function (ko, M, view) {
     //#region [ Constructor ]
 
@@ -22,7 +23,10 @@ define([
         this.no = ko.observable("");
 
         this.modal = M.Modal.init(info.element.querySelector(".confirm-modal"), {
-            dismissible: false
+            dismissible: false,
+            onOpenEnd: function (modal, trigger) {
+                modal.querySelector(".confirm-modal__value").focus();
+            }
         });
 
         if (typeof (args.openAction) === "function") {

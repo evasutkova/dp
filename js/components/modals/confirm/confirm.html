@@ -3,7 +3,8 @@
         <!-- ko if: title() -->
         <h6 data-bind="text: title"></h6>
         <!-- /ko -->
-        <p data-bind="html: text"></p>       
+        <p data-bind="html: text"></p>
+        <input class="confirm-modal__value" type="text" data-bind="enter: close.bind($component, true)" />
     </div>
     <div class="modal-footer">
         <!-- ko if: no().length -->

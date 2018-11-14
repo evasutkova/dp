@@ -21,7 +21,7 @@ define([
     //#endregion
 
 
-    //#region [ Methods : Public ]
+    //#region [ Methods : Private ]
 
     /**
      * Vráti image url.

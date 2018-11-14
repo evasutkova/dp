@@ -12,6 +12,27 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("Keywords()");
+
+        this.keywords = args.keywords || ko.observable("");
+        this.items = ko.computed(this._items, this);
+    };
+
+    //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Zoznam kľúčových slov.
+     */
+    Model.prototype._items = function () {
+        var keywords = this.keywords();
+
+        if(!keywords.length) {
+            return [];
+        }
+
+        return keywords.split(",");
     };
 
     //#endregion
@@ -24,6 +45,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~Keywords()");
+
+        this.items.dispose();
     };
 
     //#endregion

@@ -5,7 +5,7 @@
         <!-- /ko -->
         <div class="row">
             <div class="input-field col s12">
-                <input id="prompt-modal__value" type="text" data-bind="textInput: value, enter: close.bind($component, value)" />
+                <input id="prompt-modal__value" type="text" data-bind="textInput: value, enter: close.bind($component, value), escape: close.bind($component, null)" />
                 <label for="prompt-modal__value" data-bind="html: text" style="left:0"></label>
             </div>
         </div>        

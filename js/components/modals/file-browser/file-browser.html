@@ -14,7 +14,12 @@
                 </div>
             </div>       
             <input class="file-browser-modal__value" type="text"
-                   data-bind="enter: close.bind($component, files), event: { 'focus': function(e) {e.modal.el.querySelector('.file-field').className += ' input-field--active'}, 'blur': function(e) {e.modal.el.querySelector('.file-field').className = 'file-field input-field col s12 no-padding'}}"/>                 
+                   data-bind="enter: close.bind($component, files),
+                              escape: close.bind($component, null),
+                              event: { 
+                                  'focus': function(e) {e.modal.el.querySelector('.file-field').className += ' input-field--active'}, 
+                                  'blur': function(e) {e.modal.el.querySelector('.file-field').className = 'file-field input-field col s12 no-padding'}
+                              }"/>                 
         </div>        
     </div>
     <div class="modal-footer">

@@ -2,7 +2,8 @@ define([
     "knockout",
     "materialize",
     "text!./file-browser.html",
-    "dp/bindings/enter"
+    "dp/bindings/enter",
+    "dp/bindings/escape"
 ], function (ko, M, view) {
     //#region [ Fields ]
 

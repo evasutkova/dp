@@ -600,6 +600,7 @@ define([
                 
                 // Spustime worker
                 worker.postMessage(json);
+                // TODO : MOZNOST ZRUSIT BEZICI WORKER CEZ LOADING MODAL
                 //myWorker.terminate();
             });
         });   

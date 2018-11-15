@@ -25,7 +25,8 @@ require({
         showdown: "/wwwroot/js/libs/showdown",
         showdownFootnotes: "/wwwroot/js/libs/showdown.footnotes",
         syncscroll: "/wwwroot/js/libs/syncscroll",
-        mustache: "/wwwroot/js/libs/mustache"
+        mustache: "/wwwroot/js/libs/mustache",
+        filesaver: "/wwwroot/js/libs/filesaver"
     },
     map: {
         "*": {
@@ -36,7 +37,7 @@ require({
             "../css/css": "codemirrorCss",
             "../meta": "codemirrorMeta"
         }
-    },    
+    },
     config: {
         "dp/components/tools/drive/drive": {
             apiKey: "AIzaSyDNFM5eXTFSr9V1CkmKlIx_5rlC7_b2xdY",

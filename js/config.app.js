@@ -25,7 +25,8 @@ require({
         showdown: "/dp/wwwroot/js/libs/showdown",
         showdownFootnotes: "/dp/wwwroot/js/libs/showdown.footnotes",
         syncscroll: "/dp/wwwroot/js/libs/syncscroll",
-        mustache: "/dp/wwwroot/js/libs/mustache"
+        mustache: "/dp/wwwroot/js/libs/mustache",
+        filesaver: "/dp/wwwroot/js/libs/filesaver"
     },
     map: {
         "*": {

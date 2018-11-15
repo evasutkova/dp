@@ -23,6 +23,7 @@ require({
         codemirrorXml: "/wwwroot/js/libs/codemirror.xml",
         codemirrorSimplescrollbars: "/wwwroot/js/libs/codemirror.simplescrollbars",
         showdown: "/wwwroot/js/libs/showdown",
+        showdownFootnotes: "/wwwroot/js/libs/showdown.footnotes",
         syncscroll: "/wwwroot/js/libs/syncscroll",
         mustache: "/wwwroot/js/libs/mustache"
     },

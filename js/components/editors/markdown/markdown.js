@@ -5,7 +5,8 @@ define([
     "codemirror",
     "codemirrorHtmlmixed",
     "codemirrorMarkdown",
-    "codemirrorSimplescrollbars"
+    "codemirrorSimplescrollbars",
+    "showdownFootnotes"
 ], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
 
@@ -24,7 +25,8 @@ define([
             tables: true, 
             tasklists: true, 
             strikethrough: true, 
-            openLinksInNewWindow: true
+            openLinksInNewWindow: true,
+            extensions: ["footnotes"]
         });
         this.preview = ko.computed(this._preview, this);
 

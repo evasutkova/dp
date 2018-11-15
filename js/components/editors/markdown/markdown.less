@@ -123,6 +123,44 @@
 
         blockquote {
             border-left-color: rgba(0,0,0,.1);
+        }
+
+        .footnote {
+            > sup {
+                &::before {
+                    content: "[";
+                }
+
+                &::after {
+                    content: "]";
+                }
+            }
+        }
+
+        .footnotes {
+            padding: 0;
+            list-style-type: none;
+
+            &::before {
+                content: "\00a0";
+                background: @complementary-color;
+                display: block;
+                height: 1px;
+                width: 10em;
+                margin-bottom: .5em;
+            }
+
+            &__item {
+                > sup {
+                    &::after {
+                        content: "\00a0";
+                    }
+                }
+
+                > span {
+                    font-size: .8em;
+                }
+            }
         }        
     }
 }

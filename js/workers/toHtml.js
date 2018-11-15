@@ -3,6 +3,7 @@
 importScripts("../polyfills/string.js");
 importScripts("../libs/mustache.js");
 importScripts("../libs/showdown.js");
+importScripts("../libs/showdown.footnotes.js");
 
 //#endregion
 
@@ -37,11 +38,12 @@ self.onmessage = function(e) {
         tables: true, 
         tasklists: true,
         strikethrough: true,
-        openLinksInNewWindow: true
+        openLinksInNewWindow: true,
         //highlightAuto: false,
         //noHeaderId: false,
         //prefixHeaderId: "x",
         //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
+        extensions: ["footnotes"]
     }); 
 
     // Vygenerovanie obsahu

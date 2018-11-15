@@ -19,6 +19,7 @@ define([
     ko.components.register("loader", { require: "dp/components/loader/loader" });
     ko.components.register("syncscroll", { require: "dp/components/syncscroll/syncscroll" });
     ko.components.register("keywords", { require: "dp/components/keywords/keywords" });
+    ko.components.register("node-id", { require: "dp/components/node-id/node-id" });
 
     // Spustime aplikaciu
     $(function () {

@@ -55,6 +55,7 @@
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
         <div class="app__actions app__actions--footer">
+            <node-id params="node: activeNode"></node-id>
             <keywords params="keywords: activeNode().keywords"></keywords>
         </div>
         <!-- /ko -->        

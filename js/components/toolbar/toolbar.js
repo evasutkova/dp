@@ -22,6 +22,7 @@ define([
         this.openCallback = args.openCallback;
         this.previewCallback = args.previewCallback;
         this.saveCallback = args.saveCallback;
+        this.downloadCallback = args.downloadCallback;
     };
 
     //#endregion
@@ -56,8 +57,18 @@ define([
         if(typeof(this.saveCallback) === "function") {
             this.saveCallback();
         }
-    }; 
+    };
 
+
+    /**
+     * Uloží výstup projekt.
+     */
+    Model.prototype.download = function () {
+        if(typeof(this.downloadCallback) === "function") {
+            this.downloadCallback();
+        }
+    };    
+    
 
     /**
      * Nastaví aktívny tool.

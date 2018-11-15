@@ -10,19 +10,26 @@
                 <i class="dp-icons">folder_open</i>
             </button>
         </li>
-        <!-- ko if: hasMeta() && hasTemplate() -->
+    </ul>
+    <!-- ko if: hasMeta() && hasTemplate() -->
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item" title="Uložiť projekt" data-bind="click: save">
+                <i class="dp-icons">content_save</i>
+            </button>
+        </li>
+        <li>
+            <button class="btn-flat toolbar__item" title="Stiahnuť výstup" data-bind="click: download">
+                <i class="dp-icons">cloud_download</i>
+            </button>
+        </li>        
         <li>
             <button class="btn-flat toolbar__item" title="Náhľad výstupu" data-bind="click: preview">
                 <i class="dp-icons">file_find</i>
             </button>
         </li>
-        <li>
-            <button class="btn-flat toolbar__item" title="Uložiť projekt" data-bind="click: save">
-                <i class="dp-icons">content_save</i>
-            </button>
-        </li>        
-        <!-- /ko -->
     </ul>
+    <!-- /ko -->
     <!-- ko if: hasMeta() || hasTemplate() -->
     <ul>
         <!-- ko if: hasTemplate -->

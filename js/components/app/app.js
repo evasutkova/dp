@@ -484,6 +484,30 @@ define([
 
 
     /**
+     * Uloží výstup projekt.
+     */
+    Model.prototype.download = function() {
+        var $this = this;
+        var fileName = this.fileName().replace(".mdzip",".html");
+
+        this.loading(true, "Stiahutie výstupu");
+        this.toHtml()
+            .then(function (html) {
+                return new Blob([html], { type: "text/html;charset=utf-8" });
+            })
+            .then(function(content) {
+                $this.loading(false);
+                saveAs(content, fileName);
+            })
+            .catch(function(error) {
+                $this.loading(false);
+                console.error("App : download() : " + error);
+                $this.confirm("Stiahutie výstupu", "Nepodarilo sa vytvoriť výstupu.", "Ok");
+            });
+    };    
+        
+
+    /**
      * Odhlási používateľa.
      */
     Model.prototype.disconnect = function () {

@@ -2,10 +2,11 @@ define([
     "require",
     "knockout",
     "jszip",
+    "filesaver",
     "text!./app.html",
     "dp/document/node",
     "dp/polyfills/array"
-], function (require, ko, zip, view, Node) {
+], function (require, ko, zip, saveAs, view, Node) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -450,7 +451,35 @@ define([
      * Uloží projekt.
      */
     Model.prototype.save = function() {
-        console.info("save");
+        var fileName;
+
+        this.toJson()
+            .then(function (json) {
+                // Odlozime si nazov suboru
+                fileName = json.fileName;
+
+                // Vytvorime zip subor
+                var archive = new zip();
+                
+                // Pridame obsah do archivu
+                archive.file("template.html", json.template);
+                archive.file("meta.json", JSON.stringify(json.meta, null, 4));
+                archive.file("nodes.json", JSON.stringify(json.nodes, null, 4));
+
+                // Vygenerujeme zip archiv 
+                return archive.generateAsync({ type: "blob" });
+            })
+            .then(function(content) {
+                // Ponukneme na stiahnutie
+                saveAs(content, fileName);
+            })
+            .catch(function(error) {
+                console.error("App : save() : " + error);
+                $this.confirm("Uloženie projektu", "Nepodarilo sa uložiť projekt.", "Ok");
+            });        
+        // Pridame samotny obsah
+        //var img = zip.folder("images");
+        //img.file("smile.gif", imgData, {base64: true});
     };
 
 

@@ -88,7 +88,7 @@ function getToc(parentId, node) {
 
     // Toc view pre aktualny uzol
     var ti = {
-        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
         title: node.title,
         keywords: node.keywords,
         hasChildren: false
@@ -120,7 +120,7 @@ function getContent(parentId, converter, node) {
 
     // Section view pre aktualny uzol
     var section = {
-        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
         title: node.title,
         content: converter.makeHtml(node.content),
         hasSections: false
@@ -152,7 +152,7 @@ function getArticles(parentId, converter, node) {
 
     // Article view pre aktualny uzol
     var article = {
-        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
         title: node.title,
         content: converter.makeHtml(node.content),
         hasSections: false

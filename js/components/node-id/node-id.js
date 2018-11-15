@@ -33,7 +33,15 @@ define([
             return "-";
         }
 
-        return node.title().toCodeName();
+        var id = node.title().toCodeName();
+
+        var p = node;
+        while(p.parent) {
+            p = p.parent;
+            id = p.title().toCodeName() + "-" + id;
+        }
+        
+        return id;
     };
 
     //#endregion

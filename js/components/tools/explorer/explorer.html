@@ -3,7 +3,7 @@
         <!-- ko foreach: nodes -->
         <li class="collection-item">
             <button class="btn-flat explorer-tool__item" 
-                    data-bind="css: { 'explorer-tool__item--active': isActive }, click: $component.select.bind($component), clickBubble: false, event: { dblclick: $component.expand }">
+                    data-bind="css: { 'explorer-tool__item--active': isActive, 'explorer-tool__item--notoc': !isInToc() }, click: $component.select.bind($component), clickBubble: false, event: { dblclick: $component.expand }">
                 <i class="dp-icons left" data-bind="text: $component._icon($data)"></i>
                 <span data-bind="text: title"></span>
             </button>

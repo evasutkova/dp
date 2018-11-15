@@ -94,6 +94,21 @@
             }
         }
 
+        &--notoc {
+            > span {
+                &::after {
+                    content: "\00a0";
+                    background: @red-color;
+                    width: 5px;
+                    height: 5px;
+                    display: inline-block;
+                    border-radius: 50%;
+                    position: absolute;
+                    margin: .5em 0 0 .5em;
+                }
+            }
+        }
+
         &--floating {
             width: 2.25rem;
             margin: 0 auto;

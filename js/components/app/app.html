@@ -6,7 +6,8 @@
                          hasTemplate: template().length > 0,
                          disconnectCallback: disconnect.bind($component), 
                          openCallback: open.bind($component),
-                         previewCallback: preview.bind($component)">
+                         previewCallback: preview.bind($component),
+                         saveCallback: save.bind($component)">
         </toolbar>
         <!-- ko if: tool() -->
         <div class="tool">

@@ -447,6 +447,14 @@ define([
 
 
     /**
+     * Uloží projekt.
+     */
+    Model.prototype.save = function() {
+        console.info("save");
+    };
+
+
+    /**
      * Odhlási používateľa.
      */
     Model.prototype.disconnect = function () {

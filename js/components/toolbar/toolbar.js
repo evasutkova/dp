@@ -21,6 +21,7 @@ define([
         this.disconnectCallback = args.disconnectCallback;
         this.openCallback = args.openCallback;
         this.previewCallback = args.previewCallback;
+        this.saveCallback = args.saveCallback;
     };
 
     //#endregion
@@ -45,7 +46,17 @@ define([
         if(typeof(this.previewCallback) === "function") {
             this.previewCallback();
         }
-    };        
+    }; 
+    
+    
+    /**
+     * Uloží projekt.
+     */
+    Model.prototype.save = function () {
+        if(typeof(this.saveCallback) === "function") {
+            this.saveCallback();
+        }
+    }; 
 
 
     /**

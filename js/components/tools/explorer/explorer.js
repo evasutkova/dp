@@ -27,6 +27,7 @@ define([
         this.renameNodeCallback = args.renameNodeCallback;
         this.moveNodeCallback = args.moveNodeCallback;
         this.keywordsNodeCallback = args.keywordsNodeCallback;
+        this.flagNodeCallback = args.flagNodeCallback;
     };
 
     //#endregion
@@ -152,9 +153,26 @@ define([
             }).bind(this)
         };
 
+        // Nastavenie ci je uzol v toc alebo nie
+        var inTocAction = {
+            node: node,
+            flag: "isInToc",
+            text: "Zobraziť v obsahu",
+            icon: node.isInToc() ? "checkbox_marked_circle_outline" : "checkbox_blank_circle_outline",
+            isEnabled: true,
+            action: (function (e) {
+                if (typeof (this.flagNodeCallback) !== "function") {
+                    return;
+                }
+
+                this.flagNodeCallback(e.node, e.flag);
+            }).bind(this)
+        };        
+        
         return [
             renameAction,
             keywordsAction,
+            inTocAction,
             moveUpAction,
             moveDownAction,
             deleteAction

@@ -124,7 +124,19 @@ define([
      */
     Model.prototype._moveNode = function(nodes, node, from, to) {
         nodes().move(from, to);
-    };     
+    };
+
+
+    /**
+     * Nastaví flag pre node.
+     * 
+     * @param {object} node Uzol, pre ktorý treba nstaviť flag.
+     * @param {string} flag Názov vlastnosti, ktorá sa má nastaviť.
+     */
+    Model.prototype._flagNode = function(node, flag) {
+        var value = node[flag]();
+        node[flag](!value);
+    };      
     
 
     /**
@@ -313,6 +325,17 @@ define([
         this._moveNode(nodes, node, from, to);
         nodes.valueHasMutated();        
     };
+
+
+    /**
+     * Nastaví flag pre node.
+     * 
+     * @param {object} node Uzol, pre ktorý treba nstaviť flag.
+     * @param {string} flag Názov vlastnosti, ktorá sa má nastaviť.
+     */
+    Model.prototype.flagNode = function(node, flag) {
+        this._flagNode(node, flag);
+    };    
 
 
     /**

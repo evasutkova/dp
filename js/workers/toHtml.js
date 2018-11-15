@@ -23,7 +23,7 @@ self.onmessage = function(e) {
         fileName: data.fileName,
         meta: {},
         toc: [],
-        sections: []
+        articles: []
     };
 
     // Spracovanie metadat
@@ -45,9 +45,11 @@ self.onmessage = function(e) {
     }); 
 
     // Vygenerovanie obsahu
-    data.nodes.forEach(getContent.bind(view.sections, "", converter));
+    data.nodes.forEach(getContent.bind(view.articles, "", converter));
+    data.nodes.forEach(getArticles.bind(view, "", converter));
 
     // Vratime vysledok do hlavneho vlakna
+    //self.postMessage(JSON.stringify(view));
     self.postMessage(Mustache.render(data.template, view));
 
     // Ukoncime worker
@@ -80,6 +82,10 @@ function getMetadata(meta) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function getToc(parentId, node) {
+    if(!node.isInToc) {
+        return;
+    }
+
     // Toc view pre aktualny uzol
     var ti = {
         id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
@@ -101,19 +107,23 @@ function getToc(parentId, node) {
 
 
 /**
- * Spracovanie uzlov a vygenerovanie obsahue.
+ * Spracovanie uzlov a vygenerovanie obsahu.
  * 
  * @param {string} parentId Identifikátor nadradeného uzla.
  * @param {object} converter Markdown konvertor.
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function getContent(parentId, converter, node) {
+    if(!node.isInToc) {
+        return;
+    }
+
     // Section view pre aktualny uzol
     var section = {
         id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
         title: node.title,
         content: converter.makeHtml(node.content),
-        hasChildren: false
+        hasSections: false
     };
 
     // Odlozime aktualny uzol
@@ -121,9 +131,41 @@ function getContent(parentId, converter, node) {
 
     // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
     if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
-        section.hasChildren = true;
-        section.children = [];
-        node.nodes.forEach(getContent.bind(section.children, section.id, converter));
+        section.hasSections = true;
+        section.sections = [];
+        node.nodes.forEach(getContent.bind(section.sections, section.id, converter));
+    }
+}
+
+
+/**
+ * Spracovanie uzlov a vygenerovanie obsahu, ktorý nie je v toc
+ * 
+ * @param {string} parentId Identifikátor nadradeného uzla.
+ * @param {object} converter Markdown konvertor.
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function getArticles(parentId, converter, node) {
+    if(node.isInToc) {
+        return;
+    }
+
+    // Article view pre aktualny uzol
+    var article = {
+        id: (parentId ? parentId + "-" : "") + node.title.toCodeName(),
+        title: node.title,
+        content: converter.makeHtml(node.content),
+        hasSections: false
+    };
+
+    // Odlozime aktualny uzol
+    this["@" + article.id] = article;
+
+    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
+    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
+        article.hasSections = true;
+        article.sections = [];
+        node.nodes.forEach(getContent.bind(article.sections, article.id, converter));
     }
 }
 

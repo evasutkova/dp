@@ -176,7 +176,7 @@
          * Gets code name.
          */
         global.String.prototype.toCodeName = function () {
-            return this.toAccentInsensitive().replace(/[^a-zA-Z]+/g, "-").replace(/^-+/g, "").replace(/-+$/g, "").toLowerCase();
+            return this.toAccentInsensitive().replace(/[^a-zA-Z]+/g, "_").replace(/^-+/g, "").replace(/-+$/g, "").toLowerCase();
         };
     }
 

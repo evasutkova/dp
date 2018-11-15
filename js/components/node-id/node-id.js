@@ -38,7 +38,7 @@ define([
         var p = node;
         while(p.parent) {
             p = p.parent;
-            id = p.title().toCodeName() + "-" + id;
+            id = p.title().toCodeName() + "_" + id;
         }
         
         return id;

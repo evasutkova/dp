@@ -17,6 +17,7 @@ define([
         this.keywords = ko.observable(args.keywords || "");
         this.isExpanded = ko.observable(args.isExpanded || false);
         this.isActive = ko.observable(args.isActive || false);
+        this.isInToc = ko.observable(args.isInToc || false);
         this.content = ko.observable(args.content || "").extend({ rateLimit: 500 });
     };
 
@@ -33,6 +34,7 @@ define([
     Model.prototype.add = function (title) {
         var node = new Model({
             title: title,
+            isInToc: true,
             parent: this
         });
         this.nodes.push(node);
@@ -69,6 +71,11 @@ define([
             n.isExpanded = tmp;
         }
 
+        tmp = this.isInToc();
+        if(tmp) {
+            n.isInToc = tmp;
+        }
+        
         tmp = this.keywords();
         if(tmp) {
             n.keywords = tmp;

@@ -67,7 +67,8 @@ define([
         }
         else {
             n = new Node({
-                title: title
+                title: title,
+                isInToc: true
             });
             this.nodes.push(n);
         }
@@ -195,7 +196,8 @@ define([
                 content: n.content,
                 keywords: n.keywords,
                 isExpanded: n.isExpanded,
-                isActive: n.isActive
+                isActive: n.isActive,
+                isInToc: n.isInToc
             });
             tmp.nodes($this._parseNodes(n.nodes, tmp));
             return tmp;

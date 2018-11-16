@@ -8,7 +8,7 @@
                 <span data-bind="text: title"></span>
             </button>
             <!-- ko if: isActive() && $component.tools().length -->
-            <button class="btn-flat explorer-tool__action" title="Možnosti" 
+            <button class="btn-flat explorer-tool__action tooltip tooltip--right" title="Možnosti" 
                     data-bind="clickBubble: false, dropdown: { target: 'explorer-tool-menu', constrainWidth: false, coverTrigger: false, alignment: 'right', container: '.app' }">
                 <i class="dp-icons">dots_vertical</i>
             </button>

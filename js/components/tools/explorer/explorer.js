@@ -28,6 +28,7 @@ define([
         this.moveNodeCallback = args.moveNodeCallback;
         this.keywordsNodeCallback = args.keywordsNodeCallback;
         this.flagNodeCallback = args.flagNodeCallback;
+        this.selectNodeCallback = args.selectNodeCallback;
     };
 
     //#endregion
@@ -220,18 +221,11 @@ define([
      * @param {object} node Uzol v dokumente.
      */    
     Model.prototype.select = function (node) {
-        var n = this.activeNode();
-        if (n) {
-            n.isActive(false);
+        if (typeof (this.selectNodeCallback) !== "function") {
+            return;
         }
 
-        if (node) {
-            node.isActive(true);
-        }
-        
-        this.title(node ? node.title() : "");
-        this.activeNode(node);
-        this.editor(node ? "markdown" : "");
+        this.selectNodeCallback(node);
     };    
 
 

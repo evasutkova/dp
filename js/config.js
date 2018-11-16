@@ -24,6 +24,7 @@ require({
         codemirrorSimplescrollbars: "/wwwroot/js/libs/codemirror.simplescrollbars",
         showdown: "/wwwroot/js/libs/showdown",
         showdownFootnotes: "/wwwroot/js/libs/showdown.footnotes",
+        showdownHighlight: "/wwwroot/js/libs/showdown.highlight",
         syncscroll: "/wwwroot/js/libs/syncscroll",
         mustache: "/wwwroot/js/libs/mustache",
         filesaver: "/wwwroot/js/libs/filesaver",

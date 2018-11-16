@@ -23,20 +23,75 @@
 
     &__item {
         position: relative;
+        cursor: pointer;
 
         &::before {
             content: "\00a0";
             display: block;
             margin-top: 100%;
+        }       
+
+        &:hover {
+            .image-editor__item-title {
+                color: @fg-color;
+                .primary-text-shadow;
+            }
+
+            .image-editor__item-content {
+                &::after {
+                    transform: scale(1);
+                    opacity: 1; 
+                }
+            }
         }
     }
 
     &__item-content {
-        background: @bg-color-secondary;
         position: absolute;
         top: 0;
         bottom: 0.625rem;
         left: 0.625rem;
         right: 0;
+
+        &::after{
+            content: "\00a0";
+            background: fade(@fg-color, 20%);
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            border-radius: .25rem;
+            top: 0;
+            bottom: 0;
+            transform: scale(0);
+            opacity: 0;
+            transition: all .15s ease;
+        }         
+    }
+
+    &__item-title {
+        position: absolute;
+        left: 0.3125rem;
+        right: 0.3125rem;
+        bottom: 0.3125rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 4.5em;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        transition: all .3s ease;
+        color: @fg-color-secondary;
+        .secondary-text-shadow;
+        .not-selectable;
+    }
+
+    &__item-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;        
+        position: absolute;
+        left: 0.3125rem;
+        right: 0.3125rem;
+        bottom: 0.3125rem;
+        top: 0.3125rem;
     }
 }

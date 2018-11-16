@@ -21,6 +21,7 @@ define([
     ko.components.register("syncscroll", { require: "dp/components/syncscroll/syncscroll" });
     ko.components.register("keywords", { require: "dp/components/keywords/keywords" });
     ko.components.register("node-id", { require: "dp/components/node-id/node-id" });
+    ko.components.register("new-node-action", { require: "dp/components/actions/new-node/new-node" });
 
     // Spustime aplikaciu
     $(function () {

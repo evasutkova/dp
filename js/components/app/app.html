@@ -52,6 +52,9 @@
                                      addNodeCallback: addNode.bind($component)">
             </new-node-action>
             <!-- /ko -->
+            <!-- ko if: fileName().length && (editor() === 'image') -->
+            <new-image-action></new-image-action>
+            <!-- /ko -->
         </div>
         <div class="app__main">
             <!-- ko if: editor() === 'template' -->

@@ -198,10 +198,9 @@ define([
      * Spustí editáciu obrázkov.
      */
     Model.prototype.editImages = function () {
-        console.info("TODO : editImages");
-        // this.select(null);
-        // this.editor("template");
-        // this.title("Šablóna");
+        this.select(null);
+        this.editor("image");
+        this.title("Obrázky");
     };    
         
 

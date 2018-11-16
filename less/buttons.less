@@ -67,12 +67,9 @@
         background: fade(@fg-color, 60%);
         color: @complementary-color;
 
-        &:focus {
-            background: tint(fade(@fg-color, 60%), 20%);
-        }        
-
+        &:focus,
         &:hover {
-            background: fade(@fg-color, 60%);
+            background: darken(fade(@fg-color, 60%), 5%);
         }        
     }
 

@@ -192,7 +192,18 @@ define([
         this.editor("template");
         this.title("Šablóna");
     };
-    
+
+
+    /**
+     * Spustí editáciu obrázkov.
+     */
+    Model.prototype.editImages = function () {
+        console.info("TODO : editImages");
+        // this.select(null);
+        // this.editor("template");
+        // this.title("Šablóna");
+    };    
+        
 
     /**
      * Zbalí/rozbalí uzol v dokumente.

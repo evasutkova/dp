@@ -54,89 +54,22 @@
                         <i class="dp-icons">plus</i>
                     </button>
                 </li>
-                <!-- /ko -->                
+                <!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="click: editImages, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'images' }">
+                        <i class="dp-icons left light-green-text text-lighten-1">folder_image</i>
+                        <span class="light-green-text text-lighten-1">Obrázky</span>
+                    </button>
+                </li>                
+                <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'template' }">
-                        <i class="dp-icons left">xml</i>
-                        <span>Šablóna</span>
+                        <i class="dp-icons left orange-text text-lighten-2">xml</i>
+                        <span class="orange-text text-lighten-2">Šablóna</span>
                     </button>
                 </li>
                 <!-- /ko -->
             </ul>            
-            <!-- <ul class="collection explorer-tool__tree">
-                <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item">
-                        <i class="dp-icons left">markdown</i>
-                        <span>Doc 1</span>
-                    </button>
-                </li>
-                <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item">
-                        <i class="dp-icons left">xml</i>
-                        <span>Nastavenia</span>
-                    </button>
-                </li>
-                <li>
-                    <ul class="collection explorer-tool__tree">
-                        <li class="collection-item">
-                            <button class="btn-flat explorer-tool__item">
-                                <i class="dp-icons left">markdown</i>
-                                <span>Doc 1</span>
-                            </button>
-                        </li>
-                        <li class="collection-item">
-                            <button class="btn-flat explorer-tool__item">
-                                <i class="dp-icons left">markdown</i>
-                                <span>Doc 2</span>
-                            </button>
-                        </li>
-                        <li class="collection-item">
-                            <button class="btn-flat explorer-tool__item">
-                                <i class="dp-icons left">folder</i>
-                                <span>Nastavenia</span>
-                            </button>
-                            <button class="btn-flat explorer-tool__action">
-                                <i class="dp-icons">dots_vertical</i>
-                            </button>
-                        </li>   
-                        <li>
-                            <ul class="collection explorer-tool__tree">
-                                <li class="collection-item">
-                                    <button class="btn-flat explorer-tool__item">
-                                        <i class="dp-icons left">markdown</i>
-                                        <span>Doc 1</span>
-                                    </button>
-                                </li>
-                                <li class="collection-item">
-                                    <button class="btn-flat explorer-tool__item">
-                                        <i class="dp-icons left">markdown</i>
-                                        <span>Doc 2</span>
-                                    </button>
-                                </li>
-                                <li class="collection-item">
-                                    <button class="btn-flat explorer-tool__item">
-                                        <i class="dp-icons left">folder</i>
-                                        <span>Nastavenia</span>
-                                    </button>
-                                    <button class="btn-flat explorer-tool__action">
-                                        <i class="dp-icons">dots_vertical</i>
-                                    </button>
-                                </li>                
-                            </ul> 
-                        </li>                                     
-                    </ul> 
-                </li>
-                <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item">
-                        <i class="dp-icons left">folder</i>
-                        <span>Nastavenia</span>
-                    </button>
-                    <button class="btn-flat explorer-tool__action">
-                        <i class="dp-icons">dots_vertical</i>
-                    </button>
-                </li>                
-            </ul> -->
         </div>
     </div>
 </div>

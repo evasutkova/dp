@@ -5,8 +5,9 @@ define([
     "filesaver",
     "text!./app.html",
     "dp/document/node",
+    "dp/document/resource",
     "dp/polyfills/array"
-], function (require, ko, zip, saveAs, view, Node) {
+], function (require, ko, zip, saveAs, view, Node, Resource) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();

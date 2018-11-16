@@ -28,7 +28,8 @@ require({
         syncscroll: "/wwwroot/js/libs/syncscroll",
         mustache: "/wwwroot/js/libs/mustache",
         filesaver: "/wwwroot/js/libs/filesaver",
-        highlight: "/wwwroot/js/libs/highlight"
+        highlight: "/wwwroot/js/libs/highlight",
+        tooltip: "/wwwroot/js/libs/tooltip"
     },
     map: {
         "*": {

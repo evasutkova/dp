@@ -3,11 +3,12 @@ define([
     "knockout",
     "jszip",
     "filesaver",
+    "tooltip",
     "text!./app.html",
     "dp/document/node",
     "dp/document/resource",
     "dp/polyfills/array"
-], function (require, ko, zip, saveAs, view, Node, Resource) {
+], function (require, ko, zip, saveAs, tooltip, view, Node, Resource) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -47,6 +48,8 @@ define([
         this._window_openAction = ko.observable();
         this._window_closeAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
+
+        tooltip();
     };
 
     //#endregion

@@ -6,4 +6,37 @@
     right: 0;
     top: 0;
     bottom: 0;
+    
+    .row {
+        margin-bottom: 0;
+        margin-right: 0.625rem;
+    }
+    
+    .optiscroll-v {
+        top: 0;
+        bottom: 0;
+
+        .optiscroll-vtrack {
+            right: 0;
+        }
+    }
+
+    &__item {
+        position: relative;
+
+        &::before {
+            content: "\00a0";
+            display: block;
+            margin-top: 100%;
+        }
+    }
+
+    &__item-content {
+        background: @bg-color-secondary;
+        position: absolute;
+        top: 0;
+        bottom: 0.625rem;
+        left: 0.625rem;
+        right: 0;
+    }
 }

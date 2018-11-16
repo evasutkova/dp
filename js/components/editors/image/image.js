@@ -1,6 +1,7 @@
 define([
     "knockout",
-    "text!./image.html"
+    "text!./image.html",
+    "dp/bindings/optiscroll"
 ], function (ko, view) {
     //#region [ Constructor ]
 

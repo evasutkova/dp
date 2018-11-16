@@ -7,7 +7,8 @@ define([
     "codemirrorMarkdown",
     "codemirrorSimplescrollbars",
     "showdownFootnotes",
-    "showdownHighlight"
+    "showdownHighlight",
+    "dp/bindings/optiscroll"
 ], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
 

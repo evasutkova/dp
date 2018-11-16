@@ -31,8 +31,9 @@
                        target.hasClass("tooltip--bottom") ? "bottom" :
                        target.hasClass("tooltip--left") ? "left" :
                        "top";
-
-        el.html(target.find("> .tooltip__text").html() || target.attr("title"));
+        var title = target.find("> .tooltip__text").html() || target.attr("title") || target.attr("data-title");
+        target.attr("data-title", title).removeAttr("title");
+        el.html(title);
 
         switch (position) {
             case "top":
@@ -85,8 +86,6 @@
         }
 
         target[0]._tipTimeout = setTimeout(_show.bind(global, target), 200);
-
-
     };
 
 

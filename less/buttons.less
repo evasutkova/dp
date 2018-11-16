@@ -46,6 +46,23 @@
         }
     }
 
+    &--action {
+        background: @fg-color;
+        color: @complementary-color;
+        text-transform: none;
+        border-radius: 1.125rem;
+        font-size: 0.875rem;
+
+        > i {
+            margin-right: .5rem;
+        }
+
+        &:focus,
+        &:hover {
+            background: darken(@fg-color, 5%);
+        }
+    }    
+
     &--secondary {
         background: fade(@fg-color, 60%);
         color: @bg-color;

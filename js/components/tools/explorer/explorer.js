@@ -22,7 +22,6 @@ define([
         this.activeNode = args.activeNode || ko.observable(null);
         this.tools = ko.computed(this._tools, this);
 
-        this.addNodeCallback = args.addNodeCallback;
         this.deleteNodeCallback = args.deleteNodeCallback;
         this.renameNodeCallback = args.renameNodeCallback;
         this.moveNodeCallback = args.moveNodeCallback;
@@ -227,32 +226,6 @@ define([
 
         this.selectNodeCallback(node);
     };    
-
-
-    /**
-     * Vytvorí nový uzol v dokumente.
-     * 
-     * @param {object} parent Nadradený uzol v dokumente.
-     */    
-    Model.prototype.add = function (parent) {
-        if (typeof (this.addNodeCallback) !== "function") {
-            return;
-        }
-        
-        var $this = this;
-
-        this.addNodeCallback(parent).then(function(node) {
-            if(!node) {
-                return;
-            }
-            
-            if(node.parent) {
-                node.parent.isExpanded(true);
-            }
-            
-            $this.select(node);
-        });
-    };      
     
 
     /**

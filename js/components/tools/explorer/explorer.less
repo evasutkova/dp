@@ -108,32 +108,6 @@
                 }
             }
         }
-
-        &--floating {
-            width: 2.25rem;
-            margin: 0 auto;
-            border-radius: 50%;
-            padding: 0;
-            background: @fg-color;
-            color: @complementary-color;
-            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149);
-            transition: background-color .3s ease;
-
-            > i {
-                margin: 0 auto;
-            }
-
-            &::after,
-            &::before {
-                display: none;
-            }          
-   
-            &:focus,
-            &:hover {
-                color: @complementary-color;
-                background: fade(@fg-color, 95%);
-            }              
-        }
     }
 
     &__action {
@@ -160,12 +134,6 @@
                 transform: scale(1); 
             }
         }         
-    }
-
-    &__float-action {
-        position: fixed;
-        bottom: 1rem;
-        left: 16.5rem;
     }
 }
 

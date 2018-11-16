@@ -29,32 +29,12 @@
             </ul>
         </li>
         <!-- /ko -->
-        <!-- ko if: isActive -->
-        <li class="explorer-tool__float-action">
-            <ul class="collection explorer-tool__tree">
-                <li class="collection-item">
-                    <button class="btn-flat explorer-tool__item explorer-tool__item--floating" title="Pridať položku"
-                            data-bind="click: $component.add.bind($component), clickBubble: false">
-                        <i class="dp-icons">plus</i>
-                    </button>                    
-                </li>
-            </ul>
-        </li>
-        <!-- /ko -->        
         <!-- /ko -->
     </script>
     <div class="row">
         <div class="col s12" style="margin:0.5rem 0">
             <ul class="collection explorer-tool__tree">
                 <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
-                <!-- ko if: activeNode() === null -->
-                <li class="collection-item explorer-tool__float-action">
-                    <button class="btn-flat explorer-tool__item explorer-tool__item--floating" title="Pridať položku"
-                            data-bind="click: add.bind($component, null), clickBubble: false">
-                        <i class="dp-icons">plus</i>
-                    </button>
-                </li>
-                <!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editImages, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'image' }">

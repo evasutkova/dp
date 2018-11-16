@@ -249,6 +249,27 @@ define([
 
 
     /**
+     * Vyberie uzol v dokumente.
+     * 
+     * @param {object} node Uzol v dokumente.
+     */    
+    Model.prototype.selectNode = function (node) {
+        var n = this.activeNode();
+        if (n) {
+            n.isActive(false);
+        }
+
+        if (node) {
+            node.isActive(true);
+        }
+        
+        this.title(node ? node.title() : "");
+        this.activeNode(node);
+        this.editor(node ? "markdown" : "");
+    }; 
+
+
+    /**
      * Vytvorí nový uzol a pridá ho do zoznamu uzlov pre vstupný uzol.
      * 
      * @param {object} node Uzol pre ktorý sa má pridať nový uzol.

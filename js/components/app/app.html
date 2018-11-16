@@ -20,7 +20,8 @@
                                    title: title, 
                                    hasTemplate: template().length > 0, 
                                    nodes: nodes, 
-                                   activeNode: activeNode, 
+                                   activeNode: activeNode,
+                                   selectNodeCallback: selectNode.bind($component),
                                    addNodeCallback: addNode.bind($component),
                                    deleteNodeCallback: deleteNode.bind($component),
                                    renameNodeCallback: renameNode.bind($component),
@@ -45,7 +46,13 @@
             <!-- /ko -->
             <!-- ko if: title().length -->
             <h2 class="app__title" data-bind="text: title"></h2>
-            <!-- /ko -->            
+            <!-- /ko -->
+            <!-- ko if: fileName().length && (['template', 'image'].indexOf(editor()) === -1) -->
+            <new-node-action params="activeNode: activeNode, 
+                                     selectNodeCallback: selectNode.bind($component), 
+                                     addNodeCallback: addNode.bind($component)">
+            </new-node-action>
+            <!-- /ko -->
         </div>
         <div class="app__main">
             <!-- ko if: editor() === 'template' -->

@@ -12,12 +12,43 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("NewNodeAction()");
+
+        this.activeNode = args.activeNode || ko.observable(null);
+
+        this.addNodeCallback = args.addNodeCallback;
+        this.selectNodeCallback = args.selectNodeCallback;
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vytvorí nový uzol v dokumente.
+     */    
+    Model.prototype.add = function () {
+        if ((typeof (this.addNodeCallback) !== "function") 
+            || (typeof (this.selectNodeCallback) !== "function")) {
+            return;
+        }
+        
+        var parent = this.activeNode();
+        var $this = this;
+        
+        this.addNodeCallback(parent).then(function(node) {
+            if(!node) {
+                return;
+            }
+            
+            if(node.parent) {
+                node.parent.isExpanded(true);
+            }
+            
+            $this.selectNodeCallback(node);
+        });
+    };
+
 
     /**
      * Dispose.

@@ -26,7 +26,9 @@ require({
         showdownFootnotes: "/dp/wwwroot/js/libs/showdown.footnotes",
         syncscroll: "/dp/wwwroot/js/libs/syncscroll",
         mustache: "/dp/wwwroot/js/libs/mustache",
-        filesaver: "/dp/wwwroot/js/libs/filesaver"
+        filesaver: "/dp/wwwroot/js/libs/filesaver",
+        highlight: "/dp/wwwroot/js/libs/highlight",
+        highlightLineNnumbers: "/dp/wwwroot/js/libs/highlight.line-numbers"
     },
     map: {
         "*": {
@@ -38,6 +40,11 @@ require({
             "../meta": "codemirrorMeta"
         }
     },
+    shim: {
+        highlightLineNnumbers: {
+            deps: ["highlight"]
+        }
+    },    
     config: {
         "dp/components/tools/drive/drive": {
             apiKey: "AIzaSyDNFM5eXTFSr9V1CkmKlIx_5rlC7_b2xdY",

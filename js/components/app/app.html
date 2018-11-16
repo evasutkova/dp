@@ -54,6 +54,9 @@
             <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
             <markdown-editor params="content: activeNode().content"></markdown-editor>
             <!-- /ko -->
+            <!-- ko if: editor() === 'image' -->
+            <image-editor></image-editor>
+            <!-- /ko -->
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
         <div class="app__actions app__actions--footer">

@@ -16,6 +16,7 @@ define([
     ko.components.register("window-modal", { require: "dp/components/modals/window/window" });
     ko.components.register("template-editor", { require: "dp/components/editors/template/template" });
     ko.components.register("markdown-editor", { require: "dp/components/editors/markdown/markdown" });
+    ko.components.register("image-editor", { require: "dp/components/editors/image/image" });
     ko.components.register("loader", { require: "dp/components/loader/loader" });
     ko.components.register("syncscroll", { require: "dp/components/syncscroll/syncscroll" });
     ko.components.register("keywords", { require: "dp/components/keywords/keywords" });

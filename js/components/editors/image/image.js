@@ -13,6 +13,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("ImageEditor()");
+
+        this.items = args.items || ko.observableArray([]);
     };
 
     //#endregion

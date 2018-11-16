@@ -141,6 +141,7 @@ module.exports = function (grunt) {
                     "wwwroot/css/optiscroll.css",
                     "wwwroot/css/codemirror.css",
                     "wwwroot/css/codemirror.simplescrollbars.css",
+                    "wwwroot/css/highlight.css",
                     "wwwroot/css/dp-icons.css",
                     "wwwroot/css/site.css",
                     "wwwroot/css/app.css",

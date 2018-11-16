@@ -2,8 +2,10 @@
 
 importScripts("../polyfills/string.js");
 importScripts("../libs/mustache.js");
+importScripts("../libs/highlight.js");
 importScripts("../libs/showdown.js");
 importScripts("../libs/showdown.footnotes.js");
+importScripts("../libs/showdown.highlight.js");
 
 //#endregion
 
@@ -39,11 +41,11 @@ self.onmessage = function(e) {
         tasklists: true,
         strikethrough: true,
         openLinksInNewWindow: true,
-        //highlightAuto: false,
+        highlightAuto: false,
         //noHeaderId: false,
         //prefixHeaderId: "x",
         //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
-        extensions: ["footnotes"]
+        extensions: ["footnotes", "highlight"]
     }); 
 
     // Vygenerovanie obsahu

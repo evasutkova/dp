@@ -27,8 +27,13 @@ define([
             tasklists: true, 
             strikethrough: true, 
             openLinksInNewWindow: true,
+            highlightAuto: false,
+            //noHeaderId: false,
+            //prefixHeaderId: "x",
+            //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]            
             extensions: ["footnotes", "highlight"]
         });
+        
         this.preview = ko.computed(this._preview, this);
 
         this.cm = CodeMirror(info.element.querySelector(".markdown-editor__input"), {

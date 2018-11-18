@@ -237,7 +237,7 @@ define([
         
         return images.map(function(i) {
             var tmp = new Resource({
-                title: i.title,
+                title: i.title.replace("images/",""),
                 url: global.URL.createObjectURL(i.blob)
             });
             return tmp;

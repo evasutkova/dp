@@ -42,6 +42,7 @@ define([
         this.images = ko.observableArray([]);
         
         this.activeNode = ko.observable(null);
+        this.activeImage = ko.observable(null);
 
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
@@ -57,6 +58,27 @@ define([
 
 
     //#region [ Methods : Private ]
+
+    /**
+     * Vyberie uzol v dokumente.
+     * 
+     * @param {object} node Uzol v dokumente.
+     */    
+    Model.prototype._selectNode = function (node) {
+        var n = this.activeNode();
+        if (n) {
+            n.isActive(false);
+        }
+
+        if (node) {
+            node.isActive(true);
+        }
+        
+        this.title(node ? node.title() : "");
+        this.activeNode(node);
+        this.editor(node ? "markdown" : "");
+    };
+
 
     /**
      * Vytvorí novú položku.
@@ -154,6 +176,27 @@ define([
     Model.prototype._keywordsNode = function(keywords, node) {
         node.keywords(keywords.join(","));
     }; 
+
+
+    /**
+     * Vyberie obrázok.
+     * 
+     * @param {object} image Obrázok.
+     */    
+    Model.prototype._selectImage = function (image) {
+        var n = this.activeImage();
+        if (n) {
+            n.isActive(false);
+        }
+
+        if (image) {
+            image.isActive(true);
+        }
+        
+        this.title(image ? "Obrázky" : "");
+        this.activeImage(image);
+        this.editor(image ? "image" : "");
+    };
 
 
     /**
@@ -280,19 +323,9 @@ define([
      * @param {object} node Uzol v dokumente.
      */    
     Model.prototype.selectNode = function (node) {
-        var n = this.activeNode();
-        if (n) {
-            n.isActive(false);
-        }
-
-        if (node) {
-            node.isActive(true);
-        }
-        
-        this.title(node ? node.title() : "");
-        this.activeNode(node);
-        this.editor(node ? "markdown" : "");
-    }; 
+        this._selectImage(null);
+        this._selectNode(node);
+    };
 
 
     /**
@@ -406,6 +439,17 @@ define([
                     });
                 return $this._keywordsNode(keywords, node);
             });  
+    };
+
+
+    /**
+     * Vyberie obrázok.
+     * 
+     * @param {object} image Obrázok.
+     */    
+    Model.prototype.selectImage = function (image) {
+        this._selectNode(null);
+        this._selectImage(image);
     };    
     
     

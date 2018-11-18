@@ -15,12 +15,28 @@ define([
         console.log("ImageEditor()");
 
         this.items = args.items || ko.observableArray([]);
+
+        this.selectImageCallback = args.selectImageCallback;
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vyberie obrázok.
+     * 
+     * @param {object} image Obrázok.
+     */    
+    Model.prototype.select = function (node) {
+        if (typeof (this.selectImageCallback) !== "function") {
+            return;
+        }
+
+        this.selectImageCallback(node);
+    };
+
 
     /**
      * Dispose.

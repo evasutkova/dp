@@ -1,6 +1,8 @@
 <div class="editor image-editor" data-bind="optiscroll">
     <div class="row" data-bind="foreach: items">
-        <div class="image-editor__item col xl2 l3 m4 s6">
+        <div class="image-editor__item col xl2 l3 m4 s6" 
+             data-bind="css: { 'image-editor__item--active': isActive },
+                        click: $component.select.bind($component)">
             <div class="image-editor__item-content">
                 <button class="btn-flat image-editor__item-action tooltip tooltip--right" title="Možnosti">
                     <i class="dp-icons">dots_vertical</i>

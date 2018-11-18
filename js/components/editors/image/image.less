@@ -56,6 +56,12 @@
             .image-editor__item-title {
                 color: @fg-color;
                 .primary-text-shadow;
+                transform: translate(0, 100%);
+
+                &::before {
+                    background: #4c5d7c;
+                    border-radius: 0 0 .25rem .25rem;
+                }                
             }
                         
             .image-editor__item-action {
@@ -67,6 +73,7 @@
                     background: fade(@fg-color, 40%);
                     transform: scale(1);
                     opacity: 1; 
+                    border-radius: .25rem .25rem 0 0;
                 }
             } 
         }

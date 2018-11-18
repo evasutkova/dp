@@ -39,6 +39,7 @@ define([
         this.template = ko.observable("").extend({ rateLimit: 500 });
         this.meta = ko.observableArray([]);
         this.nodes = ko.observableArray([]);
+        this.images = ko.observableArray([]);
         
         this.activeNode = ko.observable(null);
 
@@ -162,8 +163,9 @@ define([
      * @param {string} template HTML šablóna pre výstup.
      * @param {object} meta Metainformácie.
      * @param {array} nodes Uzly dokumentu.
+     * @param {array} images Obrázky dokumentu.
      */
-    Model.prototype._open = function(fileName, template, meta, nodes) {
+    Model.prototype._open = function(fileName, template, meta, nodes, images) {
         this.tool("explorer");
         this.editor("");
         this.title("");
@@ -172,6 +174,7 @@ define([
         this.template(template);
         this.meta(this._parseMeta(meta));
         this.nodes(this._parseNodes(nodes, null));
+        this.images(this._parseImages(images));
     };
 
 
@@ -221,6 +224,26 @@ define([
         });
     };
 
+
+    /**
+     * Spracovanie obrázkov dokumentu.
+     * 
+     * @param {array} images Obrázky dokumentu.
+     */
+    Model.prototype._parseImages = function(images) {
+        if ((typeof(images) === "undefined") || !(images instanceof Array)) {
+            return [];
+        }
+        
+        return images.map(function(i) {
+            var tmp = new Resource({
+                title: i.title,
+                url: global.URL.createObjectURL(i.blob)
+            });
+            return tmp;
+        });
+    };    
+    
     //#endregion
 
 
@@ -397,6 +420,7 @@ define([
         var template = null;
         var meta = null;
         var nodes = null;
+        var images = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
@@ -435,9 +459,24 @@ define([
             })
             .then(function(r) {
                 nodes = JSON.parse(r);
+
+                // Nacitame obrazky
+                var files = [];
+                archive.folder("images").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);
+            })
+            .then(function (r) {
+                images = r;
             })
             .then(function() {
-                $this._open(name, template, meta, nodes);
+                $this._open(name, template, meta, nodes, images);
             })
             .catch(function(error) {
                 if(!error) {
@@ -490,6 +529,7 @@ define([
                 archive.file("template.html", json.template);
                 archive.file("meta.json", JSON.stringify(json.meta, null, 4));
                 archive.file("nodes.json", JSON.stringify(json.nodes, null, 4));
+                // TODO : images
 
                 // Vygenerujeme zip archiv 
                 return archive.generateAsync({ type: "blob" });
@@ -664,6 +704,7 @@ define([
                 meta: {},
                 nodes: []
             };
+            // TODO : images
 
             $this.meta().forEach(function(m) {
                 o.meta[m.key] = {

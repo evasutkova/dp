@@ -4,9 +4,21 @@
              data-bind="css: { 'image-editor__item--active': isActive },
                         click: $component.select.bind($component)">
             <div class="image-editor__item-content">
-                <button class="btn-flat image-editor__item-action tooltip tooltip--right" title="Možnosti">
+                <!-- ko if: isActive() && $component.tools().length -->
+                <button class="btn-flat image-editor__item-action tooltip tooltip--right" title="Možnosti"
+                        data-bind="clickBubble: false, dropdown: { target: 'image-editor-menu', constrainWidth: false, coverTrigger: false, alignment: 'right', container: '.app' }">
                     <i class="dp-icons">dots_vertical</i>
                 </button>
+                <ul id="image-editor-menu" class="dropdown-content explorer-tool-menu" data-bind="foreach: $component.tools">
+                    <li>
+                        <button class="btn-flat explorer-tool-menu__item" 
+                            data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }, click: action, clickBubble: false">
+                            <i class="dp-icons left" data-bind="text: icon"></i>
+                            <span data-bind="text: text"></span>
+                        </button>
+                    </li>
+                </ul>                
+                <!-- /ko -->
                 <div class="image-editor__item-image" 
                      data-bind="style: { 'background-image': 'url(' + url() + ')'}">
                 </div>

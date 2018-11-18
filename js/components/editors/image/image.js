@@ -1,7 +1,8 @@
 define([
     "knockout",
     "text!./image.html",
-    "dp/bindings/optiscroll"
+    "dp/bindings/optiscroll",
+    "dp/bindings/dropdown"
 ], function (ko, view) {
     //#region [ Constructor ]
 
@@ -15,8 +16,76 @@ define([
         console.log("ImageEditor()");
 
         this.items = args.items || ko.observableArray([]);
+        this.activeImage = args.activeImage || ko.observable(null);
+        this.tools = ko.computed(this._tools, this);
 
         this.selectImageCallback = args.selectImageCallback;
+    };
+
+    //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Zoznam dostupných nástrojov pre aktívny uzol.
+     */
+    Model.prototype._tools = function() {
+        var img = this.activeImage();
+        if(!img) {
+            return [];
+        }
+
+        // Premenovanie
+        var renameAction = {
+            image: img,
+            text: "Premenovať",
+            icon: "rename_box",
+            isEnabled: true,
+            action: (function (e) {
+                // if (typeof (this.renameNodeCallback) !== "function") {
+                //     return;
+                // }
+
+                // var $this = this;
+                // this.renameNodeCallback(e.node).then(function(node) {
+                //     if(!node) {
+                //         return;
+                //     }
+                //     $this.select(node);
+                // });                
+            }).bind(this)
+        };
+
+        // Vymazanie
+        var deleteAction = {
+            image: img,
+            text: "Vymazať",
+            icon: "delete",
+            isEnabled: true,
+            action: (function (e) {
+                // if (typeof (this.deleteNodeCallback) !== "function") {
+                //     return;
+                // }
+
+                // var $this = this;
+                // this.deleteNodeCallback(e.node).then(function(node) {
+                //     if (!node) {
+                //         return;
+                //     }
+                //     var parent = node.parent || null;
+                //     if(parent) {
+                //         parent.isExpanded(true);
+                //     }
+                //     $this.select(parent);
+                // });
+            }).bind(this)
+        };
+  
+        return [
+            renameAction,
+            deleteAction
+        ];
     };
 
     //#endregion
@@ -29,13 +98,23 @@ define([
      * 
      * @param {object} image Obrázok.
      */    
-    Model.prototype.select = function (node) {
+    Model.prototype.select = function (image) {
         if (typeof (this.selectImageCallback) !== "function") {
             return;
         }
 
-        this.selectImageCallback(node);
+        this.selectImageCallback(image);
     };
+
+
+    /**
+     * Zobrazí obrázok.
+     * 
+     * @param {object} image Obrázok.
+     */    
+    Model.prototype.show = function (image) {
+        console.info("show");
+    };    
 
 
     /**
@@ -43,6 +122,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~ImageEditor()");
+
+        this.tools.dispose();
     };
 
     //#endregion

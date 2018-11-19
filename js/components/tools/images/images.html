@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row" data-bind="foreach: filtered">
-        <button class="btn-flat images-tool__item col s12">
+        <button class="btn-flat images-tool__item col s12" data-bind="click: $component.insertImage.bind($component)">
             <img data-bind="attr: { 'src': url }" />
             <span data-bind="text: title"></span>
         </button>

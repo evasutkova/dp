@@ -567,7 +567,17 @@ define([
     Model.prototype.fullscreeImage = function(image) {
         global.open(image.url(), image.title());
     };    
-    
+
+
+    /**
+     * Vloží obrázok do textu.
+     * 
+     * @param {object} image Obrázok, ktorý sa má vložiť.
+     */
+    Model.prototype.insertImage = function(image) {
+        console.info(image);
+    };    
+        
     
     /**
      * Otvorí a načíta dokument z disku.

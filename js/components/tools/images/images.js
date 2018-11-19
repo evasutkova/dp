@@ -19,6 +19,8 @@ define([
         this.items = args.items || ko.observableArray([]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);
+
+        this.insertImageCallback = args.insertImageCallback;
     };
 
     //#endregion
@@ -46,7 +48,21 @@ define([
 
 
     //#region [ Methods : Public ]
-   
+    
+    /**
+     * Vloží obrázok do textu.
+     * 
+     * @param {objec} image Obrázok, ktorý sa má vložiť.
+     */
+    Model.prototype.insertImage = function (image) {
+        if (typeof (this.insertImageCallback) !== "function") {
+            return;
+        }
+
+        this.insertImageCallback(image);
+    };
+    
+    
     /**
      * Dispose.
      */

@@ -32,6 +32,9 @@
             <!-- ko if: tool() === 'settings' -->
             <settings-tool params="meta: meta, promptCallback: prompt.bind($component), confirmCallback: confirm.bind($component)"></settings-tool>
             <!-- /ko -->
+            <!-- ko if: tool() === 'images' -->
+            <images-tool></images-tool>
+            <!-- /ko -->            
         </div>        
         <!-- /ko -->
         <!-- ko if: isConnected() -->

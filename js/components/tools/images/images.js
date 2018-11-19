@@ -1,8 +1,9 @@
 define([
     "knockout",
     "text!./images.html",
+    "session!",
     "dp/bindings/optiscroll"
-], function (ko, view) {
+], function (ko, view, session) {
     //#region [ Constructor ]
 
     /**
@@ -15,10 +16,12 @@ define([
         console.log("ImagesTool()");
 
         this.items = args.items || ko.observableArray([]);
+        this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
     };
 
     //#endregion
 
+    
     //#region [ Methods : Public ]
    
     /**
@@ -26,6 +29,10 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~ImagesTool()");
+
+        session.set({
+            search: this.search()
+        });
     };
 
     //#endregion

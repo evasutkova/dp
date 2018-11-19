@@ -124,17 +124,7 @@ define([
         this.selectImageCallback(image);
     };
 
-
-    /**
-     * Zobrazí obrázok.
-     * 
-     * @param {object} image Obrázok.
-     */    
-    Model.prototype.show = function (image) {
-        console.info("show");
-    };    
-
-
+    
     /**
      * Dispose.
      */

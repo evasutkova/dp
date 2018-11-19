@@ -1,3 +1,7 @@
 <div class="images-tool" data-bind="optiscroll">
-    images
+    <div class="row" data-bind="foreach: items">
+        <button class="btn-flat images-tool__item col s12">
+            <img data-bind="attr: { 'src': url }" />
+        </button>
+    </div>
 </div>

@@ -31,7 +31,7 @@
         color: @fg-color;
 
         > img {
-            max-width: 100%;
+            max-width: 95%;
             display: block;
             margin: 0 auto;
         }
@@ -44,6 +44,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             font-size: 0.875rem;
+            padding: 0 .25rem;
             .primary-text-shadow;
         }
 
@@ -53,10 +54,10 @@
             border-radius: .25rem;
             background: fade(@fg-color, 20%);
             position: absolute;
-            top: -0.3125rem;
+            top: -0.75rem;
             bottom: 0;
-            right: 0.3125rem;
-            left: 0.3125rem;
+            right: 0.75rem;
+            left: 0.75rem;
             z-index: -1;
             transform: scale(0);
             opacity: 0;

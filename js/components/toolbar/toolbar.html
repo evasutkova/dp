@@ -38,6 +38,11 @@
                 <i class="dp-icons">file_tree</i>
             </button>
         </li>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Obrázky" data-bind="css: { 'toolbar__item--active': tool() === 'images' }, click: setTool.bind($component, 'images')">
+                <i class="dp-icons">folder_image</i>
+            </button>
+        </li>        
         <!-- /ko -->
         <!-- ko if: hasMeta -->
         <li>

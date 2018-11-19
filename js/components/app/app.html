@@ -64,10 +64,12 @@
             <markdown-editor params="content: activeNode().content"></markdown-editor>
             <!-- /ko -->
             <!-- ko if: editor() === 'image' -->
-            <image-editor params="items: images, 
+            <image-editor params="editor: editor,
+                                  items: images, 
                                   activeImage: activeImage,
                                   selectImageCallback: selectImage.bind($component),
-                                  renameImageCallback: renameImage.bind($component)"></image-editor>
+                                  renameImageCallback: renameImage.bind($component),
+                                  deleteImageCallback: deleteImage.bind($component)"></image-editor>
             <!-- /ko -->
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->

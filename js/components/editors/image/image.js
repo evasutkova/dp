@@ -15,12 +15,14 @@ define([
     var Model = function (args, info) {
         console.log("ImageEditor()");
 
+        this.editor = args.editor || ko.observable("");
         this.items = args.items || ko.observableArray([]);
         this.activeImage = args.activeImage || ko.observable(null);
         this.tools = ko.computed(this._tools, this);
 
         this.selectImageCallback = args.selectImageCallback;
         this.renameImageCallback = args.renameImageCallback;
+        this.deleteImageCallback = args.deleteImageCallback;
     };
 
     //#endregion
@@ -65,21 +67,19 @@ define([
             icon: "delete",
             isEnabled: true,
             action: (function (e) {
-                // if (typeof (this.deleteNodeCallback) !== "function") {
-                //     return;
-                // }
+                if (typeof (this.deleteImageCallback) !== "function") {
+                    return;
+                }
 
-                // var $this = this;
-                // this.deleteNodeCallback(e.node).then(function(node) {
-                //     if (!node) {
-                //         return;
-                //     }
-                //     var parent = node.parent || null;
-                //     if(parent) {
-                //         parent.isExpanded(true);
-                //     }
-                //     $this.select(parent);
-                // });
+                var $this = this;
+                this.deleteImageCallback(e.image).then(function(image) {
+                    if (!image) {
+                        return;
+                    }
+
+                    $this.select(null);
+                    $this.editor("image");
+                });
             }).bind(this)
         };
   

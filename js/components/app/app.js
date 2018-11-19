@@ -128,7 +128,7 @@ define([
         this.nodes.remove(node);
         return node;
     };
-
+    
 
     /**
      * Premenuje položku.
@@ -196,6 +196,17 @@ define([
         this.title(image ? "Obrázky" : "");
         this.activeImage(image);
         this.editor(image ? "image" : "");
+    };
+
+
+    /**
+     * Vymaže obrázok.
+     * 
+     * @param {object} image Obrázok, ktorý sa má vymazať.
+     */
+    Model.prototype._deleteImage = function (image) {
+        this.images.remove(image);
+        return image;
     };
     
 
@@ -369,7 +380,7 @@ define([
                 return $this._deleteNode(node);
             });
     };
-
+    
 
     /**
      * Premenuje uzol.
@@ -475,6 +486,24 @@ define([
                 return $this._renameNode(title, image);
             });        
     };    
+    
+
+    /**
+     * Vymaže obrázok.
+     * 
+     * @param {object} image Obrázok, ktorý sa má vymazať.
+     */
+    Model.prototype.deleteImage = function(image) {
+        var $this = this;
+        return this.confirm("Vymazať obrázok", "Chcete vymazať obrázok <b>" + image.title() + "</b>?", "Vymazať", "Zrušiť")
+            .then(function(r) {
+                if(!r) {
+                    return;
+                }
+                
+                return $this._deleteImage(image);
+            });
+    };
     
     
     /**

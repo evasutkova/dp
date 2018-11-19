@@ -66,7 +66,8 @@
             <!-- ko if: editor() === 'image' -->
             <image-editor params="items: images, 
                                   activeImage: activeImage,
-                                  selectImageCallback: selectImage.bind($component)"></image-editor>
+                                  selectImageCallback: selectImage.bind($component),
+                                  renameImageCallback: renameImage.bind($component)"></image-editor>
             <!-- /ko -->
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->

@@ -134,13 +134,13 @@ define([
      * Premenuje položku.
      * 
      * @param {string} title Nadpis.
-     * @param {object} node Nadradený uzol.
+     * @param {object} node Položka.
      */
     Model.prototype._renameNode = function (title, node) {
         node.title(title);
         return node;
     };
-
+    
 
     /**
      * Presunie uzol na novú pozíciu.
@@ -197,7 +197,7 @@ define([
         this.activeImage(image);
         this.editor(image ? "image" : "");
     };
-
+    
 
     /**
      * Otvorí súbor/projekt.
@@ -450,6 +450,30 @@ define([
     Model.prototype.selectImage = function (image) {
         this._selectNode(null);
         this._selectImage(image);
+    };
+
+
+    /**
+     * Premenuje obrázok.
+     * 
+     * @param {object} image Obrázok ktorý sa má premenovať.
+     */
+    Model.prototype.renameImage = function(image) {
+        var $this = this;
+        return this.prompt("Premenovať obrázok", "Zadajte nový názov pre obrázok <b>" + image.title() + "</b>", image.title(), "Premenovať", "Zrušiť")
+            .then(function(title) {
+                if(title === null) {
+                    return null;
+                }
+
+                if(!title) {
+                    return $this.confirm("Premenovať obrázok", "Musíte zadať názov.", "Ok").then(function() {
+                        return $this.renameImage(image);
+                    });
+                }
+                
+                return $this._renameNode(title, image);
+            });        
     };    
     
     

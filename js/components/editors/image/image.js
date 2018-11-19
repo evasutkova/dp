@@ -20,6 +20,7 @@ define([
         this.tools = ko.computed(this._tools, this);
 
         this.selectImageCallback = args.selectImageCallback;
+        this.renameImageCallback = args.renameImageCallback;
     };
 
     //#endregion
@@ -43,17 +44,17 @@ define([
             icon: "rename_box",
             isEnabled: true,
             action: (function (e) {
-                // if (typeof (this.renameNodeCallback) !== "function") {
-                //     return;
-                // }
+                if (typeof (this.renameImageCallback) !== "function") {
+                    return;
+                }
 
-                // var $this = this;
-                // this.renameNodeCallback(e.node).then(function(node) {
-                //     if(!node) {
-                //         return;
-                //     }
-                //     $this.select(node);
-                // });                
+                var $this = this;
+                this.renameImageCallback(e.image).then(function(image) {
+                    if(!image) {
+                        return;
+                    }
+                    $this.select(image);
+                });                
             }).bind(this)
         };
 

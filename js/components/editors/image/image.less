@@ -134,14 +134,21 @@
     }
 
     &__item-image {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;        
         position: absolute;
         left: 0.3125rem;
         right: 0.3125rem;
         bottom: 0.3125rem;
         top: 0.3125rem;
+
+        > img {
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translate(0,-50%);
+            max-width: 100%;
+            max-height: 100%
+        }
     }
 
     &__item-action {

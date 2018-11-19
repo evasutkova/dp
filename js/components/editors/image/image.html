@@ -19,9 +19,9 @@
                     </li>
                 </ul>                
                 <!-- /ko -->
-                <div class="image-editor__item-image" 
-                     data-bind="style: { 'background-image': 'url(' + url() + ')'}">
-                </div>
+                <div class="image-editor__item-image">
+                    <img data-bind="attr: { 'src': url }" />
+                </div>                
                 <div class="image-editor__item-title" data-bind="text: title"></div>
             </div>
         </div>

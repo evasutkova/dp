@@ -21,6 +21,7 @@ define([
         this.nodes = args.nodes || ko.observableArray([]);
         this.activeNode = args.activeNode || ko.observable(null);
         this.tools = ko.computed(this._tools, this);
+        this.isExpanded = args.isExpanded || ko.observable(true);
 
         this.deleteNodeCallback = args.deleteNodeCallback;
         this.renameNodeCallback = args.renameNodeCallback;

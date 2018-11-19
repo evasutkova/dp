@@ -34,7 +34,18 @@
     <div class="row" style="margin-bottom: 0">
         <div class="col s12" style="margin:0.5rem 0">
             <ul class="collection explorer-tool__tree">
-                <!-- ko template: { if: nodes().length, name: 'explorer-tool__item-template', data: { nodes: nodes } } --><!-- /ko -->
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="event: { dblclick: $component.expand.bind($component, $component) }">
+                        <i class="dp-icons left light-blue-text text-lighten-1" data-bind="text: isExpanded() ? 'folder_open' : 'folder'"></i>
+                        <span class="light-blue-text text-lighten-1">Obsah</span>
+                    </button>
+                </li>
+                <!-- ko if: isExpanded() && nodes().length -->
+                <li>
+                    <ul class="collection explorer-tool__tree" data-bind="template: { name: 'explorer-tool__item-template', data: { nodes: nodes } }">
+                    </ul>
+                </li>                
+                <!-- /ko -->
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editImages, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'image' }">

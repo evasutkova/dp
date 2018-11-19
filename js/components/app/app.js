@@ -50,6 +50,7 @@ define([
         this._window_openAction = ko.observable();
         this._window_closeAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
+        this._markdownEditor_insertAction = ko.observable();
 
         tooltip();
     };
@@ -575,7 +576,21 @@ define([
      * @param {object} image Obrázok, ktorý sa má vložiť.
      */
     Model.prototype.insertImage = function(image) {
-        console.info(image);
+        var action = this._markdownEditor_insertAction();
+
+        if (typeof (action) !== "function") {
+            return;
+        }
+
+        /*
+        Reference-style: 
+        ![alt text][logo]
+
+        [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+        */
+        var title = image.title();
+        var id = image.search();
+        action("![" + title + "][" + id + "]");
     };    
         
     

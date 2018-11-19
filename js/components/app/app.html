@@ -66,7 +66,7 @@
             <template-editor params="content: template"></template-editor>
             <!-- /ko -->
             <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
-            <markdown-editor params="content: activeNode().content"></markdown-editor>
+            <markdown-editor params="content: activeNode().content, insertAction: _markdownEditor_insertAction"></markdown-editor>
             <!-- /ko -->
             <!-- ko if: editor() === 'image' -->
             <image-editor params="editor: editor,

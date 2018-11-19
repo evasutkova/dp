@@ -52,6 +52,10 @@ define([
         this.cm.on("change", this._cm_onChange.bind(this));
 
         this._content_subscription = this.content.subscribe(this._content_onChange, this);
+
+        if (typeof (args.insertAction) === "function") {
+            args.insertAction(this.insert.bind(this));
+        }
     };
 
     //#endregion
@@ -100,6 +104,22 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vloží text do dokumentu.
+     * 
+     * @param {string} text Text, ktorý sa má vložiť do dokumentu.
+     */
+    Model.prototype.insert = function (text) {
+        text = (text || "").trim();
+        
+        if(!text) {
+            return;
+        }
+
+        this.cm.replaceSelection(text, "around");
+    };
+
 
     /**
      * Dispose.

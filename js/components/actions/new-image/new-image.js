@@ -12,6 +12,9 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("NewImageAction()");
+
+        this.addImageCallback = args.addImageCallback;
+        this.selectImageCallback = args.selectImageCallback;
     };
 
     //#endregion
@@ -23,7 +26,20 @@ define([
      * Vytvorí nový obrázok v dokumente.
      */    
     Model.prototype.add = function () {
-        console.info("add image");
+        if ((typeof (this.addImageCallback) !== "function") 
+            || (typeof (this.selectImageCallback) !== "function")) {
+            return;
+        }
+    
+        var $this = this;
+        
+        this.addImageCallback().then(function(image) {
+            if(!image) {
+                return;
+            }
+
+            $this.selectImageCallback(image);
+        });
     };
 
 

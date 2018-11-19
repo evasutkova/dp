@@ -208,7 +208,23 @@ define([
         this.images.remove(image);
         return image;
     };
-    
+
+
+    /**
+     * Prid obrázok.
+     * 
+     * @param {object} title Názov obrázku.
+     * @param {object} blob Obrázok.
+     */
+    Model.prototype._addImage = function (title, blob) {
+        var img = new Resource({
+            title: title,
+            url: global.URL.createObjectURL(blob)
+        });
+        this.images.unshift(img);
+        return img;
+    };    
+   
 
     /**
      * Otvorí súbor/projekt.
@@ -504,6 +520,43 @@ define([
                 return $this._deleteImage(image);
             });
     };
+
+
+    /**
+     * Pridá obrázok.
+     */
+    Model.prototype.addImage = function() {
+        var $this = this;
+
+        return this.browse("Nový obrázok", "Názov obrázku", "arrayBuffer", null, true, "Pridať", "Zrušiť")
+            .then(function(data) {
+                // Ak prislo null pouzivatel zrusil okno
+                if(!data) {
+                    return Promise.reject(null);
+                }
+                
+                // Ak prislo prazdne pole pouzivatel nevybral ziaden subor
+                if (!data.length) {
+                    throw "Musíte vybrať obrázok.";
+                }
+
+                // Pridame obrazky do kolekcie
+                var image;
+                for(var i = 0; i < data.length; i++) {
+                    var tmp = data[i];
+                    image = $this._addImage(tmp.name, new Blob([tmp.content]));
+                }
+                
+                return image;
+            })
+            .catch(function(error) {
+                if(!error) {
+                    return;
+                }
+                console.error("App : addImage() : " + error);
+                $this.confirm("Nový obrázok", (typeof(error) === "string") ? error : "Nepodarilo sa otvoriť obrázok.", "Ok");
+            });
+    };    
 
 
     /**

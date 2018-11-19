@@ -53,7 +53,9 @@
             </new-node-action>
             <!-- /ko -->
             <!-- ko if: fileName().length && (editor() === 'image') -->
-            <new-image-action></new-image-action>
+            <new-image-action params="selectImageCallback: selectImage.bind($component),
+                                      addImageCallback: addImage.bind($component)">
+            </new-image-action>
             <!-- /ko -->
         </div>
         <div class="app__main">

@@ -36,8 +36,8 @@
             <ul class="collection explorer-tool__tree">
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="event: { dblclick: $component.expand.bind($component, $component) }">
-                        <i class="dp-icons left light-blue-text text-lighten-1" data-bind="text: isExpanded() ? 'folder_open' : 'folder'"></i>
-                        <span class="light-blue-text text-lighten-1">Obsah</span>
+                        <i class="dp-icons left" data-bind="text: isExpanded() ? 'folder_open' : 'folder'"></i>
+                        <span>Obsah</span>
                     </button>
                 </li>
                 <!-- ko if: isExpanded() && nodes().length -->
@@ -49,14 +49,14 @@
                 <!-- ko if: hasTemplate -->
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editImages, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'image' }">
-                        <i class="dp-icons left light-green-text text-lighten-1">folder_image</i>
-                        <span class="light-green-text text-lighten-1">Obrázky</span>
+                        <i class="dp-icons left">folder_image</i>
+                        <span>Obrázky</span>
                     </button>
                 </li>                
                 <li class="collection-item">
                     <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'template' }">
-                        <i class="dp-icons left orange-text text-lighten-2">xml</i>
-                        <span class="orange-text text-lighten-2">Šablóna</span>
+                        <i class="dp-icons left">xml</i>
+                        <span>Šablóna</span>
                     </button>
                 </li>
                 <!-- /ko -->

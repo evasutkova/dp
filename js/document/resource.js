@@ -15,7 +15,6 @@ define([
         this.title = ko.observable(args.title || "");
         this.isActive = ko.observable(args.isActive || false);
         this.url = ko.observable(args.url || "");
-        //this.url = (args.content || "").dataUriToObjectUrl();
         this.search = ko.computed(this._search, this);
     };
 
@@ -37,6 +36,24 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vygeneruje JSON reprezentáciu.
+     */
+    Model.prototype.toJson = function() {
+        var n = {
+            title: this.title(),
+            url: this.url()
+        };
+
+        var tmp = this.isActive();
+        if(tmp) {
+            n.isActive = tmp;
+        }
+       
+        return n;
+    };
+
     
     /**
      * Dispose.

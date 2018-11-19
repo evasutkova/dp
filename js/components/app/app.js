@@ -676,6 +676,7 @@ define([
      */
     Model.prototype.save = function() {
         var fileName;
+        var archive;
 
         this.toJson()
             .then(function (json) {
@@ -683,17 +684,48 @@ define([
                 fileName = json.fileName;
 
                 // Vytvorime zip subor
-                var archive = new zip();
+                archive = new zip();
                 
                 // Pridame obsah do archivu
                 archive.file("template.html", json.template);
                 archive.file("meta.json", JSON.stringify(json.meta, null, 4));
                 archive.file("nodes.json", JSON.stringify(json.nodes, null, 4));
-                // TODO : images
 
-                // Vygenerujeme zip archiv 
-                return archive.generateAsync({ type: "blob" });
+                // Ak nie su obrazky ulozime subor
+                if(!json.images.length) {
+                    return [];
+                }
+
+                // Spracovanie obrazkov
+                return Promise.all(json.images.map(function(img) {
+                    return fetch(img.url)
+                        .then(function(r) {
+                            return r.blob();
+                        })
+                        .then(function (r) {
+                            return {
+                                title: img.title,
+                                blob: r
+                            };
+                        });
+                }));
             })
+            .then(function (images) {
+                if(!images.length) {
+                    return;
+                }
+
+                // Vytvorime priecinok pre obrazky
+                var folder = archive.folder("images");
+
+                // Pridame do neho vsetky obrazky
+                images.forEach(function(img) {
+                    folder.file(img.title, img.blob);
+                });
+            })
+            .then(function() {
+                return archive.generateAsync({ type: "blob" });
+            }) 
             .then(function(content) {
                 // Ponukneme na stiahnutie
                 saveAs(content, fileName);
@@ -862,9 +894,9 @@ define([
                 fileName: $this.fileName(),
                 template: $this.template(),
                 meta: {},
-                nodes: []
+                nodes: [],
+                images: []
             };
-            // TODO : images
 
             $this.meta().forEach(function(m) {
                 o.meta[m.key] = {
@@ -875,6 +907,10 @@ define([
 
             o.nodes = $this.nodes().map(function(n) {
                 return n.toJson();
+            });
+
+            o.images = $this.images().map(function(i) {
+                return i.toJson();
             });
 
             resolve(o);

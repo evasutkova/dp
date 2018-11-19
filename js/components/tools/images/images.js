@@ -2,6 +2,7 @@ define([
     "knockout",
     "text!./images.html",
     "session!",
+    "dp/polyfills/string",
     "dp/bindings/optiscroll"
 ], function (ko, view, session) {
     //#region [ Constructor ]
@@ -17,11 +18,33 @@ define([
 
         this.items = args.items || ko.observableArray([]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
+        this.filtered = ko.computed(this._filtered, this);
     };
 
     //#endregion
 
-    
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Zoznam vyfiltrovaných obrázkov.
+     */
+    Model.prototype._filtered = function() {
+        var items = this.items();
+        var search = this.search().toCodeName();
+
+        if(!items.length) {
+            return [];
+        }
+
+        return items.filter(function(img) {
+            return img.search().indexOf(search) !== -1;
+        });
+    };
+
+    //#endregion
+
+
     //#region [ Methods : Public ]
    
     /**
@@ -33,6 +56,8 @@ define([
         session.set({
             search: this.search()
         });
+
+        this.filtered.dispose();
     };
 
     //#endregion

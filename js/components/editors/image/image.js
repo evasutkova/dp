@@ -23,6 +23,7 @@ define([
         this.selectImageCallback = args.selectImageCallback;
         this.renameImageCallback = args.renameImageCallback;
         this.deleteImageCallback = args.deleteImageCallback;
+        this.fullscreeImageCallback = args.fullscreeImageCallback;
     };
 
     //#endregion
@@ -82,10 +83,26 @@ define([
                 });
             }).bind(this)
         };
+
+        // Zobrazenie na celu obrazovku
+        var fullscreenAction = {
+            image: img,
+            text: "Zobraziť v plnej veľkosti",
+            icon: "image_search_outline",
+            isEnabled: true,
+            action: (function (e) {
+                if (typeof (this.fullscreeImageCallback) !== "function") {
+                    return;
+                }
+
+                this.fullscreeImageCallback(e.image);
+            }).bind(this)
+        };        
   
         return [
             renameAction,
-            deleteAction
+            deleteAction,
+            fullscreenAction
         ];
     };
 

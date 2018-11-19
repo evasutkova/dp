@@ -69,7 +69,8 @@
                                   activeImage: activeImage,
                                   selectImageCallback: selectImage.bind($component),
                                   renameImageCallback: renameImage.bind($component),
-                                  deleteImageCallback: deleteImage.bind($component)"></image-editor>
+                                  deleteImageCallback: deleteImage.bind($component),
+                                  fullscreeImageCallback: fullscreeImage.bind($component)"></image-editor>
             <!-- /ko -->
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->

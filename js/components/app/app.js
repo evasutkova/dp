@@ -504,6 +504,16 @@ define([
                 return $this._deleteImage(image);
             });
     };
+
+
+    /**
+     * Zobrazí obrázok v plnej veľkosti.
+     * 
+     * @param {object} image Obrázok, ktorý sa má zobraziť.
+     */
+    Model.prototype.fullscreeImage = function(image) {
+        global.open(image.url(), image.title());
+    };    
     
     
     /**

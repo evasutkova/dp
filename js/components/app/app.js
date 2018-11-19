@@ -578,7 +578,8 @@ define([
     Model.prototype.insertImage = function(image) {
         var action = this._markdownEditor_insertAction();
 
-        if (typeof (action) !== "function") {
+        if ((typeof (action) !== "function")
+            || (this.editor() !== "markdown")) {
             return;
         }
 

@@ -165,16 +165,31 @@ function _images(content) {
         return Promise.resolve("");
     }
 
-    var result = [];
-    images
+    // Stiahnutie obrazkov a ich konverzia na base64 url
+    var tasks = images
         .filter(function(i) {
             return references.indexOf(i.search) !== -1;
         })
-        .forEach(function(i) {
-            result.push('[' + i.search + ']: ' + i.url + ' "' + i.title + '"');
+        .map(function(i) {
+            return fetch(i.url)
+                .then(function(r) {
+                    return r.blob();
+                })
+                .then(function(blob) {
+                    return new Promise(function(resolve) {
+                        var reader = new FileReader();
+                        reader.onloadend = function() {
+                            resolve('[' + i.search + ']: ' + reader.result + ' "' + i.title + '"');
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+                });
         });
 
-    return Promise.resolve("\n" + result.join("\n"));
+    return Promise.all(tasks).then(function() {
+        var result = Array.prototype.slice.call(arguments);
+        return "\n" + result.join("\n");
+    });
 }
 
 //#endregion

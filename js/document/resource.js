@@ -43,7 +43,8 @@ define([
     Model.prototype.toJson = function() {
         var n = {
             title: this.title(),
-            url: this.url()
+            url: this.url(),
+            search: this.search()
         };
 
         var tmp = this.isActive();

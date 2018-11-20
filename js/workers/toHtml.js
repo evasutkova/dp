@@ -105,8 +105,6 @@ function _content(parentId, node, isInToc) {
     var section = {
         id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
         title: node.title,
-        //content: converter.makeHtml(node.content),
-        //content: node.content + getImages(node.content, images),
         content: node.content,
         hasSections: false
     };
@@ -114,7 +112,7 @@ function _content(parentId, node, isInToc) {
     var nodes = node.nodes;
     if(!(nodes instanceof Array) || !nodes.length) {
         return _images(section.content).then(function(images) {
-            section.content = section.content + images;
+            section.content = converter.makeHtml(section.content + images);
             return section;
         });
     }
@@ -133,7 +131,7 @@ function _content(parentId, node, isInToc) {
 
         var imageTasks = section.sections.map(function(s) {
             return _images(section.content).then(function(images) {
-                section.content = section.content + images;
+                section.content = converter.makeHtml(section.content + images);
                 return section;
             });
         });
@@ -202,7 +200,6 @@ function _images(content) {
  */
 function start() {
     view = {
-        _v: 13,
         fileName: data.fileName,
         meta: {},
         toc: [],
@@ -229,7 +226,8 @@ function start() {
  * Ukončenie práce a zaslanie výsledkov. 
  */
 function finish() {
-    self.postMessage(JSON.stringify(view));
+    //self.postMessage(JSON.stringify(view));
+    self.postMessage(Mustache.render(data.template, view));
     self.close(); 
 }
 

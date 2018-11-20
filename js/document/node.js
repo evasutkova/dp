@@ -1,6 +1,16 @@
-define([
-    "knockout"
-], function (ko) {
+(function (root, factory) {
+    if ((typeof (define) === "function") && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(["knockout"], factory);
+    }
+    else {
+        if(!root.Dp) {
+            root.Dp = {};
+        }
+        // Browser globals
+        root.Dp.Node = factory();
+    }
+}(typeof (self) !== "undefined" ? self : this, function (ko) {
     //#region [ Constructor ]
 
     /**
@@ -133,5 +143,5 @@ define([
 
     //#endregion
 
-    return Model;
-});
+    return Model;  
+}));

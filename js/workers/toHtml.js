@@ -6,6 +6,7 @@ importScripts("../libs/highlight.js");
 importScripts("../libs/showdown.js");
 importScripts("../libs/showdown.footnotes.js");
 importScripts("../libs/showdown.highlight.js");
+importScripts("../document/node.js");
 
 //#endregion
 
@@ -55,7 +56,7 @@ self.onmessage = function(e) {
     // Vratime vysledok do hlavneho vlakna
     //self.postMessage(JSON.stringify(view));
     self.postMessage(Mustache.render(data.template, view));
-
+    
     // Ukoncime worker
     self.close(); 
 };

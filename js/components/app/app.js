@@ -253,6 +253,36 @@ define([
 
 
     /**
+     * Nájde aktívny uzol v dokumente.
+     * 
+     * @param {array} nodes Zoznam položiek v dokumente.
+     */
+    Model.prototype._findActiveNode = function(nodes) {
+        var buffer = nodes;
+        if(!(buffer instanceof Array)) {
+            buffer = [buffer];    
+        }
+        
+        var active = null;
+        while(buffer.length > 0) {
+            var n = buffer.shift();
+
+            if(n.isActive()) {
+               active = n; 
+            }
+
+            if(active) {
+                break;
+            }
+
+            buffer = buffer.concat(n.nodes() || []);
+        }
+
+        return active;
+    };
+
+
+    /**
      * Spracovanie metadát.
      * 
      * @param {object} meta Metainformácie.
@@ -684,6 +714,10 @@ define([
             })
             .then(function() {
                 $this._open(name, template, meta, nodes, images);
+                var an = $this._findActiveNode($this.nodes());
+                if(an) {
+                    $this._selectNode(an);
+                }
             })
             .catch(function(error) {
                 if(!error) {

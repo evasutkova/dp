@@ -22,6 +22,7 @@ define([
         console.log("MarkdownEditor()");
 
         this.content = args.content || ko.observable("");
+        this.images = args.images || ko.observableArray([]);
 
         this.sd = new Showdown.Converter({
             tables: true, 
@@ -68,6 +69,15 @@ define([
      */
     Model.prototype._preview = function() {
         var content = this.content();
+        var images = this.images();
+
+        if(images.length) {
+            var refs = [];
+            images.forEach(function(i) {
+                refs.push('[' + i.search() + ']: ' + i.url() + ' "' + i.title() + '"');
+            });
+            content += ("\n" + refs.join("\n"));
+        }
 
         return this.sd.makeHtml(content);
     };    

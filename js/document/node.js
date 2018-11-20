@@ -101,5 +101,37 @@ define([
 
     //#endregion
 
+
+    //#region [ Methods : Static ]
+
+    /**
+     * Vráti zoznam referencovaných obrázkov.
+     * 
+     * 
+     * @param {string} content Markdown text.
+     */
+    Model.getReferencedImages = function(content) {
+        content = content || "";
+
+        if(!content) {
+            return [];
+        }
+
+        var references = [];
+
+        var regex = /!\[[^\[\]]+\]\[([^\[\]]+)\]/g;
+        var match = regex.exec(content);
+        while (match != null) {
+            if(match[1] && (references.indexOf(match[1]) === -1)) {
+                references.push(match[1]);
+            }
+            match = regex.exec(content);
+        }
+
+        return references;
+    };
+
+    //#endregion
+
     return Model;
 });

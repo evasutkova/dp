@@ -43,6 +43,9 @@ define([
         
         this.activeNode = ko.observable(null);
         this.activeImage = ko.observable(null);
+        this.references = {
+            images: ko.computed(this._referencedImages, this)
+        };
 
         this._prompt_openAction = ko.observable();
         this._confirm_openAction = ko.observable();
@@ -313,7 +316,25 @@ define([
             });
             return tmp;
         });
-    };    
+    };
+
+
+    /**
+     * Zoznam referencovaných obrázkov.
+     */
+    Model.prototype._referencedImages = function() {
+        var node = this.activeNode();
+        if(!node) {
+            return [];
+        }
+
+        var references = Node.getReferencedImages(node.content());
+        var images = this.images();
+
+        return images.filter(function(i) {
+            return references.indexOf(i.search()) !== -1;
+        });
+    };
     
     //#endregion
 
@@ -986,6 +1007,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~App()");
+
+        this.references.images.dispose();
     };
 
     //#endregion

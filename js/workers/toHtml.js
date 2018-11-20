@@ -11,6 +11,15 @@ importScripts("../document/node.js");
 //#endregion
 
 
+//#region [ Fields ]
+
+var data;
+var view;
+var converter;
+
+//#endregion
+
+
 //#region [ Main ]
 
 /**
@@ -19,76 +28,35 @@ importScripts("../document/node.js");
  * @param {object} e Parametre.
  */
 self.onmessage = function(e) {
-    // Json data reprezentujuce cely dokument
-    var data = e.data;
+    // Odlozime si data
+    data = e.data;
 
-    // Json pre mustache
-    var view = {
-        fileName: data.fileName,
-        meta: {},
-        toc: [],
-        articles: []
-    };
-
-    // Spracovanie metadat
-    getMetadata.bind(view.meta)(data.meta);
-
-    // Vygenerovanie toc
-    data.nodes.forEach(getToc.bind(view.toc, ""));
-
-    // Vytvorime converter
-    var converter = new showdown.Converter({
-        tables: true, 
-        tasklists: true,
-        strikethrough: true,
-        openLinksInNewWindow: true,
-        highlightAuto: false,
-        //noHeaderId: false,
-        //prefixHeaderId: "x",
-        //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
-        extensions: ["footnotes", "highlight"]
-    }); 
-
-    // Vygenerovanie obsahu
-    data.nodes.forEach(getContent.bind(view.articles, "", converter));
-    data.nodes.forEach(getArticles.bind(view, "", converter));
-
-    // Vratime vysledok do hlavneho vlakna
-    //self.postMessage(JSON.stringify(view));
-    self.postMessage(Mustache.render(data.template, view));
-    
-    // Ukoncime worker
-    self.close(); 
+    start()
+        .then(metadata)
+        .then(toc)
+        .then(articles)
+        .then(pages)
+        .then(finish)
+        .catch(function(error) {
+            self.postMessage(JSON.stringify({error: error}));
+            self.close(); 
+        });
 };
 
 //#endregion
 
 
-//#region [ Methods ]
+//#region [ Methods : Private ]
 
 /**
- * Spracovanie metaúdajov. 
- * 
- * @param {object} meta Metadáta.
- */
-function getMetadata(meta) {
-    var keys = Object.keys(meta);
-    for(var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        this[key] = meta[key].value;
-    }
-}
-
-
-/**
- * Spracovanie uzlov a vygenerovanie toc.
+ * Spracovanie uzlov pre TOC.
  * 
  * @param {string} parentId Identifikátor nadradeného uzla.
  * @param {object} node Aktuálne spracovávaný uzol.
  */
-function getToc(parentId, node) {
+function _toc(parentId, node) {
     if(!node.isInToc) {
-        return;
+        return Promise.resolve(null);
     }
 
     // Toc view pre aktualny uzol
@@ -99,79 +67,237 @@ function getToc(parentId, node) {
         hasChildren: false
     };
 
-    // Odlozime aktualny uzol
-    this.push(ti);
-
-    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
-    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
-        ti.hasChildren = true;
-        ti.children = [];
-        node.nodes.forEach(getToc.bind(ti.children, ti.id));
+    var nodes = node.nodes;
+    if(!(nodes instanceof Array) || !nodes.length) {
+        return Promise.resolve(ti);
     }
+
+    ti.hasChildren = true;
+    ti.children = [];
+
+    var tasks = nodes.map(function(n) {
+        return _toc(ti.id, n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        ti.children = items.filter(function(i) {
+            return i !== null;
+        });
+
+        return ti;
+    });
 }
 
 
 /**
- * Spracovanie uzlov a vygenerovanie obsahu.
+ * Spracovanie uzlov v dokumente.
  * 
  * @param {string} parentId Identifikátor nadradeného uzla.
- * @param {object} converter Markdown konvertor.
  * @param {object} node Aktuálne spracovávaný uzol.
+ * @param {boolean} isInToc Ak je true, spracuje sa iba uzol, ktorý je v TOC.
  */
-function getContent(parentId, converter, node) {
-    if(!node.isInToc) {
-        return;
+function _content(parentId, node, isInToc) {
+    if((isInToc && !node.isInToc) || (!isInToc && node.isInToc)) {
+        return Promise.resolve(null);
     }
 
     // Section view pre aktualny uzol
     var section = {
         id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
         title: node.title,
-        content: converter.makeHtml(node.content),
+        //content: converter.makeHtml(node.content),
+        //content: node.content + getImages(node.content, images),
+        content: node.content,
         hasSections: false
     };
 
-    // Odlozime aktualny uzol
-    this.push(section);
-
-    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
-    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
-        section.hasSections = true;
-        section.sections = [];
-        node.nodes.forEach(getContent.bind(section.sections, section.id, converter));
+    var nodes = node.nodes;
+    if(!(nodes instanceof Array) || !nodes.length) {
+        return _images(section.content).then(function(images) {
+            section.content = section.content + images;
+            return section;
+        });
     }
+
+    section.hasSections = true;
+    section.sections = [];
+
+    var tasks = nodes.map(function(n) {
+        return _content(section.id, n, isInToc);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        section.sections = items.filter(function(i) {
+            return i !== null;
+        });
+
+        var imageTasks = section.sections.map(function(s) {
+            return _images(section.content).then(function(images) {
+                section.content = section.content + images;
+                return section;
+            });
+        });
+
+        return Promise.all(imageTasks).then(function() {
+            return section;
+        });
+    });    
 }
 
 
 /**
- * Spracovanie uzlov a vygenerovanie obsahu, ktorý nie je v toc
+ * Zistí všetky referencie na obrázky vo vstupnom obsahu položky dokumentu a vráti 
+ * markdown pre dané obrázky.
  * 
- * @param {string} parentId Identifikátor nadradeného uzla.
- * @param {object} converter Markdown konvertor.
- * @param {object} node Aktuálne spracovávaný uzol.
+ * @param {string} content Obsah položky v dokumente.
  */
-function getArticles(parentId, converter, node) {
-    if(node.isInToc) {
-        return;
+function _images(content) {
+    var images = data.images;
+
+    // Ak nie su ziadne obrazky rovno koncime
+    if(!images.length) {
+        return Promise.resolve("");
     }
 
-    // Article view pre aktualny uzol
-    var article = {
-        id: (parentId ? parentId + "_" : "") + node.title.toCodeName(),
-        title: node.title,
-        content: converter.makeHtml(node.content),
-        hasSections: false
+    // Zistime referencie v dokumente, ak nie su koncime
+    var references = Dp.Node.getReferencedImages(content);
+    if(!references.length) {
+        return Promise.resolve("");
+    }
+
+    var result = [];
+    images
+        .filter(function(i) {
+            return references.indexOf(i.search) !== -1;
+        })
+        .forEach(function(i) {
+            result.push('[' + i.search + ']: ' + i.url + ' "' + i.title + '"');
+        });
+
+    return Promise.resolve("\n" + result.join("\n"));
+}
+
+//#endregion
+
+
+//#region [ Methods ]
+
+/**
+ * Inicializácia view pre mustache. 
+ */
+function start() {
+    view = {
+        _v: 13,
+        fileName: data.fileName,
+        meta: {},
+        toc: [],
+        articles: []
     };
 
-    // Odlozime aktualny uzol
-    this["@" + article.id] = article;
+    converter = new showdown.Converter({
+        tables: true, 
+        tasklists: true,
+        strikethrough: true,
+        openLinksInNewWindow: true,
+        highlightAuto: false,
+        //noHeaderId: false,
+        //prefixHeaderId: "x",
+        //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
+        extensions: ["footnotes", "highlight"]
+    });         
 
-    // Ak aktualny uzol obsahuje dalsie uzly, spracujeme aj tie
-    if((node.nodes instanceof Array) && (node.nodes.length > 0)) {
-        article.hasSections = true;
-        article.sections = [];
-        node.nodes.forEach(getContent.bind(article.sections, article.id, converter));
-    }
+    return Promise.resolve(view);
+}
+
+
+/**
+ * Ukončenie práce a zaslanie výsledkov. 
+ */
+function finish() {
+    self.postMessage(JSON.stringify(view));
+    self.close(); 
+}
+
+
+/**
+ * Spracovanie metaúdajov.
+ */
+function metadata() {
+    var meta = data.meta;
+
+    return new Promise(function(resolve) {
+        Object
+        .keys(meta)
+        .forEach(function(key) {
+            view.meta[key] = meta[key].value;
+        });
+
+        resolve(view.meta);
+    });
+}
+
+
+/**
+ * Spracovanie TOC.
+ */
+function toc() {
+    var nodes = data.nodes;
+
+    var tasks = nodes.map(function(n) {
+        return _toc("", n);
+    });
+    
+    return Promise.all(tasks).then(function(items) {
+        view.toc = items.filter(function(i) {
+            return i !== null;
+        });
+
+        return view.toc;
+    });        
+}
+
+
+/**
+ * Spracovanie hlavného obsahu.
+ */
+function articles() {
+    var nodes = data.nodes;
+
+    var tasks = nodes.map(function(n) {
+        return _content("", n, true);
+    });
+    
+    return Promise.all(tasks).then(function(items) {
+        view.articles = items.filter(function(i) {
+            return i !== null;
+        });
+
+        return view.articles;
+    }); 
+}
+
+
+/**
+ * Spracovanie stránok, to sú tie article, ktoré sú označené aby neboli v TOC.
+ */
+function pages() {
+    var nodes = data.nodes;
+
+    var tasks = nodes.map(function(n) {
+        return _content("", n, false);
+    });
+    
+    return Promise.all(tasks).then(function(items) {
+        var pages = items.filter(function(i) {
+            return i !== null;
+        });
+
+        pages.forEach(function(p) {
+            view["@" + p.id] = p;
+        });
+
+        return pages;
+    }); 
 }
 
 //#endregion

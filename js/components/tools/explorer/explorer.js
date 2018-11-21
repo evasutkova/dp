@@ -37,6 +37,7 @@ define([
 
         this.selectScriptCallback = args.selectScriptCallback;
         this.renameScriptCallback = args.renameScriptCallback;
+        this.deleteScriptCallback = args.deleteScriptCallback;
     };
 
     //#endregion
@@ -226,21 +227,17 @@ define([
             icon: "delete",
             isEnabled: true,
             action: (function (e) {
-                // if (typeof (this.deleteNodeCallback) !== "function") {
-                //     return;
-                // }
+                if (typeof (this.deleteScriptCallback) !== "function") {
+                    return;
+                }
 
-                // var $this = this;
-                // this.deleteNodeCallback(e.node).then(function(node) {
-                //     if (!node) {
-                //         return;
-                //     }
-                //     var parent = node.parent || null;
-                //     if(parent) {
-                //         parent.isExpanded(true);
-                //     }
-                //     $this.select(parent);
-                // });
+                var $this = this;
+                this.deleteScriptCallback(e.script).then(function(script) {
+                    if (!script) {
+                        return;
+                    }
+                    $this.selectScript(null);
+                });
             }).bind(this)
         };
         

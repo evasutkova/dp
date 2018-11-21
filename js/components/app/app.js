@@ -214,7 +214,7 @@ define([
         this.images.remove(image);
         return image;
     };
-
+    
 
     /**
      * Prid obrázok.
@@ -252,6 +252,17 @@ define([
         this.editor(script ? "script" : "");
     };
     
+
+    /**
+     * Vymaže skript.
+     * 
+     * @param {object} script Skript, ktorý sa má vymazať.
+     */
+    Model.prototype._deleteScript = function (script) {
+        this.scripts.remove(script);
+        return script;
+    };
+        
 
     /**
      * Otvorí súbor/projekt.
@@ -621,7 +632,7 @@ define([
                 return $this._deleteImage(image);
             });
     };
-
+    
 
     /**
      * Pridá obrázok.
@@ -725,6 +736,24 @@ define([
     };    
     
     
+    /**
+     * Vymaže skript.
+     * 
+     * @param {object} script Skript, ktorý sa má vymazať.
+     */
+    Model.prototype.deleteScript = function(script) {
+        var $this = this;
+        return this.confirm("Vymazať skript", "Chcete vymazať skript <b>" + script.title() + "</b>?", "Vymazať", "Zrušiť")
+            .then(function(r) {
+                if(!r) {
+                    return;
+                }
+                
+                return $this._deleteScript(script);
+            });
+    };
+    
+
     /**
      * Otvorí a načíta dokument z disku.
      */

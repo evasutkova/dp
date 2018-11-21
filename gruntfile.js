@@ -134,7 +134,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/keywords.css": "js/components/keywords/keywords.less",
                     "wwwroot/css/node-id.css": "js/components/node-id/node-id.less",
                     "wwwroot/css/new-node-action.css": "js/components/actions/new-node/new-node.less",
-                    "wwwroot/css/new-image-action.css": "js/components/actions/new-image/new-image.less"
+                    "wwwroot/css/new-image-action.css": "js/components/actions/new-image/new-image.less",
+                    "wwwroot/css/new-script-action.css": "js/components/actions/new-script/new-script.less"
                 }
             }
         },
@@ -169,7 +170,8 @@ module.exports = function (grunt) {
                     "wwwroot/css/keywords.css",
                     "wwwroot/css/node-id.css",
                     "wwwroot/css/new-node-action.css",
-                    "wwwroot/css/new-image-action.css"
+                    "wwwroot/css/new-image-action.css",
+                    "wwwroot/css/new-script-action.css"
                 ],
                 dest: "wwwroot/css/site.css"
             }

@@ -230,7 +230,7 @@ define([
         this.images.unshift(img);
         return img;
     };
-
+    
 
     /**
      * Vyberie skript v dokumente.
@@ -247,9 +247,9 @@ define([
             script.isActive(true);
         }
         
-        this.title(script ? script.title() : "");
+        this.title(script ? script.title() : "Skripty");
         this.activeScript(script);
-        this.editor(script ? "script" : "");
+        this.editor(script ? "script" : "scripts");
     };
     
 
@@ -260,6 +260,22 @@ define([
      */
     Model.prototype._deleteScript = function (script) {
         this.scripts.remove(script);
+        return script;
+    };
+
+
+    /**
+     * Pridá skript.
+     * 
+     * @param {object} title Názov skript.
+     * @param {object} blob Skript.
+     */
+    Model.prototype._addScript = function (title, blob) {
+        var script = new Resource({
+            title: title,
+            url: global.URL.createObjectURL(blob)
+        });
+        this.scripts.unshift(script);
         return script;
     };
         
@@ -668,7 +684,7 @@ define([
                 console.error("App : addImage() : " + error);
                 $this.confirm("Nový obrázok", (typeof(error) === "string") ? error : "Nepodarilo sa otvoriť obrázok.", "Ok");
             });
-    };    
+    };   
 
 
     /**
@@ -753,6 +769,43 @@ define([
             });
     };
     
+
+    /**
+     * Pridá skript.
+     */
+    Model.prototype.addScript = function() {
+        var $this = this;
+
+        return this.browse("Nový skript", "Názov skriptu", "arrayBuffer", "*.js", true, "Pridať", "Zrušiť")
+            .then(function(data) {
+                // Ak prislo null pouzivatel zrusil okno
+                if(!data) {
+                    return Promise.reject(null);
+                }
+                
+                // Ak prislo prazdne pole pouzivatel nevybral ziaden subor
+                if (!data.length) {
+                    throw "Musíte vybrať skript.";
+                }
+
+                // Pridame skripty do kolekcie
+                var script;
+                for(var i = 0; i < data.length; i++) {
+                    var tmp = data[i];
+                    script = $this._addScript(tmp.name, new Blob([tmp.content]));
+                }
+                
+                return script;
+            })
+            .catch(function(error) {
+                if(!error) {
+                    return;
+                }
+                console.error("App : addScript() : " + error);
+                $this.confirm("Nový skript", (typeof(error) === "string") ? error : "Nepodarilo sa otvoriť skript.", "Ok");
+            });
+    };   
+         
 
     /**
      * Otvorí a načíta dokument z disku.

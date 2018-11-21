@@ -25,11 +25,15 @@ require({
         showdown: "/wwwroot/js/libs/showdown",
         showdownFootnotes: "/wwwroot/js/libs/showdown.footnotes",
         showdownHighlight: "/wwwroot/js/libs/showdown.highlight",
+        showdownNomnoml: "/wwwroot/js/libs/showdown.nomnoml",
         syncscroll: "/wwwroot/js/libs/syncscroll",
         mustache: "/wwwroot/js/libs/mustache",
         filesaver: "/wwwroot/js/libs/filesaver",
         highlight: "/wwwroot/js/libs/highlight",
-        tooltip: "/wwwroot/js/libs/tooltip"
+        tooltip: "/wwwroot/js/libs/tooltip",
+        lodash: "/wwwroot/js/libs/lodash",
+        dagre: "/wwwroot/js/libs/dagre",
+        nomnoml: "/wwwroot/js/libs/nomnoml"
     },
     map: {
         "*": {
@@ -42,8 +46,8 @@ require({
         }
     },
     shim: {
-        highlightLineNnumbers: {
-            deps: ["highlight"]
+        dagre: {
+            exports: "dagre"
         }
     },    
     config: {

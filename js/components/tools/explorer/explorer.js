@@ -29,6 +29,9 @@ define([
         this.keywordsNodeCallback = args.keywordsNodeCallback;
         this.flagNodeCallback = args.flagNodeCallback;
         this.selectNodeCallback = args.selectNodeCallback;
+
+        this.isScriptsExpanded = args.isScriptsExpanded || ko.observable(true);
+        this.scripts = args.scripts || ko.observableArray([]);
     };
 
     //#endregion

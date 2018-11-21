@@ -59,6 +59,12 @@
                         <span>Šablóna</span>
                     </button>
                 </li>
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="clickBubble: false, click: function(){}, event: { dblclick: function() { isScriptsExpanded(!isScriptsExpanded()); } }">
+                        <i class="dp-icons left" data-bind="text: isScriptsExpanded() ? 'folder_open' : 'folder'"></i>
+                        <span>Skripty</span>
+                    </button>                    
+                </li>                
                 <!-- /ko -->
             </ul>            
         </div>

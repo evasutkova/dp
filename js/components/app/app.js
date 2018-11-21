@@ -44,6 +44,7 @@ define([
         
         this.activeNode = ko.observable(null);
         this.activeImage = ko.observable(null);
+        this.activeScript = ko.observable(null);
         this.references = {
             images: ko.computed(this._referencedImages, this)
         };

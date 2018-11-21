@@ -32,6 +32,9 @@ define([
 
         this.isScriptsExpanded = args.isScriptsExpanded || ko.observable(true);
         this.scripts = args.scripts || ko.observableArray([]);
+        this.activeScript = args.activeScript || ko.observable(null);
+
+        this.selectScriptCallback = args.selectScriptCallback;
     };
 
     //#endregion
@@ -229,9 +232,23 @@ define([
         }
 
         this.selectNodeCallback(node);
-    };    
-    
+    };
 
+
+    /**
+     * Vyberie skript v dokumente.
+     * 
+     * @param {object} script Skript v dokumente.
+     */    
+    Model.prototype.selectScript = function (script) {
+        if (typeof (this.selectScriptCallback) !== "function") {
+            return;
+        }
+
+        this.selectScriptCallback(script);
+    };     
+    
+    
     /**
      * Dispose.
      */

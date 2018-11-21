@@ -70,7 +70,7 @@
                     <ul class="collection explorer-tool__tree" data-bind="foreach: scripts">
                         <li class="collection-item">
                             <button class="btn-flat explorer-tool__item" 
-                                    data-bind="css: { 'explorer-tool__item--active': isActive }">
+                                    data-bind="css: { 'explorer-tool__item--active': isActive }, click: $component.selectScript.bind($component), clickBubble: false">
                                 <i class="dp-icons left">script_text_outline</i>
                                 <span data-bind="text: title"></span>
                             </button>

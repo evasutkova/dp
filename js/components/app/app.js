@@ -700,6 +700,30 @@ define([
         this._selectScript(script);
     };
         
+
+    /**
+     * Premenuje skript.
+     * 
+     * @param {object} script Skript, ktorý sa má premenovať.
+     */
+    Model.prototype.renameScript = function(script) {
+        var $this = this;
+        return this.prompt("Premenovať skript", "Zadajte nový názov pre skript <b>" + script.title() + "</b>", script.title(), "Premenovať", "Zrušiť")
+            .then(function(title) {
+                if(title === null) {
+                    return null;
+                }
+
+                if(!title) {
+                    return $this.confirm("Premenovať skript", "Musíte zadať názov.", "Ok").then(function() {
+                        return $this.renameScript(script);
+                    });
+                }
+                
+                return $this._renameNode(title, script);
+            });        
+    };    
+    
     
     /**
      * Otvorí a načíta dokument z disku.

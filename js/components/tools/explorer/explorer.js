@@ -36,6 +36,7 @@ define([
         this.scriptTools = ko.computed(this._scriptTools, this);
 
         this.selectScriptCallback = args.selectScriptCallback;
+        this.renameScriptCallback = args.renameScriptCallback;
     };
 
     //#endregion
@@ -204,17 +205,17 @@ define([
             icon: "rename_box",
             isEnabled: true,
             action: (function (e) {
-                // if (typeof (this.renameNodeCallback) !== "function") {
-                //     return;
-                // }
+                if (typeof (this.renameScriptCallback) !== "function") {
+                    return;
+                }
 
-                // var $this = this;
-                // this.renameNodeCallback(e.node).then(function(node) {
-                //     if(!node) {
-                //         return;
-                //     }
-                //     $this.select(node);
-                // });                
+                var $this = this;
+                this.renameScriptCallback(e.script).then(function(script) {
+                    if(!script) {
+                        return;
+                    }
+                    $this.selectScript(script);
+                });                
             }).bind(this)
         };
 

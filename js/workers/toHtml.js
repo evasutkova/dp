@@ -36,6 +36,7 @@ self.onmessage = function(e) {
         .then(toc)
         .then(articles)
         .then(pages)
+        .then(tot)
         .then(finish)
         .catch(function(error) {
             self.postMessage(JSON.stringify({error: error}));
@@ -86,6 +87,38 @@ function _toc(parentId, node) {
 
         return ti;
     });
+}
+
+
+/**
+ * Spracovanie uzlov pre TOT.
+ * 
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function _tot(node) {
+    var regex = /<\/table>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var content = node.content;
+    var list = [];
+    var match;
+    while((match = regex.exec(content)) !== null) {
+        list.push({
+            id: match[1] || "",
+            title: match[2] || ""
+        });
+    }
+
+    var nodes = node.sections;
+    if(!(nodes instanceof Array) || !nodes.length) {
+        return Promise.resolve(list);
+    }
+
+    var tasks = nodes.map(function(n) {
+        return _tot(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        return list.concat.apply([], items);
+    });    
 }
 
 
@@ -203,6 +236,7 @@ function start() {
         fileName: data.fileName,
         meta: {},
         toc: [],
+        tot: [],
         articles: []
     };
 
@@ -267,6 +301,23 @@ function toc() {
 
         return view.toc;
     });        
+}
+
+
+/**
+ * Spracovanie TOT.
+ */
+function tot() {
+    var nodes = view.articles;
+
+    var tasks = nodes.map(function(n) {
+        return _tot(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        view.tot = [].concat.apply([], items);
+        return view.tot;
+    });    
 }
 
 

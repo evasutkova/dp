@@ -54,7 +54,7 @@
             <!-- ko if: title().length -->
             <h2 class="app__title" data-bind="text: title"></h2>
             <!-- /ko -->
-            <!-- ko if: fileName().length && (['template', 'image'].indexOf(editor()) === -1) -->
+            <!-- ko if: fileName().length && (['template', 'image', 'script'].indexOf(editor()) === -1) -->
             <new-node-action params="activeNode: activeNode, 
                                      selectNodeCallback: selectNode.bind($component), 
                                      addNodeCallback: addNode.bind($component)">

@@ -934,12 +934,16 @@ define([
      */
     Model.prototype.save = function() {
         var fileName;
+        var scripts;
+        var images;
         var archive;
 
         this.toJson()
             .then(function (json) {
                 // Odlozime si nazov suboru
                 fileName = json.fileName;
+                images = json.images;
+                scripts = json.scripts;
 
                 // Vytvorime zip subor
                 archive = new zip();
@@ -950,12 +954,12 @@ define([
                 archive.file("nodes.json", JSON.stringify(json.nodes, null, 4));
 
                 // Ak nie su obrazky ulozime subor
-                if(!json.images.length) {
+                if(!images.length) {
                     return [];
                 }
 
                 // Spracovanie obrazkov
-                return Promise.all(json.images.map(function(img) {
+                return Promise.all(images.map(function(img) {
                     return fetch(img.url)
                         .then(function(r) {
                             return r.blob();
@@ -969,17 +973,45 @@ define([
                 }));
             })
             .then(function (images) {
-                if(!images.length) {
-                    return;
+                if(images.length) {
+                    // Vytvorime priecinok pre obrazky
+                    var folder = archive.folder("images");
+    
+                    // Pridame do neho vsetky obrazky
+                    images.forEach(function(img) {
+                        folder.file(img.title, img.blob);
+                    });
                 }
 
-                // Vytvorime priecinok pre obrazky
-                var folder = archive.folder("images");
+                // Ak nie su skripty ulozime subor
+                if(!scripts.length) {
+                    return [];
+                }
 
-                // Pridame do neho vsetky obrazky
-                images.forEach(function(img) {
-                    folder.file(img.title, img.blob);
-                });
+                // Spracovanie obrazkov
+                return Promise.all(scripts.map(function(s) {
+                    return fetch(s.url)
+                        .then(function(r) {
+                            return r.blob();
+                        })
+                        .then(function (r) {
+                            return {
+                                title: s.title,
+                                blob: r
+                            };
+                        });
+                }));
+            })
+            .then(function(scripts) {
+                if(scripts.length) {
+                    // Vytvorime priecinok pre skripty
+                    var folder = archive.folder("scripts");
+    
+                    // Pridame do neho vsetky skripty
+                    scripts.forEach(function(s) {
+                        folder.file(s.title, s.blob);
+                    });
+                }
             })
             .then(function() {
                 return archive.generateAsync({ type: "blob" });
@@ -1152,7 +1184,7 @@ define([
                 fileName: $this.fileName(),
                 template: $this.template(),
                 meta: {},
-                scripts: {},
+                scripts: [],
                 nodes: [],
                 images: []
             };
@@ -1164,9 +1196,8 @@ define([
                 };
             });
 
-            $this.scripts().forEach(function(s) {
-                var tmp = s.toJson();
-                o.scripts[tmp.search] = tmp.url;
+            o.scripts = $this.scripts().map(function(i) {
+                return i.toJson();
             });
 
             o.nodes = $this.nodes().map(function(n) {

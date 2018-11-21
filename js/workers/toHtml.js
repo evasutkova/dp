@@ -37,6 +37,7 @@ self.onmessage = function(e) {
         .then(toc)
         .then(articles)
         .then(pages)
+        .then(scripts)
         .then(tot)
         .then(finish)
         .catch(function(error) {
@@ -236,6 +237,7 @@ function start() {
     view = {
         fileName: data.fileName,
         meta: {},
+        scripts: {},
         toc: [],
         tot: [],
         articles: []
@@ -363,6 +365,40 @@ function pages() {
 
         return pages;
     }); 
+}
+
+
+/**
+ * Spracovanie skriptov.
+ */
+function scripts() {
+    var scripts = data.scripts;
+
+    // Ak nie su ziadne skripty rovno koncime
+    if(!scripts.length) {
+        return Promise.resolve(null);
+    }
+
+    // Stiahnutie skriptov a ich konverzia na text
+    var tasks = scripts.map(function(i) {
+        return fetch(i.url)
+            .then(function(r) {
+                return r.text();
+            })
+            .then(function(content) {
+                return {
+                    name: i.search,
+                    content: content
+                };
+            });
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        items.forEach(function(i) {
+            view.scripts[i.name] = i.content;
+        });
+        return items;
+    });
 }
 
 //#endregion

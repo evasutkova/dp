@@ -8,6 +8,7 @@ define([
     "codemirrorSimplescrollbars",
     "showdownFootnotes",
     "showdownHighlight",
+    "showdownNomnoml",
     "dp/bindings/optiscroll"
 ], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
@@ -33,7 +34,7 @@ define([
             //noHeaderId: false,
             //prefixHeaderId: "x",
             //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]            
-            extensions: ["footnotes", "highlight"]
+            extensions: ["footnotes", "nomnoml", "highlight"]
         });
         
         this.preview = ko.computed(this._preview, this);

@@ -84,7 +84,7 @@ define([
         this.activeNode(node);
         this.editor(node ? "markdown" : "");
     };
-
+    
 
     /**
      * Vytvorí novú položku.
@@ -229,8 +229,29 @@ define([
         });
         this.images.unshift(img);
         return img;
-    };    
-   
+    };
+
+
+    /**
+     * Vyberie skript v dokumente.
+     * 
+     * @param {object} script Skript v dokumente.
+     */    
+    Model.prototype._selectScript = function (script) {
+        var n = this.activeScript();
+        if (n) {
+            n.isActive(false);
+        }
+
+        if (script) {
+            script.isActive(true);
+        }
+        
+        this.title(script ? script.title() : "");
+        this.activeScript(script);
+        this.editor(script ? "script" : "");
+    };
+    
 
     /**
      * Otvorí súbor/projekt.
@@ -429,9 +450,10 @@ define([
      */    
     Model.prototype.selectNode = function (node) {
         this._selectImage(null);
+        this._selectScript(null);
         this._selectNode(node);
     };
-
+    
 
     /**
      * Vytvorí nový uzol a pridá ho do zoznamu uzlov pre vstupný uzol.
@@ -554,6 +576,7 @@ define([
      */    
     Model.prototype.selectImage = function (image) {
         this._selectNode(null);
+        this._selectScript(null);
         this._selectImage(image);
     };
 
@@ -660,16 +683,22 @@ define([
             return;
         }
 
-        /*
-        Reference-style: 
-        ![alt text][logo]
-
-        [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-        */
         var title = image.title();
         var id = image.search();
         action("![" + title + "][" + id + "]");
-    };    
+    };
+
+
+    /**
+     * Vyberie skript v dokumente.
+     * 
+     * @param {object} script Skript v dokumente.
+     */    
+    Model.prototype.selectScript = function (script) {
+        this._selectImage(null);
+        this._selectNode(null);
+        this._selectScript(script);
+    };
         
     
     /**

@@ -33,6 +33,7 @@ define([
         this.isScriptsExpanded = args.isScriptsExpanded || ko.observable(true);
         this.scripts = args.scripts || ko.observableArray([]);
         this.activeScript = args.activeScript || ko.observable(null);
+        this.scriptTools = ko.computed(this._scriptTools, this);
 
         this.selectScriptCallback = args.selectScriptCallback;
     };
@@ -186,6 +187,68 @@ define([
         ];
     };    
 
+
+    /**
+     * Zoznam dostupných nástrojov pre aktívny skript.
+     */
+    Model.prototype._scriptTools = function() {
+        var script = this.activeScript();
+        if(!script) {
+            return [];
+        }
+
+        // Premenovanie skriptu
+        var renameAction = {
+            script: script,
+            text: "Premenovať",
+            icon: "rename_box",
+            isEnabled: true,
+            action: (function (e) {
+                // if (typeof (this.renameNodeCallback) !== "function") {
+                //     return;
+                // }
+
+                // var $this = this;
+                // this.renameNodeCallback(e.node).then(function(node) {
+                //     if(!node) {
+                //         return;
+                //     }
+                //     $this.select(node);
+                // });                
+            }).bind(this)
+        };
+
+        // Vymazanie uzla
+        var deleteAction = {
+            script: script,
+            text: "Vymazať",
+            icon: "delete",
+            isEnabled: true,
+            action: (function (e) {
+                // if (typeof (this.deleteNodeCallback) !== "function") {
+                //     return;
+                // }
+
+                // var $this = this;
+                // this.deleteNodeCallback(e.node).then(function(node) {
+                //     if (!node) {
+                //         return;
+                //     }
+                //     var parent = node.parent || null;
+                //     if(parent) {
+                //         parent.isExpanded(true);
+                //     }
+                //     $this.select(parent);
+                // });
+            }).bind(this)
+        };
+        
+        return [
+            renameAction,
+            deleteAction
+        ];        
+    };
+    
     //#endregion
 
 
@@ -256,6 +319,7 @@ define([
         console.log("~ExplorerTool()");
 
         this.tools.dispose();
+        this.scriptTools.dispose();
     };
 
     //#endregion

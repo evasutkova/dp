@@ -74,6 +74,21 @@
                                 <i class="dp-icons left">script_text_outline</i>
                                 <span data-bind="text: title"></span>
                             </button>
+                            <!-- ko if: isActive() && $component.scriptTools().length -->
+                            <button class="btn-flat explorer-tool__action tooltip tooltip--right" title="Možnosti" 
+                                    data-bind="clickBubble: false, dropdown: { target: 'explorer-tool-scriptmenu', constrainWidth: false, coverTrigger: false, alignment: 'right', container: '.app' }">
+                                <i class="dp-icons">dots_vertical</i>
+                            </button>
+                            <ul id="explorer-tool-scriptmenu" class="dropdown-content explorer-tool-menu" data-bind="foreach: $component.scriptTools">
+                                <li>
+                                    <button class="btn-flat explorer-tool-menu__item" 
+                                        data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }, click: action, clickBubble: false">
+                                        <i class="dp-icons left" data-bind="text: icon"></i>
+                                        <span data-bind="text: text"></span>
+                                    </button>
+                                </li>
+                            </ul>
+                            <!-- /ko -->                            
                         </li>
                     </ul>
                 </li>                

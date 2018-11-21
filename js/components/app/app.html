@@ -94,6 +94,11 @@
             <node-id params="node: activeImage"></node-id>
         </div>
         <!-- /ko -->
+        <!-- ko if: (editor() === 'script') && (activeScript() !== null) -->
+        <div class="app__actions app__actions--footer">
+            <node-id params="node: activeScript"></node-id>
+        </div>
+        <!-- /ko -->
     </div>
     <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>
     <confirm-modal params="openAction: _confirm_openAction"></confirm-modal>

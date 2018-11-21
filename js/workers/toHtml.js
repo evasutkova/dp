@@ -6,6 +6,7 @@ importScripts("../libs/highlight.js");
 importScripts("../libs/showdown.js");
 importScripts("../libs/showdown.footnotes.js");
 importScripts("../libs/showdown.highlight.js");
+importScripts("../libs/showdown.nomnoml.js");
 importScripts("../document/node.js");
 
 //#endregion
@@ -249,7 +250,7 @@ function start() {
         //noHeaderId: false,
         //prefixHeaderId: "x",
         //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
-        extensions: ["footnotes", "highlight"]
+        extensions: ["footnotes", "nomnoml", "highlight"]
     });         
 
     return Promise.resolve(view);

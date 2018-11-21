@@ -264,18 +264,20 @@ define([
         }
         
         var active = null;
-        while(buffer.length > 0) {
-            var n = buffer.shift();
+        for(var i = 0; i < buffer.length; i++) {
+            var n = buffer[i];
 
             if(n.isActive()) {
-               active = n; 
+                return n;
+            }
+
+            if(n.nodes().length) {
+                active = this._findActiveNode(n.nodes());
             }
 
             if(active) {
-                break;
+                return active;
             }
-
-            buffer = buffer.concat(n.nodes() || []);
         }
 
         return active;

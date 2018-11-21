@@ -40,6 +40,7 @@ define([
         this.meta = ko.observableArray([]);
         this.nodes = ko.observableArray([]);
         this.images = ko.observableArray([]);
+        this.scripts = ko.observableArray([]);
         
         this.activeNode = ko.observable(null);
         this.activeImage = ko.observable(null);
@@ -238,8 +239,9 @@ define([
      * @param {object} meta Metainformácie.
      * @param {array} nodes Uzly dokumentu.
      * @param {array} images Obrázky dokumentu.
+     * @param {array} scripts Skripty dokumentu.
      */
-    Model.prototype._open = function(fileName, template, meta, nodes, images) {
+    Model.prototype._open = function(fileName, template, meta, nodes, images, scripts) {
         this.tool("explorer");
         this.editor("");
         this.title("");
@@ -249,6 +251,7 @@ define([
         this.meta(this._parseMeta(meta));
         this.nodes(this._parseNodes(nodes, null));
         this.images(this._parseImages(images));
+        this.scripts(this._parseScripts(scripts));
     };
 
 
@@ -350,6 +353,26 @@ define([
         });
     };
 
+
+    /**
+     * Spracovanie skriptov dokumentu.
+     * 
+     * @param {array} scripts Skripty dokumentu.
+     */
+    Model.prototype._parseScripts = function(scripts) {
+        if ((typeof(scripts) === "undefined") || !(scripts instanceof Array)) {
+            return [];
+        }
+        
+        return scripts.map(function(s) {
+            var tmp = new Resource({
+                title: s.title.replace("scripts/",""),
+                url: global.URL.createObjectURL(s.blob)
+            });
+            return tmp;
+        });
+    };    
+    
 
     /**
      * Zoznam referencovaných obrázkov.
@@ -660,6 +683,7 @@ define([
         var meta = null;
         var nodes = null;
         var images = null;
+        var scripts = null;
 
         this.browse("Ovoriť projekt", "Názov súboru", "arrayBuffer", ".mdzip", false, "Otvoriť", "Zrušiť")
             .then(function (data) {
@@ -713,9 +737,24 @@ define([
             })
             .then(function (r) {
                 images = r;
+
+                // Nacitame skripty
+                var files = [];
+                archive.folder("scripts").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);                
+            })
+            .then(function (r) {
+                scripts = r;
             })
             .then(function() {
-                $this._open(name, template, meta, nodes, images);
+                $this._open(name, template, meta, nodes, images, scripts);
                 var an = $this._findActiveNode($this.nodes());
                 if(an) {
                     $this._selectNode(an);

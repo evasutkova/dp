@@ -1152,6 +1152,7 @@ define([
                 fileName: $this.fileName(),
                 template: $this.template(),
                 meta: {},
+                scripts: {},
                 nodes: [],
                 images: []
             };
@@ -1161,6 +1162,11 @@ define([
                     label: m.label,
 	                value: m.value()
                 };
+            });
+
+            $this.scripts().forEach(function(s) {
+                var tmp = s.toJson();
+                o.scripts[tmp.search] = tmp.url;
             });
 
             o.nodes = $this.nodes().map(function(n) {

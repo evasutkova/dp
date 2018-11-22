@@ -48,11 +48,11 @@ define([
             }),
             new Resource({
                 title: "Odkazy, linky",
-                url: "[v texte](https://google.sk)"
+                url: "[v texte](https://url.sk)"
             }),
             new Resource({
                 title: "Odkazy, linky spopisom",
-                url: "[s popisom](https://google.sk \"Google\")"
+                url: "[popisom](https://url.sk \"\")"
             }),            
             new Resource({
                 title: "Odkazy, linky v dokumente",
@@ -61,20 +61,20 @@ define([
             new Resource({
                 title: "Odkazy, linky referenciou",
                 url: "cez [referenciu][linka]\n\n" +
-                     "[linka]: http://google.sk"
+                     "[linka]: http://url.sk"
             }),            
             new Resource({
                 title: "Obrázky",
-                url: "![popis](http://bit.ly/2yMs2c1 \"nadpis\")"
+                url: "![popis](http://url.sk \"\")"
             }),            
             new Resource({
                 title: "Obrázky referenciou",
                 url: "![popis][logo]\n\n" +
-                     "[logo]: http://bit.ly/2yMs2c1 \"nadpis\""
+                     "[logo]: http://url.sk \"\""
             }),            
             new Resource({
                 title: "Obrázky s nadpisom",
-                url: "![popis](http://bit.ly/2yMs2c1)\n" +
+                url: "![popis](http://url.sk)\n" +
                      "###### Nadpis"
             }),            
             new Resource({
@@ -116,8 +116,13 @@ define([
                      "  <dt>Definition</dt>\n" +
                      "  <dd>list.</dd>\n" +
                      "</dl>"
+            }),            
+            new Resource({
+                title: "YouTube",
+                url: "<a href=\"...&v=ID\">\n" +
+                     "  <img src=\"...ID/0.jpg\" />\n" +
+                     "</a>"
             })
-            
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

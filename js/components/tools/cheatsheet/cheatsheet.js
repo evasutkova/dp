@@ -119,9 +119,13 @@ define([
             }),            
             new Resource({
                 title: "YouTube",
-                url: "<a href=\"...&v=ID\">\n" +
-                     "  <img src=\"...ID/0.jpg\" />\n" +
+                url: "<a href=\"..&v=ID\">\n" +
+                     "  <img src=\"..ID/0.jpg\" />\n" +
                      "</a>"
+            }),            
+            new Resource({
+                title: "YouTube Markdown",
+                url: "[![alt](url)](url)"
             })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

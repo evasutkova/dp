@@ -53,6 +53,10 @@ define([
                      "[v dokumente](#uvod)\n" +
                      "cez [referenciu][linka]\n\n" +
                      "[linka]: http://google.sk"
+            }),
+            new Resource({
+                title: "Obrázky",
+                url: "![popis](http://bit.ly/2yMs2c1 \"nadpis\")"
             }) 
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

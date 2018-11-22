@@ -703,16 +703,7 @@ define([
      * @param {object} image Obrázok, ktorý sa má vložiť.
      */
     Model.prototype.insertImage = function(image) {
-        var action = this._markdownEditor_insertAction();
-
-        if ((typeof (action) !== "function")
-            || (this.editor() !== "markdown")) {
-            return;
-        }
-
-        var title = image.title();
-        var id = image.search();
-        action("![" + title + "][" + id + "]");
+        this.insertMarkdown("![" + title + "][" + id + "]");
     };
 
 

@@ -326,7 +326,34 @@ define([
                            "\t<dd>list.</dd>\n" +
                            "</dl>");
                 select({ line: p.from.line + 1, ch: p.from.ch + 5 }, { line: p.from.line + 1, ch: p.from.ch + 15 });                           
-                return;                
+                return;
+            case "youtube":
+                p = insert("<a href=\"https://www.youtube.com/watch?feature=player_embedded&v=O3rpmctmC_M\" target=\"_blank\">\n" +
+                           "\t<img src=\"https://img.youtube.com/vi/O3rpmctmC_M/0.jpg\" alt=\"Popis\" width=\"240\" height=\"180\" />\n" +
+                           "</a>");
+                select({ line: p.from.line, ch: p.from.ch + 66 }, { line: p.from.line, ch: p.from.ch + 77 });
+                return;
+            case "youtube_markdown":
+                p = insert("[![Popis](https://img.youtube.com/vi/O3rpmctmC_M/0.jpg)](https://www.youtube.com/watch?v=O3rpmctmC_M)");
+                select({ line: p.from.line, ch: p.from.ch + 37 }, { line: p.from.line, ch: p.from.ch + 48 });
+                return;
+            case "uml":
+                p = insert("```uml\n" +
+                           "[nomnoml] is->[great]\n" +
+                           "```");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 21 });
+                return;
+            case "uml_s_nadpisom":
+                p = insert("```uml\n" +
+                           "[nomnoml] is->[great]\n" +
+                           "```\n" +
+                           "###### Nadpis");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 21 });
+                return;
+            case "poznamka_pod_ciarou":
+                p = insert("[^n](Poznámka pod čiarou.)");
+                select({ line: p.from.line, ch: p.from.ch + 5 }, { line: p.to.line, ch: p.to.ch - 1 });
+                return;
             default:
                 insert(id);
                 return;

@@ -100,7 +100,12 @@ define([
                      "|----|:----:|----:|\n" +
                      "|left|center|right|\n" +
                      "###### Nadpis"
-            })  
+            }),            
+            new Resource({
+                title: "Blockquotes",
+                url: "> Blockquotes sú vhodné\n" +
+                     "> napríklad pre zvýraznenie"
+            })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

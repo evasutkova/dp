@@ -5,6 +5,13 @@ define([
     "codemirrorHtmlmixed",
     "codemirrorSimplescrollbars"
 ], function (ko, view, CodeMirror) {
+    //#region [ Fields ]
+
+    var global = (function() { return this; })();
+
+    //#endregion
+
+
     //#region [ Constructor ]
 
     /**
@@ -62,6 +69,13 @@ define([
      */
     Model.prototype._cm_onChange = function(cm, e) {
         this.content(this.cm.getValue());
+
+        // Zrusime urlku
+        global.URL.revokeObjectURL(this.url());
+
+        // Vytvorime novu
+        var blob = new Blob([this.cm.getValue()], { type: "text/plain" });
+        this.url(global.URL.createObjectURL(blob));
     };
 
 

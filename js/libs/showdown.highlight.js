@@ -100,7 +100,13 @@
                 var regex = /\blanguage-(\w+)\b/g;
                 var lang = (regex.exec(left) || [])[1];
                 if(lang) {
-                    return left + highlight.highlight(lang, match).value + right;
+                    try {
+                        return left + highlight.highlight(lang, match).value + right;
+                    }
+                    catch(error) {
+                        console.error(error);
+                        return left + highlight.highlightAuto(match).value + right;
+                    }
                 }
                 
                 return left + highlight.highlightAuto(match).value + right;

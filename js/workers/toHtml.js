@@ -7,6 +7,7 @@ importScripts("../libs/showdown.js");
 importScripts("../libs/showdown.footnotes.js");
 importScripts("../libs/showdown.highlight.js");
 importScripts("../libs/showdown.nomnoml.js");
+importScripts("../libs/showdown.jsfiddle.js");
 importScripts("../document/node.js");
 
 //#endregion
@@ -324,10 +325,7 @@ function start() {
         strikethrough: true,
         openLinksInNewWindow: true,
         highlightAuto: false,
-        //noHeaderId: false,
-        //prefixHeaderId: "x",
-        //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]
-        extensions: ["footnotes", "nomnoml", "highlight"]
+        extensions: ["footnotes", "nomnoml", "jsfiddle", "highlight"]
     });         
 
     return Promise.resolve(view);

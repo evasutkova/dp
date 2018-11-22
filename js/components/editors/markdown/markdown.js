@@ -9,6 +9,7 @@ define([
     "showdownFootnotes",
     "showdownHighlight",
     "showdownNomnoml",
+    "showdownJsfiddle",
     "dp/bindings/optiscroll"
 ], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
@@ -31,10 +32,7 @@ define([
             strikethrough: true, 
             openLinksInNewWindow: true,
             highlightAuto: false,
-            //noHeaderId: false,
-            //prefixHeaderId: "x",
-            //extensions: ["highlight", "materialicons", "panel", "flowchart", "mermaid"]            
-            extensions: ["footnotes", "nomnoml", "highlight"]
+            extensions: ["footnotes", "nomnoml", "jsfiddle", "highlight"]
         });
         
         this.preview = ko.computed(this._preview, this);

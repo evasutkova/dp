@@ -299,6 +299,33 @@ define([
                            "```\n" +
                            "###### Nadpis");
                 select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 13 });
+                return;
+            case "tabulka":
+                p = insert("| A  | B    | C   |\n" +
+                           "|----|:----:|----:|\n" +
+                           "|left|center|right|");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 3 });
+                return;
+            case "tabulka_s_nadpisom":
+                p = insert("| A  | B    | C   |\n" +
+                           "|----|:----:|----:|\n" +
+                           "|left|center|right|\n" +
+                           "###### Nadpis");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 3 });
+                return;
+            case "blockquotes":
+                p = insert("> Blockquotes");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, p.to);
+                return;
+            case "horizontalna_ciara":
+                p = insert("\n***\n");
+                return;
+            case "inline_html":
+                p = insert("<dl>\n" +
+                           "\t<dt>Definition</dt>\n" +
+                           "\t<dd>list.</dd>\n" +
+                           "</dl>");
+                select({ line: p.from.line + 1, ch: p.from.ch + 5 }, { line: p.from.line + 1, ch: p.from.ch + 15 });                           
                 return;                
             default:
                 insert(id);

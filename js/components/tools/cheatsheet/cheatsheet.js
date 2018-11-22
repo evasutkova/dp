@@ -79,7 +79,7 @@ define([
             }),            
             new Resource({
                 title: "Zdrojový kód",
-                url: "kód `v texte`"
+                url: "`var x = 1;`"
             }),            
             new Resource({
                 title: "Blok zdrojového kódu",
@@ -87,6 +87,19 @@ define([
                      "var s = \"string\"\n" +
                      "alert(s);\n" +
                      "```"
+            }),            
+            new Resource({
+                title: "Tabuľka",
+                url: "| A  | B    | C   |\n" +
+                     "|----|:----:|----:|\n" +
+                     "|left|center|right|"
+            }),            
+            new Resource({
+                title: "Tabuľka s nadpisom",
+                url: "| A  | B    | C   |\n" +
+                     "|----|:----:|----:|\n" +
+                     "|left|center|right|\n" +
+                     "###### Nadpis"
             })  
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

@@ -216,6 +216,18 @@ define([
             case "nadpis_tretej_urovne":
                 p = insert("### Nadpis");
                 select({ line: p.from.line, ch: p.from.ch + 4 }, p.to);
+                return;
+            case "tucny_text":
+                p = insert("**text**");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.to.line, ch: p.to.ch - 2 });
+                return;
+            case "sikmy_text":
+                p = insert("_text_");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.to.line, ch: p.to.ch - 2 });
+                return;
+            case "preskrtnuty_text":
+                p = insert("~~text~~");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.to.line, ch: p.to.ch - 2 });
                 return;                
             default:
                 insert(id);

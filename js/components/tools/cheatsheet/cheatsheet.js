@@ -75,6 +75,8 @@ define([
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);
+
+        this.insertMarkdownCallback = args.insertMarkdownCallback;
     };
 
     //#endregion

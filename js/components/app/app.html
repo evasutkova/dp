@@ -41,7 +41,7 @@
             <images-tool params="items: images, insertImageCallback: insertImage.bind($component)"></images-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'cheatsheet' -->
-            <cheatsheet-tool></cheatsheet-tool>
+            <cheatsheet-tool params="insertMarkdownCallback: insertMarkdown.bind($component)"></cheatsheet-tool>
             <!-- /ko -->                
         </div>        
         <!-- /ko -->

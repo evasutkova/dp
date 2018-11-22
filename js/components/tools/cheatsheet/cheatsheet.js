@@ -76,7 +76,11 @@ define([
                 title: "Obrázky s nadpisom",
                 url: "![popis](http://bit.ly/2yMs2c1)\n" +
                      "###### Nadpis"
-            })  
+            }),            
+            new Resource({
+                title: "Zdrojový kód",
+                url: "kód `v texte`"
+            }) 
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

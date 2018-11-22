@@ -104,6 +104,20 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vloží markdown do textu.
+     * 
+     * @param {string} markdow Markdown text.
+     */
+    Model.prototype.insert = function (markdow) {
+        if (typeof (this.insertMarkdownCallback) !== "function") {
+            return;
+        }
+
+        this.insertMarkdownCallback(markdow);
+    };
+
     
     /**
      * Dispose.

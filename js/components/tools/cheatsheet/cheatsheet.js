@@ -80,7 +80,14 @@ define([
             new Resource({
                 title: "Zdrojový kód",
                 url: "kód `v texte`"
-            }) 
+            }),            
+            new Resource({
+                title: "Blok zdrojového kódu",
+                url: "```javascript\n" +
+                     "var s = \"string\"\n" +
+                     "alert(s);\n" +
+                     "```"
+            })  
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

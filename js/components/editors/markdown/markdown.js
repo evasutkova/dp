@@ -146,7 +146,7 @@ define([
      * @param {object} to Koniec selekcie.
      */
     Model.prototype.select = function (from, to) {
-        this.cm.setSelection(from, to)
+        this.cm.setSelection(from, to);
     };    
 
 

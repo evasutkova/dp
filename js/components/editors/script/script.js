@@ -16,23 +16,37 @@ define([
     var Model = function (args, info) {
         console.log("ScriptEditor()");
 
-        // this.content = args.content || ko.observable("");
+        this.url = args.url || ko.observable("");
+        this.type = args.type || ko.observable("");
+        this.content = ko.observable("");
 
-        // this.cm = CodeMirror(info.element.querySelector(".template-editor"), {
-        //     lineNumbers: true,
-        //     lineWrapping: true,
-        //     readOnly: false,
-        //     value: this.content(),
-        //     mode: "htmlmixed",
-        //     scrollbarStyle: "overlay",
-        //     theme: "editor--default",
-        //     indentWithTabs: true,
-        //     indentUnit: 4
-        // });
+        this.cm = CodeMirror(info.element.querySelector(".script-editor"), {
+            lineNumbers: true,
+            lineWrapping: true,
+            readOnly: false,
+            value: this.content(),
+            mode: this.type() === "js" ? "javascript" :
+                  this.type() === "css" ? "css" :
+                  "htmlmixed",
+            scrollbarStyle: "overlay",
+            theme: "editor--default",
+            indentWithTabs: true,
+            indentUnit: 4
+        });
 
-        // this.cm.on("change", this._cm_onChange.bind(this));
+        this.cm.on("change", this._cm_onChange.bind(this));
 
-        // this._content_subscription = this.content.subscribe(this._content_onChange, this);
+        this._content_subscription = this.content.subscribe(this._content_onChange, this);        
+
+        // Stiahneme skript
+        var $this = this;
+        fetch(this.url())
+            .then(function(r) {
+                return r.text();
+            })
+            .then(function(content) {
+                $this.content(content);
+            });
     };
 
     //#endregion
@@ -40,28 +54,28 @@ define([
 
     //#region [ Event Handlers ]
 
-    // /**
-    //  * Spracovanie udalosti zmeny hodnoty editora.
-    //  * 
-    //  * @param {object} cm Inštancia editora CodeMirror.
-    //  * @param {object} e Argumenty udalosti.
-    //  */
-    // Model.prototype._cm_onChange = function(cm, e) {
-    //     this.content(this.cm.getValue());
-    // };
+    /**
+     * Spracovanie udalosti zmeny hodnoty editora.
+     * 
+     * @param {object} cm Inštancia editora CodeMirror.
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._cm_onChange = function(cm, e) {
+        this.content(this.cm.getValue());
+    };
 
 
-    // /**
-    //  * Spracovanie udalosti zmeny obsahu.
-    //  * 
-    //  * @param {object} e Argumenty udalosti.
-    //  */
-    // Model.prototype._content_onChange = function(e) {
-    //     if (this.cm.getValue() === e) {
-    //         return;
-    //     }
-    //     this.cm.setValue(e);
-    // };      
+    /**
+     * Spracovanie udalosti zmeny obsahu.
+     * 
+     * @param {object} e Argumenty udalosti.
+     */
+    Model.prototype._content_onChange = function(e) {
+        if (this.cm.getValue() === e) {
+            return;
+        }
+        this.cm.setValue(e);
+    };      
 
     //#endregion
 
@@ -74,7 +88,7 @@ define([
     Model.prototype.dispose = function () {
         console.log("~ScriptEditor()");
 
-        // this._content_subscription.dispose();
+        this._content_subscription.dispose();
     };
 
     //#endregion

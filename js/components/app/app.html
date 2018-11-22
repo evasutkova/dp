@@ -88,7 +88,7 @@
                                   fullscreeImageCallback: fullscreeImage.bind($component)"></image-editor>
             <!-- /ko -->
             <!-- ko if: (editor() === 'script') && (activeScript() !== null) -->
-            <script-editor></script-editor>
+            <script-editor params="url: activeScript().url, type: activeScript().extension"></script-editor>
             <!-- /ko -->            
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->

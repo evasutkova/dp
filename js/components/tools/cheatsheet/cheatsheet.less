@@ -29,7 +29,7 @@
         font-size: .95em;
         text-align: left;
         color: @fg-color;
-        cursor: default;
+        cursor: pointer;
 
         > span {
             display: block;
@@ -53,9 +53,30 @@
             .secondary-text-shadow;
         }
 
+        &::before {
+            content: "\00a0";
+            display: block;
+            border-radius: .25rem;
+            background: fade(@fg-color, 20%);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0.75rem;
+            left: 0.75rem;
+            z-index: -1;
+            transform: scale(0);
+            opacity: 0;
+            transition: all .15s ease;
+        }
+
         &:hover {
             color: @fg-color;
-        }        
+
+            &::before {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }       
 
         & + & {
             margin-top: 1rem;

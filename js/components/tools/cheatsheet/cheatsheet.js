@@ -40,7 +40,12 @@ define([
                      "1. Nezáleží na čísle.\n" +
                      "    1. Číslovaný zoznam.\n" + 
                      "4. A ďalšia položka.\n"
-            })   
+            }),
+            new Resource({
+                title: "Zoznam úloh",
+                url: "- [x] Ukončená úloha\n" +
+                     "- [ ] **Neukončená** úloha"
+            }) 
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

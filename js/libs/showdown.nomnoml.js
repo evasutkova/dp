@@ -5,7 +5,7 @@
     } 
     else {
         // Browser globals
-        return factory(root.showdown, root.hljs);
+        return factory(root.showdown, root.nomnoml);
     }
 }((typeof (self) !== "undefined") ? self : this, function (showdown, nomnoml) {
     //#region [ Fields ]

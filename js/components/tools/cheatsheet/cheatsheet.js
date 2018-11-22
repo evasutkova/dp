@@ -27,10 +27,10 @@ define([
             }),
             new Resource({
                 title: "Zdôraznenie",
-                url: "# Nadpis prvej úrovne\n" +
-                     "## druhej úrovne\n" +
-                     "### tretej\n" +
-                     "#### atď"
+                url: "*italics* alebo _italics_\n" +
+                     "**bold** alebo __bold__\n" +
+                     "~~preškrtnutý text~~\n" +
+                     "**bold a _italics_**"
             })            
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

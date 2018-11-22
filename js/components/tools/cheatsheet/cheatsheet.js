@@ -159,6 +159,7 @@ define([
         this.filtered = ko.computed(this._filtered, this);
 
         this.insertMarkdownCallback = args.insertMarkdownCallback;
+        this.selectMarkdownCallback = args.selectMarkdownCallback;
     };
 
     //#endregion
@@ -193,8 +194,10 @@ define([
      * @param {object} resource Resource.
      */
     Model.prototype.insert = function (resource) {
-        var callback = this.insertMarkdownCallback;
-        if (typeof (callback) !== "function") {
+        var insert = this.insertMarkdownCallback;
+        var select = this.selectMarkdownCallback;
+        
+        if ((typeof (insert) !== "function") || (typeof (select) !== "function")){
             return;
         }
 
@@ -202,10 +205,11 @@ define([
 
         switch(id) {
             case "nadpis_prvej_urovne":
-                callback("# Nadpis");
+                var x = insert("# Nadpis");
+                debugger;
                 return;
             default:
-                callback(id);
+                insert(id);
                 return;
         }
     };

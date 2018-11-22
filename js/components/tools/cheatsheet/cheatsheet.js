@@ -241,7 +241,49 @@ define([
             case "zoznam_uloh":
                 p = insert("- [x] Ukončená úloha");
                 select({ line: p.from.line, ch: p.from.ch + 6 }, p.to);
-                return;            
+                return;
+            case "odkazy_linky":
+                p = insert("[odkaz](https://www.google.sk)");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "odkazy_linky_spopisom":
+                p = insert("[odkaz](https://www.google.sk \"Popis\")");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "odkazy_linky_v_dokumente":
+                p = insert("[odkaz](#uvod)");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "odkazy_linky_referenciou":
+                p = insert("[odkaz][linka]\n\n" +
+                           "[linka]: http://www.google.sk");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "obrazky":
+                p = insert("![logo](https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png \"Google logo\")");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "obrazky_referenciou":
+                p = insert("![popis][logo]\n\n" +
+                           "[logo]: https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png \"Google logo\"");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 7 });
+                return;
+            case "obrazky_s_nadpisom":
+                p = insert("![logo](https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png \"Google logo\")\n" +
+                           "###### Google logo");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 6 });
+                return;
+            case "zdrojovy_kod":
+                p = insert("`var x = 1;`");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.to.line, ch: p.to.ch - 1 });
+                return;
+            case "blok_zdrojoveho_kodu":
+                p = insert("```javascript\n" +
+                           "var s = \"string\"\n" +
+                           "alert(s);\n" +
+                           "```");
+                select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 13 });
+                return;                
             default:
                 insert(id);
                 return;

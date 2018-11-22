@@ -126,6 +126,19 @@ define([
             new Resource({
                 title: "YouTube Markdown",
                 url: "[![alt](url)](url)"
+            }),            
+            new Resource({
+                title: "UML",
+                url: "```uml\n" +
+                     "[nomnoml] is->[great]\n" +
+                     "```"
+            }),            
+            new Resource({
+                title: "UML s nadpisom",
+                url: "```uml\n" +
+                     "[nomnoml] is->[great]\n" +
+                     "```\n" +
+                     "###### Nadpis"
             })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

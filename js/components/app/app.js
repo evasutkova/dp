@@ -56,6 +56,7 @@ define([
         this._window_closeAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
         this._markdownEditor_insertAction = ko.observable();
+        this._markdownEditor_selectAction = ko.observable();
 
         tooltip();
     };
@@ -724,6 +725,24 @@ define([
         }
 
         action(markdown || "");
+    };
+
+
+    /**
+     * Vyselektuje text v dokumentu.
+     * 
+     * @param {object} from Začiatok selekcie.
+     * @param {object} to Koniec selekcie.
+     */
+    Model.prototype.selectMarkdown = function(from, to) {
+        var action = this._markdownEditor_selectAction();
+
+        if ((typeof (action) !== "function")
+            || (this.editor() !== "markdown")) {
+            return;
+        }
+
+        action(from, to);
     };    
 
 

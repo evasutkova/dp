@@ -58,6 +58,10 @@ define([
         if (typeof (args.insertAction) === "function") {
             args.insertAction(this.insert.bind(this));
         }
+
+        if (typeof (args.selectAction) === "function") {
+            args.selectAction(this.select.bind(this));
+        }
     };
 
     //#endregion
@@ -129,7 +133,21 @@ define([
         }
 
         this.cm.replaceSelection(text, "around");
+
+        //cm.getCursor("from")
+        //cm.getCursor("to")
     };
+
+
+    /**
+     * Vyselektuje text v dokumentu.
+     * 
+     * @param {object} from Začiatok selekcie.
+     * @param {object} to Koniec selekcie.
+     */
+    Model.prototype.select = function (from, to) {
+        this.cm.setSelection(from, to)
+    };    
 
 
     /**

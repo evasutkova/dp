@@ -228,7 +228,20 @@ define([
             case "preskrtnuty_text":
                 p = insert("~~text~~");
                 select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.to.line, ch: p.to.ch - 2 });
-                return;                
+                return;
+            case "cislovany_zoznam":
+                p = insert("1. Prvá položka.\n" +
+                           "2. Ďalšia položka.\n" + 
+                           "    * Nečíslovaný zoznam.\n" + 
+                           "1. Nezáleží na čísle.\n" +
+                           "    1. Číslovaný zoznam.\n" + 
+                           "4. A ďalšia položka.");
+                select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 16 });
+                return;
+            case "zoznam_uloh":
+                p = insert("- [x] Ukončená úloha");
+                select({ line: p.from.line, ch: p.from.ch + 6 }, p.to);
+                return;            
             default:
                 insert(id);
                 return;

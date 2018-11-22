@@ -139,6 +139,10 @@ define([
                      "[nomnoml] is->[great]\n" +
                      "```\n" +
                      "###### Nadpis"
+            }),            
+            new Resource({
+                title: "Poznámka pod čiarou",
+                url: "[^n](Text.)"
             })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

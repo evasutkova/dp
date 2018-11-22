@@ -71,7 +71,12 @@ define([
                 title: "Obrázky referenciou",
                 url: "![popis][logo]\n\n" +
                      "[logo]: http://bit.ly/2yMs2c1 \"nadpis\""
-            }) 
+            }),            
+            new Resource({
+                title: "Obrázky s nadpisom",
+                url: "![popis](http://bit.ly/2yMs2c1)\n" +
+                     "###### Nadpis"
+            })  
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

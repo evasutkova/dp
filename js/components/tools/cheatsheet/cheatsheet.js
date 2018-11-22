@@ -48,15 +48,29 @@ define([
             }),
             new Resource({
                 title: "Odkazy, linky",
-                url: "[v texte](https://google.sk)\n" +
-                     "[s popisom](https://google.sk \"Google\")\n" +
-                     "[v dokumente](#uvod)\n" +
-                     "cez [referenciu][linka]\n\n" +
-                     "[linka]: http://google.sk"
+                url: "[v texte](https://google.sk)"
             }),
+            new Resource({
+                title: "Odkazy, linky spopisom",
+                url: "[s popisom](https://google.sk \"Google\")"
+            }),            
+            new Resource({
+                title: "Odkazy, linky v dokumente",
+                url: "[v dokumente](#uvod)"
+            }),
+            new Resource({
+                title: "Odkazy, linky referenciou",
+                url: "cez [referenciu][linka]\n\n" +
+                     "[linka]: http://google.sk"
+            }),            
             new Resource({
                 title: "Obrázky",
                 url: "![popis](http://bit.ly/2yMs2c1 \"nadpis\")"
+            }),            
+            new Resource({
+                title: "Obrázky referenciou",
+                url: "![popis][logo]\n\n" +
+                     "[logo]: http://bit.ly/2yMs2c1 \"nadpis\""
             }) 
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

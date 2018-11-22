@@ -209,6 +209,14 @@ define([
                 p = insert("# Nadpis");
                 select({ line: p.from.line, ch: p.from.ch + 2 }, p.to);
                 return;
+            case "nadpis_druhej_urovne":
+                p = insert("## Nadpis");
+                select({ line: p.from.line, ch: p.from.ch + 3 }, p.to);
+                return;
+            case "nadpis_tretej_urovne":
+                p = insert("### Nadpis");
+                select({ line: p.from.line, ch: p.from.ch + 4 }, p.to);
+                return;                
             default:
                 insert(id);
                 return;

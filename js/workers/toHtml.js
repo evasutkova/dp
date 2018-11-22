@@ -39,6 +39,7 @@ self.onmessage = function(e) {
         .then(pages)
         .then(scripts)
         .then(tot)
+        .then(toi)
         .then(finish)
         .catch(function(error) {
             self.postMessage(JSON.stringify({error: error}));
@@ -116,6 +117,45 @@ function _tot(node) {
 
     var tasks = nodes.map(function(n) {
         return _tot(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        return list.concat.apply([], items);
+    });    
+}
+
+
+/**
+ * Spracovanie uzlov pre TOI.
+ * 
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function _toi(node) {
+    var regex = /<\/p>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var regexNomnoml = /<div\sclass='nomnoml-source'>[^<>]+<\/div>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var content = node.content;
+    var list = [];
+    var match;
+    while((match = regex.exec(content)) !== null) {
+        list.push({
+            id: match[1] || "",
+            title: match[2] || ""
+        });
+    }
+    while((match = regexNomnoml.exec(content)) !== null) {
+        list.push({
+            id: match[1] || "",
+            title: match[2] || ""
+        });
+    }
+
+    var nodes = node.sections;
+    if(!(nodes instanceof Array) || !nodes.length) {
+        return Promise.resolve(list);
+    }
+
+    var tasks = nodes.map(function(n) {
+        return _toi(n);
     });
 
     return Promise.all(tasks).then(function(items) {
@@ -240,6 +280,7 @@ function start() {
         scripts: {},
         toc: [],
         tot: [],
+        toi: [],
         articles: []
     };
 
@@ -320,6 +361,23 @@ function tot() {
     return Promise.all(tasks).then(function(items) {
         view.tot = [].concat.apply([], items);
         return view.tot;
+    });    
+}
+
+
+/**
+ * Spracovanie TOI.
+ */
+function toi() {
+    var nodes = view.articles;
+
+    var tasks = nodes.map(function(n) {
+        return _toi(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        view.toi = [].concat.apply([], items);
+        return view.toi;
     });    
 }
 

@@ -717,6 +717,23 @@ define([
 
 
     /**
+     * Vloží markdown do textu.
+     * 
+     * @param {string} markdown Markdown text.
+     */
+    Model.prototype.insertMarkdown = function(markdown) {
+        var action = this._markdownEditor_insertAction();
+
+        if ((typeof (action) !== "function")
+            || (this.editor() !== "markdown")) {
+            return;
+        }
+
+        action(markdown || "");
+    };    
+
+
+    /**
      * Vyberie skript v dokumente.
      * 
      * @param {object} script Skript v dokumente.

@@ -97,7 +97,15 @@ define([
                      "var s = \"string\"\n" +
                      "alert(s);\n" +
                      "```"
-            }),            
+            }), 
+            new Resource({
+                title: "Blok zdrojového kódu s nadpisom",
+                url: "```javascript\n" +
+                     "var s = \"string\"\n" +
+                     "alert(s);\n" +
+                     "```\n" +
+                     "###### Nadpis"
+            }),                        
             new Resource({
                 title: "Tabuľka",
                 url: "| A  | B    | C   |\n" +
@@ -282,6 +290,14 @@ define([
                            "var s = \"string\"\n" +
                            "alert(s);\n" +
                            "```");
+                select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 13 });
+                return;
+            case "blok_zdrojoveho_kodu_s_nadpisom":
+                p = insert("```javascript\n" +
+                           "var s = \"string\"\n" +
+                           "alert(s);\n" +
+                           "```\n" +
+                           "###### Nadpis");
                 select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 13 });
                 return;                
             default:

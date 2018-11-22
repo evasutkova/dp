@@ -31,7 +31,16 @@ define([
                      "**bold** alebo __bold__\n" +
                      "~~preškrtnutý text~~\n" +
                      "**bold a _italics_**"
-            })            
+            }),
+            new Resource({
+                title: "Číslovaný zoznam",
+                url: "1. Prvá položka.\n" +
+                     "2. Ďalšia položka.\n" + 
+                     "    * Nečíslovaný zoznam.\n" + 
+                     "1. Nezáleží na čísle.\n" +
+                     "    1. Číslovaný zoznam.\n" + 
+                     "4. A ďalšia položka.\n"
+            })   
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

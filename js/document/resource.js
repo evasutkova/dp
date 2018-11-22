@@ -16,6 +16,7 @@ define([
         this.isActive = ko.observable(args.isActive || false);
         this.url = ko.observable(args.url || "");
         this.search = ko.computed(this._search, this);
+        this.extension = ko.computed(this._extension, this);
     };
 
     //#endregion
@@ -31,6 +32,19 @@ define([
 
         return t.toCodeName();
     };
+
+
+    /**
+     * Získa príponu.
+     */
+    Model.prototype._extension = function () {
+        var parts = this.title().split(".");
+        if(parts.length < 2) {
+            return "";
+        }
+
+        return parts.pop();
+    };    
     
     //#endregion    
 
@@ -63,6 +77,7 @@ define([
         console.log("~Resource()");
 
         this.search.dispose();
+        this.extension.dispose();
         //global.URL.revokeObjectURL(this.url);
     };
 

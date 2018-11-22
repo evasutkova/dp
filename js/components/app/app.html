@@ -87,6 +87,9 @@
                                   deleteImageCallback: deleteImage.bind($component),
                                   fullscreeImageCallback: fullscreeImage.bind($component)"></image-editor>
             <!-- /ko -->
+            <!-- ko if: (editor() === 'script') && (activeScript() !== null) -->
+            <script-editor></script-editor>
+            <!-- /ko -->            
         </div>
         <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
         <div class="app__actions app__actions--footer">

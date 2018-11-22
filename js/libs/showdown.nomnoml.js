@@ -113,7 +113,7 @@
                     return '<p style="color:red">' + error.message + '</p>';
                 }
 
-                return '<img src="' + data + '" />';
+                return '<p><img src="' + data + '" /></p>';
             };
 
             return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);

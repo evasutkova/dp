@@ -45,6 +45,14 @@ define([
                 title: "Zoznam úloh",
                 url: "- [x] Ukončená úloha\n" +
                      "- [ ] **Neukončená** úloha"
+            }),
+            new Resource({
+                title: "Odkazy, linky",
+                url: "[v texte](https://google.sk)\n" +
+                     "[s popisom](https://google.sk \"Google\")\n" +
+                     "[v dokumente](#uvod)\n" +
+                     "cez [referenciu][linka]\n\n" +
+                     "[linka]: http://google.sk"
             }) 
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });

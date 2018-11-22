@@ -40,6 +40,7 @@ self.onmessage = function(e) {
         .then(scripts)
         .then(tot)
         .then(toi)
+        .then(tos)
         .then(finish)
         .catch(function(error) {
             self.postMessage(JSON.stringify({error: error}));
@@ -165,6 +166,38 @@ function _toi(node) {
 
 
 /**
+ * Spracovanie uzlov pre TOT.
+ * 
+ * @param {object} node Aktuálne spracovávaný uzol.
+ */
+function _tos(node) {
+    var regex = /<\/pre>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var content = node.content;
+    var list = [];
+    var match;
+    while((match = regex.exec(content)) !== null) {
+        list.push({
+            id: match[1] || "",
+            title: match[2] || ""
+        });
+    }
+
+    var nodes = node.sections;
+    if(!(nodes instanceof Array) || !nodes.length) {
+        return Promise.resolve(list);
+    }
+
+    var tasks = nodes.map(function(n) {
+        return _tos(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        return list.concat.apply([], items);
+    });    
+}
+
+
+/**
  * Spracovanie uzlov v dokumente.
  * 
  * @param {string} parentId Identifikátor nadradeného uzla.
@@ -281,6 +314,7 @@ function start() {
         toc: [],
         tot: [],
         toi: [],
+        tos: [],
         articles: []
     };
 
@@ -329,7 +363,7 @@ function metadata() {
 
 
 /**
- * Spracovanie TOC.
+ * Spracovanie TOC - Obsah.
  */
 function toc() {
     var nodes = data.nodes;
@@ -349,7 +383,7 @@ function toc() {
 
 
 /**
- * Spracovanie TOT.
+ * Spracovanie TOT - Zoznam tabuliek.
  */
 function tot() {
     var nodes = view.articles;
@@ -366,7 +400,7 @@ function tot() {
 
 
 /**
- * Spracovanie TOI.
+ * Spracovanie TOI - Zoznam obrázkov.
  */
 function toi() {
     var nodes = view.articles;
@@ -378,6 +412,23 @@ function toi() {
     return Promise.all(tasks).then(function(items) {
         view.toi = [].concat.apply([], items);
         return view.toi;
+    });    
+}
+
+
+/**
+ * Spracovanie TOS - Zoznam skriptov.
+ */
+function tos() {
+    var nodes = view.articles;
+
+    var tasks = nodes.map(function(n) {
+        return _tos(n);
+    });
+
+    return Promise.all(tasks).then(function(items) {
+        view.tos = [].concat.apply([], items);
+        return view.tos;
     });    
 }
 

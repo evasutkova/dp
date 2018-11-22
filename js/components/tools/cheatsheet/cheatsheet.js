@@ -19,19 +19,29 @@ define([
 
         this.items = ko.observableArray([
             new Resource({
-                title: "Nadpisy",
-                url: "# Nadpis prvej úrovne\n" +
-                     "## druhej úrovne\n" +
-                     "### tretej\n" +
-                     "#### atď"
+                title: "Nadpis prvej úrovne",
+                url: "# Nadpis prvej úrovne"
             }),
             new Resource({
-                title: "Zdôraznenie",
-                url: "*italics* alebo _italics_\n" +
-                     "**bold** alebo __bold__\n" +
-                     "~~preškrtnutý text~~\n" +
-                     "**bold a _italics_**"
+                title: "Nadpis druhej úrovne",
+                url: "## Nadpis druhej úrovne"
             }),
+            new Resource({
+                title: "Nadpis tretej úrovne",
+                url: "### Nadpis tretej úrovne"
+            }),                        
+            new Resource({
+                title: "Tučný text",
+                url: "**bold**"
+            }),
+            new Resource({
+                title: "Šikmý text",
+                url: "_italics_"
+            }),
+            new Resource({
+                title: "Preškrtnutý text",
+                url: "~~preškrtnutý text~~"
+            }),                        
             new Resource({
                 title: "Číslovaný zoznam",
                 url: "1. Prvá položka.\n" +

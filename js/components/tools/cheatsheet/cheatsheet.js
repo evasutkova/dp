@@ -108,14 +108,14 @@ define([
     /**
      * Vloží markdown do textu.
      * 
-     * @param {string} markdow Markdown text.
+     * @param {object} resource Resource.
      */
-    Model.prototype.insert = function (markdow) {
+    Model.prototype.insert = function (resource) {
         if (typeof (this.insertMarkdownCallback) !== "function") {
             return;
         }
 
-        this.insertMarkdownCallback(markdow);
+        this.insertMarkdownCallback(resource.search());
     };
 
     

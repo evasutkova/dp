@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: -.75rem;" data-bind="foreach: filtered">
-        <div class="cheatsheet-tool__item col s12">
+        <div class="cheatsheet-tool__item col s12" data-bind="click: $component.insert.bind($component)">
             <span data-bind="text: title"></span>
             <pre data-bind="text: url"></pre>
         </div>

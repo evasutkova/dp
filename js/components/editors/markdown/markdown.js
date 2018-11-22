@@ -134,8 +134,10 @@ define([
 
         this.cm.replaceSelection(text, "around");
 
-        //cm.getCursor("from")
-        //cm.getCursor("to")
+        return {
+            from: this.cm.getCursor("from"),
+            to: this.cm.getCursor("to")
+        };
     };
 
 

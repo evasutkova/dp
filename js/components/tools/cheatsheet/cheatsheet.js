@@ -105,7 +105,19 @@ define([
                 title: "Blockquotes",
                 url: "> Blockquotes sú vhodné\n" +
                      "> napríklad pre zvýraznenie"
+            }),
+            new Resource({
+                title: "Horizontálna čiara",
+                url: "***"
+            }),            
+            new Resource({
+                title: "Inline HTML",
+                url: "<dl>\n" +
+                     "  <dt>Definition</dt>\n" +
+                     "  <dd>list.</dd>\n" +
+                     "</dl>"
             })
+            
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);

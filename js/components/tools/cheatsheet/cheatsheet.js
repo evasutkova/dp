@@ -1,10 +1,11 @@
 define([
     "knockout",
     "text!./cheatsheet.html",
+    "dp/document/resource",
     "session!",
     "dp/polyfills/string",
     "dp/bindings/optiscroll"
-], function (ko, view, session) {
+], function (ko, view, Resource, session) {
     //#region [ Constructor ]
 
     /**
@@ -16,7 +17,22 @@ define([
     var Model = function (args, info) {
         console.log("CheatsheetTool()");
 
-        this.items = args.items || ko.observableArray([]);
+        this.items = ko.observableArray([
+            new Resource({
+                title: "Nadpisy",
+                url: "# Nadpis prvej úrovne\n" +
+                     "## druhej úrovne\n" +
+                     "### tretej\n" +
+                     "#### atď"
+            }),
+            new Resource({
+                title: "Zdôraznenie",
+                url: "# Nadpis prvej úrovne\n" +
+                     "## druhej úrovne\n" +
+                     "### tretej\n" +
+                     "#### atď"
+            })            
+        ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.filtered = ko.computed(this._filtered, this);
     };

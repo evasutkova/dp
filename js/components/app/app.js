@@ -724,7 +724,7 @@ define([
             return;
         }
 
-        action(markdown || "");
+        return action(markdown || "");
     };
 
 

@@ -193,11 +193,21 @@ define([
      * @param {object} resource Resource.
      */
     Model.prototype.insert = function (resource) {
-        if (typeof (this.insertMarkdownCallback) !== "function") {
+        var callback = this.insertMarkdownCallback;
+        if (typeof (callback) !== "function") {
             return;
         }
 
-        this.insertMarkdownCallback(resource.search());
+        var id = resource.search();
+
+        switch(id) {
+            case "nadpis_prvej_urovne":
+                callback("# Nadpis");
+                return;
+            default:
+                callback(id);
+                return;
+        }
     };
 
     

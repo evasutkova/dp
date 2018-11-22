@@ -51,6 +51,13 @@
             </button>
         </li>
         <!-- /ko -->
+        <!-- ko if: hasTemplate -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Cheatsheet" data-bind="css: { 'toolbar__item--active': tool() === 'cheatsheet' }, click: setTool.bind($component, 'cheatsheet')">
+                <i class="dp-icons">lifebuoy</i>
+            </button>
+        </li>
+        <!-- /ko -->        
     </ul>
     <!-- /ko -->
     <!-- ko if: isConnected() -->

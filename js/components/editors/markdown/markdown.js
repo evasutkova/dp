@@ -149,6 +149,7 @@ define([
      */
     Model.prototype.select = function (from, to) {
         this.cm.setSelection(from, to);
+        this.cm.focus();
     };    
 
 

@@ -202,11 +202,12 @@ define([
         }
 
         var id = resource.search();
+        var p;
 
         switch(id) {
             case "nadpis_prvej_urovne":
-                var x = insert("# Nadpis");
-                debugger;
+                p = insert("# Nadpis");
+                select({ line: p.from.line, ch: p.from.ch + 2 }, p.to);
                 return;
             default:
                 insert(id);

@@ -11,6 +11,7 @@ define([
     ko.components.register("explorer-tool", { require: "dp/components/tools/explorer/explorer" });
     ko.components.register("settings-tool", { require: "dp/components/tools/settings/settings" });
     ko.components.register("images-tool", { require: "dp/components/tools/images/images" });
+    ko.components.register("cheatsheet-tool", { require: "dp/components/tools/cheatsheet/cheatsheet" });
     ko.components.register("prompt-modal", { require: "dp/components/modals/prompt/prompt" });
     ko.components.register("confirm-modal", { require: "dp/components/modals/confirm/confirm" });
     ko.components.register("file-browser-modal", { require: "dp/components/modals/file-browser/file-browser" });

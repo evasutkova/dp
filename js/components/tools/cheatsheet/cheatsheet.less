@@ -1,0 +1,37 @@
+@import "../../../../less/_mixins.less";
+
+.cheatsheet-tool {
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+
+    &__search {
+        margin: 0.25rem 0 0 0;
+
+        i {
+            top: 50% !important;
+            transform: translate(0,-50%);
+            font-size: 1.5rem !important;
+            width: 2rem !important;
+        }
+
+        input[type=text] {
+            margin-left: 2rem;
+            width: calc(100% - 2rem);
+            height: 2rem;
+        }
+    }
+
+    &__item {
+        height: auto;
+        position: relative;
+        font-size: .95em;
+        text-align: left;
+        color: @fg-color;
+
+        & + & {
+            margin-top: 1rem;
+        }
+    }
+}

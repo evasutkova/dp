@@ -3,7 +3,7 @@ define([
     "knockout",
     "google!client:auth2",
     "text!./drive.html",
-    "session!",
+    "session!DriveTool",
     "dp/bindings/optiscroll"
 ], function (module, ko, api, view, session) {
     //#region [ Fields ]

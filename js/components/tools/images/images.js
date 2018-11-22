@@ -1,7 +1,7 @@
 define([
     "knockout",
     "text!./images.html",
-    "session!",
+    "session!ImagesTool",
     "dp/polyfills/string",
     "dp/bindings/optiscroll"
 ], function (ko, view, session) {

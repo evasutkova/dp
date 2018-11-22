@@ -44,8 +44,8 @@
     define({
         load: function (name, req, load, config) {
             var component = req.toUrl(".").split("?")[0].split("js/");
-            component = component[component.length - 1];
-    
+            component = name || component[component.length - 1];
+            
             load({
                 set: set.bind(storage, component),
                 get: get.bind(storage, component)

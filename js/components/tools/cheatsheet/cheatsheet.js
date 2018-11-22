@@ -2,7 +2,7 @@ define([
     "knockout",
     "text!./cheatsheet.html",
     "dp/document/resource",
-    "session!",
+    "session!CheatsheetTool",
     "dp/polyfills/string",
     "dp/bindings/optiscroll"
 ], function (ko, view, Resource, session) {

@@ -85,7 +85,7 @@ define([
             new Resource({
                 title: "Obrázky s nadpisom",
                 url: "![popis](http://url.sk)\n" +
-                     "###### Nadpis"
+                     "###### Nadpis {obrazok-1}"
             }),            
             new Resource({
                 title: "Zdrojový kód",
@@ -104,7 +104,7 @@ define([
                      "var s = \"string\"\n" +
                      "alert(s);\n" +
                      "```\n" +
-                     "###### Nadpis"
+                     "###### Nadpis {kod-1}"
             }),                        
             new Resource({
                 title: "Tabuľka",
@@ -117,7 +117,7 @@ define([
                 url: "| A  | B    | C   |\n" +
                      "|----|:----:|----:|\n" +
                      "|left|center|right|\n" +
-                     "###### Nadpis"
+                     "###### Nadpis {tabulka-1}"
             }),            
             new Resource({
                 title: "Blockquotes",
@@ -156,7 +156,7 @@ define([
                 url: "```uml\n" +
                      "[nomnoml] is->[great]\n" +
                      "```\n" +
-                     "###### Nadpis"
+                     "###### Nadpis {obrazok-1}"
             }),            
             new Resource({
                 title: "Poznámka pod čiarou",
@@ -295,7 +295,7 @@ define([
                 return;
             case "obrazky_s_nadpisom":
                 p = insert("![logo](https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png \"Google logo\")\n" +
-                           "###### Google logo");
+                           "###### Google logo {obrazok-google}");
                 select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 6 });
                 return;
             case "zdrojovy_kod":
@@ -314,7 +314,7 @@ define([
                            "var s = \"string\"\n" +
                            "alert(s);\n" +
                            "```\n" +
-                           "###### Nadpis");
+                           "###### Nadpis {kod-1}");
                 select({ line: p.from.line, ch: p.from.ch + 3 }, { line: p.from.line, ch: p.from.ch + 13 });
                 return;
             case "tabulka":
@@ -327,7 +327,7 @@ define([
                 p = insert("| A  | B    | C   |\n" +
                            "|----|:----:|----:|\n" +
                            "|left|center|right|\n" +
-                           "###### Nadpis");
+                           "###### Nadpis {tabulka-1}");
                 select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.from.line, ch: p.from.ch + 3 });
                 return;
             case "blockquotes":
@@ -364,7 +364,7 @@ define([
                 p = insert("```uml\n" +
                            "[nomnoml] is->[great]\n" +
                            "```\n" +
-                           "###### Nadpis");
+                           "###### Nadpis {obrazok-diagram}");
                 select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 21 });
                 return;
             case "poznamka_pod_ciarou":

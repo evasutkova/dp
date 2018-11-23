@@ -32,6 +32,7 @@ define([
             strikethrough: true, 
             openLinksInNewWindow: true,
             highlightAuto: false,
+            customizedHeaderId: true,
             extensions: ["footnotes", "nomnoml", "jsfiddle", "highlight"]
         });
         

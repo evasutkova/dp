@@ -101,7 +101,7 @@ function _toc(parentId, node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _tot(node) {
-    var regex = /<\/table>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h6\sid="tabulka([^<>]+)">([^<>]+)<\/h6>/g;
     var content = node.content;
     var list = [];
     var match;
@@ -133,18 +133,11 @@ function _tot(node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _toi(node) {
-    var regex = /<\/p>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
-    var regexNomnoml = /<div\sclass='nomnoml-source'>[^<>]+<\/div>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h6\sid="obrazok([^<>]+)">([^<>]+)<\/h6>/g;
     var content = node.content;
     var list = [];
     var match;
     while((match = regex.exec(content)) !== null) {
-        list.push({
-            id: match[1] || "",
-            title: match[2] || ""
-        });
-    }
-    while((match = regexNomnoml.exec(content)) !== null) {
         list.push({
             id: match[1] || "",
             title: match[2] || ""
@@ -172,7 +165,7 @@ function _toi(node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _tos(node) {
-    var regex = /<\/pre>\s+<h6\sid="([^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h6\sid="kod([^<>]+)">([^<>]+)<\/h6>/g;
     var content = node.content;
     var list = [];
     var match;

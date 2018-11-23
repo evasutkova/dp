@@ -161,6 +161,23 @@ define([
             new Resource({
                 title: "Poznámka pod čiarou",
                 url: "[^n](Text.)"
+            }),            
+            new Resource({
+                title: "JsFiddle",
+                url: "```jsfiddle\n" +
+                     "m7qck23r\n" +
+                     "js,html,css,result\n" +
+                     "dark\n" +
+                     "```"
+            }),            
+            new Resource({
+                title: "JsFiddle Light",
+                url: "```jsfiddle\n" +
+                     "m7qck23r\n" +
+                     "js,html,css,result\n" +
+                     "light\n" +
+                     "300,200\n" +
+                     "```"
             })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
@@ -353,6 +370,23 @@ define([
             case "poznamka_pod_ciarou":
                 p = insert("[^n](Poznámka pod čiarou.)");
                 select({ line: p.from.line, ch: p.from.ch + 5 }, { line: p.to.line, ch: p.to.ch - 1 });
+                return;
+            case "jsfiddle":
+                p = insert("```jsfiddle\n" +
+                           "m7qck23r\n" +
+                           "js,html,css,result\n" +
+                           "dark\n" +
+                           "```");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 8 });            
+                return;
+            case "jsfiddle_light":
+                p = insert("```jsfiddle\n" +
+                           "m7qck23r\n" +
+                           "js,html,css,result\n" +
+                           "light\n" +
+                           "300,200\n" +
+                           "```");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 8 });            
                 return;
             default:
                 insert(id);

@@ -96,12 +96,13 @@ function _toc(parentId, node) {
 
 
 /**
- * Spracovanie uzlov pre TOT.
+ * Spracovanie uzlov pre zoznam.
  * 
  * @param {object} node Aktuálne spracovávaný uzol.
+ * @param {string} prefix Prefix nadpisov, ktoré treba zahrnúť do zoznamu.
  */
-function _tot(node) {
-    var regex = /<h\d\sid="(tabulka[^<>]+)">([^<>]+)<\/h\d>/g;
+function _to(node, prefix) {
+    var regex = new RegExp('<h\\d\\sid="(' + prefix + '[^<>]+)">([^<>]+)<\\/h\\d>', "g");
     var content = node.content;
     var list = [];
     var match;
@@ -118,71 +119,7 @@ function _tot(node) {
     }
 
     var tasks = nodes.map(function(n) {
-        return _tot(n);
-    });
-
-    return Promise.all(tasks).then(function(items) {
-        return [].concat.apply(list, items);
-    });    
-}
-
-
-/**
- * Spracovanie uzlov pre TOI.
- * 
- * @param {object} node Aktuálne spracovávaný uzol.
- */
-function _toi(node) {
-    var regex = /<h\d\sid="(obrazok[^<>]+)">([^<>]+)<\/h\d>/g;
-    var content = node.content;
-    var list = [];
-    var match;
-    while((match = regex.exec(content)) !== null) {
-        list.push({
-            id: match[1] || "",
-            title: match[2] || ""
-        });
-    }
-
-    var nodes = node.sections;
-    if(!(nodes instanceof Array) || !nodes.length) {
-        return Promise.resolve(list);
-    }
-
-    var tasks = nodes.map(function(n) {
-        return _toi(n);
-    });
-
-    return Promise.all(tasks).then(function(items) {
-        return [].concat.apply(list, items);
-    });    
-}
-
-
-/**
- * Spracovanie uzlov pre TOT.
- * 
- * @param {object} node Aktuálne spracovávaný uzol.
- */
-function _tos(node) {
-    var regex = /<h\d\sid="(kod[^<>]+)">([^<>]+)<\/h\d>/g;
-    var content = node.content;
-    var list = [];
-    var match;
-    while((match = regex.exec(content)) !== null) {
-        list.push({
-            id: match[1] || "",
-            title: match[2] || ""
-        });
-    }
-
-    var nodes = node.sections;
-    if(!(nodes instanceof Array) || !nodes.length) {
-        return Promise.resolve(list);
-    }
-
-    var tasks = nodes.map(function(n) {
-        return _tos(n);
+        return _to(n, prefix);
     });
 
     return Promise.all(tasks).then(function(items) {
@@ -381,7 +318,7 @@ function tot() {
     var nodes = view.articles;
 
     var tasks = nodes.map(function(n) {
-        return _tot(n);
+        return _to(n, "tabulka");
     });
 
     return Promise.all(tasks).then(function(items) {
@@ -398,7 +335,7 @@ function toi() {
     var nodes = view.articles;
 
     var tasks = nodes.map(function(n) {
-        return _toi(n);
+        return _to(n, "obrazok");
     });
 
     return Promise.all(tasks).then(function(items) {
@@ -415,7 +352,7 @@ function tos() {
     var nodes = view.articles;
 
     var tasks = nodes.map(function(n) {
-        return _tos(n);
+        return _to(n, "kod");
     });
 
     return Promise.all(tasks).then(function(items) {

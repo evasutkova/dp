@@ -18,6 +18,7 @@ importScripts("../document/node.js");
 var data;
 var view;
 var converter;
+var pgs;
 
 //#endregion
 
@@ -261,6 +262,8 @@ function start() {
         extensions: ["footnotes", "nomnoml", "jsfiddle", "highlight"]
     });         
 
+    pgs = [];
+
     return Promise.resolve(view);
 }
 
@@ -322,8 +325,12 @@ function toc() {
 function to(name, prefix) {
     var nodes = view.articles;
 
-    var tasks = nodes.map(function(n) {
-        return _to(n, prefix);
+    var tasks = [];
+    nodes.forEach(function(n) {
+        tasks.push(_to(n, prefix));
+    });
+    pgs.forEach(function(n) {
+        tasks.push(_to(n, prefix));
     });
 
     return Promise.all(tasks).then(function(items) {
@@ -370,6 +377,7 @@ function pages() {
 
         pages.forEach(function(p) {
             view["@" + p.id] = p;
+            pgs.push(p);
         });
 
         return pages;

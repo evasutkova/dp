@@ -42,6 +42,7 @@ self.onmessage = function(e) {
         .then(to.bind(self, "tot", "tabulka"))
         .then(to.bind(self, "toi", "obrazok"))
         .then(to.bind(self, "tos", "kod"))
+        .then(to.bind(self, "toa", "priloha"))
         .then(finish)
         .catch(function(error) {
             self.postMessage(JSON.stringify({error: error}));
@@ -246,6 +247,7 @@ function start() {
         tot: [],
         toi: [],
         tos: [],
+        toa: [],
         articles: []
     };
 

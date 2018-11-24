@@ -101,7 +101,7 @@ function _toc(parentId, node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _tot(node) {
-    var regex = /<h6\sid="(tabulka[^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h\d\sid="(tabulka[^<>]+)">([^<>]+)<\/h\d>/g;
     var content = node.content;
     var list = [];
     var match;
@@ -133,7 +133,7 @@ function _tot(node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _toi(node) {
-    var regex = /<h6\sid="(obrazok[^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h\d\sid="(obrazok[^<>]+)">([^<>]+)<\/h\d>/g;
     var content = node.content;
     var list = [];
     var match;
@@ -165,7 +165,7 @@ function _toi(node) {
  * @param {object} node Aktuálne spracovávaný uzol.
  */
 function _tos(node) {
-    var regex = /<h6\sid="(kod[^<>]+)">([^<>]+)<\/h6>/g;
+    var regex = /<h\d\sid="(kod[^<>]+)">([^<>]+)<\/h\d>/g;
     var content = node.content;
     var list = [];
     var match;

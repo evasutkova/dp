@@ -39,9 +39,9 @@ self.onmessage = function(e) {
         .then(articles)
         .then(pages)
         .then(scripts)
-        .then(tot)
-        .then(toi)
-        .then(tos)
+        .then(to.bind(self, "tot", "tabulka"))
+        .then(to.bind(self, "toi", "obrazok"))
+        .then(to.bind(self, "tos", "kod"))
         .then(finish)
         .catch(function(error) {
             self.postMessage(JSON.stringify({error: error}));
@@ -312,52 +312,21 @@ function toc() {
 
 
 /**
- * Spracovanie TOT - Zoznam tabuliek.
+ * Spracovanie  zoznamu.
+ * 
+ * @param {string} name Nazov property, do ktorej treba odlozit zoznam.
+ * @param {string} prefix Prefix nadpisov, ktoré treba zahrnúť do zoznamu.
  */
-function tot() {
+function to(name, prefix) {
     var nodes = view.articles;
 
     var tasks = nodes.map(function(n) {
-        return _to(n, "tabulka");
+        return _to(n, prefix);
     });
 
     return Promise.all(tasks).then(function(items) {
-        view.tot = [].concat.apply([], items);
-        return view.tot;
-    });    
-}
-
-
-/**
- * Spracovanie TOI - Zoznam obrázkov.
- */
-function toi() {
-    var nodes = view.articles;
-
-    var tasks = nodes.map(function(n) {
-        return _to(n, "obrazok");
-    });
-
-    return Promise.all(tasks).then(function(items) {
-        view.toi = [].concat.apply([], items);
-        return view.toi;
-    });    
-}
-
-
-/**
- * Spracovanie TOS - Zoznam skriptov.
- */
-function tos() {
-    var nodes = view.articles;
-
-    var tasks = nodes.map(function(n) {
-        return _to(n, "kod");
-    });
-
-    return Promise.all(tasks).then(function(items) {
-        view.tos = [].concat.apply([], items);
-        return view.tos;
+        view[name] = [].concat.apply([], items);
+        return view[name];
     });    
 }
 

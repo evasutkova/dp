@@ -838,6 +838,14 @@ define([
          
 
     /**
+     * Vyvolá dialóg pre vytvorenie nového súboru.
+     */
+    Model.prototype.newProject = function () {
+        console.info("newProject");
+    };
+
+
+    /**
      * Otvorí a načíta dokument z disku.
      */
     Model.prototype.open = function () {

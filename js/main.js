@@ -27,6 +27,7 @@ define([
     ko.components.register("new-node-action", { require: "dp/components/actions/new-node/new-node" });
     ko.components.register("new-image-action", { require: "dp/components/actions/new-image/new-image" });
     ko.components.register("new-script-action", { require: "dp/components/actions/new-script/new-script" });
+    ko.components.register("new-project", { require: "dp/components/new-project/new-project" });
 
     // Spustime aplikaciu
     $(function () {

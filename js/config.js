@@ -64,6 +64,17 @@ require({
                 "https://www.googleapis.com/auth/drive.file", 
                 "https://www.googleapis.com/auth/drive.readonly"
             ]            
+        },
+        "dp/components/new-project/new-project": {
+            templates: [{
+                title: "Záverečný projekt",
+                url: "dp/templates/final-thesis.mdzip",
+                thumnail: "dp/templates/final-thesis.png"
+            }, {
+                title: "Prezentácia",
+                url: "dp/templates/presentation.mdzip",
+                thumnail: "dp/templates/presentation.png"
+            }]
         }
     }
 }, ["dp/main"]);

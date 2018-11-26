@@ -23,12 +23,23 @@ define([
         this.previewCallback = args.previewCallback;
         this.saveCallback = args.saveCallback;
         this.downloadCallback = args.downloadCallback;
+        this.newProjectCallback = args.newProjectCallback;
     };
 
     //#endregion
 
 
     //#region [ Methods : Public ]
+    
+    /**
+     * Vyvolá dialóg pre vytvorenie nového súboru.
+     */
+    Model.prototype.newProject = function () {
+        if(typeof(this.newProjectCallback) === "function") {
+            this.newProjectCallback();
+        }
+    };    
+    
     
     /**
      * Vyvolá dialóg pre otvorenie súboru.

@@ -841,7 +841,10 @@ define([
      * Vyvolá dialóg pre vytvorenie nového súboru.
      */
     Model.prototype.newProject = function () {
-        console.info("newProject");
+        var w = this.window("new-project");
+        w.open().then(function(r) {
+            debugger;
+        });
     };
 
 

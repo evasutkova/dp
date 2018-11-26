@@ -22,7 +22,7 @@ define([
     //#region [ Methods : Public ]
 
     /**
-     * Okno.
+     * Zavrie okno.
      */
     Model.prototype.close = function () {
         if(typeof(this.closeCallback) === "function") {
@@ -30,6 +30,16 @@ define([
         }
     };
 
+
+    /**
+     * Zavrie okno a vytvorí nový projekt.
+     */
+    Model.prototype.create = function () {
+        if(typeof(this.closeCallback) === "function") {
+            this.closeCallback(true);
+        }
+    };
+    
 
     /**
      * Dispose.

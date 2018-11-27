@@ -855,7 +855,7 @@ define([
         w.open()
             .then(function(r) {
                 if(!r) {
-                    return;
+                    return Promise.reject(null);
                 }
 
                 if(!r.filename) {

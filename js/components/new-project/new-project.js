@@ -70,7 +70,10 @@ define([
      */
     Model.prototype.create = function () {
         if(typeof(this.closeCallback) === "function") {
-            this.closeCallback(true);
+            this.closeCallback({
+                filename: this.value(),
+                url: (this.activeItem() || {}).url
+            });
         }
     };
     

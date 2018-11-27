@@ -842,9 +842,14 @@ define([
      */
     Model.prototype.newProject = function () {
         var $this = this;
-        var filename;
+        var name;
         var url;
         var archive;
+        var template = null;
+        var meta = null;
+        var nodes = null;
+        var images = null;
+        var scripts = null;        
 
         var w = this.window("new-project");
         w.open()
@@ -856,7 +861,10 @@ define([
                 if(!r.filename) {
                     throw "Musíte zadať názov pre nový projekt.";
                 }
-                filename = r.filename;
+                name = r.filename;
+                if(!name.endsWith(".mdzip")) {
+                    name = name + ".mdzip";
+                }
 
                 if(!r.url) {
                     throw "Musíte vybrať šablónu.";
@@ -878,6 +886,58 @@ define([
 
                 // Nacitame sablonu
                 return archive.file("template.html").async("string");
+            })
+            .then(function(r) {
+                template = r;
+
+                // Nacitame metainformacie
+                return archive.file("meta.json").async("string");
+            })
+            .then(function(r) {
+                meta = JSON.parse(r);
+
+                // Nacitame uzly dokumentu
+                return archive.file("nodes.json").async("string");
+            })
+            .then(function(r) {
+                nodes = JSON.parse(r);
+
+                // Nacitame obrazky
+                var files = [];
+                archive.folder("images").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);
+            })
+            .then(function (r) {
+                images = r;
+
+                // Nacitame skripty
+                var files = [];
+                archive.folder("scripts").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);                
+            })
+            .then(function (r) {
+                scripts = r;
+            })
+            .then(function() {
+                $this._open(name, template, meta, nodes, images, scripts);
+                var an = $this._findActiveNode($this.nodes());
+                if(an) {
+                    $this._selectNode(an);
+                }
             })            
             .catch(function(error) {
                 if(!error) {

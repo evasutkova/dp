@@ -841,10 +841,34 @@ define([
      * Vyvolá dialóg pre vytvorenie nového súboru.
      */
     Model.prototype.newProject = function () {
+        var $this = this;
+        var filename;
+        var url;
+
         var w = this.window("new-project");
-        w.open().then(function(r) {
-            debugger;
-        });
+        w.open()
+            .then(function(r) {
+                if(!r) {
+                    return;
+                }
+
+                if(!r.filename) {
+                    throw "Musíte zadať názov pre nový projekt.";
+                }
+                filename = r.filename;
+
+                if(!r.url) {
+                    throw "Musíte vybrať šablónu.";
+                }
+                url = r.url;
+            })
+            .catch(function(error) {
+                if(!error) {
+                    return;
+                }
+                console.error("App : newProject() : " + error);
+                $this.confirm("Nový projekt", (typeof(error) === "string") ? error : "Nepodarilo sa vytvoriť nový projekt.", "Ok");
+            });
     };
 
 

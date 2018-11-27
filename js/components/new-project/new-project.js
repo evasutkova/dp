@@ -23,6 +23,7 @@ define([
         console.log("NewProject()");
         
         this.items = cnf.templates;
+        this.value = ko.observable("");
         
         this.closeCallback = args.closeCallback;
     };

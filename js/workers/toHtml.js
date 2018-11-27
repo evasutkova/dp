@@ -170,14 +170,8 @@ function _content(parentId, node, isInToc) {
             return i !== null;
         });
 
-        var imageTasks = section.sections.map(function(s) {
-            return _images(section.content).then(function(images) {
-                section.content = converter.makeHtml(section.content + images);
-                return section;
-            });
-        });
-
-        return Promise.all(imageTasks).then(function() {
+        return _images(section.content).then(function(images) {
+            section.content = converter.makeHtml(section.content + images);
             return section;
         });
     });    

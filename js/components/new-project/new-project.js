@@ -1,9 +1,10 @@
 define([
+    "require",
     "module",
     "knockout",
     "text!./new-project.html",
     "dp/bindings/optiscroll"
-], function (module, ko, view) {
+], function (require, module, ko, view) {
     //#region [ Fields ]
     
     var cnf = module.config();
@@ -23,6 +24,7 @@ define([
         console.log("NewProject()");
         
         this.items = cnf.templates;
+        this.activeItem = ko.observable();
         this.value = ko.observable("");
         
         this.closeCallback = args.closeCallback;
@@ -32,6 +34,26 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vyberie šablónu.
+     * 
+     * @param {object} item Šablóna.
+     */
+    Model.prototype.select = function (item) {
+        this.activeItem(item);
+    };  
+
+
+    /**
+     * Url pre šablónu.
+     * 
+     * @param {object} item Šablóna.
+     */
+    Model.prototype.thumnailUrl = function (item) {
+        return "url('" + require.toUrl(item.thumnail) + "')";
+    };    
+    
 
     /**
      * Zavrie okno.

@@ -844,6 +844,7 @@ define([
         var $this = this;
         var filename;
         var url;
+        var archive;
 
         var w = this.window("new-project");
         w.open()
@@ -861,7 +862,23 @@ define([
                     throw "Musíte vybrať šablónu.";
                 }
                 url = r.url;
+
+                // V IIS nastavit mime type pre ".mdzip" application/x-zip-compressed
+                return fetch(require.toUrl(url))
+                    .then(function(r) {
+                        return r.blob();
+                    });
             })
+            .then(function(blob) {
+                return new zip().loadAsync(blob);
+            })
+            .then(function(a) {
+                // Odlozime archiv
+                archive = a;
+
+                // Nacitame sablonu
+                return archive.file("template.html").async("string");
+            })            
             .catch(function(error) {
                 if(!error) {
                     return;

@@ -1,4 +1,95 @@
 @import "../../../less/_mixins.less";
 
 .new-project {
+    .row {
+        margin-bottom: 0;
+        margin-right: 0.625rem;
+        margin-left: -0.3125rem;
+        min-height: 14rem;
+        max-height: 14rem;        
+    }
+
+    .optiscroll-v {
+        .optiscroll-vtrack {
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+    }    
+
+    &__item {
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "\00a0";
+            display: block;
+            margin-top: 100%;
+        }
+
+        &:hover {
+            .new-project__item-content {
+                &::after {
+                    transform: scale(1);
+                    opacity: 1; 
+                }
+            }
+        }        
+    }
+
+    &__item-content {
+        position: absolute;
+        top: 0.3125rem;
+        bottom: 0.625rem;
+        left: 0.3125rem;
+        right: 0.3125rem;
+        border-radius: 2px;
+        //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        
+        &::after{
+            content: "\00a0";
+            background: fade(@primary-color, 20%);
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            border-radius: .25rem;
+            top: 0;
+            bottom: 0;
+            transform: scale(0);
+            opacity: 0;
+            transition: all .15s ease;
+        }        
+    }
+
+    &__item-title {
+        position: absolute;
+        background: rgba(0,0,0,.1);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 4.5em;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        transition: all .3s ease;
+        padding: 0.625rem;
+        color: @complementary-color;
+        transition: transform .15s ease;
+        z-index: 1;
+        .secondary-text-shadow;
+        .not-selectable;
+    }
+
+    &__item-image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-image: url(https://www.lush.ca/dw/image/v2/AAHL_PRD/on/demandware.static/-/Sites-lushcosmetics-export/default/dw644d578f/images/ingredients/11488.jpg?sw=240&sh=240&sm=fit);
+        background-position: center 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 1;
+    }    
 }

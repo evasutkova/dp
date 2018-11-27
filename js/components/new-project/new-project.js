@@ -1,7 +1,16 @@
 define([
+    "module",
     "knockout",
-    "text!./new-project.html"
-], function (ko, view) {
+    "text!./new-project.html",
+    "dp/bindings/optiscroll"
+], function (module, ko, view) {
+    //#region [ Fields ]
+    
+    var cnf = module.config();
+    
+    //#endregion
+
+
     //#region [ Constructor ]
 
     /**
@@ -12,7 +21,9 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("NewProject()");
-
+        
+        this.items = cnf.templates;
+        
         this.closeCallback = args.closeCallback;
     };
 

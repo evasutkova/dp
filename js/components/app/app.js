@@ -872,7 +872,7 @@ define([
                 url = r.url;
 
                 // V IIS nastavit mime type pre ".mdzip" application/x-zip-compressed
-                return fetch(require.toUrl(url))
+                return fetch(require.toUrl(url), {cache: "no-store"})
                     .then(function(r) {
                         return r.blob();
                     });

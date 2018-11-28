@@ -33,4 +33,12 @@ define([
     $(function () {
         ko.applyBindings({});
     });
+
+    // Osetrenie opustenia aplikacie
+    $(window).on("beforeunload", function (e) {
+        // Cancel the event as stated by the standard.
+        e.preventDefault();
+        // Chrome requires returnValue to be set.
+        e.returnValue = "";
+      });
 });

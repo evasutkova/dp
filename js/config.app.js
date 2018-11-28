@@ -70,6 +70,10 @@ require({
                 title: "Záverečný projekt",
                 url: "dp/templates/final-thesis.mdzip",
                 thumnail: "dp/templates/final-thesis.png"
+            }, {
+                title: "Prezentácia",
+                url: "dp/templates/presentation.mdzip",
+                thumnail: "dp/templates/presentation.png"
             }]
         }
     }

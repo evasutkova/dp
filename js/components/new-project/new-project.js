@@ -28,6 +28,10 @@ define([
         this.value = ko.observable("");
         
         this.closeCallback = args.closeCallback;
+
+        setTimeout(function() {
+            info.element.parentNode.querySelector("input[type=text]").focus();
+        }, 0);
     };
 
     //#endregion

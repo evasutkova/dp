@@ -67,6 +67,9 @@ define([
     Model.prototype.close = function (value) {
         this.modal.close();
 
+        this.component("");
+        this.params(null);
+
         if (this._resolve) {
             this._resolve(ko.unwrap(value));
             this._resolve = null;

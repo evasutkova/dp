@@ -28,13 +28,13 @@
                 var size = (source[3] || "").split(",");
                 
                 if(size.length !== 2) {
-                    return '<script async src="//jsfiddle.net/' + id + '/embed/' + params + '/' + theme + '/"></script>';
+                    return '<script async src="https://jsfiddle.net/' + id + '/embed/' + params + '/' + theme + '/"></script>';
                 }
 
                 var w = size[0];
                 var h = size[1];
 
-                return '<iframe width="' + w + '" height="' + h + '" src="//jsfiddle.net/' + id + '/embedded/' + params + '/' + theme + '/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>';
+                return '<iframe width="' + w + '" height="' + h + '" src="https://jsfiddle.net/' + id + '/embedded/' + params + '/' + theme + '/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>';
             };
 
             return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);

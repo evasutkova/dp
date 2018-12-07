@@ -8,6 +8,7 @@ importScripts("../libs/showdown.footnotes.js");
 importScripts("../libs/showdown.highlight.js");
 importScripts("../libs/showdown.nomnoml.js");
 importScripts("../libs/showdown.jsfiddle.js");
+importScripts("../libs/showdown.iframe.js");
 importScripts("../document/node.js");
 
 //#endregion
@@ -253,7 +254,7 @@ function start() {
         openLinksInNewWindow: true,
         highlightAuto: false,
         customizedHeaderId: true,
-        extensions: ["footnotes", "nomnoml", "jsfiddle", "highlight"]
+        extensions: ["footnotes", "nomnoml", "jsfiddle", "iframe", "highlight"]
     });         
 
     pgs = [];

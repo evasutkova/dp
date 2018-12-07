@@ -57,6 +57,11 @@ define([
                      "- [ ] _**Neukončená** úloha_"
             }),
             new Resource({
+                title: "Zoznam úloh 2",
+                url: "- [x] **Ukončená úloha**\n" +
+                     "- [ ] **__Neukončená__ úloha**"
+            }),            
+            new Resource({
                 title: "Odkazy, linky",
                 url: "[v texte](https://url.sk)"
             }),
@@ -267,6 +272,10 @@ define([
                 p = insert("- [x] _Ukončená úloha_");
                 select({ line: p.from.line, ch: p.from.ch + 7 }, { line: p.to.line, ch: p.to.ch - 1});
                 return;
+            case "zoznam_uloh_":
+                p = insert("- [x] **Ukončená úloha**");
+                select({ line: p.from.line, ch: p.from.ch + 8 }, { line: p.to.line, ch: p.to.ch - 2});
+                return;                
             case "odkazy_linky":
                 p = insert("[odkaz](https://www.google.sk)");
                 select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.from.ch + 6 });

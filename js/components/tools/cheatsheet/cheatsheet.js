@@ -174,13 +174,20 @@ define([
                      "js,html,css,result\n" +
                      "dark\n" +
                      "```"
-            }),            
+            }),
             new Resource({
                 title: "JsFiddle Light",
                 url: "```jsfiddle\n" +
                      "m7qck23r\n" +
                      "js,html,css,result\n" +
                      "light\n" +
+                     "300,200\n" +
+                     "```"
+            }),
+            new Resource({
+                title: "iFrame",
+                url: "```iframe\n" +
+                     "https://www.google.sk\n" +
                      "300,200\n" +
                      "```"
             })
@@ -397,6 +404,13 @@ define([
                            "```");
                 select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 8 });            
                 return;
+            case "iframe":
+                p = insert("```iframe\n" +
+                           "https://www.google.sk\n" +
+                           "300,200\n" +
+                           "```");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 21 });            
+                return;                
             default:
                 insert(id);
                 return;

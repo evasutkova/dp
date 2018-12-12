@@ -28,6 +28,7 @@ require({
         showdownNomnoml: "/dp/wwwroot/js/libs/showdown.nomnoml",
         showdownJsfiddle: "/dp/wwwroot/js/libs/showdown.jsfiddle",
         showdownIframe: "/dp/wwwroot/js/libs/showdown.iframe",
+        showdownKbd: "/dp/wwwroot/js/libs/showdown.kbd",
         syncscroll: "/dp/wwwroot/js/libs/syncscroll",
         mustache: "/dp/wwwroot/js/libs/mustache",
         filesaver: "/dp/wwwroot/js/libs/filesaver",

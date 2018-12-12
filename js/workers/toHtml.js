@@ -208,9 +208,14 @@ function _images(content) {
         .map(function(i) {
             return fetch(i.url)
                 .then(function(r) {
-                    return r.blob();
+                    // Vo Firefoxe po update verzie v64 prestalo fungovat volanie .blob()
+                    //return r.blob();
+                    return r.arrayBuffer();
                 })
                 .then(function(blob) {
+                    // Vo Firefoxe po update verzie v64 prestalo fungovat volanie .blob()
+                    blob = new Blob([blob]);
+
                     return new Promise(function(resolve) {
                         var reader = new FileReader();
                         reader.onloadend = function() {

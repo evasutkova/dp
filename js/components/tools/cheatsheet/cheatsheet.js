@@ -41,7 +41,11 @@ define([
             new Resource({
                 title: "Preškrtnutý text",
                 url: "~~preškrtnutý text~~"
-            }),                        
+            }),
+            new Resource({
+                title: "Vstup z klávesnice",
+                url: "~Ctrl~"
+            }),             
             new Resource({
                 title: "Číslovaný zoznam",
                 url: "1. Prvá položka.\n" +
@@ -266,6 +270,10 @@ define([
                 p = insert("~~text~~");
                 select({ line: p.from.line, ch: p.from.ch + 2 }, { line: p.to.line, ch: p.to.ch - 2 });
                 return;
+            case "vstup_z_klavesnice":
+                p = insert("~Ctrl~");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.to.line, ch: p.to.ch - 1 });
+                return;                
             case "cislovany_zoznam":
                 p = insert("1. Prvá položka.\n" +
                            "2. Ďalšia položka.\n" + 

@@ -472,9 +472,15 @@ define([
             .then(function(result) {
                 $this._cancelPreview();
 
+                // Odpamatame scroll poziciu
+                var top = (previewWindow.pageYOffset || previewWindow.document.scrollTop)  - (previewWindow.document.clientTop || 0);
+
                 previewWindow.document.open();
                 previewWindow.document.write(result);
                 previewWindow.document.close();
+
+                // Nascrolujeme na povodnu pozicu
+                previewWindow.scrollTo(0, top);
 
                 previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
             })

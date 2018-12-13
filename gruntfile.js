@@ -46,6 +46,15 @@ module.exports = function (grunt) {
                     }
                 }]
             },
+            blank: {
+                files: [{
+                    expand: true,
+                    src: ["blank.xhtml"],
+                    rename: function () {
+                        return "wwwroot/blank.html";
+                    }
+                }]
+            },            
             css: {
                 files: [{
                     expand: true,
@@ -225,6 +234,7 @@ module.exports = function (grunt) {
             "clean:wwwroot",
             "copy:index",
             "copy:app",
+            "copy:blank",
             "copy:css",
             "copy:materialize",
             "copy:js",

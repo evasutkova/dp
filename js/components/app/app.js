@@ -13,6 +13,9 @@ define([
 
     var global = (function() { return this; })();
     var loader = null;
+    var previewWindow = null;
+    var previewTimeout = null;
+    var previewDuration = 5000;
 
     //#endregion
     
@@ -439,6 +442,49 @@ define([
         return images.filter(function(i) {
             return references.indexOf(i.search()) !== -1;
         });
+    };
+
+
+    /**
+     * Zruší obnovovanie náhľadu.
+     */
+    Model.prototype._cancelPreview = function() {
+        if(previewTimeout) {
+            clearTimeout(previewTimeout);
+            previewTimeout = null;
+        }
+    };
+
+
+    /**
+     * Obnoví náhľad výstupu.
+     */
+    Model.prototype._refreshPreview = function() {
+        if(!previewWindow || (previewWindow && previewWindow.closed)) {
+            this._cancelPreview();
+            previewWindow = null;
+            return;
+        }
+
+        var $this = this;
+
+        this.toHtml()
+            .then(function(result) {
+                $this._cancelPreview();
+
+                previewWindow.document.open();
+                previewWindow.document.write(result);
+                previewWindow.document.close();
+
+                previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
+            })
+            .catch(function(error) {
+                $this._cancelPreview();
+
+                console.error("App : _refreshPreview() : " + error);
+
+                previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
+            });
     };
     
     //#endregion
@@ -1052,16 +1098,30 @@ define([
      * Zobrazí náhľad výstupu.
      */
     Model.prototype.preview = function() {
+        if(previewWindow) {
+            this._cancelPreview();
+            previewWindow.close();
+            previewWindow = null;
+            return;
+        }
+        
+        // Otvorime okno s nahladom
+        previewWindow = global.open("blank.html", this.fileName(), "titlebar=yes");
+        
+        // Vytvorime prvy nahlad
         var $this = this;
-
         this.loading(true, "Náhľad výstupu");
         this.toHtml()
             .then(function (result) {
                 $this.loading(false);
-                var w = global.open(null, $this.fileName());
-                w.document.open();
-                w.document.write(result);
-                w.document.close();                 
+
+                // Zapiseme vystup do preview okna
+                previewWindow.document.open();
+                previewWindow.document.write(result);
+                previewWindow.document.close();
+
+                // Nahlad sa bude obnovovat kazdych 5 sekund
+                previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
             })
             .catch(function(error) {
                 $this.loading(false);

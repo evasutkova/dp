@@ -38,7 +38,13 @@ define([
         }
 
         return items.filter(function(r) {
-            return r.n.indexOf(search) !== -1;
+            var found = r.n.indexOf(search) !== -1;
+
+            (r.a || []).forEach(function(a) {
+                found = found || (a.indexOf(search) !== -1);
+            });
+
+            return found;
         });
     };
 

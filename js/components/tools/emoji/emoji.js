@@ -2,7 +2,9 @@ define([
     "knockout",
     "text!./emoji.html",
     "session!EmojiTool",
-], function (ko, view, session) {
+    "dp/emoji/material-design-icons",
+    "dp/bindings/optiscroll"
+], function (ko, view, session, icons) {
     //#region [ Constructor ]
 
     /**
@@ -15,9 +17,32 @@ define([
         console.log("EmojiTool()");
 
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
+        this.items = ko.observableArray(icons);
+        this.filtered = ko.computed(this._filtered, this);
     };
 
     //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Filtrovaný zoznam.
+     */
+    Model.prototype._filtered = function() {
+        var items = this.items();
+        var search = this.search().toCodeName();
+
+        if(!items.length) {
+            return [];
+        }
+
+        return items.filter(function(r) {
+            return r.n.indexOf(search) !== -1;
+        });
+    };
+
+    //#endregion    
 
 
     //#region [ Methods : Public ]
@@ -31,6 +56,8 @@ define([
         session.set({
             search: this.search()
         });
+
+        this.filtered.dispose();
     };
 
     //#endregion

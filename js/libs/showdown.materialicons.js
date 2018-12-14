@@ -42,7 +42,7 @@
                 return match;
             }
 
-            return '<svg class="' + classNames + '"><path d="' + icon.d + '"></path></svg>'
+            return '<svg width="24px" height="24px" viewBox="0 0 24 24" class="' + classNames + '"><path d="' + icon.d + '"></path></svg>'
         }
     };
     

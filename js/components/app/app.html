@@ -41,9 +41,12 @@
             <!-- ko if: tool() === 'images' -->
             <images-tool params="items: images, insertImageCallback: insertImage.bind($component)"></images-tool>
             <!-- /ko -->
+            <!-- ko if: tool() === 'emoji' -->
+            emoji
+            <!-- /ko -->
             <!-- ko if: tool() === 'cheatsheet' -->
             <cheatsheet-tool params="insertMarkdownCallback: insertMarkdown.bind($component), selectMarkdownCallback: selectMarkdown.bind($component)"></cheatsheet-tool>
-            <!-- /ko -->                
+            <!-- /ko -->
         </div>        
         <!-- /ko -->
         <!-- ko if: isConnected() -->

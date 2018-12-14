@@ -36,5 +36,26 @@
             width: calc(100% - 2rem);
             height: 2rem;
         }
-    }    
+    }
+
+    &__item {
+        text-align: center;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            vertical-align: middle;
+
+            path {
+                fill: fade(@fg-color, 90%);
+            }
+        }
+
+        .btn-flat {
+            display: inline-block;
+            width: 2.25rem;
+            padding: 0;
+            margin: .25rem;
+        }
+    }
 }

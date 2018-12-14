@@ -12,7 +12,12 @@
     </div>
     <div class="row" data-bind="optiscroll">
         <!-- ko foreach: filtered-->
-        <div class="emoji-tool__item col s4" data-bind="text: n">
+        <div class="emoji-tool__item col s3">
+            <button class="btn-flat tooltip tooltip--bottom" data-bind="attr: { title: n }">
+                <svg>
+                    <path data-bind="attr: { d: d }"></path>
+                </svg>
+            </button>
         </div>
         <!-- /ko -->
     </div>    

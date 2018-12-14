@@ -58,6 +58,11 @@
         <!-- /ko -->
         <!-- ko if: hasTemplate -->
         <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Emoji" data-bind="css: { 'toolbar__item--active': tool() === 'emoji' }, click: setTool.bind($component, 'emoji')">
+                <i class="dp-icons">emoticon_devil_outline</i>
+            </button>
+        </li>        
+        <li>
             <button class="btn-flat toolbar__item tooltip tooltip--right" title="Cheatsheet" data-bind="css: { 'toolbar__item--active': tool() === 'cheatsheet' }, click: setTool.bind($component, 'cheatsheet')">
                 <i class="dp-icons">lifebuoy</i>
             </button>

@@ -19,6 +19,9 @@ define([
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
         this.items = ko.observableArray(icons);
         this.filtered = ko.computed(this._filtered, this);
+
+        this.insertMarkdownCallback = args.insertMarkdownCallback;
+        this.selectMarkdownCallback = args.selectMarkdownCallback;
     };
 
     //#endregion
@@ -52,6 +55,24 @@ define([
 
 
     //#region [ Methods : Public ]
+
+    /**
+     * Vloží emoji do textu.
+     * 
+     * @param {object} emoji Emoji ikonka.
+     */
+    Model.prototype.insert = function (emoji) {
+        var insert = this.insertMarkdownCallback;
+        var select = this.selectMarkdownCallback;
+        
+        if ((typeof (insert) !== "function") || (typeof (select) !== "function")){
+            return;
+        }
+        
+        var p = insert(":" + emoji.n + ":");
+        select(p.from, p.to);
+    };
+
     
     /**
      * Dispose.

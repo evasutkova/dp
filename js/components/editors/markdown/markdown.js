@@ -12,6 +12,7 @@ define([
     "showdownJsfiddle",
     "showdownIframe",
     "showdownKbd",
+    "showdownMaterialicons",
     "dp/bindings/optiscroll"
 ], function (ko, view, Showdown, CodeMirror) {
     //#region [ Constructor ]
@@ -35,7 +36,7 @@ define([
             openLinksInNewWindow: true,
             highlightAuto: false,
             customizedHeaderId: true,
-            extensions: ["footnotes", "kbd", "nomnoml", "jsfiddle", "iframe", "highlight"]
+            extensions: ["footnotes", "kbd", "materialicons", "nomnoml", "jsfiddle", "iframe", "highlight"]
         });
         
         this.preview = ko.computed(this._preview, this);

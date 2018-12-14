@@ -29,6 +29,7 @@ require({
         showdownJsfiddle: "/dp/wwwroot/js/libs/showdown.jsfiddle",
         showdownIframe: "/dp/wwwroot/js/libs/showdown.iframe",
         showdownKbd: "/dp/wwwroot/js/libs/showdown.kbd",
+        showdownMaterialicons: "/dp/wwwroot/js/libs/showdown.materialicons",
         syncscroll: "/dp/wwwroot/js/libs/syncscroll",
         mustache: "/dp/wwwroot/js/libs/mustache",
         filesaver: "/dp/wwwroot/js/libs/filesaver",
@@ -36,7 +37,8 @@ require({
         tooltip: "/dp/wwwroot/js/libs/tooltip",
         lodash: "/dp/wwwroot/js/libs/lodash",
         dagre: "/dp/wwwroot/js/libs/dagre",
-        nomnoml: "/dp/wwwroot/js/libs/nomnoml"
+        nomnoml: "/dp/wwwroot/js/libs/nomnoml",
+        emoji: "/dp/wwwroot/js/emoji/material-design-icons"
     },
     map: {
         "*": {

@@ -2,7 +2,7 @@ define([
     "knockout",
     "text!./emoji.html",
     "session!EmojiTool",
-    "dp/emoji/material-design-icons",
+    "emoji",
     "dp/bindings/optiscroll"
 ], function (ko, view, session, icons) {
     //#region [ Constructor ]

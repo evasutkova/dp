@@ -1,7 +1,8 @@
 define([
     "knockout",
-    "text!./emoji.html"
-], function (ko, view) {
+    "text!./emoji.html",
+    "session!EmojiTool",
+], function (ko, view, session) {
     //#region [ Constructor ]
 
     /**
@@ -12,6 +13,8 @@ define([
 	 */
     var Model = function (args, info) {
         console.log("EmojiTool()");
+
+        this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
     };
 
     //#endregion
@@ -24,6 +27,10 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~EmojiTool()");
+
+        session.set({
+            search: this.search()
+        });
     };
 
     //#endregion

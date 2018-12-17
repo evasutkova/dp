@@ -6,6 +6,21 @@
     height: 100%;
     position: relative;
 
+    .row {
+        &:last-child {
+            margin-top: -.75rem;
+            position: relative;
+            height: calc(100vh - 3.5rem);
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+    }
+    
+    .optiscroll-v {
+        top: 0 !important;
+        bottom: 0 !important;
+    } 
+
     &__search {
         margin: 0.25rem 0 0 0;
 

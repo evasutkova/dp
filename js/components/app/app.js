@@ -1101,6 +1101,98 @@ define([
 
 
     /**
+     * Otvorí a načíta dokument zo vstupného blob-u.
+     * 
+     * @param {string} fileName Názov súboru.
+     * @param {Blob} blob Blob reprezentujúci súbor.
+     */
+    Model.prototype.openBlob = function (fileName, blob) {
+        var $this = this;
+
+        var name = fileName;
+        var archive = null;
+        var template = null;
+        var meta = null;
+        var nodes = null;
+        var images = null;
+        var scripts = null;
+
+        // Pokusime sa rozbalit zip
+        new zip()
+            .loadAsync(blob)
+            .then(function (a) {
+                // Odlozime archiv
+                archive = a;
+
+                // Nacitame sablonu
+                return archive.file("template.html").async("string");
+            })
+            .then(function(r) {
+                template = r;
+
+                // Nacitame metainformacie
+                return archive.file("meta.json").async("string");
+            })
+            .then(function(r) {
+                meta = JSON.parse(r);
+
+                // Nacitame uzly dokumentu
+                return archive.file("nodes.json").async("string");
+            })
+            .then(function(r) {
+                nodes = JSON.parse(r);
+
+                // Nacitame obrazky
+                var files = [];
+                archive.folder("images").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);
+            })
+            .then(function (r) {
+                images = r;
+
+                // Nacitame skripty
+                var files = [];
+                archive.folder("scripts").forEach(function (relativePath, file) {
+                    files.push(file.async("blob").then(function(blob) {
+                        return {
+                            title: file.name,
+                            blob: blob
+                        };
+                    }));
+                });
+                return Promise.all(files);                
+            })
+            .then(function (r) {
+                scripts = r;
+            })
+            .then(function() {
+                $this._open(name, template, meta, nodes, images, scripts);
+                var an = $this._findActiveNode($this.nodes());
+                if(an) {
+                    $this._selectNode(an);
+                }
+                $this.loading(false);
+            })            
+            .catch(function(error) {
+                $this.loading(false);
+
+                if(!error) {
+                    return;
+                }
+                console.error("App : openBlob() : " + error);
+                $this.confirm("Otvoriť projekt", (typeof(error) === "string") ? error : "Nepodarilo sa načítať obsah súboru.", "Ok");
+            });            
+    };    
+
+
+    /**
      * Zobrazí náhľad výstupu.
      */
     Model.prototype.preview = function() {

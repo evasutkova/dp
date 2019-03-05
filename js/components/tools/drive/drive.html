@@ -30,7 +30,7 @@
         <div class="col s12">
             <ul class="collection drive-tool__files" data-bind="foreach: files">
                 <li class="collection-item">
-                    <a class="btn-flat drive-tool__file">
+                    <a class="btn-flat drive-tool__file" data-bind="click: $component.downloadFile.bind($component)">
                         <i class="dp-icons left">
                             <img data-bind="attr: { src: iconLink }" />
                         </i>

@@ -4,8 +4,10 @@ define([
     "google!client:auth2",
     "text!./drive.html",
     "session!DriveTool",
+    "jquery",
+    "ajaxTransport",
     "dp/bindings/optiscroll"
-], function (module, ko, api, view, session) {
+], function (module, ko, api, view, session, $) {
     //#region [ Fields ]
 
     var cnf = module.config();
@@ -39,6 +41,9 @@ define([
             args.disconnectAction(this.disconnect.bind(this));
         }
 
+        this.openBlobCallback = args.openBlobCallback;
+        this.loadingCallback = args.loadingCallback;
+        
         this._search_subscribe = this.search.subscribe(this._onSearch, this);
     };
 
@@ -185,6 +190,67 @@ define([
         return s.toFixed(2) + unit;
     };
 
+
+    /**
+     * Zistí mime type.
+     * 
+     * @param {string} mimeType Mime type.
+     */
+    Model.prototype._mimeType = function(mimeType) {
+        switch(mimeType) {
+            case "application/vnd.google-apps.document":
+                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            case "application/vnd.google-apps.spreadsheet":
+                return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            case "application/vnd.google-apps.audio":
+                return "application/zip";
+            case "application/vnd.google-apps.drawing":
+                return "application/zip";
+            case "application/vnd.google-apps.file":
+                return "application/zip";
+            case "application/vnd.google-apps.folder":
+                return "application/zip";
+            case "application/vnd.google-apps.form":
+                return "application/zip";
+            case "application/vnd.google-apps.fusiontable":
+                return "application/zip";
+            case "application/vnd.google-apps.map":
+                return "application/zip";
+            case "application/vnd.google-apps.photo":
+                return "application/zip";
+            case "application/vnd.google-apps.presentation":
+                return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+            case "application/vnd.google-apps.script":
+                return "application/zip";
+            case "application/vnd.google-apps.site":
+                return "application/zip";
+            case "application/vnd.google-apps.unknown":
+                return "application/zip";
+            case "application/vnd.google-apps.video":
+                return "application/zip";
+            case "application/vnd.google-apps.drive-sdk":
+                return "application/zip";
+            default:
+                return "application/zip";
+        }
+    };
+
+
+    /**
+     * Zobrazí/skryje loader.
+     *
+     * @param {boolean} isLoading Ak je true tak sa loader zobrazí inak sa skryje.
+     * @param {string} title Text - nadpis.
+     * @param {string} cancelText Text pre tlačidlo zrušiť.
+     */
+    Model.prototype._loading = function (isLoading, title, cancelText) {
+        if(typeof(this.loadingCallback) !== "function") {
+            return;
+        }
+
+        this.loadingCallback(isLoading, title, cancelText);
+    };   
+
     //#endregion
 
 
@@ -260,7 +326,55 @@ define([
         api.client.drive.files
             .list(query)
             .then(this._onFilesListed.bind(this));
-    };    
+    };
+
+
+    /**
+     * Stiahnutie a otvorenie súboru.
+     */
+    Model.prototype.downloadFile = function(file) {
+        if(!this.isConnected()) {
+            return;
+        }
+
+        if(typeof(this.openBlobCallback) !== "function") {
+            return;
+        }
+
+        this._loading(true, "Otvára sa projekt");
+
+        var token = api.client.getToken();
+
+        var prms = {
+            method: "GET",
+            url: "https://www.googleapis.com/drive/v3/files/" + file.id,
+            headers: {
+                "Authorization": [token.token_type, token.access_token].join(" ")
+            },
+            dataType: "arraybuffer",
+            data: {
+                "key": cnf.apiKey
+            }            
+        };
+
+        if (file.webContentLink) {
+            prms.data.alt = "media";
+        }
+        else {
+            prms.url += "/export";
+            prms.data.mimeType = this._mimeType(file.mimeType);
+        }
+
+        var $this = this;
+
+        $.ajax(prms).then(function(data, status, xhr) {
+            var blob = new Blob([data], {
+                type: xhr.getResponseHeader("Content-Type")
+            });
+            
+            $this.openBlobCallback(file.name, blob);
+        });
+    };
     
 
     /**

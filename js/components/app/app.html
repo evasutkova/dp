@@ -14,7 +14,12 @@
         <!-- ko if: tool() -->
         <div class="tool">
             <!-- ko if: tool() === 'drive' -->
-            <drive-tool params="isConnected: isConnected, user: user, files: files, disconnectAction: _drive_disconnectAction"></drive-tool>
+            <drive-tool params="isConnected: isConnected, 
+                                user: user, 
+                                files: files, 
+                                disconnectAction: _drive_disconnectAction,
+                                openBlobCallback: openBlob.bind($component),
+                                loadingCallback: loading.bind($component)"></drive-tool>
             <!-- /ko -->
             <!-- ko if: tool() === 'explorer' -->
             <explorer-tool params="editor: editor, 

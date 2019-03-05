@@ -23,6 +23,13 @@
                 <i class="dp-icons">content_save</i>
             </button>
         </li>
+        <!-- ko if: isConnected() -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Uložiť projekt do Google Drive" data-bind="click: saveCloud">
+                <i class="dp-icons">cloud_upload_outline</i>
+            </button>
+        </li>        
+        <!-- /ko -->
         <li>
             <button class="btn-flat toolbar__item tooltip tooltip--right" title="Stiahnuť výstup" data-bind="click: download">
                 <i class="dp-icons">cloud_download</i>

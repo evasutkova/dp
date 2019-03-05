@@ -1331,6 +1331,14 @@ define([
 
 
     /**
+     * Uloží súbor do cloudu.
+     */
+    Model.prototype.saveCloud = function() {
+        console.info("saveCloud");
+    };
+
+
+    /**
      * Uloží výstup projekt.
      */
     Model.prototype.download = function() {

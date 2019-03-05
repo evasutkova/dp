@@ -24,6 +24,7 @@ define([
         this.saveCallback = args.saveCallback;
         this.downloadCallback = args.downloadCallback;
         this.newProjectCallback = args.newProjectCallback;
+        this.saveCloudCallback = args.saveCloudCallback;
     };
 
     //#endregion
@@ -70,6 +71,16 @@ define([
         }
     };
 
+
+    /**
+     * Uloží projekt do google drive.
+     */
+    Model.prototype.saveCloud = function () {
+        if(typeof(this.saveCloudCallback) === "function") {
+            this.saveCloudCallback();
+        }
+    };
+    
 
     /**
      * Uloží výstup projekt.

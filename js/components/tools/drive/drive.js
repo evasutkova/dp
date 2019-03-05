@@ -252,7 +252,50 @@ define([
         }
 
         this.loadingCallback(isLoading, title, cancelText);
-    };   
+    };
+
+
+    /**
+     * Upload súboru na server.
+     * 
+     * @param {string} fileName Názov súboru.
+     * @param {Blob} content Obsah súboru.
+     */
+    Model.prototype._uploadFile = function(fileName, content) {
+        var file = content;
+        var metadata = {
+            "name": fileName,
+            "mimeType": "application/x-zip"
+        };
+        
+        var form = new FormData();
+        form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
+        form.append("file", file);
+
+        var token = api.client.getToken();
+
+        var prms = {
+            method: "POST",
+            url: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&key=" + cnf.apiKey,
+            headers: {
+                "Authorization": [token.token_type, token.access_token].join(" ")
+            },
+            dataType: "json",
+            data: form,
+            processData: false,
+            contentType: false
+        };
+
+        var $this = this;
+
+        return $.ajax(prms)
+            .then(function(data) {
+                $this.files([]);
+                $this.nextPage("");
+                $this.listFiles();
+                return data;
+            }); 
+    };    
 
     //#endregion
 
@@ -388,7 +431,19 @@ define([
      * @param {Blob} content Obsah súboru.
      */
     Model.prototype.uploadFile = function(fileInfo, fileName, content) {
-        debugger;
+        if(!fileInfo)  {
+            return this._uploadFile(fileName, content);
+        }
+
+        // Zmazeme stary subor, ak bol povodne otvoreny z google drive
+        var $this = this;
+        return api.client.drive.files
+            .delete({
+                fileId: fileInfo.id
+            })
+            .then(function() {
+                return $this._uploadFile(fileName, content);
+            });
     };
 
 

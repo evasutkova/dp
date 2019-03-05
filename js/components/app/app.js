@@ -1356,11 +1356,18 @@ define([
             return;
         }
 
+        var $this = this;
+        this.loading(true, "Ukladá sa projekt");
         this.save(false)
             .then(function(r) {
                 return action(r.fileCloud, r.fileName, r.content);
             })
+            .then(function(r) {
+                $this.fileCloud(r);
+                $this.loading(false);
+            })
             .catch(function(error) {
+                $this.loading(false);
                 console.error("App : saveCloud() : " + error);
                 $this.confirm("Uloženie projektu", "Nepodarilo sa uložiť projekt.", "Ok");
             });

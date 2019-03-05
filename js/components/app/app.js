@@ -44,7 +44,8 @@ define([
         this.nodes = ko.observableArray([]);
         this.images = ko.observableArray([]);
         this.scripts = ko.observableArray([]);
-        
+        this.fileCloud = ko.observable(null);
+
         this.activeNode = ko.observable(null);
         this.activeImage = ko.observable(null);
         this.activeScript = ko.observable(null);
@@ -300,6 +301,7 @@ define([
         this.editor("");
         this.title("");
 
+        this.fileCloud(null);
         this.fileName(fileName);
         this.template(template);
         this.meta(this._parseMeta(meta));
@@ -1175,6 +1177,7 @@ define([
             })
             .then(function() {
                 $this._open(name, template, meta, nodes, images, scripts);
+                $this.fileCloud(fileInfo);
                 var an = $this._findActiveNode($this.nodes());
                 if(an) {
                     $this._selectNode(an);
@@ -1242,6 +1245,7 @@ define([
         var scripts;
         var images;
         var archive;
+        var fileCloud = this.fileCloud();
 
         return this.toJson()
             .then(function (json) {
@@ -1329,6 +1333,7 @@ define([
                 else {
                     return {
                         fileName: fileName,
+                        fileCloud: fileCloud,
                         content: content
                     };
                 }
@@ -1353,7 +1358,7 @@ define([
 
         this.save(false)
             .then(function(r) {
-                return action(r.fileName, r.content);
+                return action(r.fileCloud, r.fileName, r.content);
             })
             .catch(function(error) {
                 console.error("App : saveCloud() : " + error);

@@ -383,10 +383,11 @@ define([
     /**
      * Upload súboru na server.
      * 
+     * @param {object} fileInfo Info o súbore.
      * @param {string} fileName Názov súboru.
      * @param {Blob} content Obsah súboru.
      */
-    Model.prototype.uploadFile = function(fileName, content) {
+    Model.prototype.uploadFile = function(fileInfo, fileName, content) {
         debugger;
     };
 

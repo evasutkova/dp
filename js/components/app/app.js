@@ -58,6 +58,7 @@ define([
         this._window_openAction = ko.observable();
         this._window_closeAction = ko.observable();
         this._drive_disconnectAction = ko.observable();
+        this._drive_uploadFileAction = ko.observable();
         this._markdownEditor_insertAction = ko.observable();
         this._markdownEditor_selectAction = ko.observable();
 
@@ -1324,9 +1325,6 @@ define([
                 console.error("App : save() : " + error);
                 $this.confirm("Uloženie projektu", "Nepodarilo sa uložiť projekt.", "Ok");
             });        
-        // Pridame samotny obsah
-        //var img = zip.folder("images");
-        //img.file("smile.gif", imgData, {base64: true});
     };
 
 
@@ -1334,7 +1332,14 @@ define([
      * Uloží súbor do cloudu.
      */
     Model.prototype.saveCloud = function() {
-        console.info("saveCloud");
+        var action = this._drive_uploadFileAction();
+
+        if (typeof (action) !== "function") {
+            console.error("App : saveCloud() : Akcia pre nahratie súboru nie je definovaná.");
+            return;
+        }
+
+        action();
     };
 
 

@@ -40,7 +40,10 @@ define([
         if (typeof (args.disconnectAction) === "function") {
             args.disconnectAction(this.disconnect.bind(this));
         }
-
+        if (typeof (args.uploadFileAction) === "function") {
+            args.uploadFileAction(this.uploadFile.bind(this));
+        }
+        
         this.openBlobCallback = args.openBlobCallback;
         this.loadingCallback = args.loadingCallback;
         
@@ -375,7 +378,15 @@ define([
             $this.openBlobCallback(file.name, blob);
         });
     };
-    
+
+
+    /**
+     * Upload súboru na server.
+     */
+    Model.prototype.uploadFile = function() {    
+        console.info("uploadFile");
+    };
+
 
     /**
      * Dispose.

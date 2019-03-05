@@ -1232,14 +1232,18 @@ define([
 
     /**
      * Uloží projekt.
+     * 
+     * @param {boolean} toDisc Ak je nastavené na true súbor sa ukladá na disk.
      */
-    Model.prototype.save = function() {
+    Model.prototype.save = function(toDisc) {
+        toDisc = (typeof(toDisc) === "boolean") ? toDisc : true;
+
         var fileName;
         var scripts;
         var images;
         var archive;
 
-        this.toJson()
+        return this.toJson()
             .then(function (json) {
                 // Odlozime si nazov suboru
                 fileName = json.fileName;
@@ -1319,7 +1323,15 @@ define([
             }) 
             .then(function(content) {
                 // Ponukneme na stiahnutie
-                saveAs(content, fileName);
+                if(toDisc) {
+                    saveAs(content, fileName);
+                }
+                else {
+                    return {
+                        fileName: fileName,
+                        content: content
+                    };
+                }
             })
             .catch(function(error) {
                 console.error("App : save() : " + error);
@@ -1339,7 +1351,14 @@ define([
             return;
         }
 
-        action();
+        this.save(false)
+            .then(function(r) {
+                return action(r.fileName, r.content);
+            })
+            .catch(function(error) {
+                console.error("App : saveCloud() : " + error);
+                $this.confirm("Uloženie projektu", "Nepodarilo sa uložiť projekt.", "Ok");
+            });
     };
 
 

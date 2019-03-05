@@ -54,10 +54,13 @@ define([
 
     /**
      * Zobrazí náhľad výstupu.
+     * 
+     * @param {object} vm View model.
+     * @param {object} e Argumenty
      */
-    Model.prototype.preview = function () {
+    Model.prototype.preview = function (vm, e) {
         if(typeof(this.previewCallback) === "function") {
-            this.previewCallback();
+            this.previewCallback(e.ctrlKey);
         }
     }; 
     

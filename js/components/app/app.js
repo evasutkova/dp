@@ -1198,13 +1198,18 @@ define([
 
     /**
      * Zobrazí náhľad výstupu.
+     * 
+     * @param {boolean} doRefresh Ak je nastavené na true náhľad sa bude obnovovať.
      */
-    Model.prototype.preview = function() {
+    Model.prototype.preview = function(doRefresh) {
         if(previewWindow) {
             this._cancelPreview();
             previewWindow.close();
             previewWindow = null;
-            return;
+
+            if(doRefresh) {
+                return;
+            }
         }
         
         // Otvorime okno s nahladom
@@ -1223,7 +1228,9 @@ define([
                 previewWindow.document.close();
 
                 // Nahlad sa bude obnovovat kazdych 5 sekund
-                previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
+                if(doRefresh) {
+                    previewTimeout = setTimeout($this._refreshPreview.bind($this), previewDuration);
+                }
             })
             .catch(function(error) {
                 $this.loading(false);

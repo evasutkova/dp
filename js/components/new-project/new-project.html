@@ -9,7 +9,7 @@
         </div>          
         <div class="row new-project__container" data-bind="optiscroll">
             <!-- ko foreach: items -->
-            <div class="new-project__item tooltip tooltip--bottom col xl3 l4 m6 s12" 
+            <div class="new-project__item tooltip tooltip--bottom col s3" 
                  data-bind="attr: { title: title }, css: { 'new-project__item--active': $component.activeItem() === $data }, click: $component.select.bind($component)">
                 <div class="new-project__item-content">
                     <div class="new-project__item-image" data-bind="style: { 'background-image': $component.thumnailUrl($data) }"></div>                

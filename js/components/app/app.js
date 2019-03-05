@@ -1104,13 +1104,13 @@ define([
     /**
      * Otvorí a načíta dokument zo vstupného blob-u.
      * 
-     * @param {string} fileName Názov súboru.
+     * @param {object} fileInfo Info o súbore.
      * @param {Blob} blob Blob reprezentujúci súbor.
      */
-    Model.prototype.openBlob = function (fileName, blob) {
+    Model.prototype.openBlob = function (fileInfo, blob) {
         var $this = this;
 
-        var name = fileName;
+        var name = fileInfo.name;
         var archive = null;
         var template = null;
         var meta = null;

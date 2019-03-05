@@ -375,7 +375,7 @@ define([
                 type: xhr.getResponseHeader("Content-Type")
             });
             
-            $this.openBlobCallback(file.name, blob);
+            $this.openBlobCallback(file, blob);
         });
     };
 

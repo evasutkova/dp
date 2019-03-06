@@ -1,0 +1,21 @@
+<div class="images-tool">
+    <div class="row" style="padding: 0 .75rem">
+        <div class="input-field input-field--negative col s12 images-tool__search">
+            <i class="dp-icons prefix">search</i>
+            <input type="text" placeholder="Nájsť obrázok"
+                   data-bind="textInput: search, 
+                              event: { 
+                                focus: function(m, e) { $(e.target.parentNode).addClass('input-field--active'); }, 
+                                blur: function(m, e) { $(e.target.parentNode).removeClass('input-field--active'); }
+                              }" />
+        </div>
+    </div>
+    <div class="row" data-bind="optiscroll">
+        <!-- ko foreach: filtered-->
+        <button class="btn-flat images-tool__item col s12" data-bind="click: $component.insertImage.bind($component)">
+            <img data-bind="attr: { 'src': url }" />
+            <span data-bind="text: title"></span>
+        </button>
+        <!-- /ko -->
+    </div>
+</div>

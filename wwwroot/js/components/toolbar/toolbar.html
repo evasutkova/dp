@@ -1,0 +1,89 @@
+<div class="toolbar">
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Nový projekt" data-bind="click: newProject">
+                <i class="dp-icons">folder_plus_outline</i>
+            </button>
+        </li>        
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Google Drive" data-bind="css: { 'toolbar__item--active': tool() === 'drive' }, click: setTool.bind($component, 'drive')">
+                <i class="dp-icons">google_drive</i>
+            </button>
+        </li>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Otvoriť projekt" data-bind="click: open">
+                <i class="dp-icons">folder_open</i>
+            </button>
+        </li>
+    </ul>
+    <!-- ko if: hasMeta() && hasTemplate() -->
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Uložiť projekt" data-bind="click: save">
+                <i class="dp-icons">content_save</i>
+            </button>
+        </li>
+        <!-- ko if: isConnected() -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Uložiť projekt do Google Drive" data-bind="click: saveCloud">
+                <i class="dp-icons">cloud_upload_outline</i>
+            </button>
+        </li>        
+        <!-- /ko -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Stiahnuť výstup" data-bind="click: download">
+                <i class="dp-icons">cloud_download</i>
+            </button>
+        </li>        
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Náhľad výstupu" data-bind="click: preview">
+                <i class="dp-icons">file_find</i>
+            </button>
+        </li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: hasMeta() || hasTemplate() -->
+    <ul>
+        <!-- ko if: hasTemplate -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Obsah" data-bind="css: { 'toolbar__item--active': tool() === 'explorer' }, click: setTool.bind($component, 'explorer')">
+                <i class="dp-icons">file_tree</i>
+            </button>
+        </li>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Obrázky" data-bind="css: { 'toolbar__item--active': tool() === 'images' }, click: setTool.bind($component, 'images')">
+                <i class="dp-icons">folder_image</i>
+            </button>
+        </li>        
+        <!-- /ko -->
+        <!-- ko if: hasMeta -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Atribúty" data-bind="css: { 'toolbar__item--active': tool() === 'settings' }, click: setTool.bind($component, 'settings')">
+                <i class="dp-icons">tag_multiple</i>
+            </button>
+        </li>
+        <!-- /ko -->
+        <!-- ko if: hasTemplate -->
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Emoji" data-bind="css: { 'toolbar__item--active': tool() === 'emoji' }, click: setTool.bind($component, 'emoji')">
+                <i class="dp-icons">emoticon_devil_outline</i>
+            </button>
+        </li>        
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Cheatsheet" data-bind="css: { 'toolbar__item--active': tool() === 'cheatsheet' }, click: setTool.bind($component, 'cheatsheet')">
+                <i class="dp-icons">lifebuoy</i>
+            </button>
+        </li>
+        <!-- /ko -->        
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: isConnected() -->
+    <ul>
+        <li>
+            <button class="btn-flat toolbar__item tooltip tooltip--right" title="Odhlásiť" data-bind="click: disconnect">
+                <i class="dp-icons">power</i>
+            </button>
+        </li> 
+    </ul>
+    <!-- /ko -->
+</div>

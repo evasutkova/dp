@@ -1,0 +1,9 @@
+<div class="keywords">
+    Kľúčové slová:
+    <!-- ko if: items().length <= 0 -->-<!-- /ko -->
+    <!-- ko if: items().length -->
+    <!-- ko foreach: items -->
+    <span class="keywords__item" data-bind="text: $data"></span>
+    <!-- /ko -->
+    <!-- /ko-->
+</div>

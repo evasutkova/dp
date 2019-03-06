@@ -1,0 +1,129 @@
+<div class="app">
+    <div class="app__side">
+        <toolbar params="tool: tool, 
+                         isConnected: isConnected, 
+                         hasMeta: meta().length > 0,
+                         hasTemplate: template().length > 0,
+                         disconnectCallback: disconnect.bind($component), 
+                         openCallback: open.bind($component),
+                         previewCallback: preview.bind($component),
+                         saveCallback: save.bind($component),
+                         downloadCallback: download.bind($component),
+                         newProjectCallback: newProject.bind($component),
+                         saveCloudCallback: saveCloud.bind($component)">
+        </toolbar>
+        <!-- ko if: tool() -->
+        <div class="tool">
+            <!-- ko if: tool() === 'drive' -->
+            <drive-tool params="isConnected: isConnected, 
+                                user: user, 
+                                files: files, 
+                                disconnectAction: _drive_disconnectAction,
+                                uploadFileAction: _drive_uploadFileAction,
+                                openBlobCallback: openBlob.bind($component),
+                                loadingCallback: loading.bind($component)"></drive-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'explorer' -->
+            <explorer-tool params="editor: editor, 
+                                   title: title, 
+                                   hasTemplate: template().length > 0, 
+                                   nodes: nodes, 
+                                   activeNode: activeNode,
+                                   selectNodeCallback: selectNode.bind($component),
+                                   deleteNodeCallback: deleteNode.bind($component),
+                                   renameNodeCallback: renameNode.bind($component),
+                                   moveNodeCallback: moveNode.bind($component),
+                                   keywordsNodeCallback: keywordsNode.bind($component),
+                                   flagNodeCallback: flagNode.bind($component),
+                                   scripts: scripts,
+                                   activeScript: activeScript,
+                                   selectScriptCallback: selectScript.bind($component),
+                                   renameScriptCallback: renameScript.bind($component),
+                                   deleteScriptCallback: deleteScript.bind($component)">
+            </explorer-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'settings' -->
+            <settings-tool params="meta: meta, promptCallback: prompt.bind($component), confirmCallback: confirm.bind($component)"></settings-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'images' -->
+            <images-tool params="items: images, insertImageCallback: insertImage.bind($component)"></images-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'emoji' -->
+            <emoji-tool params="insertMarkdownCallback: insertMarkdown.bind($component), selectMarkdownCallback: selectMarkdown.bind($component)"></emoji-tool>
+            <!-- /ko -->
+            <!-- ko if: tool() === 'cheatsheet' -->
+            <cheatsheet-tool params="insertMarkdownCallback: insertMarkdown.bind($component), selectMarkdownCallback: selectMarkdown.bind($component)"></cheatsheet-tool>
+            <!-- /ko -->
+        </div>        
+        <!-- /ko -->
+        <!-- ko if: isConnected() -->
+            <user params="user: user"></user>
+        <!-- /ko -->        
+    </div>
+    <div class="app__main">
+        <div class="app__actions">
+            <!-- ko if: fileName().length -->
+            <h1 class="app__fileName" data-bind="text: fileName"></h1>
+            <!-- /ko -->
+            <!-- ko if: title().length -->
+            <h2 class="app__title" data-bind="text: title"></h2>
+            <!-- /ko -->
+            <!-- ko if: fileName().length && (['template', 'image', 'script', 'scripts'].indexOf(editor()) === -1) -->
+            <new-node-action params="activeNode: activeNode, 
+                                     selectNodeCallback: selectNode.bind($component), 
+                                     addNodeCallback: addNode.bind($component)">
+            </new-node-action>
+            <!-- /ko -->
+            <!-- ko if: fileName().length && (editor() === 'image') -->
+            <new-image-action params="selectImageCallback: selectImage.bind($component),
+                                      addImageCallback: addImage.bind($component)">
+            </new-image-action>
+            <!-- /ko -->
+            <!-- ko if: fileName().length && (editor() === 'scripts') -->
+            <new-script-action params="selectScriptCallback: selectScript.bind($component),
+                                       addScriptCallback: addScript.bind($component)">
+            </new-script-action>
+            <!-- /ko -->
+        </div>
+        <div class="app__main">
+            <!-- ko if: editor() === 'template' -->
+            <template-editor params="content: template"></template-editor>
+            <!-- /ko -->
+            <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
+            <markdown-editor params="content: activeNode().content, images: references.images, insertAction: _markdownEditor_insertAction, selectAction: _markdownEditor_selectAction"></markdown-editor>
+            <!-- /ko -->
+            <!-- ko if: editor() === 'image' -->
+            <image-editor params="editor: editor,
+                                  items: images, 
+                                  activeImage: activeImage,
+                                  selectImageCallback: selectImage.bind($component),
+                                  renameImageCallback: renameImage.bind($component),
+                                  deleteImageCallback: deleteImage.bind($component),
+                                  fullscreeImageCallback: fullscreeImage.bind($component)"></image-editor>
+            <!-- /ko -->
+            <!-- ko if: (editor() === 'script') && (activeScript() !== null) -->
+            <script-editor params="url: activeScript().url, type: activeScript().extension"></script-editor>
+            <!-- /ko -->            
+        </div>
+        <!-- ko if: (editor() === 'markdown') && (activeNode() !== null) -->
+        <div class="app__actions app__actions--footer">
+            <node-id params="node: activeNode"></node-id>
+            <keywords params="keywords: activeNode().keywords"></keywords>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: (editor() === 'image') && (activeImage() !== null) -->
+        <div class="app__actions app__actions--footer">
+            <node-id params="node: activeImage"></node-id>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: (editor() === 'script') && (activeScript() !== null) -->
+        <div class="app__actions app__actions--footer">
+            <node-id params="node: activeScript"></node-id>
+        </div>
+        <!-- /ko -->
+    </div>
+    <prompt-modal params="openAction: _prompt_openAction"></prompt-modal>
+    <confirm-modal params="openAction: _confirm_openAction"></confirm-modal>
+    <file-browser-modal params="openAction: _fileBrowser_openAction"></file-browser-modal>
+    <window-modal params="openAction: _window_openAction, closeAction: _window_closeAction"></window-modal>
+</div>

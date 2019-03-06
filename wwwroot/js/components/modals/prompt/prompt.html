@@ -1,0 +1,17 @@
+<div class="prompt-modal modal">
+    <div class="modal-content">
+        <!-- ko if: title() -->
+        <h6 data-bind="text: title"></h6>
+        <!-- /ko -->
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="prompt-modal__value" type="text" data-bind="textInput: value, enter: close.bind($component, value), escape: close.bind($component, null)" />
+                <label for="prompt-modal__value" data-bind="html: text" style="left:0"></label>
+            </div>
+        </div>        
+    </div>
+    <div class="modal-footer">
+        <button class="btn-flat btn-flat--secondary" data-bind="click: close.bind($component, null), text: no"></button>
+        <button class="btn btn--primary" data-bind="click: close.bind($component, value), text: yes"></button>
+    </div>
+</div>

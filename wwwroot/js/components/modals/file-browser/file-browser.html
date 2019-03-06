@@ -1,0 +1,29 @@
+<div class="file-browser-modal modal">
+    <div class="modal-content">
+        <!-- ko if: title() -->
+        <h6 data-bind="text: title"></h6>
+        <!-- /ko -->
+        <div class="row">
+            <div class="file-field input-field col s12 no-padding">
+                <div>
+                    <input id="file-browser-modal__file" type="file" data-bind="event: { change: _file_onChange }"/>
+                    <label for="file-browser-modal__file" data-bind="text: text" style="left:0"></label>                
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path file-browser-modal__file-path" type="text" data-bind="value: value" />
+                </div>
+            </div>       
+            <input class="file-browser-modal__value" type="text"
+                   data-bind="enter: close.bind($component, files),
+                              escape: close.bind($component, null),
+                              event: { 
+                                  'focus': function(e) {e.modal.el.querySelector('.file-field').className += ' input-field--active'}, 
+                                  'blur': function(e) {e.modal.el.querySelector('.file-field').className = 'file-field input-field col s12 no-padding'}
+                              }"/>                 
+        </div>        
+    </div>
+    <div class="modal-footer">
+        <button class="btn-flat btn-flat--secondary" data-bind="click: close.bind($component, null), text: no"></button>
+        <button class="btn btn--primary" data-bind="click: close.bind($component, files), text: yes"></button>
+    </div>
+</div>

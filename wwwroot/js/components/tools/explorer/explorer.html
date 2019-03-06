@@ -1,0 +1,100 @@
+<div class="explorer-tool" data-bind="optiscroll, click: select.bind($component, null)">
+    <script type="text/html" id="explorer-tool__item-template">
+        <!-- ko foreach: nodes -->
+        <li class="collection-item">
+            <button class="btn-flat explorer-tool__item" 
+                    data-bind="css: { 'explorer-tool__item--active': isActive, 'explorer-tool__item--notoc': !isInToc() }, click: $component.select.bind($component), clickBubble: false, event: { dblclick: $component.expand }">
+                <i class="dp-icons left" data-bind="text: $component._icon($data)"></i>
+                <span data-bind="text: title"></span>
+            </button>
+            <!-- ko if: isActive() && $component.tools().length -->
+            <button class="btn-flat explorer-tool__action tooltip tooltip--right" title="Možnosti" 
+                    data-bind="clickBubble: false, dropdown: { target: 'explorer-tool-menu', constrainWidth: false, coverTrigger: false, alignment: 'right', container: '.app' }">
+                <i class="dp-icons">dots_vertical</i>
+            </button>
+            <ul id="explorer-tool-menu" class="dropdown-content explorer-tool-menu" data-bind="foreach: $component.tools">
+                <li>
+                    <button class="btn-flat explorer-tool-menu__item" 
+                        data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }, click: action, clickBubble: false">
+                        <i class="dp-icons left" data-bind="text: icon"></i>
+                        <span data-bind="text: text"></span>
+                    </button>
+                </li>
+            </ul>
+            <!-- /ko -->
+        </li>
+        <!-- ko if: nodes().length && $data.isExpanded() -->
+        <li>
+            <ul class="collection explorer-tool__tree" data-bind="template: { name: 'explorer-tool__item-template', data: { nodes: nodes } }">
+            </ul>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+    </script>
+    <div class="row" style="margin-bottom: 0">
+        <div class="col s12" style="margin:0.5rem 0">
+            <ul class="collection explorer-tool__tree">
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="event: { dblclick: $component.expand.bind($component, $component) }">
+                        <i class="dp-icons left" data-bind="text: isExpanded() ? 'folder_open' : 'folder'"></i>
+                        <span>Obsah</span>
+                    </button>
+                </li>
+                <!-- ko if: isExpanded() && nodes().length -->
+                <li>
+                    <ul class="collection explorer-tool__tree" data-bind="template: { name: 'explorer-tool__item-template', data: { nodes: nodes } }">
+                    </ul>
+                </li>                
+                <!-- /ko -->
+                <!-- ko if: hasTemplate -->
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="click: editImages, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'image' }">
+                        <i class="dp-icons left">folder_image</i>
+                        <span>Obrázky</span>
+                    </button>
+                </li>                
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="click: editTemplate, clickBubble: false, css: { 'explorer-tool__item--active': editor() === 'template' }">
+                        <i class="dp-icons left">xml</i>
+                        <span>Šablóna</span>
+                    </button>
+                </li>
+                <li class="collection-item">
+                    <button class="btn-flat explorer-tool__item" data-bind="clickBubble: false, click: selectScript.bind($component, null), event: { dblclick: function() { isScriptsExpanded(!isScriptsExpanded()); } }">
+                        <i class="dp-icons left" data-bind="text: isScriptsExpanded() ? 'folder_open' : 'folder'"></i>
+                        <span>Skripty</span>
+                    </button>                    
+                </li>
+                <!-- ko if: isScriptsExpanded() && scripts().length -->
+                <li>
+                    <ul class="collection explorer-tool__tree" data-bind="foreach: scripts">
+                        <li class="collection-item">
+                            <button class="btn-flat explorer-tool__item" 
+                                    data-bind="css: { 'explorer-tool__item--active': isActive }, click: $component.selectScript.bind($component), clickBubble: false">
+                                <i class="dp-icons left">script_text_outline</i>
+                                <span data-bind="text: title"></span>
+                            </button>
+                            <!-- ko if: isActive() && $component.scriptTools().length -->
+                            <button class="btn-flat explorer-tool__action tooltip tooltip--right" title="Možnosti" 
+                                    data-bind="clickBubble: false, dropdown: { target: 'explorer-tool-scriptmenu', constrainWidth: false, coverTrigger: false, alignment: 'right', container: '.app' }">
+                                <i class="dp-icons">dots_vertical</i>
+                            </button>
+                            <ul id="explorer-tool-scriptmenu" class="dropdown-content explorer-tool-menu" data-bind="foreach: $component.scriptTools">
+                                <li>
+                                    <button class="btn-flat explorer-tool-menu__item" 
+                                        data-bind="css: { 'explorer-tool-menu__item--disabled': !isEnabled }, click: action, clickBubble: false">
+                                        <i class="dp-icons left" data-bind="text: icon"></i>
+                                        <span data-bind="text: text"></span>
+                                    </button>
+                                </li>
+                            </ul>
+                            <!-- /ko -->                            
+                        </li>
+                    </ul>
+                </li>                
+                <!-- /ko -->                
+                <!-- /ko -->
+            </ul>            
+        </div>
+    </div>
+</div>

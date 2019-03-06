@@ -1,0 +1,55 @@
+<div class="drive-tool" data-bind="optiscroll">
+    <!-- ko if: !isConnected() -->
+    <div class="row">
+        <div class="col s12 center">
+            <br>
+            <button class="btn btn--primary" data-bind="click: connect, css: { 'btn--loading': isConnecting }">
+                <!-- ko text: isConnecting() ? '... pripájam sa' : 'Pripojiť' --><!-- /ko -->
+            </button>            
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: isConnected() -->
+    <div class="row" style="margin-bottom: 0;padding: 0 .75rem">
+        <div class="input-field input-field--negative col s12 drive-tool__search">
+            <i class="dp-icons prefix">search</i>
+            <input id="search" type="text" placeholder="Nájsť v zozname"
+                   data-bind="textInput: search, event:{ focus: function(m, e) { $(e.target.parentNode).addClass('input-field--active'); }, blur: function(m, e) { $(e.target.parentNode).removeClass('input-field--active'); }}" />
+        </div>
+    </div>      
+    <!-- /ko -->
+    <!-- ko if: errorMessage() -->
+    <div class="row">
+        <div class="col s12">
+            <p class="red-text" data-bind="text: errorMessage"></p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: files().length -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection drive-tool__files" data-bind="foreach: files">
+                <li class="collection-item">
+                    <a class="btn-flat drive-tool__file" data-bind="click: $component.downloadFile.bind($component)">
+                        <i class="dp-icons left">
+                            <img data-bind="attr: { src: iconLink }" />
+                        </i>
+                        <span data-bind="text: name"></span>
+                        <b class="right" data-bind="text: $parent._size($data.size)"></b>
+                    </a>
+                    <a class="btn-flat" title="Vymazať súbor" style="display: none">
+                        <i class="dp-icons">delete</i>
+                    </a>                    
+                </li>
+            </ul>
+        </div>
+        <!-- ko if: nextPage().length -->
+        <div class="col s12 center">
+            <button class="btn btn--action btn--secondary btn--small" data-bind="click: listFiles.bind($component, nextPage())">
+                Ďalšie záznamy
+            </button>
+        </div>        
+        <!-- /ko -->       
+    </div>
+    <!-- /ko -->
+</div>

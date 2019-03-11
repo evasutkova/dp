@@ -71,6 +71,10 @@ require({
         },
         "dp/components/new-project/new-project": {
             templates: [{
+                title: "Používateľská príručka",
+                url: "dp/templates/help.mdzip",
+                thumnail: "dp/templates/help.png"
+            }, {
                 title: "Záverečný projekt",
                 url: "dp/templates/final-thesis.mdzip",
                 thumnail: "dp/templates/final-thesis.png"

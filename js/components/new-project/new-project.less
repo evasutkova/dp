@@ -1,20 +1,34 @@
 @import "../../../less/_mixins.less";
 
 .new-project {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &-modal {
+        height: 80vh;
+        max-height: 80vh;
+    }
+
+    > .modal-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;        
+    }
+
     .optiscroll-v {
         .optiscroll-vtrack {
             right: 0;
             background: rgba(0, 0, 0, 0.3);
         }
-    }    
+    }
 
     &__container {
         margin-bottom: 0;
         margin-right: 0;
         margin-left: -0.3125rem;
         margin-top: 1rem;
-        min-height: 10rem;
-        max-height: 10rem;        
+        flex: 1;     
     }
 
     &__item {

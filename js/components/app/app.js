@@ -1624,6 +1624,13 @@ define([
 	 */
     Model.createViewModel = function (params, componentInfo) {
         global.app = new Model(params, componentInfo);
+        setTimeout(function() {
+            try {
+                app.newProject();
+            }
+            catch(ex) {
+            }
+        }, 1000);
         return global.app;
     };
 

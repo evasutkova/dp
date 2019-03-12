@@ -21,6 +21,7 @@ define([
         this.modal = M.Modal.init(info.element.querySelector(".window-modal"), {
             dismissible: false
         });
+        this.getClass = ko.computed(this._getClass, this);
 
         if (typeof (args.openAction) === "function") {
             args.openAction(this.open.bind(this));
@@ -29,6 +30,23 @@ define([
         if (typeof (args.closeAction) === "function") {
             args.closeAction(this.close.bind(this));
         }
+    };
+
+    //#endregion
+
+
+    //#region [ Methods : Private ]
+
+    /**
+     * Dynamický názov css triedy podľa aktuálneho komponentu v okne.
+     */
+    Model.prototype._getClass = function() {
+        var component = this.component();
+        if(!component) {
+            return "";
+        }
+
+        return component + "-modal";
     };
 
     //#endregion
@@ -82,6 +100,8 @@ define([
      */
     Model.prototype.dispose = function () {
         console.log("~WindowModal()");
+
+        this.getClass.dispose();
     };
 
     //#endregion

@@ -1,5 +1,5 @@
 require({
-    urlArgs: "t=v1.0.0",
+    urlArgs: "t=v1.1.0.0312",
     packages: [{
         name: "dp",
         location: "/dp/wwwroot/js"
@@ -71,6 +71,10 @@ require({
         },
         "dp/components/new-project/new-project": {
             templates: [{
+                title: "Používateľská príručka",
+                url: "dp/templates/help.mdzip",
+                thumnail: "dp/templates/help.png"
+            }, {
                 title: "Záverečný projekt",
                 url: "dp/templates/final-thesis.mdzip",
                 thumnail: "dp/templates/final-thesis.png"

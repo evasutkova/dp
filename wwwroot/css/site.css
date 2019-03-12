@@ -11246,6 +11246,20 @@ body {
   margin: 0 0 0 1rem;
 }
 
+.new-project {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.new-project-modal {
+  height: 80vh;
+  max-height: 80vh;
+}
+.new-project > .modal-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 .new-project .optiscroll-v .optiscroll-vtrack {
   right: 0;
   background: rgba(0, 0, 0, 0.3);
@@ -11255,8 +11269,7 @@ body {
   margin-right: 0;
   margin-left: -0.3125rem;
   margin-top: 1rem;
-  min-height: 10rem;
-  max-height: 10rem;
+  flex: 1;
 }
 .new-project__item {
   position: relative;

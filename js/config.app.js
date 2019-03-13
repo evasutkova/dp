@@ -86,6 +86,10 @@ require({
                 title: "Modrá prezentácia",
                 url: "dp/templates/presentation-blue.mdzip",
                 thumnail: "dp/templates/presentation-blue.png"
+            }, {
+                title: "Prezentácia STU",
+                url: "dp/templates/presentation-stu.mdzip",
+                thumnail: "dp/templates/presentation-stu.png"
             }]
         }
     }

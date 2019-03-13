@@ -4,6 +4,7 @@ importScripts("../polyfills/string.js");
 importScripts("../emoji/material-design-icons.js");
 importScripts("../libs/mustache.js");
 importScripts("../libs/highlight.js");
+importScripts("../libs/katex.js");
 importScripts("../libs/showdown.js");
 importScripts("../libs/showdown.footnotes.js");
 importScripts("../libs/showdown.highlight.js");
@@ -12,6 +13,7 @@ importScripts("../libs/showdown.jsfiddle.js");
 importScripts("../libs/showdown.iframe.js");
 importScripts("../libs/showdown.kbd.js");
 importScripts("../libs/showdown.materialicons.js");
+importScripts("../libs/showdown.katex.js");
 importScripts("../document/node.js");
 
 //#endregion
@@ -262,7 +264,7 @@ function start() {
         openLinksInNewWindow: true,
         highlightAuto: false,
         customizedHeaderId: true,
-        extensions: ["footnotes", "kbd", "materialicons", "nomnoml", "jsfiddle", "iframe", "highlight"]
+        extensions: ["footnotes", "katex", "kbd", "materialicons", "nomnoml", "jsfiddle", "iframe", "highlight"]
     });         
 
     pgs = [];

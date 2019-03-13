@@ -30,6 +30,7 @@ require({
         showdownIframe: "/wwwroot/js/libs/showdown.iframe",
         showdownKbd: "/wwwroot/js/libs/showdown.kbd",
         showdownMaterialicons: "/wwwroot/js/libs/showdown.materialicons",
+        showdownKatex: "/wwwroot/js/libs/showdown.katex",
         syncscroll: "/wwwroot/js/libs/syncscroll",
         mustache: "/wwwroot/js/libs/mustache",
         filesaver: "/wwwroot/js/libs/filesaver",
@@ -38,7 +39,8 @@ require({
         lodash: "/wwwroot/js/libs/lodash",
         dagre: "/wwwroot/js/libs/dagre",
         nomnoml: "/wwwroot/js/libs/nomnoml",
-        emoji: "/wwwroot/js/emoji/material-design-icons"
+        emoji: "/wwwroot/js/emoji/material-design-icons",
+        katex: "/wwwroot/js/libs/katex"
     },
     map: {
         "*": {

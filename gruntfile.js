@@ -64,6 +64,15 @@ module.exports = function (grunt) {
                     filter: "isFile"
                 }]
             },
+            fonts: {
+                files: [{
+                    expand: true,
+                    cwd: "fonts/",
+                    src: ["**"],
+                    dest: "wwwroot/fonts/",
+                    filter: "isFile"
+                }]
+            },
             materialize: {
                 options: {
                     process: function (content, srcpath) {
@@ -160,6 +169,7 @@ module.exports = function (grunt) {
                     "wwwroot/css/codemirror.css",
                     "wwwroot/css/codemirror.simplescrollbars.css",
                     "wwwroot/css/highlight.css",
+                    "wwwroot/css/katex.css",
                     "wwwroot/css/dp-icons.css",
                     "wwwroot/css/site.css",
                     "wwwroot/css/app.css",
@@ -238,6 +248,7 @@ module.exports = function (grunt) {
             "copy:app",
             "copy:blank",
             "copy:css",
+            "copy:fonts",
             "copy:materialize",
             "copy:js",
             "jshint",

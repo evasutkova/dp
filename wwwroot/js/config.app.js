@@ -1,5 +1,5 @@
 require({
-    urlArgs: "t=v1.2.0.0313",
+    urlArgs: "t=v1.3.0.0313",
     packages: [{
         name: "dp",
         location: "/dp/wwwroot/js"
@@ -30,6 +30,7 @@ require({
         showdownIframe: "/dp/wwwroot/js/libs/showdown.iframe",
         showdownKbd: "/dp/wwwroot/js/libs/showdown.kbd",
         showdownMaterialicons: "/dp/wwwroot/js/libs/showdown.materialicons",
+        showdownKatex: "/dp/wwwroot/js/libs/showdown.katex",
         syncscroll: "/dp/wwwroot/js/libs/syncscroll",
         mustache: "/dp/wwwroot/js/libs/mustache",
         filesaver: "/dp/wwwroot/js/libs/filesaver",
@@ -38,7 +39,8 @@ require({
         lodash: "/dp/wwwroot/js/libs/lodash",
         dagre: "/dp/wwwroot/js/libs/dagre",
         nomnoml: "/dp/wwwroot/js/libs/nomnoml",
-        emoji: "/dp/wwwroot/js/emoji/material-design-icons"
+        emoji: "/dp/wwwroot/js/emoji/material-design-icons",
+        katex: "/dp/wwwroot/js/libs/katex"
     },
     map: {
         "*": {

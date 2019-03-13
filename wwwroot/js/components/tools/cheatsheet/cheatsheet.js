@@ -194,6 +194,16 @@ define([
                      "https://www.google.sk\n" +
                      "300,200\n" +
                      "```"
+            }),
+            new Resource({
+                title: "Rovnica",
+                url: "$c=\\pm\\sqrt{a^2 + b^2}$"
+            }),
+            new Resource({
+                title: "Blok s rovnicou",
+                url: "$$\n" +
+                     "c=\\pm\\sqrt{a^2 + b^2}\n" +
+                     "$$"
             })
         ]);
         this.search = ko.observable(session.get("search") || "").extend({ rateLimit: 350 });
@@ -418,7 +428,17 @@ define([
                            "300,200\n" +
                            "```");
                 select({ line: p.from.line + 1, ch: 0 }, { line: p.from.line + 1, ch: 21 });            
-                return;                
+                return;
+            case "rovnica":
+                p = insert("$c=\\pm\\sqrt{a^2 + b^2}$");
+                select({ line: p.from.line, ch: p.from.ch + 1 }, { line: p.from.line, ch: p.to.ch - 1 });
+                return;
+            case "blok_s_rovnicou":
+                p = insert("$$\n" +
+                           "c=\\pm\\sqrt{a^2 + b^2}\n" +
+                           "$$");
+                select({ line: p.from.line + 1, ch: 0 }, { line: p.to.line - 1, ch: 22 });            
+                return;                 
             default:
                 insert(id);
                 return;

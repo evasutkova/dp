@@ -12,7 +12,7 @@
 
     var Extension = {
         type: "lang",
-        regex: /~(\w+)+~/g,
+        regex: /\s~(\w+)+~\s/g,
         replace: "<kbd>$1</kbd>"
     };
 

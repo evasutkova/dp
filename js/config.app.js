@@ -1,5 +1,5 @@
 require({
-    urlArgs: "t=v1.2.0.0313",
+    urlArgs: "t=v1.3.0.0313",
     packages: [{
         name: "dp",
         location: "/dp/wwwroot/js"

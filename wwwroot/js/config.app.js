@@ -1,5 +1,5 @@
 require({
-    urlArgs: "t=v1.1.0.0312",
+    urlArgs: "t=v1.2.0.0313",
     packages: [{
         name: "dp",
         location: "/dp/wwwroot/js"
@@ -86,6 +86,10 @@ require({
                 title: "Modrá prezentácia",
                 url: "dp/templates/presentation-blue.mdzip",
                 thumnail: "dp/templates/presentation-blue.png"
+            }, {
+                title: "Prezentácia STU",
+                url: "dp/templates/presentation-stu.mdzip",
+                thumnail: "dp/templates/presentation-stu.png"
             }]
         }
     }

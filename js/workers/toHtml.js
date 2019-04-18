@@ -231,7 +231,7 @@ function _images(content) {
         });
 
     return Promise.all(tasks).then(function() {
-        var result = Array.prototype.slice.call(arguments);
+        var result = Array.prototype.slice.call(arguments[0]);
         return "\n" + result.join("\n");
     });
 }

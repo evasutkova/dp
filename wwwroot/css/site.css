@@ -12024,6 +12024,9 @@ body {
   padding: 0.1875em 0.3125em;
   vertical-align: middle;
 }
+.markdown-editor__output img {
+  max-width: 100%;
+}
 .markdown-editor__output .emoji {
   height: 1.5em;
   width: 1.5em;
